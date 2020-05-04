@@ -1,0 +1,26 @@
+<!--这是无限层级嵌套的写法-->
+<ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+  <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menus }"></ng-container>
+  <ng-template #menuTpl let-list>
+    <ng-container *ngFor="let menu of format(list)">
+      <li
+        *ngIf="!menu.children"
+        nz-menu-item
+        [nzPaddingLeft]="menu.level * 24"
+      >
+        <a [routerLink]="menu.path">{{menu.name}}</a>
+      </li>
+      <li
+        *ngIf="menu.children"
+        nz-submenu
+        [nzTitle]="menu.name"
+        [nzIcon]="menu.meta.icon"
+        [nzPaddingLeft]="menu.level * 24"
+      >
+        <ul>
+          <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children }"></ng-container>
+        </ul>
+      </li>
+    </ng-container>
+  </ng-template>
+</ul>

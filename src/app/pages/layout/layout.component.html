@@ -1,0 +1,86 @@
+<nz-layout class="app-layout">
+  <!--左边菜单-->
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <div class="sidebar-logo">
+      <a routerLink="/">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>体育后台</h1>
+      </a>
+    </div>
+    <app-side-menus [isCollapsed]="isCollapsed"></app-side-menus>
+  </nz-sider>
+  <!--右边-->
+  <nz-layout>
+    <!--头部-->
+    <nz-header>
+      <div class="app-header">
+        <div class="header-left">
+          <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <i
+              class="trigger"
+              nz-icon
+              [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            ></i>
+          </span>
+          <div
+            class="tab"
+            style="padding: 0 24px"
+            [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active"
+          >
+            <a routerLink="/">首页</a>
+          </div>
+          <!--已打开的页面-->
+          <div
+            *ngFor="let menu of openedMenus"
+            class="tab"
+            [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active"
+            (contextmenu)="openDropdownMenu($event,dropdownMenu)"
+          >
+            <a [routerLink]="menu.path">{{menu.name}}</a>
+            <i (click)="closePage(menu)" nz-icon nzType="close-circle" nzTheme="outline"></i>
+            <nz-dropdown-menu #dropdownMenu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item (click)="closeOtherPage(menu)">关闭其他</li>
+                <li nz-menu-item (click)="closeAllPage()">关闭所有</li>
+              </ul>
+            </nz-dropdown-menu>
+          </div>
+        </div>
+        <div class="header-right">
+          <span class="item">
+            <nz-avatar [nzSize]="30" nzIcon="user"></nz-avatar>
+            <span class="user-info" nz-dropdown [nzDropdownMenu]="userMenu">
+              <span>{{user.username}}</span>
+              <br/>
+              <span>{{user.roleName}}</span>
+            </span>
+            <nz-dropdown-menu #userMenu="nzDropdownMenu">
+              <ul nz-menu nzSelectable>
+                <li nz-menu-item>操作1</li>
+                <li nz-menu-item>操作2</li>
+                <li nz-menu-item>操作3</li>
+                <li nz-menu-divider></li>
+                <li nz-menu-item (click)="logout()">退出登录</li>
+              </ul>
+            </nz-dropdown-menu>
+          </span>
+        </div>
+      </div>
+    </nz-header>
+    <!--内容页-->
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
