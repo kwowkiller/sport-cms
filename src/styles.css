@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.search-area [nz-row] {
+  margin-bottom: 12px;
+}
+
+.search-area nz-select {
+  width: 100%;
+}
+
+.search-area .actions > button {
+  margin-right: 12px;
+}

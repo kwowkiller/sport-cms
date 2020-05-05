@@ -50,8 +50,9 @@ registerLocaleData(zh);
     NzDropDownModule,
     NzIconModule,
     RouterModule.forRoot([
+      {path: '', pathMatch: 'full', redirectTo: 'main'},
       {
-        path: '',
+        path: 'main',
         component: LayoutComponent,
         resolve: {menus: InitResolve},
         loadChildren: () => import('./pages/modules/main.module').then(m => m.MainModule),

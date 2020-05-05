@@ -1,0 +1,99 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播标题">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播分类">
+      <nz-select nzPlaceHolder="请选择">
+      </nz-select>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播标签">
+      <nz-select nzPlaceHolder="请选择">
+      </nz-select>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播状态">
+      <nz-select nzPlaceHolder="请选择">
+      </nz-select>
+    </nz-input-group>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播时间">
+      <nz-range-picker></nz-range-picker>
+    </nz-input-group>
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        type="button"
+        nz-button
+      >新增直播
+      </button>
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>直播标题</th>
+    <th>直播分类</th>
+    <th>直播标签</th>
+    <th>开播时间</th>
+    <th>上次直播结束时间</th>
+    <th>直播时长(分钟)</th>
+    <th>累计直播时长（分钟）</th>
+    <th>观看人数</th>
+    <th>累计观看人数</th>
+    <th>订阅人数</th>
+    <th>直播状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>直播标题</td>
+    <td>直播分类</td>
+    <td>直播标签</td>
+    <td>开播时间</td>
+    <td>上次直播结束时间</td>
+    <td>直播时长(分钟)</td>
+    <td>累计直播时长（分钟）</td>
+    <td>观看人数</td>
+    <td>累计观看人数</td>
+    <td>订阅人数</td>
+    <td>直播状态</td>
+    <td>
+      <a>编辑</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>下播</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>弹幕填充</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

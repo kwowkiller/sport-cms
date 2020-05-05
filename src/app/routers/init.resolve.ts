@@ -44,7 +44,164 @@ export class InitResolve implements Resolve<any> {
           };
         });
       };
-      Session.menus = foo(menuData.data.routes, 0);
+      // 测试数据
+      const temp: Menu[] = [
+        {
+          alwaysShow: true,
+          children: [
+            {
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '用户管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '用户管理',
+              path: 'user',
+            },
+            {
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '认证管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '认证管理',
+              path: 'user/auth',
+            },
+          ],
+          component: '',
+          hidden: false,
+          meta: {
+            title: '用户管理',
+            icon: '',
+            breadcrumb: false,
+          },
+          name: '用户管理',
+          path: 'user',
+        },
+        {
+          alwaysShow: true,
+          children: [
+            {
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '直播管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '直播管理',
+              path: 'live',
+            },
+          ],
+          component: '',
+          hidden: false,
+          meta: {
+            title: '直播管理',
+            icon: '',
+            breadcrumb: false,
+          },
+          name: '直播管理',
+          path: 'live',
+        },
+        {
+          alwaysShow: true,
+          children: [
+            {
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '赛事管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '赛事管理',
+              path: 'match',
+            },
+          ],
+          component: '',
+          hidden: false,
+          meta: {
+            title: '赛事管理',
+            icon: '',
+            breadcrumb: false,
+          },
+          name: '赛事管理',
+          path: 'match',
+        },
+        {
+          alwaysShow: true,
+          children: [
+            {
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '球吧管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '球吧管理',
+              path: 'bar',
+            },
+            {
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '贴子管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '贴子管理',
+              path: 'post',
+            },
+          ],
+          component: '',
+          hidden: false,
+          meta: {
+            title: '球吧管理',
+            icon: '',
+            breadcrumb: false,
+          },
+          name: '球吧管理',
+          path: 'bar',
+        },
+        {
+          alwaysShow: true,
+          children: [
+            {
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '资讯管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '资讯管理',
+              path: 'news',
+            },
+          ],
+          component: '',
+          hidden: false,
+          meta: {
+            title: '资讯管理',
+            icon: '',
+            breadcrumb: false,
+          },
+          name: '资讯管理',
+          path: 'news',
+        },
+      ];
+      Session.menus = foo(temp, 0);
     }
   }
 }

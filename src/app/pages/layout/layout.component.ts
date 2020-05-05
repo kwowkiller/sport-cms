@@ -25,13 +25,22 @@ export class LayoutComponent implements OnInit {
   ) {
   }
 
-  private findMenuByPath(path: string = this.router.url): Menu {
-    let findMenu: Menu = null;
-    this.menus.filter(item => item.children).some(item => {
-      findMenu = item.children.find(submenu => submenu.path === path);
-      return !!findMenu;
-    });
-    return findMenu;
+  private findMenuByPath(): Menu {
+    let find: Menu;
+    const foo = (arr: Menu[]) => {
+      arr.forEach(item => {
+        if (item.children) {
+          foo(item.children);
+          return;
+        }
+        if (location.pathname === `/main/${item.path}`) {
+          find = item;
+          return false;
+        }
+      });
+    };
+    foo(this.menus);
+    return find;
   }
 
   ngOnInit(): void {

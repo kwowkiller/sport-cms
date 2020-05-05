@@ -1,0 +1,82 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="资讯标题">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="资讯内容">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="状态">
+      <nz-select nzPlaceHolder="请选择">
+      </nz-select>
+    </nz-input-group>
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        nz-button
+      >创建资讯
+      </button>
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>咨询标题</th>
+    <th>咨询内容</th>
+    <th>咨询分类</th>
+    <th>发布时间</th>
+    <th>评论数</th>
+    <th>点赞数</th>
+    <th>分享数</th>
+    <th>阅读量</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>咨询标题</td>
+    <td>咨询内容</td>
+    <td>咨询分类</td>
+    <td>发布时间</td>
+    <td>评论数</td>
+    <td>点赞数</td>
+    <td>分享数</td>
+    <td>阅读量</td>
+    <td>状态</td>
+    <td>
+      <a>编辑</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>下架</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

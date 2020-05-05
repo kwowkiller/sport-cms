@@ -1,0 +1,86 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="球吧名称">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="球吧分类">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="吧主昵称">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="创建时间">
+      <nz-range-picker></nz-range-picker>
+    </nz-input-group>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="审核状态">
+      <nz-radio-group>
+        <label nz-radio-button nzValue="0">待审核</label>
+        <label nz-radio-button nzValue="1">审核通过</label>
+        <label nz-radio-button nzValue="2">审核不通过</label>
+      </nz-radio-group>
+    </nz-input-group>
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        type="button"
+        nz-button
+      >创建球吧
+      </button>
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>球吧LOGO</th>
+    <th>球吧名称</th>
+    <th>球吧分类</th>
+    <th>创建时间</th>
+    <th>申请人</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>球吧LOGO</td>
+    <td>球吧名称</td>
+    <td>球吧分类</td>
+    <td>创建时间</td>
+    <td>申请人</td>
+    <td>
+      <a>吧主信息</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>审核</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

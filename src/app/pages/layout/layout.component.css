@@ -104,11 +104,11 @@ nz-header {
 }
 
 nz-content {
-  margin: 24px;
+  margin: 16px;
 }
 
 .inner-content {
-  padding: 24px;
+  padding: 12px;
   background: #fff;
   min-height: 100%;
 }

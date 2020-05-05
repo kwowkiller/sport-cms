@@ -1,0 +1,134 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="dateRange=[];fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户昵称">
+      <input nz-input [(ngModel)]="search.nikeName">
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="手机号">
+      <input nz-input [(ngModel)]="search.phone">
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="性别">
+      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.sex">
+        <nz-option nzValue="1" nzLabel="男"></nz-option>
+        <nz-option nzValue="2" nzLabel="女"></nz-option>
+      </nz-select>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="提交认证时间">
+      <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
+    </nz-input-group>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="审核状态">
+      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.authStatus">
+        <nz-option nzValue="0" nzLabel="未认证"></nz-option>
+        <nz-option nzValue="1" nzLabel="认证成功"></nz-option>
+        <nz-option nzValue="2" nzLabel="认证失败"></nz-option>
+      </nz-select>
+    </nz-input-group>
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>用户头像</th>
+    <th>用户昵称</th>
+    <th>手机号码</th>
+    <th>性别</th>
+    <th>注册时间</th>
+    <th>提交认证时间</th>
+    <th>审核状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td><img
+      style="height: 35px;width: 35px;border-radius: 50%;object-fit: cover"
+      [src]="item.headerImg"
+      alt
+    /></td>
+    <td>{{item.nikeName}}</td>
+    <td>{{item.phone}}</td>
+    <td>{{item.sex == 1 ? '男' : '女'}}</td>
+    <td>{{item.creationTime}}</td>
+    <td>提交认证时间</td>
+    <td [ngSwitch]="item.authStatus">
+      <span *ngSwitchCase="0">未认证</span>
+      <span *ngSwitchCase="1">认证成功</span>
+      <span *ngSwitchCase="2">认证失败</span>
+    </td>
+    <td [ngSwitch]="item.authStatus">
+      <ng-container *ngSwitchCase="0">
+        <a (click)="detail=item;modalDetailShow=true">认证信息</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="detail=item;modalActionShow=true">审核</a>
+      </ng-container>
+      <ng-container *ngSwitchCase="1">
+        <a (click)="detail=item;modalDetailShow=true">认证信息</a>
+      </ng-container>
+      <ng-container *ngSwitchCase="2">
+        <a (click)="detail=item;modalDetailShow=true">认证信息</a>
+      </ng-container>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<nz-modal
+  nzTitle="认证信息"
+  [nzVisible]="modalDetailShow"
+  [nzFooter]="null"
+  (nzOnCancel)="modalDetailShow=false;detail=null"
+  [nzWidth]="600"
+>
+  <p><span>真实姓名：{{detail?.realName}}</span></p>
+  <p><span>身份证号：{{detail?.idNo}}</span></p>
+  <p>
+    <span>身份照片：</span>
+    <img alt [src]="detail?.frontPhoto" width="200" style="margin-right: 12px"/>
+    <img alt [src]="detail?.handPhoto" width="200"/>
+  </p>
+</nz-modal>
+<nz-modal
+  nzTitle="用户认证信息审核"
+  [nzVisible]="modalActionShow"
+  (nzOnCancel)="modalActionShow=false"
+>
+  <p>请审核用户认证信息，审核通过后用户可在前端进行开启直播操作！</p>
+  <nz-radio-group style="display: block">
+    <label nz-radio nzValue="0">通过</label>
+    <label nz-radio nzValue="1">不通过</label>
+  </nz-radio-group>
+  <label style="display: flex;margin-top: 12px">
+    <span>备注：</span>
+    <textarea style="flex: 1;height: 100px" nz-input></textarea>
+  </label>
+</nz-modal>

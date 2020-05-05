@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {IndexComponent} from '../index/index.component';
-import {NotFoundComponent} from './errors/not-found.component';
+import {NotFoundComponent} from '../errors/not-found.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +15,11 @@ import {NotFoundComponent} from './errors/not-found.component';
       {
         path: '',
         component: IndexComponent,
+      },
+      {
+        // 系统管理
+        path: 'system',
+        loadChildren: () => import('./system/system.module').then(m => m.SystemModule),
       },
       {
         // 球吧管理

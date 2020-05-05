@@ -1,3 +1,18 @@
+export interface Pageable<T> {
+  code: number;
+  data: {
+    current: number;
+    orders: [];
+    pages: number;
+    // 列表数据
+    records: T[];
+    searchCount: boolean;
+    size: number;
+    // 总数
+    total: number;
+  };
+}
+
 // 登录用户
 export interface User {
   accountNonExpired: boolean;
@@ -33,4 +48,6 @@ export interface Menu {
   path: string;
   // 层级  用来写padding样式
   level?: number;
+  // 是否展开
+  open?: boolean;
 }

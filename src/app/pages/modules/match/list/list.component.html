@@ -1,0 +1,85 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事名称">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事分类">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="队伍名称">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事状态">
+      <nz-select nzPlaceHolder="请选择">
+      </nz-select>
+    </nz-input-group>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>赛事名称</th>
+    <th>赛事分类</th>
+    <th>开播时间</th>
+    <th>主队名称</th>
+    <th>客队名称</th>
+    <th>当前比分</th>
+    <th>观看人数</th>
+    <th>关注人数</th>
+    <th>赛事状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>赛事名称</td>
+    <td>赛事分类</td>
+    <td>开播时间</td>
+    <td>主队名称</td>
+    <td>客队名称</td>
+    <td>当前比分</td>
+    <td>观看人数</td>
+    <td>关注人数</td>
+    <td>赛事状态</td>
+    <td>
+      <a>赛事数据</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>直播数据</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>赛事直属</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
