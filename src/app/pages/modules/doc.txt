@@ -1,0 +1,5 @@
+http://47.92.131.37:8301/admin/swagger-ui.html#/
+http://47.92.131.37:8301/bar/swagger-ui.html#/
+http://47.92.131.37:8301/news/swagger-ui.html#/
+http://47.92.131.37:8301/app/swagger-ui.html#/
+http://47.92.131.37:8301/live/swagger-ui.html#/

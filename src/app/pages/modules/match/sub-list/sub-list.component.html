@@ -1,0 +1,67 @@
+<form
+  ngNoForm
+  class="search-area"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事状态">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事时间">
+      <input nz-input>
+    </nz-input-group>
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate let-total>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="true"
+  [nzLoading]="loading"
+  [nzShowTotal]="totalTemplate"
+>
+  <thead>
+  <tr>
+    <th>比赛名称</th>
+    <th>比赛状态</th>
+    <th>比赛时间</th>
+    <th>开球时间</th>
+    <th>主队名称</th>
+    <th>主队红牌</th>
+    <th>主队黄牌</th>
+    <th>主队半场比赛</th>
+    <th>主队角球</th>
+    <th>主队比赛得分</th>
+    <th>主队联赛排名</th>
+    <th>是否中立场</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>{{item.eventName}}</td>
+    <td>{{statusStr(item.status)}}</td>
+    <td>比赛时间</td>
+    <td>开球时间</td>
+    <td>{{item.homeTeamName}}</td>
+    <td>{{item.homeTeamRed}}</td>
+    <td>{{item.homeTeamYellow}}</td>
+    <td>{{item.homeTeamHalf}}</td>
+    <td>{{item.homeTeamCorner}}</td>
+    <td>{{item.homeTeamScore}}</td>
+    <td>主队联赛排名</td>
+    <td>是否中立场</td>
+  </tr>
+  </tbody>
+</nz-table>

@@ -9,10 +9,11 @@ import {Bar} from '../bar.module';
   styles: []
 })
 export class ListComponent extends Table<Bar> implements OnInit {
+  tabIndex = 0;
 
   constructor(http: HttpClient) {
     super(http);
-    this.url = '';
+    this.url = 'bar/sys/bar/list';
   }
 
   ngOnInit(): void {
@@ -20,5 +21,10 @@ export class ListComponent extends Table<Bar> implements OnInit {
   }
 
   beforeSearch() {
+    // 审核状态
+    this.search.approveStatus = this.tabIndex;
+  }
+
+  onSubmitSuccess() {
   }
 }

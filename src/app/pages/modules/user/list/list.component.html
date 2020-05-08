@@ -71,7 +71,11 @@
     <th>手机号码</th>
     <th>性别</th>
     <th>注册时间</th>
-    <th>粉丝数</th>
+    <th
+      nzShowSort
+      (nzSortOrderChange)="onSortChange($event,'fans_count')"
+    >粉丝数
+    </th>
     <th>关注用户数</th>
     <th>关注贴吧数</th>
     <th>上次登录时间</th>

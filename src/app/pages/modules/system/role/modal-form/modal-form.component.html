@@ -1,0 +1,25 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="form.reset();visiableChange.emit(false)"
+  (nzOnOk)="submit()"
+  [nzOkDisabled]="!form.valid"
+  [nzOkLoading]="submiting"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>角色名称</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input formControlName="roleName"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>角色描述</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <textarea nz-input rows="5" formControlName="remark"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+

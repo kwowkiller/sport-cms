@@ -1,0 +1,60 @@
+<nz-modal
+  nzWidth="1000"
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  (nzOnCancel)="visiableChange.emit(false)"
+  (nzAfterOpen)="showEditor=true"
+  (nzOnOk)="submit()"
+  [nzOkDisabled]="!form.valid"
+  [nzOkLoading]="submiting"
+>
+  <nz-spin [nzSpinning]="loading">
+    <form nz-form [formGroup]="form">
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>资讯标题</nz-form-label>
+        <nz-form-control [nzSm]="12">
+          <input nz-input formControlName="newsTitle"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>作者</nz-form-label>
+        <nz-form-control [nzSm]="12">
+          <input nz-input formControlName="author"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>封面</nz-form-label>
+        <nz-form-control [nzSm]="12">
+          <app-upload
+            formControlName="newsImg"
+          ></app-upload>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>资讯分类</nz-form-label>
+        <nz-form-control [nzSm]="8">
+          <nz-select formControlName="typeId">
+            <nz-option
+              *ngFor="let item of selectData"
+              [nzLabel]="item.newsTypeName"
+              [nzValue]="item.id"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>资讯内容</nz-form-label>
+        <nz-form-control [nzSm]="18">
+          <ckeditor
+            *ngIf="showEditor"
+            [editor]="Editor"
+            [config]="editorConfig"
+            data="<p>Hello, world!</p>"
+            (ready)="editorReady($event)"
+            formControlName="content"
+          ></ckeditor>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-spin>
+</nz-modal>

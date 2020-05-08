@@ -94,21 +94,21 @@ export class LayoutComponent implements OnInit {
     // 从数组删除菜单
     this.openedMenus.splice(index, 1);
     // 关闭的是当前页 跳转到标签最后一个
-    if (menu.path === this.router.url) {
-      this.router.navigateByUrl(this.openedMenus[this.openedMenus.length - 1].path).then();
+    if (`/main/${menu.path}` === this.router.url) {
+      this.router.navigateByUrl('/main/' + this.openedMenus[this.openedMenus.length - 1].path).then();
     }
   }
 
   // 关闭全部页面
   closeAllPage() {
-    this.router.navigateByUrl('/').then(() => {
+    this.router.navigateByUrl('/main').then(() => {
       this.openedMenus = [];
     });
   }
 
   // 关闭其他页面
   closeOtherPage(menu: Menu) {
-    this.router.navigateByUrl(menu.path).then(() => {
+    this.router.navigateByUrl('/main/' + menu.path).then(() => {
       this.openedMenus = [menu];
     });
   }

@@ -88,15 +88,15 @@
     </td>
     <td [ngSwitch]="item.authStatus">
       <ng-container *ngSwitchCase="0">
-        <a (click)="detail=item;modalDetailShow=true">认证信息</a>
+        <a (click)="selected=item;modalDetailShow=true">认证信息</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="detail=item;modalActionShow=true">审核</a>
+        <a (click)="selected=item;modalActionShow=true">审核</a>
       </ng-container>
       <ng-container *ngSwitchCase="1">
-        <a (click)="detail=item;modalDetailShow=true">认证信息</a>
+        <a (click)="selected=item;modalDetailShow=true">认证信息</a>
       </ng-container>
       <ng-container *ngSwitchCase="2">
-        <a (click)="detail=item;modalDetailShow=true">认证信息</a>
+        <a (click)="selected=item;modalDetailShow=true">认证信息</a>
       </ng-container>
     </td>
   </tr>
@@ -106,15 +106,15 @@
   nzTitle="认证信息"
   [nzVisible]="modalDetailShow"
   [nzFooter]="null"
-  (nzOnCancel)="modalDetailShow=false;detail=null"
+  (nzOnCancel)="modalDetailShow=false;selected=null"
   [nzWidth]="600"
 >
-  <p><span>真实姓名：{{detail?.realName}}</span></p>
-  <p><span>身份证号：{{detail?.idNo}}</span></p>
+  <p><span>真实姓名：{{selected?.realName}}</span></p>
+  <p><span>身份证号：{{selected?.idNo}}</span></p>
   <p>
     <span>身份照片：</span>
-    <img alt [src]="detail?.frontPhoto" width="200" style="margin-right: 12px"/>
-    <img alt [src]="detail?.handPhoto" width="200"/>
+    <img alt [src]="selected?.frontPhoto" width="200" style="margin-right: 12px"/>
+    <img alt [src]="selected?.handPhoto" width="200"/>
   </p>
 </nz-modal>
 <nz-modal

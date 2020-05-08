@@ -11,7 +11,6 @@ import * as moment from 'moment';
 })
 export class AuthListComponent extends Table<Auth> implements OnInit {
   dateRange: Date[] = [];
-  detail: Auth;
   modalDetailShow = false;
   modalActionShow = false;
 
@@ -29,5 +28,8 @@ export class AuthListComponent extends Table<Auth> implements OnInit {
       this.search.authTimeFrom = moment(this.dateRange[0]).format('YYYY-MM-DD');
       this.search.authTimeTo = moment(this.dateRange[1]).format('YYYY-MM-DD');
     }
+  }
+
+  onSubmitSuccess() {
   }
 }

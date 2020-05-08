@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  min-width: 1800px;
+}
+
 .search-area [nz-row] {
   margin-bottom: 12px;
 }
@@ -9,4 +13,8 @@
 
 .search-area .actions > button {
   margin-right: 12px;
+}
+
+.ck-editor__editable_inline {
+  min-height: 350px;
 }

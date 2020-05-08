@@ -13,6 +13,11 @@ export interface Pageable<T> {
   };
 }
 
+export interface Result {
+  code: number;
+  message: string;
+}
+
 // 登录用户
 export interface User {
   accountNonExpired: boolean;

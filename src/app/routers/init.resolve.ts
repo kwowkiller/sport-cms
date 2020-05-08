@@ -59,6 +59,56 @@ export class InitResolve implements Resolve<any> {
                 breadcrumb: false,
               },
               name: '用户管理',
+              path: 'system/admin',
+            },
+            {
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '菜单管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '菜单管理',
+              path: 'system/menu',
+            },
+            {
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '角色管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '角色管理',
+              path: 'system/role',
+            },
+          ],
+          component: '',
+          hidden: false,
+          meta: {
+            title: '系统管理',
+            icon: 'appstore',
+            breadcrumb: false,
+          },
+          name: '系统管理',
+          path: 'system',
+        },
+        {
+          alwaysShow: true,
+          children: [
+            {
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '用户管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '用户管理',
               path: 'user',
             },
             {
@@ -78,7 +128,7 @@ export class InitResolve implements Resolve<any> {
           hidden: false,
           meta: {
             title: '用户管理',
-            icon: '',
+            icon: 'appstore',
             breadcrumb: false,
           },
           name: '用户管理',
@@ -104,7 +154,7 @@ export class InitResolve implements Resolve<any> {
           hidden: false,
           meta: {
             title: '直播管理',
-            icon: '',
+            icon: 'appstore',
             breadcrumb: false,
           },
           name: '直播管理',
@@ -130,7 +180,7 @@ export class InitResolve implements Resolve<any> {
           hidden: false,
           meta: {
             title: '赛事管理',
-            icon: '',
+            icon: 'appstore',
             breadcrumb: false,
           },
           name: '赛事管理',
@@ -168,7 +218,7 @@ export class InitResolve implements Resolve<any> {
           hidden: false,
           meta: {
             title: '球吧管理',
-            icon: '',
+            icon: 'appstore',
             breadcrumb: false,
           },
           name: '球吧管理',
@@ -194,7 +244,7 @@ export class InitResolve implements Resolve<any> {
           hidden: false,
           meta: {
             title: '资讯管理',
-            icon: '',
+            icon: 'appstore',
             breadcrumb: false,
           },
           name: '资讯管理',

@@ -62,6 +62,7 @@ registerLocaleData(zh);
     ]),
   ],
   providers: [
+    {provide: RouteReuseStrategy, useClass: RouteReuseService}, // 路由缓存，复用路由
     {provide: ErrorHandler, useClass: MyErrorHandler},
     {
       provide: APP_INITIALIZER,

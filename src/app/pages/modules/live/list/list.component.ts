@@ -10,9 +10,10 @@ import {Live} from '../live.module';
 })
 export class ListComponent extends Table<Live> implements OnInit {
 
-  constructor(http: HttpClient) {
+  constructor(protected http: HttpClient) {
     super(http);
-    this.url = '';
+    this.url = 'live/sys/live/list';
+    this.modalShow = true;
   }
 
   ngOnInit(): void {
@@ -20,5 +21,8 @@ export class ListComponent extends Table<Live> implements OnInit {
   }
 
   beforeSearch() {
+  }
+
+  onSubmitSuccess() {
   }
 }

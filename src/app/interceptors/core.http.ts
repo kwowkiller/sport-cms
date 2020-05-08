@@ -28,7 +28,7 @@ export class CoreHttp implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headers: any = {};
-    if (req.method === 'POST') {
+    if (req.method === 'POST' || req.method === 'PUT') {
       headers['Content-Type'] = 'application/x-www-form-urlencoded';
       req = req.clone({
         body: new HttpParams({
@@ -37,7 +37,7 @@ export class CoreHttp implements HttpInterceptor {
       });
     }
     // 带上额外信息
-    headers.Authorization = Session.token;
+    headers.authorization = Session.token;
     return next.handle(req.clone({
       // 拼接请求地址
       url: req.url.startsWith('http') ? req.url : this.baseUrl + req.url,
@@ -55,10 +55,16 @@ export class CoreHttp implements HttpInterceptor {
           return EMPTY;
         } else if (event instanceof HttpErrorResponse) {
           switch (event.status) {
+            case 400:
+              this.message.warning(`参数不正确，检查参数`);
+              break;
             case 401:
               break;
             case 404:
               this.message.warning(`接口${req.url}不存在`);
+              break;
+            case 405:
+              this.message.warning(`${req.url}接口不支持${req.method}`);
               break;
             case 500:
               this.message.error((event.error as { code, message }).message);

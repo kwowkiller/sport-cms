@@ -27,4 +27,7 @@ export class ListComponent extends Table<User> implements OnInit {
   ngOnInit(): void {
     this.fetchList('all');
   }
+
+  onSubmitSuccess() {
+  }
 }

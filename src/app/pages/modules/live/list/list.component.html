@@ -6,18 +6,25 @@
 >
   <div nz-row [nzGutter]="24">
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播标题">
-      <input nz-input>
+      <input nz-input [(ngModel)]="search.liveTitle">
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播分类">
-      <nz-select nzPlaceHolder="请选择">
+      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.liveType">
+        <nz-option [nzValue]="0" nzLabel="足球"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="篮球"></nz-option>
+        <nz-option [nzValue]="2" nzLabel="电竞"></nz-option>
+        <nz-option [nzValue]="3" nzLabel="全部"></nz-option>
       </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播标签">
-      <nz-select nzPlaceHolder="请选择">
-      </nz-select>
+      <app-live-tag-select
+      ></app-live-tag-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播状态">
-      <nz-select nzPlaceHolder="请选择">
+      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.liveStatus">
+        <nz-option [nzValue]="0" nzLabel="未开播"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="直播中"></nz-option>
+        <nz-option [nzValue]="2" nzLabel="已结束"></nz-option>
       </nz-select>
     </nz-input-group>
   </div>
@@ -29,6 +36,7 @@
       <button
         type="button"
         nz-button
+        (click)="modalShow=true"
       >新增直播
       </button>
       <button
@@ -60,40 +68,84 @@
 >
   <thead>
   <tr>
+    <th
+      [nzChecked]="allChecked"
+      [nzIndeterminate]="false"
+      (nzCheckedChange)="onAllChecked($event)"
+    ></th>
     <th>直播标题</th>
     <th>直播分类</th>
     <th>直播标签</th>
     <th>开播时间</th>
     <th>上次直播结束时间</th>
-    <th>直播时长(分钟)</th>
-    <th>累计直播时长（分钟）</th>
-    <th>观看人数</th>
-    <th>累计观看人数</th>
-    <th>订阅人数</th>
+    <th>直播时长</th>
+    <th>累计直播时长</th>
+    <th
+      nzShowSort
+      (nzSortOrderChange)="onSortChange($event,'')"
+    >观看人数
+    </th>
+    <th
+      nzShowSort
+      (nzSortOrderChange)="onSortChange($event,'')"
+    >累计观看人数
+    </th>
+    <th
+      nzShowSort
+      (nzSortOrderChange)="onSortChange($event,'')"
+    >订阅人数
+    </th>
     <th>直播状态</th>
     <th>操作</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let item of list">
-    <td>直播标题</td>
-    <td>直播分类</td>
-    <td>直播标签</td>
-    <td>开播时间</td>
-    <td>上次直播结束时间</td>
-    <td>直播时长(分钟)</td>
-    <td>累计直播时长（分钟）</td>
-    <td>观看人数</td>
-    <td>累计观看人数</td>
-    <td>订阅人数</td>
-    <td>直播状态</td>
-    <td>
-      <a>编辑</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a>下播</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a>弹幕填充</a>
+    <td
+      [nzChecked]="setOfCheckedId.has(item.id)"
+      (nzCheckedChange)="onItemChecked(item.id, $event)"
+    ></td>
+    <td>{{item.liveTitle}}</td>
+    <td [ngSwitch]="item.liveType">
+      <span *ngSwitchCase="0">足球</span>
+      <span *ngSwitchCase="1">篮球</span>
+      <span *ngSwitchCase="2">电竞</span>
+      <span *ngSwitchCase="3">全部</span>
+    </td>
+    <td>-</td>
+    <td>{{item.startTime}}</td>
+    <td>-</td>
+    <td>{{item.liveTime}}min</td>
+    <td>{{item.totalLiveTime}}min</td>
+    <td>{{item.viewUsers}}</td>
+    <td>{{item.totalLiveUsers}}</td>
+    <td>{{item.viewUsers}}</td>
+    <td [ngSwitch]="item.liveStatus">
+      <span *ngSwitchCase="0">未开播</span>
+      <span *ngSwitchCase="1">直播中</span>
+      <span *ngSwitchCase="2">已结束</span>
+    </td>
+    <td [ngSwitch]="item.liveStatus">
+      <ng-container *ngSwitchCase="0">
+        <a>编辑</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>开播</a>
+      </ng-container>
+      <ng-container *ngSwitchCase="1">
+        <a>编辑</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>下播</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>弹幕填充</a>
+      </ng-container>
+      <ng-container *ngSwitchCase="2">
+        <a>删除</a>
+      </ng-container>
     </td>
   </tr>
   </tbody>
 </nz-table>
+<app-live-form
+  [(visiable)]="modalShow"
+  (submitSuccess)="onSubmitSuccess()"
+></app-live-form>

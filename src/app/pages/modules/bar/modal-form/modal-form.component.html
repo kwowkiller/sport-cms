@@ -1,0 +1,35 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>球吧名称</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>球吧分类</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>吧主</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>球吧LOGO</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <app-upload
+        ></app-upload>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+

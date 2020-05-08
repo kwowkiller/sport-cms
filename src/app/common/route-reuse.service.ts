@@ -6,11 +6,11 @@ export class RouteReuseService implements RouteReuseStrategy {
   static handlers: Map<Route, DetachedRouteHandle> = new Map();
 
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    return !route.firstChild && route.data.reuse;
+    return !route.firstChild;
   }
 
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    return RouteReuseService.handlers.has(route.routeConfig) && route.data.reuse;
+    return RouteReuseService.handlers.has(route.routeConfig);
   }
 
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot) {

@@ -1,0 +1,79 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户账号">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="手机号">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="角色">
+      <nz-select nzPlaceHolder="请选择"></nz-select>
+    </nz-input-group>
+    <div class="actions" nz-col [nzSpan]="6">
+      <button
+        nz-button
+        type="button"
+        (click)="modalShow=true"
+      >新增用户
+      </button>
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>账号</th>
+    <th>手机号</th>
+    <th>注册时间</th>
+    <th>账号角色</th>
+    <th>最近登录时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>{{item.username}}</td>
+    <td>{{item.mobile}}</td>
+    <td>{{item.createTime}}</td>
+    <td>{{item.roleName}}</td>
+    <td>{{item.lastLoginTime}}</td>
+    <td>
+      <a>删除</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>重置密码</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<app-admin-form
+  [(visiable)]="modalShow"
+  (submitSuccess)="onSubmitSuccess()"
+></app-admin-form>

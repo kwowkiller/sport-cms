@@ -1,3 +1,15 @@
+<nz-tabset
+  [nzAnimated]="false"
+  [(nzSelectedIndex)]="tabIndex"
+  (nzSelectChange)="fetchList('all')"
+>
+  <nz-tab nzTitle="待审核">
+  </nz-tab>
+  <nz-tab nzTitle="审核通过">
+  </nz-tab>
+  <nz-tab nzTitle="审核不通过">
+  </nz-tab>
+</nz-tabset>
 <form
   ngNoForm
   class="search-area"
@@ -19,17 +31,11 @@
     </nz-input-group>
   </div>
   <div nz-row [nzGutter]="24">
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="审核状态">
-      <nz-radio-group>
-        <label nz-radio-button nzValue="0">待审核</label>
-        <label nz-radio-button nzValue="1">审核通过</label>
-        <label nz-radio-button nzValue="2">审核不通过</label>
-      </nz-radio-group>
-    </nz-input-group>
     <div nz-col [nzSpan]="6" class="actions">
       <button
         type="button"
         nz-button
+        (click)="modalShow=true"
       >创建球吧
       </button>
       <button
@@ -72,9 +78,14 @@
   <tbody>
   <tr *ngFor="let item of list">
     <td>球吧LOGO</td>
-    <td>球吧名称</td>
-    <td>球吧分类</td>
-    <td>创建时间</td>
+    <td>{{item.barName}}</td>
+    <td [ngSwitch]="item.barType">
+      <span *ngSwitchCase="0">足球</span>
+      <span *ngSwitchCase="1">篮球</span>
+      <span *ngSwitchCase="2">电竞</span>
+      <span *ngSwitchCase="3">全部</span>
+    </td>
+    <td>{{item.createTime}}</td>
     <td>申请人</td>
     <td>
       <a>吧主信息</a>
@@ -84,3 +95,7 @@
   </tr>
   </tbody>
 </nz-table>
+<app-bar-form
+  [(visiable)]="modalShow"
+  (submitSuccess)="onSubmitSuccess()"
+></app-bar-form>

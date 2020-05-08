@@ -1,0 +1,57 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+  (nzOnOk)="submit()"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>直播标题</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>直播分类</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-select nzPlaceHolder="请选择">
+          <nz-option [nzValue]="0" nzLabel="足球"></nz-option>
+          <nz-option [nzValue]="1" nzLabel="篮球"></nz-option>
+          <nz-option [nzValue]="2" nzLabel="电竞"></nz-option>
+          <nz-option [nzValue]="3" nzLabel="全部"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>直播标签</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-select
+          nzMode="multiple"
+          nzPlaceHolder="输入标签名精确匹配"
+          nzShowSearch
+          nzServerSearch
+          (nzOnSearch)="fetchSelectData($event)"
+        >
+          <nz-option
+            *ngFor="let item of selectedData"
+            [nzLabel]="item.tag"
+            [nzValue]="item.id"
+          ></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>直播时间</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-range-picker style="width: 100%"></nz-range-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>信号源</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
