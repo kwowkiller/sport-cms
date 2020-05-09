@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Match} from '../match.module';
 import {HttpClient} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-match-list',
@@ -13,6 +14,13 @@ export class ListComponent implements OnInit {
   loading = false;
   selected: Match = null;
   tabIndex = 0;
+  search: {
+    /**
+     * 即时() 赛程(今天之后) 赛果(今天之前) 其他()
+     */
+    type?: number,
+    date?: Date,
+  } = {};
 
   constructor(private http: HttpClient) {
   }
@@ -25,10 +33,24 @@ export class ListComponent implements OnInit {
     this.fetchList();
   }
 
+  formatDate() {
+    if (this.search.date) {
+      return moment(this.search.date).format('YYYYMMDD');
+    }
+    return '';
+  }
+
   fetchList() {
+    const params: any = {};
+    if (this.search.type) {
+      params.type = this.search.type;
+    }
+    if (this.search.date) {
+      params.date = this.formatDate();
+    }
     this.loading = true;
     this.http.get<{ code: number, data: Match[] }>('match/sys/football/event', {
-      params: {type: '1'}
+      params,
     }).pipe(
       finalize(() => this.loading = false),
     ).subscribe(event => {

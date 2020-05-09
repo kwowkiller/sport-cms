@@ -1,23 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {Table} from '../../../../frame/table';
-import {Role} from '../system.module';
 import {HttpClient} from '@angular/common/http';
+import {Blog} from '../blog.module';
 import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
-  selector: 'app-system-role',
-  templateUrl: './role.component.html',
+  selector: 'app-blog-list',
+  templateUrl: './list.component.html',
   styles: []
 })
-export class RoleComponent extends Table<Role> implements OnInit {
+export class ListComponent extends Table<Blog> implements OnInit {
+  dateRange: Date[] = [];
 
   constructor(
     protected http: HttpClient,
     protected message: NzMessageService,
   ) {
     super(http, message);
-    this.idKey = 'roleId';
-    this.listUrl = 'admin/system/role/page';
+    this.listUrl = 'bar/sys/postings/list';
   }
 
   ngOnInit(): void {
@@ -28,11 +28,8 @@ export class RoleComponent extends Table<Role> implements OnInit {
   }
 
   onSubmitSuccess() {
-    this.fetchList('none');
   }
 
-  remove(id: number) {
-    this.deleteUrl = `admin/system/role/delete/${id}`;
-    this.deleteItem();
+  onDelete() {
   }
 }

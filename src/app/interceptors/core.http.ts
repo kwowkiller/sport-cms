@@ -56,7 +56,8 @@ export class CoreHttp implements HttpInterceptor {
         } else if (event instanceof HttpErrorResponse) {
           switch (event.status) {
             case 400:
-              this.message.warning(`参数不正确，检查参数`);
+              // this.message.warning(`参数不正确，检查参数`);
+              this.message.warning(`请求失败`);
               break;
             case 401:
               break;
@@ -67,7 +68,8 @@ export class CoreHttp implements HttpInterceptor {
               this.message.warning(`${req.url}接口不支持${req.method}`);
               break;
             case 500:
-              this.message.error((event.error as { code, message }).message);
+              // this.message.error((event.error as { code, message }).message);
+              this.message.error('服务器异常');
               break;
             default:
               this.message.warning(`连接服务器失败`);

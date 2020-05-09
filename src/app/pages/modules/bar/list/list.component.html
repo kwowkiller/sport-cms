@@ -18,16 +18,24 @@
 >
   <div nz-row [nzGutter]="24">
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="球吧名称">
-      <input nz-input>
+      <input nz-input [(ngModel)]="search.barName">
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="球吧分类">
-      <input nz-input>
+      <nz-select [(ngModel)]="search.barType">
+        <!--0:足球1:篮球2:电竞3:全部-->
+        <nz-option nzLabel="足球" [nzValue]="0"></nz-option>
+        <nz-option nzLabel="篮球" [nzValue]="1"></nz-option>
+        <nz-option nzLabel="电竞" [nzValue]="2"></nz-option>
+        <nz-option nzLabel="全部" [nzValue]="3"></nz-option>
+      </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="吧主昵称">
-      <input nz-input>
+      <app-user-select
+        [(model)]="search.userId"
+      ></app-user-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="创建时间">
-      <nz-range-picker></nz-range-picker>
+      <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
     </nz-input-group>
   </div>
   <div nz-row [nzGutter]="24">
@@ -66,7 +74,7 @@
   (nzPageSizeChange)="fetchList('page')"
 >
   <thead>
-  <tr>
+  <tr *ngIf="tabIndex!=1">
     <th>球吧LOGO</th>
     <th>球吧名称</th>
     <th>球吧分类</th>
@@ -74,8 +82,21 @@
     <th>申请人</th>
     <th>操作</th>
   </tr>
+  <tr *ngIf="tabIndex==1">
+    <th>球吧LOGO</th>
+    <th>球吧名称</th>
+    <th>球吧分类</th>
+    <th>创建时间</th>
+    <th>吧主</th>
+    <th>发帖数</th>
+    <th>关注数</th>
+    <th>回复数</th>
+    <th>阅读量</th>
+    <th>球吧状态</th>
+    <th>操作</th>
+  </tr>
   </thead>
-  <tbody>
+  <tbody *ngIf="tabIndex!=1">
   <tr *ngFor="let item of list">
     <td>球吧LOGO</td>
     <td>{{item.barName}}</td>
@@ -87,10 +108,34 @@
     </td>
     <td>{{item.createTime}}</td>
     <td>申请人</td>
-    <td>
+    <td *ngIf="tabIndex==0">
       <a>吧主信息</a>
       <nz-divider nzType="vertical"></nz-divider>
       <a>审核</a>
+    </td>
+    <td *ngIf="tabIndex==2">
+      <a>吧主信息</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>审核信息</a>
+    </td>
+  </tr>
+  </tbody>
+  <tbody *ngIf="tabIndex==1">
+  <tr *ngFor="let item of list">
+    <td>球吧LOGO</td>
+    <td>球吧名称</td>
+    <td>球吧分类</td>
+    <td>创建时间</td>
+    <td>吧主</td>
+    <td>发帖数</td>
+    <td>关注数</td>
+    <td>回复数</td>
+    <td>阅读量</td>
+    <td>球吧状态</td>
+    <td>
+      <a>吧主信息</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>关闭球吧</a>
     </td>
   </tr>
   </tbody>

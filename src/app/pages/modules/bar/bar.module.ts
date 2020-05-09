@@ -7,7 +7,7 @@ import {
   NzDividerModule, NzFormModule,
   NzGridModule, NzIconModule,
   NzInputModule, NzModalModule,
-  NzRadioModule,
+  NzRadioModule, NzSelectModule,
   NzTableModule, NzTabsModule, NzUploadModule
 } from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -38,6 +38,7 @@ import {ComponentsModule} from '../../../components/components.module';
     NzIconModule,
     NzTabsModule,
     ComponentsModule,
+    NzSelectModule,
   ]
 })
 export class BarModule {
@@ -64,4 +65,6 @@ export interface Bar {
   userId: number;
   // 吧主昵称
   username: string;
+  barLogo: string;
+  followTime: string;
 }

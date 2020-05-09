@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Table} from '../../../../common/table';
+import {Table} from '../../../../frame/table';
 import {News} from '../news.module';
 import {HttpClient} from '@angular/common/http';
 import {Result} from '../../../../common/common.model';
@@ -13,10 +13,10 @@ import {NzMessageService} from 'ng-zorro-antd';
 export class ListComponent extends Table<News> implements OnInit {
   constructor(
     protected http: HttpClient,
-    private message: NzMessageService,
+    protected message: NzMessageService,
   ) {
-    super(http);
-    this.url = 'news/sys/news/page';
+    super(http, message);
+    this.listUrl = 'news/sys/news/page';
   }
 
   ngOnInit(): void {
@@ -27,7 +27,8 @@ export class ListComponent extends Table<News> implements OnInit {
   }
 
   onSubmitSuccess() {
-    this.fetchList('all');
+    this.fetchList('none');
+    this.message.success('操作成功');
   }
 
   updateItem(id: number) {
@@ -37,5 +38,10 @@ export class ListComponent extends Table<News> implements OnInit {
         this.message.success('操作成功');
       }
     });
+  }
+
+  onDelete() {
+    this.deleteUrl = `news/sys/news/delete/${Array.from(this.setOfCheckedId.values()).join(',')}`;
+    this.deleteItem();
   }
 }

@@ -4,15 +4,19 @@
 >
   <div nz-row [nzGutter]="24">
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事状态">
-      <input nz-input>
-    </nz-input-group>
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事时间">
-      <input nz-input>
+      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.type">
+        <nz-option nzLabel="即时" [nzValue]="1"></nz-option>
+        <nz-option nzLabel="赛程" [nzValue]="2"></nz-option>
+        <nz-option nzLabel="赛果" [nzValue]="3"></nz-option>
+        <nz-option nzLabel="延期" [nzValue]="4"></nz-option>
+      </nz-select>
     </nz-input-group>
     <div nz-col [nzSpan]="6" class="actions">
       <button
+        type="button"
         nz-button
         [nzType]="'primary'"
+        (click)="fetchList()"
         [disabled]="loading"
       >查询
       </button>
@@ -20,6 +24,7 @@
         type="reset"
         nz-button
         [disabled]="loading"
+        (click)="search={};fetchList()"
       >重置
       </button>
     </div>

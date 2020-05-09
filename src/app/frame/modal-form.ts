@@ -1,8 +1,9 @@
 import {EventEmitter, Input, Output} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {Result} from './common.model';
+import {Result} from '../common/common.model';
 import {HttpClient} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
+import * as moment from 'moment';
 
 export abstract class ModalForm<T> {
   // 编辑对象 直接从表单中带过来
@@ -10,7 +11,7 @@ export abstract class ModalForm<T> {
   detail: T;
   // 打开之后请求接口查询 detail
   @Input()
-  id: number;
+  queryId: number;
   // 接口加载详情
   loading = false;
   @Input()
@@ -37,8 +38,16 @@ export abstract class ModalForm<T> {
   submit() {
     this.beforeSubmit();
     this.submiting = true;
+    const body = {
+      ...this.form.value
+    };
+    for (const key in body) {
+      if (body.hasOwnProperty(key) && body[key] instanceof Date) {
+        body[key] = moment(body[key]).format('YYYY-MM-DD');
+      }
+    }
     this.http.request<Result>(this.method, this.submitUrl, {
-      body: this.form.value
+      body
     }).pipe(
       finalize(() => this.submiting = false)
     ).subscribe(event => {

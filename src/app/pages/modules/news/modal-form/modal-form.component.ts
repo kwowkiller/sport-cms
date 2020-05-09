@@ -4,7 +4,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn';
 import {CKEditor5} from '@ckeditor/ckeditor5-angular/ckeditor';
-import {ModalForm} from '../../../../common/modal-form';
+import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {config, UploadAdapter} from '../../../../common/CKEditor';
 import {finalize} from 'rxjs/operators';
@@ -22,7 +22,7 @@ export class ModalFormComponent extends ModalForm<News> implements OnInit, OnCha
   selectData: NewsType[] = [];
 
   get title() {
-    return this.id ? '编辑资讯' : '创建资讯';
+    return this.queryId ? '编辑资讯' : '创建资讯';
   }
 
   constructor(
@@ -47,8 +47,8 @@ export class ModalFormComponent extends ModalForm<News> implements OnInit, OnCha
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const idChange = changes.id;
-    if (this.id == null) {
+    const idChange = changes.queryId;
+    if (this.queryId == null) {
       this.method = 'POST';
       this.submitUrl = 'news/sys/news/add';
       this.form.removeControl('id');
@@ -67,7 +67,7 @@ export class ModalFormComponent extends ModalForm<News> implements OnInit, OnCha
         code, data: {
           news: News
         }
-      }>(`news/sys/news/${this.id}`).pipe(
+      }>(`news/sys/news/${this.queryId}`).pipe(
         finalize(() => this.loading = false)
       ).subscribe(event => {
         this.form.addControl('id', this.fb.control(null));

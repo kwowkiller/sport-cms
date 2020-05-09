@@ -1,4 +1,7 @@
 // https://ckeditor.com/docs/ckeditor5
+import {environment} from '../../environments/environment';
+import {Session} from './session';
+
 export const config = {
   language: 'zh-cn',
   image: {
@@ -31,9 +34,21 @@ export class UploadAdapter {
 
   upload() {
     return new Promise((resolve, reject) => {
-      console.log('UploadAdapter upload called', this.loader, this.url);
-      console.log('the file we got was', this.loader.file);
-      resolve({default: 'https://mao.1f866.com/uploads/images/1584539236.png'});
+      // console.log('UploadAdapter upload called', this.loader, this.url);
+      // console.log('the file we got was', this.loader.file);
+      const formData = new FormData();
+      formData.append('file', this.loader.file);
+      fetch(`${environment.baseUrl}app/sys/app/file/upload`, {
+        method: 'POST',
+        headers: {
+          authorization: Session.token,
+        },
+        body: formData,
+      }).then(response => {
+        response.json().then(json => {
+          resolve({default: json.data});
+        });
+      });
     });
   }
 

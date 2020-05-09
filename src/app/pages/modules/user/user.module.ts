@@ -8,15 +8,19 @@ import {
   NzDividerModule,
   NzFormModule,
   NzGridModule,
-  NzInputModule, NzModalModule, NzRadioModule,
-  NzSelectModule,
-  NzTableModule
+  NzInputModule, NzModalModule, NzPopconfirmModule, NzRadioModule,
+  NzSelectModule, NzSpinModule,
+  NzTableModule, NzTabsModule
 } from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthListComponent} from './auth-list/auth-list.component';
+import {SubListComponent} from './sub-list/sub-list.component';
+import {BarListComponent} from './bar-list/bar-list.component';
+import {AuthInfoComponent} from './auth-info/auth-info.component';
+import {BannedComponent} from './banned/banned.component';
 
 @NgModule({
-  declarations: [ListComponent, AuthListComponent],
+  declarations: [ListComponent, AuthListComponent, SubListComponent, BarListComponent, AuthInfoComponent, BannedComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -33,6 +37,11 @@ import {AuthListComponent} from './auth-list/auth-list.component';
     FormsModule,
     NzModalModule,
     NzRadioModule,
+    NzTabsModule,
+    NzPopconfirmModule,
+    NzSpinModule,
+    ReactiveFormsModule,
+    NzFormModule,
   ]
 })
 export class UserModule {
@@ -59,10 +68,12 @@ export interface User {
   username: string;
 }
 
-export interface Auth {
+export interface AuthInfo {
   authStatus: number;
   authTimeFrom: string;
   authTimeTo: string;
+  // 用户注册时间
+  createTime: string;
   creationTime: string;
   frontPhoto: string;
   handPhoto: string;

@@ -8,12 +8,13 @@ import {
   NzDatePickerModule,
   NzDividerModule, NzFormModule,
   NzGridModule,
-  NzInputModule, NzModalModule,
-  NzSelectModule,
+  NzInputModule, NzModalModule, NzPopconfirmModule,
+  NzSelectModule, NzSpinModule,
   NzTableModule
 } from 'ng-zorro-antd';
 import {ModalFormComponent} from './modal-form/modal-form.component';
-import { TagSelectComponent } from './tag-select/tag-select.component';
+import {TagSelectComponent} from './tag-select/tag-select.component';
+import {ComponentsModule} from '../../../components/components.module';
 
 @NgModule({
   declarations: [ListComponent, ModalFormComponent, TagSelectComponent],
@@ -29,13 +30,16 @@ import { TagSelectComponent } from './tag-select/tag-select.component';
     NzTableModule,
     NzDividerModule,
     RouterModule.forChild([
-      {path: '', component: ListComponent}
+      {path: '', component: ListComponent},
     ]),
     NzButtonModule,
     NzDatePickerModule,
     NzModalModule,
     ReactiveFormsModule,
     NzFormModule,
+    ComponentsModule,
+    NzSpinModule,
+    NzPopconfirmModule,
   ]
 })
 export class LiveModule {

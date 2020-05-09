@@ -1,121 +1,166 @@
-<form
-  ngNoForm
-  class="search-area"
-  (submit)="$event.preventDefault();fetchList('page')"
-  (reset)="dateRange=[];fetchList('all')"
+<nz-tabset
+  [(nzSelectedIndex)]="tabIndex"
 >
-  <div nz-row [nzGutter]="24">
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户名">
-      <input nz-input [(ngModel)]="search.username">
-    </nz-input-group>
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="手机号">
-      <input nz-input [(ngModel)]="search.phone">
-    </nz-input-group>
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="性别">
-      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.sex">
-        <nz-option nzValue="1" nzLabel="男"></nz-option>
-        <nz-option nzValue="2" nzLabel="女"></nz-option>
-      </nz-select>
-    </nz-input-group>
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="注册时间">
-      <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
-    </nz-input-group>
-  </div>
-  <div nz-row [nzGutter]="24">
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="认证状态">
-      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.authenStatus">
-        <nz-option nzValue="0" nzLabel="未认证"></nz-option>
-        <nz-option nzValue="1" nzLabel="基础认证"></nz-option>
-        <nz-option nzValue="2" nzLabel="高级认证"></nz-option>
-      </nz-select>
-    </nz-input-group>
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="账号状态">
-      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.userStatus">
-        <nz-option nzValue="0" nzLabel="正常"></nz-option>
-        <nz-option nzValue="1" nzLabel="禁言"></nz-option>
-        <nz-option nzValue="2" nzLabel="禁用"></nz-option>
-      </nz-select>
-    </nz-input-group>
-    <div nz-col [nzSpan]="6" class="actions">
-      <button
-        nz-button
-        [nzType]="'primary'"
-        [disabled]="loading"
-      >查询
-      </button>
-      <button
-        type="reset"
-        nz-button
-        [disabled]="loading"
-      >重置
-      </button>
-    </div>
-  </div>
-</form>
-<ng-template #totalTemplate>共 {{total}} 条</ng-template>
-<nz-table
-  [nzData]="list"
-  [nzFrontPagination]="false"
-  [nzLoading]="loading"
-  [nzTotal]="total"
-  [nzShowTotal]="totalTemplate"
-  [(nzPageIndex)]="search.pageNum"
-  [(nzPageSize)]="search.pageSize"
-  (nzPageIndexChange)="fetchList()"
-  (nzPageSizeChange)="fetchList('page')"
->
-  <thead>
-  <tr>
-    <th>用户头像</th>
-    <th>用户昵称</th>
-    <th>手机号码</th>
-    <th>性别</th>
-    <th>注册时间</th>
-    <th
-      nzShowSort
-      (nzSortOrderChange)="onSortChange($event,'fans_count')"
-    >粉丝数
-    </th>
-    <th>关注用户数</th>
-    <th>关注贴吧数</th>
-    <th>上次登录时间</th>
-    <!--<th>用户等级</th>-->
-    <th>账号状态</th>
-    <th>认证状态</th>
-    <th>操作</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let item of list">
-    <td><img
-      style="height: 35px;width: 35px;border-radius: 50%;object-fit: cover"
-      [src]="item.headerImg"
-      alt
-    /></td>
-    <td>{{item.username}}</td>
-    <td>{{item.phone}}</td>
-    <td>{{item.sex == 1 ? '男' : '女'}}</td>
-    <td>{{item.createTime}}</td>
-    <td>{{item.fansCount}}</td>
-    <td>{{item.followUserCount}}</td>
-    <td>{{item.followBarCount}}</td>
-    <td>{{item.lastLoginTime}}</td>
-    <!--<td>用户等级</td>-->
-    <td [ngSwitch]="item.userStatus">
-      <span *ngSwitchCase="0">正常</span>
-      <span *ngSwitchCase="1">禁言</span>
-      <span *ngSwitchCase="2">禁用</span>
-    </td>
-    <td [ngSwitch]="item.authenStatus">
-      <span *ngSwitchCase="0">未认证</span>
-      <span *ngSwitchCase="1">基础认证</span>
-      <span *ngSwitchCase="2">高级认证</span>
-    </td>
-    <td>
-      <a>认证信息</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a>禁言</a>
-    </td>
-  </tr>
-  </tbody>
-</nz-table>
+  <nz-tab nzTitle="用户列表">
+    <form
+      ngNoForm
+      class="search-area"
+      (submit)="$event.preventDefault();fetchList('page')"
+      (reset)="dateRange=[];fetchList('all')"
+    >
+      <div nz-row [nzGutter]="24">
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户名">
+          <input nz-input [(ngModel)]="search.username">
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="手机号">
+          <input nz-input [(ngModel)]="search.phone">
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="性别">
+          <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.sex">
+            <nz-option nzValue="1" nzLabel="男"></nz-option>
+            <nz-option nzValue="2" nzLabel="女"></nz-option>
+          </nz-select>
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="注册时间">
+          <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
+        </nz-input-group>
+      </div>
+      <div nz-row [nzGutter]="24">
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="认证状态">
+          <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.authenStatus">
+            <nz-option nzValue="0" nzLabel="未认证"></nz-option>
+            <nz-option nzValue="1" nzLabel="基础认证"></nz-option>
+            <nz-option nzValue="2" nzLabel="高级认证"></nz-option>
+          </nz-select>
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="账号状态">
+          <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.userStatus">
+            <nz-option nzValue="0" nzLabel="正常"></nz-option>
+            <nz-option nzValue="1" nzLabel="禁言"></nz-option>
+            <nz-option nzValue="2" nzLabel="禁用"></nz-option>
+          </nz-select>
+        </nz-input-group>
+        <div nz-col [nzSpan]="6" class="actions">
+          <button
+            nz-button
+            [nzType]="'primary'"
+            [disabled]="loading"
+          >查询
+          </button>
+          <button
+            type="reset"
+            nz-button
+            [disabled]="loading"
+          >重置
+          </button>
+        </div>
+      </div>
+    </form>
+    <ng-template #totalTemplate>共 {{total}} 条</ng-template>
+    <nz-table
+      [nzData]="list"
+      [nzFrontPagination]="false"
+      [nzLoading]="loading"
+      [nzTotal]="total"
+      [nzShowTotal]="totalTemplate"
+      [(nzPageIndex)]="search.pageNum"
+      [(nzPageSize)]="search.pageSize"
+      (nzPageIndexChange)="fetchList()"
+      (nzPageSizeChange)="fetchList('page')"
+    >
+      <thead>
+      <tr>
+        <th>用户头像</th>
+        <th>用户昵称</th>
+        <th>手机号码</th>
+        <th>性别</th>
+        <th>注册时间</th>
+        <th
+          nzShowSort
+          (nzSortOrderChange)="onSortChange($event,'fans_count')"
+        >粉丝数
+        </th>
+        <th>关注用户数</th>
+        <th>关注贴吧数</th>
+        <th>上次登录时间</th>
+        <!--<th>用户等级</th>-->
+        <th>账号状态</th>
+        <th>认证状态</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of list">
+        <td><img
+          style="height: 35px;width: 35px;border-radius: 50%;object-fit: cover"
+          [src]="item.headerImg"
+          alt
+        /></td>
+        <td>{{item.username}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.sex == 1 ? '男' : '女'}}</td>
+        <td>{{item.createTime}}</td>
+        <td>
+          <a (click)="selected=item;tabIndex=1;subTableType='fans'">{{item.fansCount}}</a></td>
+        <td>
+          <a (click)="selected=item;tabIndex=1;subTableType='follow'">{{item.followUserCount}}</a>
+        </td>
+        <td>
+          <a (click)="selected=item;tabIndex=1;subTableType='bar'">{{item.followBarCount}}</a>
+        </td>
+        <td>{{item.lastLoginTime}}</td>
+        <!--<td>用户等级</td>-->
+        <td [ngSwitch]="item.userStatus">
+          <span *ngSwitchCase="0">正常</span>
+          <span *ngSwitchCase="1">禁言</span>
+          <span *ngSwitchCase="2">禁用</span>
+        </td>
+        <td [ngSwitch]="item.authenStatus">
+          <span *ngSwitchCase="0">未认证</span>
+          <span *ngSwitchCase="1">基础认证</span>
+          <span *ngSwitchCase="2">高级认证</span>
+        </td>
+        <td>
+          <ng-container *ngIf="item.authenStatus!=0">
+            <a (click)="selected=item;modalShow=true">认证信息</a>
+            <nz-divider nzType="vertical"></nz-divider>
+          </ng-container>
+          <a
+            *ngIf="item.userStatus!=1"
+            (click)="modalStatusShow=true;selected=item"
+          >禁言</a>
+          <a
+            *ngIf="item.userStatus==1"
+            nz-popconfirm
+            nzPopconfirmTitle="确认解除禁言该用户吗？"
+            (nzOnConfirm)="unbannedUser(item.id)"
+          >解除禁言</a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+  <nz-tab
+    *ngIf="selected"
+    [nzTitle]="subTableTitle"
+  >
+    <app-user-sub-list
+      *ngIf="subTableType=='fans'||subTableType=='follow'"
+      [userId]="selected?.id"
+      [type]="subTableType"
+    ></app-user-sub-list>
+    <app-user-bar-list
+      *ngIf="subTableType=='bar'"
+      [userId]="selected?.id"
+    ></app-user-bar-list>
+  </nz-tab>
+</nz-tabset>
+<app-auth-info
+  [(visiable)]="modalShow"
+  [queryId]="selected?.id"
+></app-auth-info>
+<app-banned
+  [detail]="selected"
+  [(visiable)]="modalStatusShow"
+  (submitSuccess)="onSubmitSuccess()"
+></app-banned>

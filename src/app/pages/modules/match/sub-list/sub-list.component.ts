@@ -1,5 +1,4 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Table} from '../../../../common/table';
 import {MatchItem} from '../match.module';
 import {HttpClient} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
@@ -12,8 +11,16 @@ import {finalize} from 'rxjs/operators';
 export class SubListComponent implements OnInit, OnChanges {
   @Input()
   matchId = 0;
+  @Input()
+  date: string;
   list: MatchItem[] = [];
   loading = false;
+  search: {
+    /**
+     * 即时() 赛程(今天之后) 赛果(今天之前) 其他()
+     */
+    type?: number,
+  } = {};
 
   constructor(private http: HttpClient) {
   }
@@ -48,7 +55,6 @@ export class SubListComponent implements OnInit, OnChanges {
         return '取消';
       case 13:
         return '待定';
-
     }
   }
 
@@ -56,16 +62,21 @@ export class SubListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.search = {};
     this.fetchList();
   }
 
   fetchList() {
     this.loading = true;
+    const params: any = {eventIds: `${this.matchId}`};
+    if (this.date) {
+      params.date = this.date;
+    }
+    if (this.search.type) {
+      params.type = this.search.type;
+    }
     this.http.get<{ code: number; data: MatchItem[] }>('match/sys/football/schedule', {
-      params: {
-        type: '1',
-        eventIds: `${this.matchId}`,
-      }
+      params,
     }).pipe(
       finalize(() => this.loading = false)
     ).subscribe(event => {

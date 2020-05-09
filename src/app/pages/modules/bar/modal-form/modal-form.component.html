@@ -3,30 +3,42 @@
   [nzVisible]="visiable"
   [nzWidth]="600"
   (nzOnCancel)="visiableChange.emit(false)"
+  [nzOkLoading]="submiting"
+  [nzOkDisabled]="!form.valid"
+  (nzOnOk)="submit()"
 >
   <form nz-form [formGroup]="form">
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>球吧名称</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <input nz-input formControlName="barName"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>球吧分类</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <nz-select formControlName="barType">
+          <!--0:足球1:篮球2:电竞3:全部-->
+          <nz-option nzLabel="足球" [nzValue]="0"></nz-option>
+          <nz-option nzLabel="篮球" [nzValue]="1"></nz-option>
+          <nz-option nzLabel="电竞" [nzValue]="2"></nz-option>
+          <nz-option nzLabel="全部" [nzValue]="3"></nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>吧主</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <app-user-select
+          formControlName="userId"
+        ></app-user-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>球吧LOGO</nz-form-label>
       <nz-form-control [nzSm]="17">
         <app-upload
+          formControlName="barLogo"
         ></app-upload>
       </nz-form-control>
     </nz-form-item>

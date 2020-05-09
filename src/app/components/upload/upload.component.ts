@@ -6,6 +6,7 @@ import {environment} from '../../../environments/environment';
 import {Session} from '../../common/session';
 import {finalize} from 'rxjs/operators';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {CustomInput} from '../../frame/custom-input';
 
 @Component({
   selector: 'app-upload',
@@ -24,34 +25,20 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
       [nzBeforeUpload]="beforeUpload"
       [nzCustomRequest]="customRequest"
     >
-      <ng-container *ngIf="!uploadImageUrl">
+      <ng-container *ngIf="!model">
         <i class="upload-icon" nz-icon [nzType]="uploading ? 'loading' : 'plus'"></i>
         <div class="ant-upload-text">点击选择图片</div>
       </ng-container>
-      <img alt *ngIf="uploadImageUrl" [src]="uploadImageUrl" style="width: 100%"/>
+      <img alt *ngIf="model" [src]="model" style="width: 100%"/>
     </nz-upload>
   `,
   styles: []
 })
-export class UploadComponent implements OnInit, ControlValueAccessor {
+export class UploadComponent extends CustomInput implements OnInit {
   uploading = false;
-  uploadImageUrl: string = null;
-  onChangeListener: (image: string) => {};
-  onTouchedListener: () => {};
 
   constructor() {
-  }
-
-  writeValue(obj: string): void {
-    this.uploadImageUrl = obj;
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChangeListener = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouchedListener = fn;
+    super();
   }
 
   ngOnInit(): void {
@@ -92,9 +79,7 @@ export class UploadComponent implements OnInit, ControlValueAccessor {
     ).subscribe(event => {
       event.json().then(json => {
         if (json.code === 200) {
-          this.uploadImageUrl = json.data;
-          this.onTouchedListener();
-          this.onChangeListener(json.data);
+          this.onModelChange(json.data);
         }
       });
     });

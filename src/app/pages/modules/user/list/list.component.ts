@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Table} from '../../../../common/table';
+import {Table} from '../../../../frame/table';
 import {User} from '../user.module';
 import * as moment from 'moment';
+import {NzMessageService} from 'ng-zorro-antd';
+import {Result} from '../../../../common/common.model';
 
 @Component({
   selector: 'app-user-list',
@@ -10,11 +12,34 @@ import * as moment from 'moment';
   styles: []
 })
 export class ListComponent extends Table<User> implements OnInit {
+  tabIndex = 0;
+  subTableType: 'fans' | 'bar' | 'follow';
   dateRange: Date[] = [];
+  // 设置禁言
+  modalStatusShow = false;
 
-  constructor(http: HttpClient) {
-    super(http);
-    this.url = 'app/sys/app/user/page';
+  get subTableTitle() {
+    let str = '';
+    switch (this.subTableType) {
+      case 'bar':
+        str = '关注的吧';
+        break;
+      case 'fans':
+        str = '粉丝';
+        break;
+      case 'follow':
+        str = '关注的人';
+        break;
+    }
+    return `${this.selected.username}的${str}`;
+  }
+
+  constructor(
+    protected http: HttpClient,
+    protected message: NzMessageService,
+  ) {
+    super(http, message);
+    this.listUrl = 'app/sys/app/user/page';
   }
 
   beforeSearch() {
@@ -29,5 +54,17 @@ export class ListComponent extends Table<User> implements OnInit {
   }
 
   onSubmitSuccess() {
+    this.message.success('禁言成功');
+    this.fetchList('none');
+  }
+
+  // 解除禁言
+  unbannedUser(id: number) {
+    this.http.delete<Result>(`app/sys/app/user/banned/${id}`).subscribe(event => {
+      if (event.code === 200) {
+        this.message.success('解除禁言成功');
+        this.fetchList('none');
+      }
+    });
   }
 }

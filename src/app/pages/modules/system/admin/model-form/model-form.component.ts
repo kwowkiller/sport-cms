@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Admin} from '../../system.module';
 import {FormBuilder} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {ModalForm} from '../../../../../common/modal-form';
+import {ModalForm} from '../../../../../frame/modal-form';
 
 @Component({
   selector: 'app-admin-form',

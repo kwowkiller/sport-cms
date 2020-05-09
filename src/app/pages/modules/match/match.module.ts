@@ -1,7 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ListComponent} from './list/list.component';
-import {NzButtonModule, NzDividerModule, NzGridModule, NzInputModule, NzSelectModule, NzTableModule, NzTabsModule} from 'ng-zorro-antd';
+import {
+  NzButtonModule,
+  NzDatePickerModule,
+  NzDividerModule,
+  NzGridModule,
+  NzInputModule,
+  NzSelectModule,
+  NzTableModule,
+  NzTabsModule
+} from 'ng-zorro-antd';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {SubListComponent} from './sub-list/sub-list.component';
@@ -21,6 +30,7 @@ import {SubListComponent} from './sub-list/sub-list.component';
     NzSelectModule,
     NzButtonModule,
     NzTabsModule,
+    NzDatePickerModule,
   ]
 })
 export class MatchModule {

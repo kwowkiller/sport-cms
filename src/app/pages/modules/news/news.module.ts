@@ -70,9 +70,12 @@ export interface News {
   share: number;
   // 资讯类型
   typeId: number;
+  typeName: string;
   updateTime: string;
   // 浏览量
   visits: number;
+  // 评论数
+  commentnum: number;
 }
 
 // 下拉框数据

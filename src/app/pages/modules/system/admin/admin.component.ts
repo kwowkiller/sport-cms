@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Table} from '../../../../common/table';
+import {Table} from '../../../../frame/table';
 import {Admin} from '../system.module';
 import {HttpClient} from '@angular/common/http';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-system-admin',
@@ -10,9 +11,12 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AdminComponent extends Table<Admin> implements OnInit {
 
-  constructor(protected http: HttpClient) {
-    super(http);
-    this.url = 'admin/system/user';
+  constructor(
+    protected http: HttpClient,
+    protected message: NzMessageService,
+  ) {
+    super(http, message);
+    this.listUrl = 'admin/system/user';
   }
 
   ngOnInit(): void {

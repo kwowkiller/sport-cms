@@ -79,8 +79,8 @@
     <td>{{item.nikeName}}</td>
     <td>{{item.phone}}</td>
     <td>{{item.sex == 1 ? '男' : '女'}}</td>
+    <td>{{item.createTime}}</td>
     <td>{{item.creationTime}}</td>
-    <td>提交认证时间</td>
     <td [ngSwitch]="item.authStatus">
       <span *ngSwitchCase="0">未认证</span>
       <span *ngSwitchCase="1">认证成功</span>
@@ -102,33 +102,26 @@
   </tr>
   </tbody>
 </nz-table>
-<nz-modal
-  nzTitle="认证信息"
-  [nzVisible]="modalDetailShow"
-  [nzFooter]="null"
-  (nzOnCancel)="modalDetailShow=false;selected=null"
-  [nzWidth]="600"
->
-  <p><span>真实姓名：{{selected?.realName}}</span></p>
-  <p><span>身份证号：{{selected?.idNo}}</span></p>
-  <p>
-    <span>身份照片：</span>
-    <img alt [src]="selected?.frontPhoto" width="200" style="margin-right: 12px"/>
-    <img alt [src]="selected?.handPhoto" width="200"/>
-  </p>
-</nz-modal>
+<app-auth-info
+  [(visiable)]="modalDetailShow"
+  [detail]="selected"
+></app-auth-info>
 <nz-modal
   nzTitle="用户认证信息审核"
   [nzVisible]="modalActionShow"
   (nzOnCancel)="modalActionShow=false"
+  (nzOnOk)="updateItem()"
+  [nzOkLoading]="updating"
 >
-  <p>请审核用户认证信息，审核通过后用户可在前端进行开启直播操作！</p>
-  <nz-radio-group style="display: block">
-    <label nz-radio nzValue="0">通过</label>
-    <label nz-radio nzValue="1">不通过</label>
-  </nz-radio-group>
-  <label style="display: flex;margin-top: 12px">
-    <span>备注：</span>
-    <textarea style="flex: 1;height: 100px" nz-input></textarea>
-  </label>
+  <form [formGroup]="form">
+    <p>请审核用户认证信息，审核通过后用户可在前端进行开启直播操作！</p>
+    <nz-radio-group style="display: block" formControlName="status">
+      <label nz-radio [nzValue]="0">通过</label>
+      <label nz-radio [nzValue]="1">不通过</label>
+    </nz-radio-group>
+    <label style="display: flex;margin-top: 12px">
+      <span>备注：</span>
+      <textarea style="flex: 1;height: 100px" nz-input formControlName="remark"></textarea>
+    </label>
+  </form>
 </nz-modal>

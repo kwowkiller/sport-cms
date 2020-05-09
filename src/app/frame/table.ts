@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
-import {Pageable} from './common.model';
+import {Pageable, Result} from '../common/common.model';
 import {finalize} from 'rxjs/operators';
+import {NzMessageService} from 'ng-zorro-antd';
 
 export abstract class Table<T> {
   // 唯一标识字段 默认id
@@ -8,7 +9,10 @@ export abstract class Table<T> {
   list: T[] = [];
   // 选中的项
   selected: T;
+  // 表单加载
   loading = false;
+  // 更新项
+  updating = false;
   total = 0;
   // 查询参数
   search: {
@@ -24,10 +28,12 @@ export abstract class Table<T> {
     asc: boolean,
     column: string,
   }[] = [];
-  url = '';
+  listUrl = '';
   // 显示表单modal
   modalShow = false;
   setOfCheckedId = new Set<number>();
+  // 删除项
+  deleteUrl = '';
 
   get allChecked() {
     if (this.list.length === 0) {
@@ -55,7 +61,10 @@ export abstract class Table<T> {
     });
   }
 
-  protected constructor(protected http: HttpClient) {
+  protected constructor(
+    protected http: HttpClient,
+    protected message: NzMessageService,
+  ) {
   }
 
   // 搜索前处理特殊参数
@@ -111,7 +120,7 @@ export abstract class Table<T> {
       });
     }
     this.loading = true;
-    this.http.get<Pageable<T>>(this.url, {
+    this.http.get<Pageable<T>>(this.listUrl, {
       params: {
         ...this.search,
         ...orders,
@@ -121,6 +130,22 @@ export abstract class Table<T> {
     ).subscribe(event => {
       this.total = event.data.total;
       this.list = event.data.records;
+    });
+  }
+
+  /**
+   * 删除对象
+   */
+  deleteItem() {
+    this.http.delete<Result>(this.deleteUrl).pipe(
+    ).subscribe(event => {
+      if (event.code === 200) {
+        this.setOfCheckedId.clear();
+        this.message.success('删除成功');
+        this.fetchList('all');
+      } else {
+        this.message.error('删除失败');
+      }
     });
   }
 }

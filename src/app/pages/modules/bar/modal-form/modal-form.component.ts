@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {Bar} from '../bar.module';
-import {ModalForm} from '../../../../common/modal-form';
+import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
@@ -16,7 +16,13 @@ export class ModalFormComponent extends ModalForm<Bar> implements OnInit {
     private fb: FormBuilder,
   ) {
     super(http);
-    this.form = this.fb.group({});
+    this.form = this.fb.group({
+      barLogo: [null, [Validators.required]],
+      barName: [null, [Validators.required]],
+      barType: [null, [Validators.required]],
+      userId: [null, [Validators.required]],
+    });
+    this.submitUrl = 'bar/sys/bar/add';
   }
 
   get title() {

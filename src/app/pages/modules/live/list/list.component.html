@@ -18,6 +18,8 @@
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播标签">
       <app-live-tag-select
+        [type]="search.liveType"
+        [(model)]="search.liveTag"
       ></app-live-tag-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播状态">
@@ -30,14 +32,22 @@
   </div>
   <div nz-row [nzGutter]="24">
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播时间">
-      <nz-range-picker></nz-range-picker>
+      <nz-date-picker style="width: 100%"></nz-date-picker>
     </nz-input-group>
     <div nz-col [nzSpan]="6" class="actions">
       <button
         type="button"
         nz-button
-        (click)="modalShow=true"
+        (click)="selected=null;modalShow=true"
       >新增直播
+      </button>
+      <button
+        type="button"
+        nz-button
+        nzType="danger"
+        [disabled]="setOfCheckedId.size==0"
+        (click)="onDelete()"
+      >删除
       </button>
       <button
         nz-button
@@ -74,25 +84,27 @@
       (nzCheckedChange)="onAllChecked($event)"
     ></th>
     <th>直播标题</th>
+    <th>直播预览图</th>
+    <th>主播</th>
     <th>直播分类</th>
     <th>直播标签</th>
     <th>开播时间</th>
-    <th>上次直播结束时间</th>
+    <th>上次开播时间</th>
     <th>直播时长</th>
     <th>累计直播时长</th>
     <th
       nzShowSort
-      (nzSortOrderChange)="onSortChange($event,'')"
+      (nzSortOrderChange)="onSortChange($event,'viewUsers')"
     >观看人数
     </th>
     <th
       nzShowSort
-      (nzSortOrderChange)="onSortChange($event,'')"
+      (nzSortOrderChange)="onSortChange($event,'totalLiveUsers')"
     >累计观看人数
     </th>
     <th
       nzShowSort
-      (nzSortOrderChange)="onSortChange($event,'')"
+      (nzSortOrderChange)="onSortChange($event,'reseveUsers')"
     >订阅人数
     </th>
     <th>直播状态</th>
@@ -106,20 +118,24 @@
       (nzCheckedChange)="onItemChecked(item.id, $event)"
     ></td>
     <td>{{item.liveTitle}}</td>
+    <td>
+      <img [src]="item.liveFaceImage" alt="" style="height: 35px">
+    </td>
+    <td>主播</td>
     <td [ngSwitch]="item.liveType">
       <span *ngSwitchCase="0">足球</span>
       <span *ngSwitchCase="1">篮球</span>
       <span *ngSwitchCase="2">电竞</span>
       <span *ngSwitchCase="3">全部</span>
     </td>
-    <td>-</td>
+    <td>直播标签</td>
     <td>{{item.startTime}}</td>
-    <td>-</td>
-    <td>{{item.liveTime}}min</td>
-    <td>{{item.totalLiveTime}}min</td>
+    <td>{{item.lastStartTime}}</td>
+    <td>{{item.liveTime}}</td>
+    <td>{{item.totalLiveTime}}</td>
     <td>{{item.viewUsers}}</td>
     <td>{{item.totalLiveUsers}}</td>
-    <td>{{item.viewUsers}}</td>
+    <td>{{item.reseveUsers}}</td>
     <td [ngSwitch]="item.liveStatus">
       <span *ngSwitchCase="0">未开播</span>
       <span *ngSwitchCase="1">直播中</span>
@@ -127,25 +143,30 @@
     </td>
     <td [ngSwitch]="item.liveStatus">
       <ng-container *ngSwitchCase="0">
-        <a>编辑</a>
+        <a (click)="modalShow=true;selected=item;">编辑</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a>开播</a>
+        <a (click)="updateStatus(item.id,1)">开播</a>
       </ng-container>
       <ng-container *ngSwitchCase="1">
-        <a>编辑</a>
+        <a (click)="modalShow=true;selected=item;">编辑</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a>下播</a>
+        <a (click)="updateStatus(item.id,2)">下播</a>
         <nz-divider nzType="vertical"></nz-divider>
         <a>弹幕填充</a>
       </ng-container>
       <ng-container *ngSwitchCase="2">
-        <a>删除</a>
+        <a
+          nz-popconfirm
+          nzPopconfirmTitle="确认删除该项？"
+          (nzOnConfirm)="onDeleteSingle(item.id)"
+        >删除</a>
       </ng-container>
     </td>
   </tr>
   </tbody>
 </nz-table>
 <app-live-form
+  [queryId]="selected?.id"
   [(visiable)]="modalShow"
   (submitSuccess)="onSubmitSuccess()"
 ></app-live-form>
