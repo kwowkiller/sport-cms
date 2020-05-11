@@ -16,7 +16,8 @@ import {
 } from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ModalFormComponent} from './role/modal-form/modal-form.component';
-import { ModelFormComponent } from './admin/model-form/model-form.component';
+import {ModelFormComponent} from './admin/model-form/model-form.component';
+import {RoleSelectComponent} from './role-select/role-select.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ModelFormComponent } from './admin/model-form/model-form.component';
     RoleComponent,
     ModalFormComponent,
     ModelFormComponent,
+    RoleSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -72,4 +74,20 @@ export interface Role {
   roleId: number;
   roleName: string;
   updateTime: string;
+}
+
+export interface Menu {
+  component: string;
+  createTime: string;
+  createTimeFrom: string;
+  icon: string;
+  menuId: number;
+  menuName: string;
+  orderNum: number;
+  parentId: number;
+  path: string;
+  perms: any;
+  type: string;
+  updateTime: string;
+  updateTimeTo: string;
 }

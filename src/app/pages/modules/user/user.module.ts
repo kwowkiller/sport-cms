@@ -69,6 +69,7 @@ export interface User {
 }
 
 export interface AuthInfo {
+  // 0未认证 1认证成功 2认证失败
   authStatus: number;
   authTimeFrom: string;
   authTimeTo: string;
@@ -87,4 +88,10 @@ export interface AuthInfo {
   sex: number;
   userId: number;
   versoPhoto: string;
+  authenTime: string;
+  fansCount: number;
+  followBarCount: number;
+  registerDays: number;
+  signature: string;
+  username: string;
 }

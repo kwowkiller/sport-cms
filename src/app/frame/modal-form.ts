@@ -25,10 +25,27 @@ export abstract class ModalForm<T> {
   submitSuccess = new EventEmitter<void>();
   // 新增 或 更新
   method: 'POST' | 'PUT' = 'POST';
+  // 查询详情地址
+  detailUrl = '';
   // 表单提交地址
   submitUrl = '';
+  // 处理时间
+  dateFormat = 'YYYY-MM-DD';
 
   protected constructor(protected http: HttpClient) {
+  }
+
+  // 仅查询详情  不填充表单
+  fetchDetailOnly() {
+    if (!this.visiable) {
+      return;
+    }
+    this.loading = true;
+    this.http.get<{ code, data: T }>(this.detailUrl).pipe(
+      finalize(() => this.loading = false)
+    ).subscribe(event => {
+      this.detail = event.data;
+    });
   }
 
   // 提交前的额外处理
@@ -43,7 +60,7 @@ export abstract class ModalForm<T> {
     };
     for (const key in body) {
       if (body.hasOwnProperty(key) && body[key] instanceof Date) {
-        body[key] = moment(body[key]).format('YYYY-MM-DD');
+        body[key] = moment(body[key]).format(this.dateFormat);
       }
     }
     this.http.request<Result>(this.method, this.submitUrl, {

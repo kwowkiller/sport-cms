@@ -10,25 +10,25 @@
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>登录账号</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <input nz-input formControlName="username"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>手机号码</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <input nz-input formControlName="mobile"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>账号角色</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <app-role-select formControlName="roleId"></app-role-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>账号密码</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <input nz-input type="password" formControlName="password"/>
       </nz-form-control>
     </nz-form-item>
   </form>

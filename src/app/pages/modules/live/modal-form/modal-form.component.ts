@@ -28,8 +28,9 @@ export class ModalFormComponent extends ModalForm<Live> implements OnInit, OnCha
       liveUrl: [null, [Validators.required]],
       liveTag: [null, [Validators.required]],
       liveFaceImage: [null, [Validators.required]],
-      username: [null, [Validators.required]],
+      // username: [null, [Validators.required]],
     });
+    this.dateFormat = 'YYYY-MM-DD HH:mm:ss';
   }
 
   ngOnInit(): void {
@@ -64,7 +65,7 @@ export class ModalFormComponent extends ModalForm<Live> implements OnInit, OnCha
           liveUrl: event.data.liveUrl,
           liveTag: event.data.liveTag,
           liveFaceImage: event.data.liveFaceImage,
-          username: '主播名',
+          // username: '主播名',
         });
       });
     }

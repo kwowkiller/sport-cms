@@ -6,15 +6,10 @@ export class Session {
   }
 
   static get token(): string {
-    if (environment.production) {
-      if (!sessionStorage.getItem('token')) {
-        return 'Basic c3NsOjEyMzRxd2Vy';
-      }
-      return sessionStorage.getItem('token');
-    } else {
-      // 测试token
-      return 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODkwNzYzMzgsInVzZXJfbmFtZSI6InNzbCIsImp0aSI6IjYyZDZiYzM0LWZjNTYtNGQ1NC1hMzgwLTk5YTgwZjdjOGVkYiIsImNsaWVudF9pZCI6InN3YWdnZXIiLCJzY29wZSI6WyJ0ZXN0Il19.i_VdVvhqLVYbyCnvY2uqgmyJ8dSWpFf3sK3KJ0c_9LY';
+    if (!sessionStorage.getItem('token')) {
+      return 'Basic c3NsOjEyMzRxd2Vy';
     }
+    return sessionStorage.getItem('token');
   }
 
   static set token(token) {

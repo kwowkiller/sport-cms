@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Admin} from '../../system.module';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ModalForm} from '../../../../../frame/modal-form';
 
@@ -10,6 +10,7 @@ import {ModalForm} from '../../../../../frame/modal-form';
   styles: []
 })
 export class ModelFormComponent extends ModalForm<Admin> implements OnInit {
+
   get title() {
     return this.detail ? '编辑账户' : '新增账户';
   }
@@ -19,7 +20,12 @@ export class ModelFormComponent extends ModalForm<Admin> implements OnInit {
     private fb: FormBuilder,
   ) {
     super(http);
-    this.form = this.fb.group({});
+    this.form = this.fb.group({
+      username: [null, [Validators.required]],
+      mobile: [null, [Validators.required]],
+      roleId: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+    });
   }
 
   ngOnInit(): void {

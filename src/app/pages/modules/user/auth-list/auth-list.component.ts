@@ -28,7 +28,7 @@ export class AuthListComponent extends Table<AuthInfo> implements OnInit {
     this.listUrl = 'app/sys/app/user/auth/page';
     this.form = this.fb.group({
       remark: [null],
-      status: [0]
+      status: [1]
     });
   }
 
@@ -55,6 +55,8 @@ export class AuthListComponent extends Table<AuthInfo> implements OnInit {
       finalize(() => this.updating = false)
     ).subscribe(event => {
       if (event.code === 200) {
+        this.message.success('审核成功');
+        this.modalActionShow = false;
         this.fetchList();
       } else {
         this.message.error('审核失败');

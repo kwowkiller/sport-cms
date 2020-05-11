@@ -85,7 +85,6 @@
     ></th>
     <th>直播标题</th>
     <th>直播预览图</th>
-    <th>主播</th>
     <th>直播分类</th>
     <th>直播标签</th>
     <th>开播时间</th>
@@ -121,14 +120,13 @@
     <td>
       <img [src]="item.liveFaceImage" alt="" style="height: 35px">
     </td>
-    <td>主播</td>
     <td [ngSwitch]="item.liveType">
       <span *ngSwitchCase="0">足球</span>
       <span *ngSwitchCase="1">篮球</span>
       <span *ngSwitchCase="2">电竞</span>
       <span *ngSwitchCase="3">全部</span>
     </td>
-    <td>直播标签</td>
+    <td>{{item.tag}}</td>
     <td>{{item.startTime}}</td>
     <td>{{item.lastStartTime}}</td>
     <td>{{item.liveTime}}</td>
@@ -142,24 +140,28 @@
       <span *ngSwitchCase="2">已结束</span>
     </td>
     <td [ngSwitch]="item.liveStatus">
+      <a (click)="modalShow=true;selected=item;">编辑</a>
+      <nz-divider nzType="vertical"></nz-divider>
       <ng-container *ngSwitchCase="0">
-        <a (click)="modalShow=true;selected=item;">编辑</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="updateStatus(item.id,1)">开播</a>
+        <a
+          nz-popconfirm
+          nzPopconfirmTitle="确认开播?"
+          (nzOnConfirm)="updateStatus(item.id,1)"
+        >开播</a>
       </ng-container>
       <ng-container *ngSwitchCase="1">
-        <a (click)="modalShow=true;selected=item;">编辑</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="updateStatus(item.id,2)">下播</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a>弹幕填充</a>
+        <a
+          nz-popconfirm
+          nzPopconfirmTitle="确认下播?"
+          (nzOnConfirm)="updateStatus(item.id,2)"
+        >下播</a>
       </ng-container>
       <ng-container *ngSwitchCase="2">
         <a
           nz-popconfirm
-          nzPopconfirmTitle="确认删除该项？"
-          (nzOnConfirm)="onDeleteSingle(item.id)"
-        >删除</a>
+          nzPopconfirmTitle="重新开播?"
+          (nzOnConfirm)="updateStatus(item.id,1)"
+        >重新开播</a>
       </ng-container>
     </td>
   </tr>

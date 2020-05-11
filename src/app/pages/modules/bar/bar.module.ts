@@ -7,17 +7,18 @@ import {
   NzDividerModule, NzFormModule,
   NzGridModule, NzIconModule,
   NzInputModule, NzModalModule,
-  NzRadioModule, NzSelectModule,
+  NzRadioModule, NzSelectModule, NzSpinModule,
   NzTableModule, NzTabsModule, NzUploadModule
 } from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {ModalFormComponent} from './modal-form/modal-form.component';
 import {ComponentsModule} from '../../../components/components.module';
+import {ModalUserComponent} from './modal-user/modal-user.component';
 
 
 @NgModule({
-  declarations: [ListComponent, ModalFormComponent],
+  declarations: [ListComponent, ModalFormComponent, ModalUserComponent],
   imports: [
     CommonModule,
     NzDividerModule,
@@ -39,6 +40,7 @@ import {ComponentsModule} from '../../../components/components.module';
     NzTabsModule,
     ComponentsModule,
     NzSelectModule,
+    NzSpinModule,
   ]
 })
 export class BarModule {
@@ -67,4 +69,5 @@ export interface Bar {
   username: string;
   barLogo: string;
   followTime: string;
+  viewCount: number;
 }

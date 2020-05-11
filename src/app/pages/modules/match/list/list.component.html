@@ -63,8 +63,13 @@
           <img alt [src]="item.logo" style="height: 35px"/>
         </td>
         <td>{{item.name_zh}}</td>
-        <td>赛事类型</td>
-        <td>地区标签</td>
+        <td [ngSwitch]="item.type">
+          <span *ngSwitchCase="0">未知</span>
+          <span *ngSwitchCase="1">联赛</span>
+          <span *ngSwitchCase="2">杯赛</span>
+          <span *ngSwitchCase="3">友谊赛</span>
+        </td>
+        <td>{{item.areaName}}</td>
         <td>{{item.country_name}}</td>
         <td>
           <a (click)="selected=item;tabIndex=1">查看比赛</a>

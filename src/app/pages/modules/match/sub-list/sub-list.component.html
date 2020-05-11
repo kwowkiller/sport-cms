@@ -57,16 +57,16 @@
   <tr *ngFor="let item of list">
     <td>{{item.eventName}}</td>
     <td>{{statusStr(item.status)}}</td>
-    <td>比赛时间</td>
-    <td>开球时间</td>
+    <td>{{item.matchTime * 1000|date:'yyyy-MM-dd'}}</td>
+    <td>{{item.teeTime * 1000|date:'yyyy-MM-dd'}}</td>
     <td>{{item.homeTeamName}}</td>
     <td>{{item.homeTeamRed}}</td>
     <td>{{item.homeTeamYellow}}</td>
     <td>{{item.homeTeamHalf}}</td>
     <td>{{item.homeTeamCorner}}</td>
     <td>{{item.homeTeamScore}}</td>
-    <td>主队联赛排名</td>
-    <td>是否中立场</td>
+    <td>{{item.homeTeamRank}}</td>
+    <td>{{item.middlePosition == 1 ? '是' : '否'}}</td>
   </tr>
   </tbody>
 </nz-table>

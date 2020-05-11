@@ -6,7 +6,7 @@
       <li
         *ngIf="!menu.children"
         nz-menu-item
-        [nzPaddingLeft]="menu.level * 24"
+        [nzPaddingLeft]="menu.level * 48"
         nzMatchRouter
         nzMatchRouterExact
       >
@@ -17,7 +17,7 @@
         nz-submenu
         [nzTitle]="menu.name"
         [nzIcon]="menu.meta.icon"
-        [nzPaddingLeft]="menu.level * 24"
+        [nzPaddingLeft]="menu.level * 48"
         [nzOpen]="menu.open"
       >
         <ul>

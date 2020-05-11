@@ -1,1 +1,55 @@
-<p>menu works!</p>
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="菜单名">
+      <input nz-input [(ngModel)]="search.menuName">
+    </nz-input-group>
+    <div class="actions" nz-col [nzSpan]="6">
+      <button
+        nz-button
+        type="button"
+        (click)="modalShow=true"
+      >新增菜单
+      </button>
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>菜单名</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>{{item.menuName}}</td>
+  </tr>
+  </tbody>
+</nz-table>

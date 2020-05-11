@@ -18,17 +18,10 @@ export class AuthInfoComponent extends ModalForm<AuthInfo> implements OnInit, On
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!this.visiable) {
-      return;
-    }
     const idChange = changes.queryId;
     if (idChange && !idChange.firstChange) {
-      this.loading = true;
-      this.http.get<{ code, data: AuthInfo }>(`app/sys/app/user/auth/${this.queryId}`).pipe(
-        finalize(() => this.loading = false)
-      ).subscribe(event => {
-        this.detail = event.data;
-      });
+      this.detailUrl = `app/sys/app/user/auth/${this.queryId}`;
+      this.fetchDetailOnly();
     }
   }
 

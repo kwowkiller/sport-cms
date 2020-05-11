@@ -50,6 +50,7 @@ export interface Match {
   short_name_en: string;
   short_name_zh: string;
   short_name_zht: string;
+  // 赛事类型 0-未知 1-联赛 2-杯赛 3-友谊赛
   type: number;
 }
 

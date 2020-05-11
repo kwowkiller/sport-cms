@@ -30,7 +30,7 @@ import {ComponentsModule} from '../../../components/components.module';
     NzTableModule,
     NzDividerModule,
     RouterModule.forChild([
-      {path: '', component: ListComponent},
+      {path: 'tv', component: ListComponent},
     ]),
     NzButtonModule,
     NzDatePickerModule,
@@ -69,6 +69,8 @@ export interface Live {
   userId: number;
   // 观看人数
   viewUsers: number;
+  // 标签名
+  tag: string;
 }
 
 export interface LiveTag {

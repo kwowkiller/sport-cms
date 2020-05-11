@@ -98,7 +98,9 @@
   </thead>
   <tbody *ngIf="tabIndex!=1">
   <tr *ngFor="let item of list">
-    <td>球吧LOGO</td>
+    <td>
+      <img [src]="item.barLogo" alt="" height="35">
+    </td>
     <td>{{item.barName}}</td>
     <td [ngSwitch]="item.barType">
       <span *ngSwitchCase="0">足球</span>
@@ -107,14 +109,14 @@
       <span *ngSwitchCase="3">全部</span>
     </td>
     <td>{{item.createTime}}</td>
-    <td>申请人</td>
+    <td>{{item.username}}</td>
     <td *ngIf="tabIndex==0">
-      <a>吧主信息</a>
+      <a (click)="modalUserShow=true;selected=item">吧主信息</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>审核</a>
+      <a (click)="modalApproveShow=true;selected=item">审核</a>
     </td>
     <td *ngIf="tabIndex==2">
-      <a>吧主信息</a>
+      <a (click)="modalUserShow=true;selected=item">吧主信息</a>
       <nz-divider nzType="vertical"></nz-divider>
       <a>审核信息</a>
     </td>
@@ -122,20 +124,30 @@
   </tbody>
   <tbody *ngIf="tabIndex==1">
   <tr *ngFor="let item of list">
-    <td>球吧LOGO</td>
-    <td>球吧名称</td>
-    <td>球吧分类</td>
-    <td>创建时间</td>
-    <td>吧主</td>
-    <td>发帖数</td>
-    <td>关注数</td>
-    <td>回复数</td>
-    <td>阅读量</td>
-    <td>球吧状态</td>
     <td>
-      <a>吧主信息</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a>关闭球吧</a>
+      <img [src]="item.barLogo" alt="" height="35">
+    </td>
+    <td>{{item.barName}}</td>
+    <td [ngSwitch]="item.barType">
+      <span *ngSwitchCase="0">足球</span>
+      <span *ngSwitchCase="1">篮球</span>
+      <span *ngSwitchCase="2">电竞</span>
+      <span *ngSwitchCase="3">全部</span>
+    </td>
+    <td>{{item.createTime}}</td>
+    <td>{{item.username}}</td>
+    <td>{{item.postCount}}</td>
+    <td>{{item.followCount}}</td>
+    <td>{{item.replayCount}}</td>
+    <td>{{item.viewCount}}</td>
+    <td [ngSwitch]="item.barStatus">
+      <span *ngSwitchCase="0">开启</span>
+      <span *ngSwitchCase="1">关闭</span>
+    </td>
+    <td>
+      <a (click)="modalUserShow=true;selected=item">吧主信息</a>
+      <!--<nz-divider nzType="vertical"></nz-divider>-->
+      <!--<a>关闭球吧</a>-->
     </td>
   </tr>
   </tbody>
@@ -144,3 +156,26 @@
   [(visiable)]="modalShow"
   (submitSuccess)="onSubmitSuccess()"
 ></app-bar-form>
+<app-bar-user
+  [queryId]="selected?.id"
+  [(visiable)]="modalUserShow"
+></app-bar-user>
+<nz-modal
+  nzTitle="用户认证信息审核"
+  [nzVisible]="modalApproveShow"
+  (nzOnCancel)="modalApproveShow=false"
+  (nzOnOk)="updateItem()"
+  [nzOkLoading]="updating"
+>
+  <form [formGroup]="form">
+    <p>请对球吧（篮球吧）进行审核操作！审核通过后前端显示该球吧</p>
+    <nz-radio-group style="display: block" formControlName="approveStatus">
+      <label nz-radio [nzValue]="1">审核通过</label>
+      <label nz-radio [nzValue]="2">审核不通过</label>
+    </nz-radio-group>
+    <label style="display: flex;margin-top: 12px">
+      <span>备注：</span>
+      <textarea style="flex: 1;height: 100px" nz-input formControlName="remark"></textarea>
+    </label>
+  </form>
+</nz-modal>

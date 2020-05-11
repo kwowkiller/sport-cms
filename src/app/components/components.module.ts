@@ -4,16 +4,19 @@ import {UploadComponent} from './upload/upload.component';
 import {NzIconModule, NzSelectModule, NzUploadModule} from 'ng-zorro-antd';
 import {UserSelectComponent} from './user-select/user-select.component';
 import {FormsModule} from '@angular/forms';
+import { BarSelectComponent } from './bar-select/bar-select.component';
 
 
 @NgModule({
   declarations: [
     UploadComponent,
     UserSelectComponent,
+    BarSelectComponent,
   ],
   exports: [
     UploadComponent,
-    UserSelectComponent
+    UserSelectComponent,
+    BarSelectComponent
   ],
   imports: [
     CommonModule,

@@ -27,15 +27,11 @@ export class ListComponent extends Table<Live> implements OnInit {
   }
 
   onSubmitSuccess() {
+    this.message.success('操作成功');
   }
 
   onDelete() {
-    this.deleteUrl = `live/sys/live/delete/${Array.from(this.setOfCheckedId.values()).join(',')}`;
-    this.deleteItem();
-  }
-
-  onDeleteSingle(id: number) {
-    this.deleteUrl = `live/sys/live/delete/${id}`;
+    this.deleteUrl = `live/sys/live/delete?ids=${Array.from(this.setOfCheckedId.values()).join(',')}`;
     this.deleteItem();
   }
 

@@ -116,8 +116,8 @@
   <form [formGroup]="form">
     <p>请审核用户认证信息，审核通过后用户可在前端进行开启直播操作！</p>
     <nz-radio-group style="display: block" formControlName="status">
-      <label nz-radio [nzValue]="0">通过</label>
-      <label nz-radio [nzValue]="1">不通过</label>
+      <label nz-radio [nzValue]="1">通过</label>
+      <label nz-radio [nzValue]="2">不通过</label>
     </nz-radio-group>
     <label style="display: flex;margin-top: 12px">
       <span>备注：</span>
