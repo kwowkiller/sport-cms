@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../pages/modules/user/user.module';
 import {Pageable} from '../../common/common.model';
 import {HttpClient} from '@angular/common/http';
@@ -19,12 +19,13 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
     <nz-select
       nzShowSearch
       nzServerSearch
-      nzPlaceHolder="输入用户名搜索"
+      [nzPlaceHolder]="placeholder"
       (nzOnSearch)="onSearch($event)"
       [nzLoading]="loading"
       nzNotFoundContent="没有相关用户"
       [(ngModel)]="model"
       (ngModelChange)="onModelChange($event)"
+      nzAllowClear
     >
       <nz-option
         *ngFor="let item of selectData"
@@ -38,6 +39,10 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 export class UserSelectComponent extends CustomInput implements OnInit {
   selectData: User[] = [];
   loading = false;
+  @Input()
+  queryParams: { [key: string]: string } = {};
+  @Input()
+  placeholder = '输入用户名搜索';
 
   constructor(private http: HttpClient) {
     super();
@@ -51,8 +56,7 @@ export class UserSelectComponent extends CustomInput implements OnInit {
     this.http.get<Pageable<User>>('app/sys/app/user/page', {
       params: {
         username,
-        // 高级认证过的
-        authenStatus: '2',
+        ...this.queryParams,
       }
     }).pipe(
       finalize(() => this.loading = false)

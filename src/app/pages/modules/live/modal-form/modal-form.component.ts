@@ -30,7 +30,6 @@ export class ModalFormComponent extends ModalForm<Live> implements OnInit, OnCha
       liveFaceImage: [null, [Validators.required]],
       // username: [null, [Validators.required]],
     });
-    this.dateFormat = 'YYYY-MM-DD HH:mm:ss';
   }
 
   ngOnInit(): void {

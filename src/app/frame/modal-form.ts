@@ -30,7 +30,7 @@ export abstract class ModalForm<T> {
   // 表单提交地址
   submitUrl = '';
   // 处理时间
-  dateFormat = 'YYYY-MM-DD';
+  dateFormat = 'YYYY-MM-DD HH:mm:ss';
 
   protected constructor(protected http: HttpClient) {
   }

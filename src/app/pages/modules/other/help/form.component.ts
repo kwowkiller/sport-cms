@@ -1,17 +1,18 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
-import {Banner} from '../banner.module';
+import {Help} from '../other.module';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-banner-form',
+  selector: 'app-help-form',
   templateUrl: './form.component.html',
   styles: []
 })
-export class FormComponent extends ModalForm<Banner> implements OnInit, OnChanges {
+export class FormComponent extends ModalForm<Help> implements OnInit, OnChanges {
+
   get title() {
-    return this.detail ? '编辑banner' : '新增banner';
+    return this.detail ? '编辑常见问题' : '新增常见问题';
   }
 
   constructor(
@@ -20,13 +21,12 @@ export class FormComponent extends ModalForm<Banner> implements OnInit, OnChange
   ) {
     super(http);
     this.form = this.fb.group({
-      bannerName: [null, [Validators.required]],
-      url: [null, [Validators.required]],
-      linkUrl: [null, [Validators.required]],
-      moduleType: [null, [Validators.required]],
+      title: [null, [Validators.required]],
+      answer: [null, [Validators.required]],
       orderNum: [null, [Validators.required]],
+      imageUrl: [null, [Validators.required]],
     });
-    this.submitUrl = 'news/sys/banner/add';
+    this.submitUrl = 'app/sys/feedback/add';
   }
 
   ngOnInit(): void {
@@ -36,24 +36,22 @@ export class FormComponent extends ModalForm<Banner> implements OnInit, OnChange
     if (this.detail) {
       this.form.addControl('id', this.fb.control(null));
       this.method = 'PUT';
-      this.submitUrl = 'news/sys/banner/update';
+      this.submitUrl = 'app/sys/feedback/update';
       this.form.setValue({
         id: this.detail.id,
-        bannerName: this.detail.bannerName,
-        url: this.detail.url,
-        linkUrl: this.detail.linkUrl,
-        moduleType: this.detail.moduleType,
+        title: this.detail.title,
+        answer: this.detail.answer,
         orderNum: this.detail.orderNum,
+        imageUrl: this.detail.imageUrl,
       });
     } else {
       this.form.removeControl('id');
       this.form.reset();
       this.method = 'POST';
-      this.submitUrl = 'news/sys/banner/add';
+      this.submitUrl = 'app/sys/feedback/add';
     }
   }
 
   beforeSubmit() {
   }
-
 }

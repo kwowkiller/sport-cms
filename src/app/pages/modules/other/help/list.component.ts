@@ -1,23 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {Table} from '../../../../frame/table';
-import {Message} from '../message.module';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
+import {Help} from '../other.module';
 import {Result} from '../../../../common/common.model';
 
 @Component({
-  selector: 'app-message-list',
+  selector: 'app-help-list',
   templateUrl: './list.component.html',
   styles: []
 })
-export class ListComponent extends Table<Message> implements OnInit {
+export class ListComponent extends Table<Help> implements OnInit {
 
   constructor(
     protected http: HttpClient,
     protected message: NzMessageService,
   ) {
     super(http, message);
-    this.listUrl = 'app/sys/message/page';
+    this.listUrl = 'app/sys/feedback/list';
   }
 
   ngOnInit(): void {
@@ -33,17 +33,17 @@ export class ListComponent extends Table<Message> implements OnInit {
   }
 
   onDelete() {
-    this.deleteUrl = `app/sys/message/${Array.from(this.setOfCheckedId.values()).join(',')}`;
-    this.deleteItem();
   }
 
-  updateItem(id: number) {
-    this.http.put<Result>(`app/sys/message/send/${id}`, {}).subscribe(event => {
+  updateItem(id: number, dlStatus: number) {
+    this.http.put<Result>('app/sys/feedback/change', {
+      id, dlStatus,
+    }).subscribe(event => {
       if (event.code === 200) {
-        this.message.success('发送成功');
+        this.message.success('操作成功');
         this.fetchList();
       } else {
-        this.message.error('发送失败');
+        this.message.error('操作失败');
       }
     });
   }

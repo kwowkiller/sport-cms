@@ -1,11 +1,25 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {NzButtonModule, NzFormModule, NzGridModule, NzInputModule, NzModalModule, NzSelectModule, NzTableModule} from 'ng-zorro-antd';
+import {
+  NzButtonModule,
+  NzDividerModule,
+  NzFormModule,
+  NzGridModule,
+  NzInputModule,
+  NzModalModule, NzPopconfirmModule,
+  NzSelectModule,
+  NzTableModule, NzToolTipModule, NzUploadModule
+} from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
+import {ListComponent as WordList} from './word/list.component';
+import {ListComponent as HelpList} from './help/list.component';
+import {FormComponent as HelpForm} from './help/form.component';
+import {FormComponent as WordForm} from './word/form.component';
+import {ComponentsModule} from '../../../components/components.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [WordList, HelpList, HelpForm, WordForm],
   imports: [
     CommonModule,
     NzTableModule,
@@ -17,8 +31,36 @@ import {RouterModule} from '@angular/router';
     NzModalModule,
     ReactiveFormsModule,
     NzFormModule,
-    RouterModule.forChild([]),
+    RouterModule.forChild([
+      {path: 'word', component: WordList},
+      {path: 'help', component: HelpList},
+    ]),
+    NzDividerModule,
+    NzPopconfirmModule,
+    ComponentsModule,
+    NzToolTipModule,
+    NzUploadModule,
   ]
 })
 export class OtherModule {
+}
+
+// 敏感词
+export interface Word {
+  createTime: string;
+  id: number;
+  sstatus: number;
+  word: string;
+}
+
+// 帮助问题
+export interface Help {
+  answer: string;
+  createTime: string;
+  // 问题状态(0:上架1:下架)
+  fdStatus: number;
+  id: number;
+  imageUrl: string;
+  orderNum: number;
+  title: string;
 }

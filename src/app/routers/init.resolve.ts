@@ -212,7 +212,7 @@ export class InitResolve implements Resolve<any> {
           name: '资讯管理',
           path: 'news',
         },
-        /*{
+        {
           alwaysShow: true,
           children: [
             {
@@ -232,7 +232,7 @@ export class InitResolve implements Resolve<any> {
           hidden: false,
           meta: {
             title: 'Banner管理',
-            icon: 'appstore',
+            icon: 'diff',
             breadcrumb: false,
           },
           name: 'Banner管理',
@@ -258,7 +258,7 @@ export class InitResolve implements Resolve<any> {
           hidden: false,
           meta: {
             title: '消息管理',
-            icon: 'appstore',
+            icon: 'message',
             breadcrumb: false,
           },
           name: '消息管理',
@@ -277,7 +277,7 @@ export class InitResolve implements Resolve<any> {
                 breadcrumb: false,
               },
               name: '敏感词管理',
-              path: 'word',
+              path: 'other/word',
             },
             {
               alwaysShow: true,
@@ -289,19 +289,19 @@ export class InitResolve implements Resolve<any> {
                 breadcrumb: false,
               },
               name: '常见问题',
-              path: 'help',
+              path: 'other/help',
             },
           ],
           component: '',
           hidden: false,
           meta: {
             title: '公共信息管理',
-            icon: 'appstore',
+            icon: 'warning',
             breadcrumb: false,
           },
           name: '公共信息管理',
           path: 'information',
-        },*/
+        },
         {
           alwaysShow: true,
           children: [

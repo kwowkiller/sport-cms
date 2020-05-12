@@ -9,30 +9,21 @@
 >
   <form nz-form [formGroup]="form">
     <nz-form-item>
-      <nz-form-label [nzSm]="4" nzRequired>banner标题</nz-form-label>
+      <nz-form-label [nzSm]="4" nzRequired>问题标题</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input formControlName="bannerName"/>
+        <input nz-input formControlName="title"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSm]="4" nzRequired>banner图片</nz-form-label>
+      <nz-form-label [nzSm]="4" nzRequired>问题解答</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <app-upload formControlName="url"></app-upload>
+        <textarea nz-input rows="5" formControlName="answer"></textarea>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSm]="4" nzRequired>跳转链接</nz-form-label>
+      <nz-form-label [nzSm]="4" nzRequired>解答图片</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input formControlName="linkUrl"/>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="4" nzRequired>应用模块</nz-form-label>
-      <nz-form-control [nzSm]="17">
-        <nz-select formControlName="moduleType">
-          <nz-option nzLabel="首页" [nzValue]="0"></nz-option>
-          <nz-option nzLabel="资讯" [nzValue]="1"></nz-option>
-        </nz-select>
+        <app-upload formControlName="imageUrl"></app-upload>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>

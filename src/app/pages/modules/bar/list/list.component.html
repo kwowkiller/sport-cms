@@ -32,6 +32,7 @@
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="吧主昵称">
       <app-user-select
         [(model)]="search.userId"
+        [queryParams]="{authenStatus: '2'}"
       ></app-user-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="创建时间">

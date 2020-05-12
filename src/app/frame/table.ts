@@ -34,6 +34,7 @@ export abstract class Table<T> {
   setOfCheckedId = new Set<number>();
   // 删除项
   deleteUrl = '';
+  deleteMethod: 'PUT' | 'POST' | 'DELETE' = 'DELETE';
 
   get allChecked() {
     if (this.list.length === 0) {
@@ -128,6 +129,10 @@ export abstract class Table<T> {
     }).pipe(
       finalize(() => this.loading = false)
     ).subscribe(event => {
+      if (!event.data.records) {
+        this.message.warning('返回数据格式不正确');
+        return;
+      }
       this.total = event.data.total;
       this.list = event.data.records;
     });
@@ -137,7 +142,7 @@ export abstract class Table<T> {
    * 删除对象
    */
   deleteItem() {
-    this.http.delete<Result>(this.deleteUrl).pipe(
+    this.http.request<Result>(this.deleteMethod, this.deleteUrl).pipe(
     ).subscribe(event => {
       if (event.code === 200) {
         this.setOfCheckedId.clear();

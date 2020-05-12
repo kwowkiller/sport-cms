@@ -2,9 +2,19 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {ListComponent} from './list/list.component';
-import {NzButtonModule, NzFormModule, NzGridModule, NzInputModule, NzModalModule, NzSelectModule, NzTableModule} from 'ng-zorro-antd';
+import {
+  NzButtonModule, NzDividerModule,
+  NzFormModule,
+  NzGridModule,
+  NzInputModule,
+  NzModalModule,
+  NzPopconfirmModule,
+  NzSelectModule,
+  NzTableModule
+} from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { FormComponent } from './form/form.component';
+import {FormComponent} from './form/form.component';
+import {ComponentsModule} from '../../../components/components.module';
 
 
 @NgModule({
@@ -23,11 +33,22 @@ import { FormComponent } from './form/form.component';
     NzModalModule,
     ReactiveFormsModule,
     NzFormModule,
+    ComponentsModule,
+    NzPopconfirmModule,
+    NzDividerModule,
   ]
 })
 export class BannerModule {
 }
 
 export interface Banner {
+  createTime: string;
   id: number;
+  moduleType: number;
+  orderNum: number;
+  sstatus: number;
+  updateTime: string;
+  url: string;
+  bannerName: string;
+  linkUrl: string;
 }
