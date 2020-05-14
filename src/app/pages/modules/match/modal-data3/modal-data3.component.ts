@@ -2,16 +2,18 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
+import {MatchItem} from '../match.module';
 
 @Component({
   selector: 'app-match-modal-data3',
   templateUrl: './modal-data3.component.html',
   styles: []
 })
-export class ModalData3Component extends ModalForm<any> implements OnInit, OnChanges {
+export class ModalData3Component extends ModalForm<MatchItem> implements OnInit, OnChanges {
   tabIndex = 0;
   data: Model;
 
+  // 欧指
   get eu() {
     return this.data.eu;
   }

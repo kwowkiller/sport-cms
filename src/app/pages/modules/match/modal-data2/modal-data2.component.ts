@@ -2,13 +2,14 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
+import {MatchItem} from '../match.module';
 
 @Component({
   selector: 'app-match-modal-data2',
   templateUrl: './modal-data2.component.html',
   styleUrls: ['./modal-data2.component.css']
 })
-export class ModalData2Component extends ModalForm<any> implements OnInit, OnChanges {
+export class ModalData2Component extends ModalForm<MatchItem> implements OnInit, OnChanges {
   stats: Item3[] = [];
   home: Item1;
   away: Item1;

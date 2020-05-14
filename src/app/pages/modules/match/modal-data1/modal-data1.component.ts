@@ -2,13 +2,14 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
+import {MatchItem} from '../match.module';
 
 @Component({
   selector: 'app-match-modal-data1',
   templateUrl: './modal-data1.component.html',
   styles: []
 })
-export class ModalData1Component extends ModalForm<any> implements OnInit, OnChanges {
+export class ModalData1Component extends ModalForm<MatchItem> implements OnInit, OnChanges {
   // 历史交锋
   history: Item1[] = [];
   // 进球分布
