@@ -6,17 +6,20 @@ import {
   NzDatePickerModule,
   NzDividerModule,
   NzGridModule,
-  NzInputModule,
-  NzSelectModule,
+  NzInputModule, NzModalModule, NzRadioModule,
+  NzSelectModule, NzSpinModule,
   NzTableModule,
   NzTabsModule
 } from 'ng-zorro-antd';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {SubListComponent} from './sub-list/sub-list.component';
+import {ModalData1Component} from './modal-data1/modal-data1.component';
+import {ModalData2Component} from './modal-data2/modal-data2.component';
+import {ModalData3Component} from './modal-data3/modal-data3.component';
 
 @NgModule({
-  declarations: [ListComponent, SubListComponent],
+  declarations: [ListComponent, SubListComponent, ModalData1Component, ModalData2Component, ModalData3Component],
   imports: [
     CommonModule,
     NzTableModule,
@@ -31,6 +34,9 @@ import {SubListComponent} from './sub-list/sub-list.component';
     NzButtonModule,
     NzTabsModule,
     NzDatePickerModule,
+    NzModalModule,
+    NzRadioModule,
+    NzSpinModule,
   ]
 })
 export class MatchModule {

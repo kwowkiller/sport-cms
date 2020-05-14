@@ -1,0 +1,71 @@
+<nz-modal
+  nzWidth="800px"
+  [nzTitle]="'赛事指数'"
+  [nzVisible]="visiable"
+  (nzOnCancel)="visiableChange.emit(false)"
+  [nzFooter]="null"
+>
+  <nz-spin [nzSpinning]="loading">
+    <nz-radio-group nzButtonStyle="solid" [(ngModel)]="tabIndex" style="margin-bottom: 12px">
+      <label nz-radio-button [nzValue]="0">让球</label>
+      <label nz-radio-button [nzValue]="1">欧指</label>
+      <label nz-radio-button [nzValue]="2">进球数</label>
+    </nz-radio-group>
+    <table *ngIf="tabIndex==1" class="table" style="margin-bottom: 12px">
+      <tbody>
+      <tr>
+        <td rowspan="2">最高值</td>
+        <td>初盘</td>
+        <td *ngFor="let n of eu?.max.first">{{n}}</td>
+      </tr>
+      <tr>
+        <td>即盘</td>
+        <td *ngFor="let n of eu?.max.last">{{n}}</td>
+      </tr>
+      <tr>
+        <td rowspan="2">最低值</td>
+        <td>初盘</td>
+        <td *ngFor="let n of eu?.min.first">{{n}}</td>
+      </tr>
+      <tr>
+        <td>即盘</td>
+        <td *ngFor="let n of eu?.min.last">{{n}}</td>
+      </tr>
+      <tr>
+        <td rowspan="2">平均值</td>
+        <td>初盘</td>
+        <td *ngFor="let n of eu?.avg.first">{{n}}</td>
+      </tr>
+      <tr>
+        <td>即盘</td>
+        <td *ngFor="let n of eu?.avg.last">{{n}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <nz-table
+      nzSize="small"
+      [nzShowPagination]="false"
+      [nzData]="list"
+      nzBordered
+    >
+      <thead>
+      <tr>
+        <th>公司</th>
+        <th>初盘</th>
+        <th>即盘</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of list">
+        <td>{{item.company}}</td>
+        <td>
+          <span style="padding: 0 8px" *ngFor="let n of item.first">{{n}}</span>
+        </td>
+        <td>
+          <span style="padding: 0 8px" *ngFor="let n of item.last">{{n}}</span>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-spin>
+</nz-modal>

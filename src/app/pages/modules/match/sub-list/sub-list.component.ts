@@ -12,6 +12,8 @@ export class SubListComponent implements OnInit, OnChanges {
   @Input()
   matchId = 0;
   @Input()
+  matchName = '';
+  @Input()
   date: string;
   list: MatchItem[] = [];
   loading = false;
@@ -21,6 +23,11 @@ export class SubListComponent implements OnInit, OnChanges {
      */
     type?: number,
   } = {};
+
+  selected: MatchItem;
+  modal1Show = false;
+  modal2Show = false;
+  modal3Show = false;
 
   constructor(private http: HttpClient) {
   }

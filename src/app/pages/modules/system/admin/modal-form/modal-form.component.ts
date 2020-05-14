@@ -6,10 +6,10 @@ import {ModalForm} from '../../../../../frame/modal-form';
 
 @Component({
   selector: 'app-admin-form',
-  templateUrl: './model-form.component.html',
+  templateUrl: './modal-form.component.html',
   styles: []
 })
-export class ModelFormComponent extends ModalForm<Admin> implements OnInit {
+export class ModalFormComponent extends ModalForm<Admin> implements OnInit {
 
   get title() {
     return this.detail ? '编辑账户' : '新增账户';

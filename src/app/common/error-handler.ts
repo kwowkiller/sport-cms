@@ -7,7 +7,7 @@ export class ErrorHandler implements DefaultErrorHandler {
   }
 
   handleError(error): void {
-    console.warn(error);
+    console.error('error handler', error);
   }
 }
 

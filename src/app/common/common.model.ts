@@ -40,6 +40,7 @@ export interface User {
 
 // 菜单项
 export interface Menu {
+  id: number;
   alwaysShow: boolean;
   children?: Menu[];
   component: string;
@@ -56,3 +57,4 @@ export interface Menu {
   // 是否展开
   open?: boolean;
 }
+

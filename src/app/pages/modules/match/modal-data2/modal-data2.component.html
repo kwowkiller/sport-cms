@@ -1,0 +1,91 @@
+<nz-modal
+  nzWidth="900px"
+  [nzTitle]="'直播数据'"
+  [nzVisible]="visiable"
+  (nzOnCancel)="visiableChange.emit(false)"
+  [nzFooter]="null"
+>
+  <nz-spin [nzSpinning]="loading">
+    <div class="container">
+      <div>
+        <h2>主队：{{home?.name_zh}}<i>比分：{{home?.score}}</i></h2>
+        <div class="box">
+          <div>
+            <div>
+              <p>进球数</p>
+              <p>{{getStat('home', 1)}}</p>
+            </div>
+            <div>
+              <p>半场进球数</p>
+              <p>1</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>红牌</p>
+              <p>{{getStat('home', 4)}}</p>
+            </div>
+            <div>
+              <p>黄牌</p>
+              <p>{{getStat('home', 3)}}</p>
+            </div>
+            <div>
+              <p>角球</p>
+              <p>{{getStat('home', 2)}}</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>比赛得分</p>
+              <p>2</p>
+            </div>
+            <div>
+              <p>联赛排名</p>
+              <p>1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span>VS</span>
+      <div>
+        <h2>客队：{{away?.name_zh}}<i>比分：{{away?.score}}</i></h2>
+        <div class="box">
+          <div>
+            <div>
+              <p>进球数</p>
+              <p>{{getStat('away', 1)}}</p>
+            </div>
+            <div>
+              <p>半场进球数</p>
+              <p>1</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>红牌</p>
+              <p>{{getStat('away', 4)}}</p>
+            </div>
+            <div>
+              <p>黄牌</p>
+              <p>{{getStat('away', 3)}}</p>
+            </div>
+            <div>
+              <p>角球</p>
+              <p>{{getStat('away', 2)}}</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>比赛得分</p>
+              <p>2</p>
+            </div>
+            <div>
+              <p>联赛排名</p>
+              <p>1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nz-spin>
+</nz-modal>

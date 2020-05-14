@@ -44,13 +44,10 @@
     <th>比赛时间</th>
     <th>开球时间</th>
     <th>主队名称</th>
-    <th>主队红牌</th>
-    <th>主队黄牌</th>
-    <th>主队半场比赛</th>
-    <th>主队角球</th>
-    <th>主队比赛得分</th>
-    <th>主队联赛排名</th>
+    <th>客队名称</th>
+    <th>比分</th>
     <th>是否中立场</th>
+    <th>操作</th>
   </tr>
   </thead>
   <tbody>
@@ -60,13 +57,28 @@
     <td>{{item.matchTime * 1000|date:'yyyy-MM-dd'}}</td>
     <td>{{item.teeTime * 1000|date:'yyyy-MM-dd'}}</td>
     <td>{{item.homeTeamName}}</td>
-    <td>{{item.homeTeamRed}}</td>
-    <td>{{item.homeTeamYellow}}</td>
-    <td>{{item.homeTeamHalf}}</td>
-    <td>{{item.homeTeamCorner}}</td>
-    <td>{{item.homeTeamScore}}</td>
-    <td>{{item.homeTeamRank}}</td>
+    <td>{{item.awayTeamName}}</td>
+    <td>{{item.homeTeamScore}}:{{item.awayTeamScore}}</td>
     <td>{{item.middlePosition == 1 ? '是' : '否'}}</td>
+    <td>
+      <a (click)="modal1Show=true;selected=item;">赛事数据</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a (click)="modal2Show=true;selected=item;">直播数据</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a (click)="modal3Show=true;selected=item;">赛事指数</a>
+    </td>
   </tr>
   </tbody>
 </nz-table>
+<app-match-modal-data1
+  [queryId]="selected?.id"
+  [(visiable)]="modal1Show"
+></app-match-modal-data1>
+<app-match-modal-data2
+  [queryId]="selected?.id"
+  [(visiable)]="modal2Show"
+></app-match-modal-data2>
+<app-match-modal-data3
+  [queryId]="selected?.id"
+  [(visiable)]="modal3Show"
+></app-match-modal-data3>

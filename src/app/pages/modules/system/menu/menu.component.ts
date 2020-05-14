@@ -15,7 +15,7 @@ export class MenuComponent extends Table<Menu> implements OnInit {
     protected message: NzMessageService,
   ) {
     super(http, message);
-    this.idKey = 'roleId';
+    this.idKey = 'menuId';
     this.listUrl = 'admin/system/menu/page';
   }
 
@@ -27,5 +27,15 @@ export class MenuComponent extends Table<Menu> implements OnInit {
   }
 
   onSubmitSuccess() {
+  }
+
+  onDeleteSingle(menuId: number) {
+    this.deleteUrl = `admin/system/menu/delete/${menuId}`;
+    this.deleteItem();
+  }
+
+  onDelete() {
+    this.deleteUrl = `admin/system/menu/delete/${Array.from(this.setOfCheckedId.values()).join(',')}`;
+    this.deleteItem();
   }
 }

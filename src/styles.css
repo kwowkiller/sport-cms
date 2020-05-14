@@ -18,3 +18,13 @@ body {
 .ck-editor__editable_inline {
   min-height: 350px;
 }
+
+.table {
+  border: 1px solid #cccccc;
+  width: 100%;
+}
+
+.table td, .table th {
+  border: 1px solid #cccccc;
+  padding: 8px;
+}

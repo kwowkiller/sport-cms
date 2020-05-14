@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container p {
+  margin: 0;
+  padding: 0;
+}
+
+.container > div {
+  flex: 1;
+}
+
+.container > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  font-size: 18px;
+  color: #1890ff;
+}
+
+.container > div > h2 {
+  font-size: 16px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.container > div > h2 > i {
+  font-style: normal;
+  margin-left: 8px;
+}
+
+.box {
+  color: #ffffff;
+  background: #1890ff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 12px;
+}
+
+.box > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.box > div:last-of-type {
+  margin-bottom: 0;
+}
+
+.box > div > div:first-of-type {
+  text-align: left;
+}
+
+.box > div > div:last-of-type {
+  text-align: right;
+}

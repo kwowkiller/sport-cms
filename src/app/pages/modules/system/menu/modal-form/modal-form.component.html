@@ -1,0 +1,39 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="form.reset();visiableChange.emit(false)"
+  (nzOnOk)="submit()"
+  [nzOkDisabled]="!form.valid"
+  [nzOkLoading]="submiting"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>菜单名称</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input formControlName="menuName"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>父级菜单</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-tree-select
+          formControlName="parentId"
+          [nzNodes]="treeData"
+        ></nz-tree-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>路径</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input formControlName="path"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>排序</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input type="number" formControlName="orderNum"/>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

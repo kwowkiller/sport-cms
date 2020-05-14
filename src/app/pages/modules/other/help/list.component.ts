@@ -33,6 +33,8 @@ export class ListComponent extends Table<Help> implements OnInit {
   }
 
   onDelete() {
+    this.deleteUrl = `app/sys/feedback/${Array.from(this.setOfCheckedId.values()).join(',')}`;
+    this.deleteItem();
   }
 
   updateItem(id: number, dlStatus: number) {

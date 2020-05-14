@@ -1,0 +1,60 @@
+<nz-modal
+  [nzTitle]="'赛事数据'"
+  [nzVisible]="visiable"
+  (nzOnCancel)="visiableChange.emit(false)"
+  nzWidth="1200px"
+  [nzFooter]="null"
+>
+  <nz-spin [nzSpinning]="loading">
+    <h3>进球分布</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th></th>
+        <th>00’</th>
+        <th>15’</th>
+        <th>30’</th>
+        <th>45’</th>
+        <th>60’</th>
+        <th>75’</th>
+        <th>90’</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of distribution">
+        <td>{{item.footballTeam}}</td>
+        <td *ngFor="let n of item.scored">{{n}}</td>
+        <td>{{item.totalScore}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <h3>历史交锋</h3>
+    <nz-table
+      [nzData]="history"
+      nzSize="small"
+      [nzShowPagination]="false"
+      nzBordered
+    >
+      <thead>
+      <tr>
+        <th>日期</th>
+        <th>赛事</th>
+        <th>主队</th>
+        <th>比分</th>
+        <th>客队</th>
+        <th>盘路</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of history">
+        <td>{{item.date}}</td>
+        <td>{{item.eventName}}</td>
+        <td>{{item.homeTeamName}}</td>
+        <td>{{item.homeTeamScore}}:{{item.awayTeamScore}}</td>
+        <td>{{item.awayTeamName}}</td>
+        <td>{{item.rate}}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-spin>
+</nz-modal>

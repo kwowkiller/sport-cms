@@ -47,9 +47,11 @@ export class InitResolve implements Resolve<any> {
       // 测试数据
       const temp: Menu[] = [
         {
+          id: 1,
           alwaysShow: true,
           children: [
             {
+              id: 2,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -62,6 +64,7 @@ export class InitResolve implements Resolve<any> {
               path: 'user',
             },
             {
+              id: 3,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -85,9 +88,11 @@ export class InitResolve implements Resolve<any> {
           path: 'user',
         },
         {
+          id: 4,
           alwaysShow: true,
           children: [
             {
+              id: 5,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -123,9 +128,11 @@ export class InitResolve implements Resolve<any> {
           path: 'live',
         },
         {
+          id: 23,
           alwaysShow: true,
           children: [
             {
+              id: 6,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -149,9 +156,11 @@ export class InitResolve implements Resolve<any> {
           path: 'match',
         },
         {
+          id: 22,
           alwaysShow: true,
           children: [
             {
+              id: 7,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -164,6 +173,7 @@ export class InitResolve implements Resolve<any> {
               path: 'bar',
             },
             {
+              id: 8,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -187,9 +197,11 @@ export class InitResolve implements Resolve<any> {
           path: 'bar',
         },
         {
+          id: 21,
           alwaysShow: true,
           children: [
             {
+              id: 9,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -213,9 +225,11 @@ export class InitResolve implements Resolve<any> {
           path: 'news',
         },
         {
+          id: 20,
           alwaysShow: true,
           children: [
             {
+              id: 10,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -239,9 +253,11 @@ export class InitResolve implements Resolve<any> {
           path: 'banner',
         },
         {
+          id: 11,
           alwaysShow: true,
           children: [
             {
+              id: 12,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -265,9 +281,11 @@ export class InitResolve implements Resolve<any> {
           path: 'message',
         },
         {
+          id: 13,
           alwaysShow: true,
           children: [
             {
+              id: 14,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -280,6 +298,7 @@ export class InitResolve implements Resolve<any> {
               path: 'other/word',
             },
             {
+              id: 15,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -303,9 +322,11 @@ export class InitResolve implements Resolve<any> {
           path: 'information',
         },
         {
+          id: 16,
           alwaysShow: true,
           children: [
             {
+              id: 17,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -318,6 +339,7 @@ export class InitResolve implements Resolve<any> {
               path: 'system/admin',
             },
             {
+              id: 18,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -330,6 +352,7 @@ export class InitResolve implements Resolve<any> {
               path: 'system/menu',
             },
             {
+              id: 19,
               alwaysShow: true,
               component: '',
               hidden: false,

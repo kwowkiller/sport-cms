@@ -8,15 +8,16 @@ import {
   NzButtonModule,
   NzDividerModule,
   NzFormModule,
-  NzGridModule,
+  NzGridModule, NzIconModule,
   NzInputModule,
   NzModalModule, NzPopconfirmModule,
   NzSelectModule,
-  NzTableModule
+  NzTableModule, NzTreeSelectModule
 } from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ModalFormComponent} from './role/modal-form/modal-form.component';
-import {ModelFormComponent} from './admin/model-form/model-form.component';
+import {ModalFormComponent as RoleForm} from './role/modal-form/modal-form.component';
+import {ModalFormComponent as AdminForm} from './admin/modal-form/modal-form.component';
+import {ModalFormComponent as MenuForm} from './menu/modal-form/modal-form.component';
 import {RoleSelectComponent} from './role-select/role-select.component';
 
 @NgModule({
@@ -24,8 +25,9 @@ import {RoleSelectComponent} from './role-select/role-select.component';
     MenuComponent,
     AdminComponent,
     RoleComponent,
-    ModalFormComponent,
-    ModelFormComponent,
+    RoleForm,
+    AdminForm,
+    MenuForm,
     RoleSelectComponent,
   ],
   imports: [
@@ -46,6 +48,8 @@ import {RoleSelectComponent} from './role-select/role-select.component';
     ReactiveFormsModule,
     NzFormModule,
     NzPopconfirmModule,
+    NzIconModule,
+    NzTreeSelectModule,
   ]
 })
 export class SystemModule {
