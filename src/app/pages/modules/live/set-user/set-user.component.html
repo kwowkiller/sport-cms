@@ -1,0 +1,17 @@
+<nz-modal
+  [nzTitle]="type==='watching'?'设置虚拟观看人数':'设置虚拟订阅人数'"
+  [nzVisible]="visiable"
+  (nzOnOk)="submit()"
+  (nzOnCancel)="visiableChange.emit(false)"
+  [nzOkLoading]="submiting"
+  [nzOkDisabled]="!form.valid"
+>
+  <form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="7" nzRequired>{{type==='watching'?'虚拟观看人数':'虚拟订阅人数'}}</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <input nz-input type="number"/>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

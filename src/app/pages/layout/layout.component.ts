@@ -5,6 +5,7 @@ import {Menu} from '../../common/common.model';
 import {Session} from '../../common/session';
 import {filter, map} from 'rxjs/operators';
 import {IndexComponent} from '../index/index.component';
+import {RouteReuseService} from '../../common/route-reuse.service';
 
 @Component({
   selector: 'app-layout',
@@ -26,7 +27,7 @@ export class LayoutComponent implements OnInit {
   }
 
   private findMenuByPath(): Menu {
-    let find: Menu;
+    let find: Menu = null;
     const foo = (arr: Menu[]) => {
       arr.forEach(item => {
         if (item.children) {
@@ -61,7 +62,7 @@ export class LayoutComponent implements OnInit {
       }),
       // 过滤掉首页
       filter(route => route.outlet === 'primary' && route.component !== IndexComponent),
-    ).subscribe((event) => {
+    ).subscribe(() => {
       const menu = this.findMenuByPath();
       if (menu) {
         if (this.openedMenus.some(item => item === menu)) {
@@ -95,13 +96,16 @@ export class LayoutComponent implements OnInit {
     this.openedMenus.splice(index, 1);
     // 关闭的是当前页 跳转到标签最后一个
     if (`/main/${menu.path}` === this.router.url) {
-      this.router.navigateByUrl('/main/' + this.openedMenus[this.openedMenus.length - 1].path).then();
+      this.router.navigateByUrl('/main/' + this.openedMenus[this.openedMenus.length - 1].path).then(() => {
+        RouteReuseService.handlers.delete(location.pathname);
+      });
     }
   }
 
   // 关闭全部页面
   closeAllPage() {
     this.router.navigateByUrl('/main').then(() => {
+      RouteReuseService.handlers.clear();
       this.openedMenus = [];
     });
   }

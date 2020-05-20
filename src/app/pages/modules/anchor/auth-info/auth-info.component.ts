@@ -1,14 +1,27 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {AuthInfo} from '../user.module';
 import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
-  selector: 'app-auth-info',
+  selector: 'app-anchor-auth-info',
   templateUrl: './auth-info.component.html',
   styles: []
 })
-export class AuthInfoComponent extends ModalForm<AuthInfo> implements OnInit, OnChanges {
+export class AuthInfoComponent extends ModalForm<{
+  appUserAuthenStatus: number
+  authStatus: number;
+  creationTime: string;
+  frontPhoto: string;
+  handPhoto: string;
+  headerImg: null
+  idNo: string;
+  isAuthenHost: number;
+  nikeName: string;
+  phone: string;
+  realName: string;
+  versoPhoto: string;
+}> implements OnInit, OnChanges {
+
   constructor(protected http: HttpClient) {
     super(http);
   }
@@ -19,7 +32,7 @@ export class AuthInfoComponent extends ModalForm<AuthInfo> implements OnInit, On
   ngOnChanges(changes: SimpleChanges) {
     const idChange = changes.queryId;
     if (idChange && !idChange.firstChange && this.visiable) {
-      this.detailUrl = `app/sys/app/user/auth/${this.queryId}`;
+      this.detailUrl = `live/sys/host/auth/${this.queryId}`;
       this.fetchDetailOnly();
     }
   }

@@ -1,0 +1,103 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="标签名">
+      <input nz-input [(ngModel)]="search.tag">
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="所属分类">
+      <nz-select [(ngModel)]="search.liveType">
+        <!--0:足球1:篮球2:电竞3:全部-->
+        <nz-option nzLabel="足球" [nzValue]="0"></nz-option>
+        <nz-option nzLabel="篮球" [nzValue]="1"></nz-option>
+        <nz-option nzLabel="电竞" [nzValue]="2"></nz-option>
+        <nz-option nzLabel="全部" [nzValue]="3"></nz-option>
+      </nz-select>
+    </nz-input-group>
+    <div nz-col [nzSpan]="12" class="actions">
+      <button
+        type="button"
+        nz-button
+        (click)="selected=null;modalShow=true"
+      >新增标签
+      </button>
+      <button
+        type="button"
+        nz-button
+        nzType="danger"
+        [disabled]="setOfCheckedId.size==0"
+        (click)="onDelete()"
+      >删除
+      </button>
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th
+      [nzChecked]="allChecked"
+      [nzIndeterminate]="false"
+      (nzCheckedChange)="onAllChecked($event)"
+      nzWidth="100px"
+    ></th>
+    <th>标签名</th>
+    <th>所属分类</th>
+    <th nzWidth="200px">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td
+      [nzChecked]="setOfCheckedId.has(item.id)"
+      (nzCheckedChange)="onItemChecked(item.id, $event)"
+    ></td>
+    <td>{{item.tag}}</td>
+    <td [ngSwitch]="item.liveType">
+      <span *ngSwitchCase="0">足球</span>
+      <span *ngSwitchCase="1">篮球</span>
+      <span *ngSwitchCase="2">电竞</span>
+      <span *ngSwitchCase="3">全部</span>
+    </td>
+    <td>
+      <a (click)="modalShow=true;selected=item">编辑</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a
+        nz-popconfirm
+        nzPopconfirmTitle="确认删除？"
+        (nzOnConfirm)="onDeleteSingle(item.id)"
+      >删除</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<app-tags-form
+  [(visiable)]="modalShow"
+  [detail]="selected"
+></app-tags-form>

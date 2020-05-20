@@ -1,0 +1,120 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="dateRange=[];fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="主播名称">
+      <input nz-input [(ngModel)]="search.username">
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="手机号">
+      <input nz-input [(ngModel)]="search.phone">
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="性别">
+      <nz-select [(ngModel)]="search.sex">
+        <nz-option nzValue="1" nzLabel="男"></nz-option>
+        <nz-option nzValue="2" nzLabel="女"></nz-option>
+      </nz-select>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="授权时间">
+      <nz-range-picker style="width: 100%" [(ngModel)]="dateRange"></nz-range-picker>
+    </nz-input-group>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="主播状态">
+      <nz-select [(ngModel)]="search.sstatus">
+        <nz-option nzValue="1" nzLabel="正常"></nz-option>
+        <nz-option nzValue="2" nzLabel="禁播"></nz-option>
+      </nz-select>
+    </nz-input-group>
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>主播头像</th>
+    <th>主播昵称</th>
+    <th>手机号码</th>
+    <th>性别</th>
+    <th>授权时间</th>
+    <th>主播房间号</th>
+    <th>粉丝数</th>
+    <th>关注用户数</th>
+    <th>上次直播时间</th>
+    <th>主播等级</th>
+    <th>主播状态</th>
+    <th>直播状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>
+      <img
+        [src]="item.headerImg"
+        alt=""
+        style="height: 35px;width: 35px;border-radius: 50%;object-fit: cover"
+      >
+    </td>
+    <td>{{item.username}}</td>
+    <td>{{item.phone}}</td>
+    <td [ngSwitch]="item.sex">
+      <span *ngSwitchCase="0">男</span>
+      <span *ngSwitchCase="1">女</span>
+      <span *ngSwitchCase="2">未知</span>
+    </td>
+    <td>授权时间</td>
+    <td>{{item.roomId}}</td>
+    <td>{{item.fansCount}}</td>
+    <td>关注用户数</td>
+    <td>{{item.lastStartTime}}</td>
+    <td>{{item.hostLevel}}</td>
+    <td>{{item.sstatus == 0 ? '正常' : '禁播'}}</td>
+    <td [ngSwitch]="item.liveStatus">
+      <span *ngSwitchCase="0">未播</span>
+      <span *ngSwitchCase="1">直播中</span>
+    </td>
+    <td>
+      <a *ngIf="item.sstatus==0" (click)="selected=item;modalAction=true;">禁播</a>
+      <a *ngIf="item.sstatus==1" (click)="updateItem(item.id)">取消禁播</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a (click)="modalShow=true;selected=item;">主播数据</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<app-anchor-modal-data
+  [(visiable)]="modalShow"
+  [queryId]="selected?.id"
+></app-anchor-modal-data>
+<app-anchor-action
+  [(visiable)]="modalAction"
+  [detail]="selected"
+  (submitSuccess)="onSubmitSuccess()"
+></app-anchor-action>

@@ -44,4 +44,14 @@ export class ListComponent extends Table<News> implements OnInit {
     this.deleteUrl = `news/sys/news/delete/${Array.from(this.setOfCheckedId.values()).join(',')}`;
     this.deleteItem();
   }
+
+  // 设为推荐
+  updateItemRecommend(item: News) {
+    this.http.put<Result>(`news/sys/news/setup/${item.id}`, {}).subscribe(event => {
+      if (event.code === 200) {
+        this.fetchList('none');
+        this.message.success('操作成功');
+      }
+    });
+  }
 }

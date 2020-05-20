@@ -1,15 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {Table} from '../../../../frame/table';
+import {Table} from '../../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
-import {Live} from '../live.module';
+import {Live} from '../../live.module';
 import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
-  selector: 'app-live-list',
+  selector: 'app-tv-list',
   templateUrl: './list.component.html',
   styles: []
 })
 export class ListComponent extends Table<Live> implements OnInit {
+  tabIndex = 0;
+  modalSetUser = false;
 
   constructor(
     protected http: HttpClient,

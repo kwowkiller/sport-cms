@@ -37,6 +37,11 @@ import {NotFoundComponent} from '../errors/not-found.component';
         loadChildren: () => import('./live/live.module').then(m => m.LiveModule),
       },
       {
+        // 主播管理
+        path: 'anchor',
+        loadChildren: () => import('./anchor/anchor.module').then(m => m.AnchorModule),
+      },
+      {
         // 赛事管理
         path: 'match',
         loadChildren: () => import('./match/match.module').then(m => m.MatchModule),

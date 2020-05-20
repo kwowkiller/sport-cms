@@ -90,8 +90,8 @@
         <td>{{item.commentCount}}</td>
         <td>{{item.likeCount}}</td>
         <td>
-          <!--<a (click)="selected=item;tabIndex=1">贴子详情</a>
-          <nz-divider nzType="vertical"></nz-divider>-->
+          <a (click)="selected=item;tabIndex=1">贴子详情</a>
+          <nz-divider nzType="vertical"></nz-divider>
           <a
             nz-popconfirm
             [nzPopconfirmTitle]="item.isRecommend==0?'确认设为推荐吗？':'取消推荐吗？'"
@@ -103,8 +103,7 @@
     </nz-table>
   </nz-tab>
   <nz-tab
-    *ngIf="selected"
-    [nzTitle]="selected?.postingTitle"
+    [nzTitle]="'贴子详情'"
   >
     <app-blog-detail
       [queryId]="selected?.id"

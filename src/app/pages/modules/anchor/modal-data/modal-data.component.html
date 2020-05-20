@@ -1,0 +1,29 @@
+<nz-modal
+  nzWidth="800px"
+  nzTitle="直播数据"
+  [nzFooter]="null"
+  [nzVisible]="visiable"
+  (nzOnCancel)="visiableChange.emit(false)"
+>
+  <div style="display: flex">
+    <div style="flex: 1">
+      <p><label>主播：{{detail?.username}}</label></p>
+      <p><label>真实姓名：</label></p>
+      <p><label>身份证号：</label></p>
+      <p><label>注册时间：</label></p>
+      <p><label>认证时间：</label></p>
+      <p><label>主播等级：</label></p>
+      <p><label>主播粉丝数：</label></p>
+    </div>
+    <div style="flex: 1">
+      <p><label>直播次数：</label></p>
+      <p><label>最近直播结束时间：</label></p>
+      <p><label>总直播时长：</label></p>
+      <p><label>累计最大观看人数：</label></p>
+      <p><label>直播间总分享数：</label></p>
+      <p><label>主播获得里无数：</label></p>
+      <p><label>礼物总值：</label></p>
+    </div>
+  </div>
+</nz-modal>
+

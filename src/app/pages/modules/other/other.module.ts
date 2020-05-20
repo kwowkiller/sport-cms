@@ -16,10 +16,12 @@ import {ListComponent as WordList} from './word/list.component';
 import {ListComponent as HelpList} from './help/list.component';
 import {FormComponent as HelpForm} from './help/form.component';
 import {FormComponent as WordForm} from './word/form.component';
+import {ListComponent as TagsList} from './tags/list.component';
 import {ComponentsModule} from '../../../components/components.module';
+import {FormComponent as TagForm} from './tags/form.component';
 
 @NgModule({
-  declarations: [WordList, HelpList, HelpForm, WordForm],
+  declarations: [WordList, HelpList, HelpForm, WordForm, TagsList, TagForm],
   imports: [
     CommonModule,
     NzTableModule,
@@ -34,6 +36,7 @@ import {ComponentsModule} from '../../../components/components.module';
     RouterModule.forChild([
       {path: 'word', component: WordList},
       {path: 'help', component: HelpList},
+      {path: 'tags', component: TagsList},
     ]),
     NzDividerModule,
     NzPopconfirmModule,
@@ -63,4 +66,14 @@ export interface Help {
   imageUrl: string;
   orderNum: number;
   title: string;
+}
+
+export interface Tags {
+  createTime: string;
+  id: number;
+  liveType: number;
+  orderNum: number;
+  sstatus: number;
+  tag: string;
+  updateTime: string;
 }

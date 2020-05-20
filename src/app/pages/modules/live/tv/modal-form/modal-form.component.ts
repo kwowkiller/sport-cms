@@ -1,12 +1,12 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Live} from '../live.module';
+import {Live} from '../../live.module';
 import {FormBuilder, Validators} from '@angular/forms';
-import {ModalForm} from '../../../../frame/modal-form';
+import {ModalForm} from '../../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-live-form',
+  selector: 'app-tv-form',
   templateUrl: './modal-form.component.html',
   styles: []
 })

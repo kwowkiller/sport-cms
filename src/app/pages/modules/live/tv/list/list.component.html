@@ -1,0 +1,191 @@
+<nz-tabset [(nzSelectedIndex)]="tabIndex">
+  <nz-tab nzTitle="TV列表">
+    <form
+      ngNoForm
+      class="search-area"
+      (submit)="$event.preventDefault();fetchList('page')"
+      (reset)="fetchList('all')"
+    >
+      <div nz-row [nzGutter]="24">
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播标题">
+          <input nz-input [(ngModel)]="search.liveTitle">
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播分类">
+          <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.liveType">
+            <nz-option [nzValue]="0" nzLabel="足球"></nz-option>
+            <nz-option [nzValue]="1" nzLabel="篮球"></nz-option>
+            <nz-option [nzValue]="2" nzLabel="电竞"></nz-option>
+            <nz-option [nzValue]="3" nzLabel="全部"></nz-option>
+          </nz-select>
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播标签">
+          <app-live-tag-select
+            [type]="search.liveType"
+            [(model)]="search.liveTag"
+          ></app-live-tag-select>
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播状态">
+          <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.liveStatus">
+            <nz-option [nzValue]="0" nzLabel="未开播"></nz-option>
+            <nz-option [nzValue]="1" nzLabel="直播中"></nz-option>
+            <nz-option [nzValue]="2" nzLabel="已结束"></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </div>
+      <div nz-row [nzGutter]="24">
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播时间">
+          <nz-date-picker style="width: 100%"></nz-date-picker>
+        </nz-input-group>
+        <div nz-col [nzSpan]="6" class="actions">
+          <button
+            type="button"
+            nz-button
+            (click)="selected=null;modalShow=true"
+          >新增直播
+          </button>
+          <button
+            type="button"
+            nz-button
+            nzType="danger"
+            [disabled]="setOfCheckedId.size==0"
+            (click)="onDelete()"
+          >删除
+          </button>
+          <button
+            nz-button
+            [nzType]="'primary'"
+            [disabled]="loading"
+          >查询
+          </button>
+          <button
+            type="reset"
+            nz-button
+            [disabled]="loading"
+          >重置
+          </button>
+        </div>
+      </div>
+    </form>
+    <ng-template #totalTemplate>共 {{total}} 条</ng-template>
+    <nz-table
+      [nzData]="list"
+      [nzFrontPagination]="false"
+      [nzLoading]="loading"
+      [nzTotal]="total"
+      [nzShowTotal]="totalTemplate"
+      [(nzPageIndex)]="search.pageNum"
+      [(nzPageSize)]="search.pageSize"
+      (nzPageIndexChange)="fetchList()"
+      (nzPageSizeChange)="fetchList('page')"
+    >
+      <thead>
+      <tr>
+        <th
+          [nzChecked]="allChecked"
+          [nzIndeterminate]="false"
+          (nzCheckedChange)="onAllChecked($event)"
+        ></th>
+        <th>直播标题</th>
+        <th>直播预览图</th>
+        <th>直播分类</th>
+        <th>直播标签</th>
+        <th>开播时间</th>
+        <th>上次开播时间</th>
+        <th>直播时长</th>
+        <th>累计直播时长</th>
+        <th
+          nzShowSort
+          (nzSortOrderChange)="onSortChange($event,'viewUsers')"
+        >观看人数
+        </th>
+        <th
+          nzShowSort
+          (nzSortOrderChange)="onSortChange($event,'totalLiveUsers')"
+        >累计观看人数
+        </th>
+        <th
+          nzShowSort
+          (nzSortOrderChange)="onSortChange($event,'reseveUsers')"
+        >订阅人数
+        </th>
+        <th>直播状态</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of list">
+        <td
+          [nzChecked]="setOfCheckedId.has(item.id)"
+          (nzCheckedChange)="onItemChecked(item.id, $event)"
+        ></td>
+        <td>{{item.liveTitle}}</td>
+        <td>
+          <img [src]="item.liveFaceImage" alt="" style="height: 35px">
+        </td>
+        <td [ngSwitch]="item.liveType">
+          <span *ngSwitchCase="0">足球</span>
+          <span *ngSwitchCase="1">篮球</span>
+          <span *ngSwitchCase="2">电竞</span>
+          <span *ngSwitchCase="3">全部</span>
+        </td>
+        <td>{{item.tag}}</td>
+        <td>{{item.startTime}}</td>
+        <td>{{item.lastStartTime}}</td>
+        <td>{{item.liveTime}}</td>
+        <td>{{item.totalLiveTime}}</td>
+        <td><a (click)="tabIndex=1;selected=item">{{item.viewUsers}}</a></td>
+        <td>{{item.totalLiveUsers}}</td>
+        <td><a (click)="selected=item;modalSetUser=true">{{item.reseveUsers}}</a></td>
+        <td [ngSwitch]="item.liveStatus">
+          <span *ngSwitchCase="0">未开播</span>
+          <span *ngSwitchCase="1">直播中</span>
+          <span *ngSwitchCase="2">已结束</span>
+        </td>
+        <td [ngSwitch]="item.liveStatus">
+          <a (click)="modalShow=true;selected=item;">编辑</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <ng-container *ngSwitchCase="0">
+            <a
+              nz-popconfirm
+              nzPopconfirmTitle="确认开播?"
+              (nzOnConfirm)="updateStatus(item.id,1)"
+            >开播</a>
+          </ng-container>
+          <ng-container *ngSwitchCase="1">
+            <a
+              nz-popconfirm
+              nzPopconfirmTitle="确认下播?"
+              (nzOnConfirm)="updateStatus(item.id,2)"
+            >下播</a>
+          </ng-container>
+          <ng-container *ngSwitchCase="2">
+            <a
+              nz-popconfirm
+              nzPopconfirmTitle="重新开播?"
+              (nzOnConfirm)="updateStatus(item.id,1)"
+            >重新开播</a>
+          </ng-container>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+  <nz-tab
+    [nzTitle]="selected?.liveTitle+'-观看人数'"
+    *ngIf="tabIndex==1"
+  >
+    <app-audience-list
+      queryType="tv"
+      [queryId]="selected?.id"
+    ></app-audience-list>
+  </nz-tab>
+</nz-tabset>
+<app-tv-form
+  [queryId]="selected?.id"
+  [(visiable)]="modalShow"
+  (submitSuccess)="onSubmitSuccess()"
+></app-tv-form>
+<app-set-user
+  [(visiable)]="modalSetUser"
+  type="subscriber"
+></app-set-user>

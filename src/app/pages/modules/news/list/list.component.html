@@ -10,9 +10,8 @@
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="状态">
       <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.publishStatus">
-        <nz-option nzLabel="待发布" [nzValue]="0"></nz-option>
-        <nz-option nzLabel="已发布" [nzValue]="1"></nz-option>
-        <nz-option nzLabel="已下架" [nzValue]="2"></nz-option>
+        <nz-option nzLabel="已发布" [nzValue]="0"></nz-option>
+        <nz-option nzLabel="已下架" [nzValue]="1"></nz-option>
       </nz-select>
     </nz-input-group>
     <div nz-col [nzSpan]="6" class="actions">
@@ -89,9 +88,8 @@
     <td>{{item.share}}</td>
     <td>{{item.visits}}</td>
     <td [ngSwitch]="item.publishStatus">
-      <span *ngSwitchCase="0">待发布</span>
       <span *ngSwitchCase="1">已发布</span>
-      <span *ngSwitchCase="2">已下架</span>
+      <span *ngSwitchCase="0">已下架</span>
     </td>
     <td>
       <a (click)="selected=item;modalShow=true">编辑</a>
@@ -102,6 +100,14 @@
         (nzOnConfirm)="updateItem(item.id)"
         nzPopconfirmPlacement="top"
       >{{item.publishStatus != 1 ? '上架' : '下架'}}</a>
+      <ng-container *ngIf="item.publishStatus==1">
+        <nz-divider nzType="vertical"></nz-divider>
+        <a
+          nz-popconfirm
+          [nzPopconfirmTitle]="item.isRecommend === 0 ? '设为推荐？' : '取消推荐？'"
+          (nzOnConfirm)="updateItemRecommend(item)"
+        >{{item.isRecommend === 0 ? '设为推荐' : '取消推荐'}}</a>
+      </ng-container>
     </td>
   </tr>
   </tbody>

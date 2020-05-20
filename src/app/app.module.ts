@@ -25,6 +25,7 @@ import {InitResolve} from './routers/init.resolve';
 import {ErrorHandler as MyErrorHandler} from './common/error-handler';
 import {SideMenusComponent} from './pages/layout/side-menus/side-menus.component';
 import {UserGuard} from './routers/user.guard';
+import {VideoComponent} from './pages/video.component';
 
 registerLocaleData(zh);
 
@@ -34,6 +35,7 @@ registerLocaleData(zh);
     LoginComponent,
     LayoutComponent,
     SideMenusComponent,
+    VideoComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +61,7 @@ registerLocaleData(zh);
         canActivate: [UserGuard],
       },
       {path: 'login', component: LoginComponent},
+      {path: 'video', component: VideoComponent},
     ]),
   ],
   providers: [

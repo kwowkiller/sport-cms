@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ListComponent} from './list/list.component';
+import {ListComponent as TVList} from './tv/list/list.component';
+import {ListComponent as LiveList} from './live/list/list.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
@@ -8,20 +9,23 @@ import {
   NzDatePickerModule,
   NzDividerModule, NzFormModule,
   NzGridModule,
-  NzInputModule, NzModalModule, NzPopconfirmModule,
+  NzInputModule, NzModalModule, NzPopconfirmModule, NzRadioModule,
   NzSelectModule, NzSpinModule,
-  NzTableModule
+  NzTableModule, NzTabsModule
 } from 'ng-zorro-antd';
-import {ModalFormComponent} from './modal-form/modal-form.component';
+import {ModalFormComponent} from './tv/modal-form/modal-form.component';
 import {TagSelectComponent} from './tag-select/tag-select.component';
 import {ComponentsModule} from '../../../components/components.module';
+import {AudienceComponent} from './audience/audience.component';
+import {SetUserComponent} from './set-user/set-user.component';
 
 @NgModule({
-  declarations: [ListComponent, ModalFormComponent, TagSelectComponent],
+  declarations: [TVList, LiveList, ModalFormComponent, TagSelectComponent, AudienceComponent, SetUserComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: '', component: ListComponent}
+      {path: 'tv', component: TVList},
+      {path: 'live', component: LiveList},
     ]),
     FormsModule,
     NzGridModule,
@@ -29,9 +33,6 @@ import {ComponentsModule} from '../../../components/components.module';
     NzSelectModule,
     NzTableModule,
     NzDividerModule,
-    RouterModule.forChild([
-      {path: 'tv', component: ListComponent},
-    ]),
     NzButtonModule,
     NzDatePickerModule,
     NzModalModule,
@@ -40,11 +41,14 @@ import {ComponentsModule} from '../../../components/components.module';
     ComponentsModule,
     NzSpinModule,
     NzPopconfirmModule,
+    NzTabsModule,
+    NzRadioModule,
   ]
 })
 export class LiveModule {
 }
 
+// TV
 export interface Live {
   createTime: string;
   id: number;
@@ -80,4 +84,21 @@ export interface LiveTag {
   sstatus: number;
   tag: string;
   updateTime: string;
+}
+
+// 直播
+export interface Live2 {
+  id: number;
+  createTime: string;
+  fromTime: string;
+  headerImg: string;
+  hostId: number;
+  hostType: number;
+  lengthOfTime: number;
+  liveImg: string;
+  liveTitle: string;
+  phone: string;
+  sex: number;
+  sstatus: number;
+  username: string;
 }

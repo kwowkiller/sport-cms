@@ -6,7 +6,7 @@ import {
   NzDatePickerModule,
   NzDividerModule, NzFormModule,
   NzGridModule, NzIconModule,
-  NzInputModule, NzModalModule,
+  NzInputModule, NzModalModule, NzPopconfirmModule,
   NzRadioModule, NzSelectModule, NzSpinModule,
   NzTableModule, NzTabsModule, NzUploadModule
 } from 'ng-zorro-antd';
@@ -41,6 +41,7 @@ import {ModalUserComponent} from './modal-user/modal-user.component';
     ComponentsModule,
     NzSelectModule,
     NzSpinModule,
+    NzPopconfirmModule,
   ]
 })
 export class BarModule {

@@ -104,7 +104,8 @@ export class InitResolve implements Resolve<any> {
               name: 'TV管理',
               path: 'live/tv',
             },
-            /*{
+            {
+              id: 40,
               alwaysShow: true,
               component: '',
               hidden: false,
@@ -115,7 +116,7 @@ export class InitResolve implements Resolve<any> {
               },
               name: '直播管理',
               path: 'live/live',
-            },*/
+            },
           ],
           component: '',
           hidden: false,
@@ -126,6 +127,47 @@ export class InitResolve implements Resolve<any> {
           },
           name: '直播管理',
           path: 'live',
+        },
+        {
+          id: 30,
+          alwaysShow: true,
+          children: [
+            {
+              id: 31,
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '主播审核',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '主播审核',
+              path: 'anchor/list1',
+            },
+            {
+              id: 32,
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '主播列表',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '主播列表',
+              path: 'anchor/list2',
+            },
+          ],
+          component: '',
+          hidden: false,
+          meta: {
+            title: '主播管理',
+            icon: 'audio',
+            breadcrumb: false,
+          },
+          name: '主播管理',
+          path: 'anchor',
         },
         {
           id: 23,
@@ -284,6 +326,19 @@ export class InitResolve implements Resolve<any> {
           id: 13,
           alwaysShow: true,
           children: [
+            {
+              id: 55,
+              alwaysShow: true,
+              component: '',
+              hidden: false,
+              meta: {
+                title: '标签管理',
+                icon: '',
+                breadcrumb: false,
+              },
+              name: '标签管理',
+              path: 'other/tags',
+            },
             {
               id: 14,
               alwaysShow: true,

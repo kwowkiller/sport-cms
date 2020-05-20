@@ -1,15 +1,13 @@
-<nz-tabset
-  [nzAnimated]="false"
-  [(nzSelectedIndex)]="tabIndex"
-  (nzSelectChange)="fetchList('all')"
+<nz-radio-group
+  [(ngModel)]="status"
+  (ngModelChange)="fetchList('all')"
+  nzButtonStyle="solid"
+  style="margin-bottom: 12px"
 >
-  <nz-tab nzTitle="待审核">
-  </nz-tab>
-  <nz-tab nzTitle="审核通过">
-  </nz-tab>
-  <nz-tab nzTitle="审核不通过">
-  </nz-tab>
-</nz-tabset>
+  <label nz-radio-button [nzValue]="0">未开播</label>
+  <label nz-radio-button [nzValue]="1">直播中</label>
+  <label nz-radio-button [nzValue]="2">直播结束</label>
+</nz-radio-group>
 <form
   ngNoForm
   class="search-area"
@@ -75,7 +73,7 @@
   (nzPageSizeChange)="fetchList('page')"
 >
   <thead>
-  <tr *ngIf="tabIndex!=1">
+  <tr *ngIf="status!=1">
     <th>球吧LOGO</th>
     <th>球吧名称</th>
     <th>球吧分类</th>
@@ -83,7 +81,7 @@
     <th>申请人</th>
     <th>操作</th>
   </tr>
-  <tr *ngIf="tabIndex==1">
+  <tr *ngIf="status==1">
     <th>球吧LOGO</th>
     <th>球吧名称</th>
     <th>球吧分类</th>
@@ -97,7 +95,7 @@
     <th>操作</th>
   </tr>
   </thead>
-  <tbody *ngIf="tabIndex!=1">
+  <tbody *ngIf="status!=1">
   <tr *ngFor="let item of list">
     <td>
       <img [src]="item.barLogo" alt="" height="35">
@@ -111,19 +109,19 @@
     </td>
     <td>{{item.createTime}}</td>
     <td>{{item.username}}</td>
-    <td *ngIf="tabIndex==0">
+    <td *ngIf="status==0">
       <a (click)="modalUserShow=true;selected=item">吧主信息</a>
       <nz-divider nzType="vertical"></nz-divider>
       <a (click)="modalApproveShow=true;selected=item">审核</a>
     </td>
-    <td *ngIf="tabIndex==2">
+    <td *ngIf="status==2">
       <a (click)="modalUserShow=true;selected=item">吧主信息</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>审核信息</a>
+      <a (click)="modalRemark=true">审核信息</a>
     </td>
   </tr>
   </tbody>
-  <tbody *ngIf="tabIndex==1">
+  <tbody *ngIf="status==1">
   <tr *ngFor="let item of list">
     <td>
       <img [src]="item.barLogo" alt="" height="35">
@@ -147,8 +145,12 @@
     </td>
     <td>
       <a (click)="modalUserShow=true;selected=item">吧主信息</a>
-      <!--<nz-divider nzType="vertical"></nz-divider>-->
-      <!--<a>关闭球吧</a>-->
+      <nz-divider nzType="vertical"></nz-divider>
+      <a
+        nz-popconfirm
+        [nzPopconfirmTitle]="item.barStatus == 0 ? '关闭球吧' : '开启球吧'"
+        (nzOnConfirm)="updateItemStatus(item)"
+      >{{item.barStatus == 0 ? '关闭球吧' : '开启球吧'}}</a>
     </td>
   </tr>
   </tbody>
@@ -179,4 +181,12 @@
       <textarea style="flex: 1;height: 100px" nz-input formControlName="remark"></textarea>
     </label>
   </form>
+</nz-modal>
+<nz-modal
+  nzTitle="审核备注"
+  [nzVisible]="modalRemark"
+  (nzOnCancel)="modalRemark=false"
+  [nzFooter]="null"
+>
+  <div>不通过原因：</div>
 </nz-modal>

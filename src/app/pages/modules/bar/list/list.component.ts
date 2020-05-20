@@ -14,12 +14,14 @@ import {finalize} from 'rxjs/operators';
   styles: []
 })
 export class ListComponent extends Table<Bar> implements OnInit {
-  tabIndex = 0;
+  status = 0;
   dateRange: Date[] = [];
   // 吧主信息
   modalUserShow = false;
   // 审核弹框
   modalApproveShow = false;
+  // 审核备注
+  modalRemark = false;
   form: FormGroup;
 
   constructor(
@@ -41,7 +43,7 @@ export class ListComponent extends Table<Bar> implements OnInit {
 
   beforeSearch() {
     // 审核状态
-    this.search.approveStatus = this.tabIndex;
+    this.search.approveStatus = this.status;
     if (this.dateRange.length !== 0) {
       this.search.createTimeFrom = moment(this.dateRange[0]).format('YYYY-MM-DD');
       this.search.createTimeTo = moment(this.dateRange[1]).format('YYYY-MM-DD');
@@ -65,6 +67,21 @@ export class ListComponent extends Table<Bar> implements OnInit {
         this.fetchList();
       } else {
         this.message.error('审核失败');
+      }
+    });
+  }
+
+  // 关闭/开启 球吧
+  updateItemStatus(item: Bar) {
+    this.http.put<Result>('bar/sys/bar/update', {
+      id: item.id,
+      barStatus: item.barStatus === 0 ? 1 : 0,
+    }).pipe().subscribe(event => {
+      if (event.code === 200) {
+        this.message.success('操作成功');
+        this.fetchList();
+      } else {
+        this.message.error('操作失败');
       }
     });
   }

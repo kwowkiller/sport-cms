@@ -1,0 +1,99 @@
+ul {
+  padding: 0;
+}
+
+.top {
+  max-width: 1200px;
+}
+
+.top > li {
+  display: flex;
+}
+
+.top > li {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.top > li:last-of-type {
+  margin-bottom: 0;
+  border: 0;
+}
+
+.top > li > .user {
+}
+
+.top > li > .user > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eeeeee;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.top > li > .content {
+  margin-left: 24px;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.top > li > .content > .img-box {
+  margin-top: 12px;
+}
+
+.top > li > .content > .img-box > img {
+  height: 100px;
+  min-width: 100px;
+  background-color: #eeeeee;
+  margin-right: 12px;
+  display: inline-block;
+}
+
+.top > li > .content > .action {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 14px;
+  padding-right: 12px;
+}
+
+.top > li > .content > .action span {
+  margin-right: 12px;
+}
+
+.sub {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.sub > li {
+  background-color: #eee;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #ffffff;
+}
+
+.sub > li > .user {
+  display: flex;
+  align-items: center;
+}
+
+.sub > li > .user > img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #cccccc;
+  display: block;
+  margin-right: 5px;
+}
+
+.sub > li > .content {
+  flex: 1;
+  padding: 0 24px 0 12px;
+}
+
+.sub > li > .action span {
+  margin-right: 12px;
+}
