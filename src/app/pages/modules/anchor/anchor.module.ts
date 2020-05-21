@@ -8,7 +8,7 @@ import {
   NzDatePickerModule,
   NzDividerModule,
   NzFormModule,
-  NzInputModule, NzModalModule, NzRadioModule,
+  NzInputModule, NzModalModule, NzPopconfirmModule, NzRadioModule,
   NzSelectModule, NzSpinModule,
   NzTableModule
 } from 'ng-zorro-antd';
@@ -42,6 +42,7 @@ import {ComponentsModule} from '../../../components/components.module';
     NzRadioModule,
     NzSpinModule,
     ComponentsModule,
+    NzPopconfirmModule,
   ]
 })
 export class AnchorModule {

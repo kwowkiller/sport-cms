@@ -36,8 +36,8 @@ export class List1Component extends Table<AnchorAudit> implements OnInit {
 
   beforeSearch() {
     if (this.dateRange.length !== 0) {
-      this.search.startDate = moment(this.dateRange[0]).format('YYYY-MM-DD');
-      this.search.endDate = moment(this.dateRange[1]).format('YYYY-MM-DD');
+      this.search.createTimeFrom = moment(this.dateRange[0]).format('YYYY-MM-DD');
+      this.search.createTimeTo = moment(this.dateRange[1]).format('YYYY-MM-DD');
     }
   }
 

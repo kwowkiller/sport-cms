@@ -129,6 +129,10 @@ export abstract class Table<T> {
     }).pipe(
       finalize(() => this.loading = false)
     ).subscribe(event => {
+      if (event.data == null) {
+        this.message.info('数据为空，接口返回null');
+        return;
+      }
       if (!event.data.records) {
         this.message.warning('返回数据格式不正确');
         return;

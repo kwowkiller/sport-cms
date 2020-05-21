@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
@@ -8,7 +8,7 @@ import {NzMessageService} from 'ng-zorro-antd';
   templateUrl: './audience.component.html',
   styles: []
 })
-export class AudienceComponent extends Table<any> implements OnInit {
+export class AudienceComponent extends Table<any> implements OnInit, OnChanges {
   @Input()
   queryId = 0;
   @Input()
@@ -24,7 +24,23 @@ export class AudienceComponent extends Table<any> implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    switch (this.queryType) {
+      case 'tv':
+        this.listUrl = 'live/sys/live/views';
+        break;
+      case 'live':
+        this.listUrl = 'live/sys/host/log/viewlist';
+        break;
+      default:
+    }
+    if (this.queryId) {
+      this.fetchList('all');
+    }
+  }
+
   beforeSearch() {
+    this.search.id = this.queryId;
   }
 
   onSubmitSuccess() {
