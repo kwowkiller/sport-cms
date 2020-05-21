@@ -17,8 +17,10 @@ export class ModalActionComponent extends ModalForm<Anchor> implements OnInit, O
     private fb: FormBuilder,
   ) {
     super(http);
-    this.submitUrl = 'live/sys/host/change/{id}/1';
+    this.submitUrl = 'live/sys/host/change';
     this.form = this.fb.group({
+      id: [null, [Validators.required]],
+      sStatus: [1],
       forbiddenFrom: [null, [Validators.required]],
       forbiddenTo: [null, [Validators.required]],
     });
@@ -29,7 +31,7 @@ export class ModalActionComponent extends ModalForm<Anchor> implements OnInit, O
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.detail) {
-      this.submitUrl = `live/sys/host/change/${this.detail.id}/1`;
+      this.form.controls.id.setValue(this.detail.id);
     }
   }
 

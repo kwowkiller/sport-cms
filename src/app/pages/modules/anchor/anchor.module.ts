@@ -9,16 +9,18 @@ import {
   NzDividerModule,
   NzFormModule,
   NzInputModule, NzModalModule, NzRadioModule,
-  NzSelectModule,
+  NzSelectModule, NzSpinModule,
   NzTableModule
 } from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ModalDataComponent} from './modal-data/modal-data.component';
 import {AuthInfoComponent} from './auth-info/auth-info.component';
-import { ModalActionComponent } from './modal-action/modal-action.component';
+import {ModalActionComponent} from './modal-action/modal-action.component';
+import { ModalFormComponent } from './modal-form/modal-form.component';
+import {ComponentsModule} from '../../../components/components.module';
 
 @NgModule({
-  declarations: [List1Component, List2Component, ModalDataComponent, AuthInfoComponent, ModalActionComponent],
+  declarations: [List1Component, List2Component, ModalDataComponent, AuthInfoComponent, ModalActionComponent, ModalFormComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -38,6 +40,8 @@ import { ModalActionComponent } from './modal-action/modal-action.component';
     NzModalModule,
     ReactiveFormsModule,
     NzRadioModule,
+    NzSpinModule,
+    ComponentsModule,
   ]
 })
 export class AnchorModule {
@@ -68,6 +72,7 @@ export interface Anchor {
   currentViews: number;
   //   粉丝数
   fansCount: number;
+  followUserCount: number;
   forbiddenFrom: string;
   forbiddenTo: string;
   headerImg: string;

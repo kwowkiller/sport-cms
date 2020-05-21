@@ -13,6 +13,7 @@ import * as moment from 'moment';
 export class List2Component extends Table<Anchor> implements OnInit {
   modalAction = false;
   dateRange: Date[] = [];
+  modalForm = false;
 
   constructor(
     protected http: HttpClient,
@@ -39,7 +40,9 @@ export class List2Component extends Table<Anchor> implements OnInit {
   }
 
   updateItem(id: number) {
-    this.http.post(`live/sys/host/change/${id}/0`, {}).subscribe(event => {
+    this.http.post(`live/sys/host/change`, {
+      id, sStatus: 1
+    }).subscribe(event => {
     });
   }
 }

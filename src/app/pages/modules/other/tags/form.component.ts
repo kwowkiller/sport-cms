@@ -37,7 +37,7 @@ export class FormComponent extends ModalForm<Tags> implements OnInit, OnChanges 
         tag: this.detail.tag,
         liveType: this.detail.liveType,
       });
-      this.method = 'PUT';
+      this.method = 'POST';
       this.submitUrl = 'live/sys/tag/update';
     } else {
       this.form.removeControl('id');

@@ -1,0 +1,66 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+  (nzOnOk)="submit()"
+  [nzOkLoading]="submiting"
+  [nzOkDisabled]="!form.valid"
+>
+  <nz-spin [nzSpinning]="loading">
+    <form nz-form [formGroup]="form">
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>主播昵称</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <input nz-input/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>主播头像</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <app-upload></app-upload>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>手机号码</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <input nz-input/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>手机号码</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <nz-select>
+            <nz-option nzLabel="男"></nz-option>
+            <nz-option nzLabel="女"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>授权时间</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <input nz-input/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>主播房间号</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <input nz-input/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>主播密钥</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <input nz-input/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>信号源</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <input nz-input/>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-spin>
+</nz-modal>
+

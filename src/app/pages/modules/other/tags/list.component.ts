@@ -27,7 +27,10 @@ export class ListComponent extends Table<Tags> implements OnInit {
   }
 
   onSubmitSuccess() {
+    this.fetchList('all');
+    this.message.success('操作成功');
   }
+
   onDelete() {
     this.deleteUrl = `live/sys/tag/delete/${Array.from(this.setOfCheckedId.values()).join(',')}`;
     this.deleteItem();

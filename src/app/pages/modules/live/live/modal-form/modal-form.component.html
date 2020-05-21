@@ -1,0 +1,70 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+  (nzOnOk)="submit()"
+  [nzOkLoading]="submiting"
+  [nzOkDisabled]="!form.valid"
+>
+  <nz-spin [nzSpinning]="loading">
+    <form nz-form [formGroup]="form">
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>直播标题</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <input nz-input formControlName="liveTitle"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>主播昵称</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <app-user-select formControlName="userId"></app-user-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>直播预览图</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <app-upload
+            formControlName="liveImg"
+          ></app-upload>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>直播分类</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <nz-select nzPlaceHolder="请选择" formControlName="hostType">
+            <nz-option [nzValue]="0" nzLabel="足球"></nz-option>
+            <nz-option [nzValue]="1" nzLabel="篮球"></nz-option>
+            <nz-option [nzValue]="2" nzLabel="电竞"></nz-option>
+            <nz-option [nzValue]="3" nzLabel="全部"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>直播标签</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <app-live-tag-select
+            [type]="form.controls.hostType.value"
+            formControlName="hostTag"
+          ></app-live-tag-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>开播时间</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <nz-date-picker
+            style="width: 100%"
+            formControlName="fromTime"
+            nzShowTime
+          ></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" nzRequired>信号源</nz-form-label>
+        <nz-form-control [nzSm]="17">
+          <input nz-input formControlName="liveUrl"/>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-spin>
+</nz-modal>

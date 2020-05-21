@@ -1,0 +1,18 @@
+<nz-modal
+  [nzTitle]="'直播数据'"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+>
+  <nz-spin [nzSpinning]="loading">
+    <p>主播：</p>
+    <p>开播时间：</p>
+    <p>结束时间：</p>
+    <p>直播时长：</p>
+    <p>最大同时观看人数：</p>
+    <p>直播间分享数：</p>
+    <p>粉丝增量：</p>
+    <p>订阅数量：</p>
+  </nz-spin>
+</nz-modal>
+

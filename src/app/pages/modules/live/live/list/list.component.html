@@ -90,8 +90,9 @@
         <th>主播</th>
         <th>直播分类</th>
         <th>开播时间</th>
-        <th>观看人数</th>
-        <th>订阅人数</th>
+        <th *ngIf="status==1">观看人数</th>
+        <th *ngIf="status==2">结束时间</th>
+        <th *ngIf="status==2">直播时长</th>
         <th>直播状态</th>
         <th>操作</th>
       </tr>
@@ -114,20 +115,33 @@
           <span *ngSwitchCase="3">全部</span>
         </td>
         <td>{{item.fromTime}}</td>
-        <td><a (click)="selected=item;tabIndex=1">观看人数</a></td>
-        <td><a (click)="selected=item;modalSetUser=true">订阅人数</a></td>
-        <td>直播状态</td>
-        <td>
-          <a>下播</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a>弹幕填充</a>
+        <td *ngIf="status==1"><a (click)="selected=item;tabIndex=1">观看人数</a></td>
+        <td *ngIf="status==2">结束时间</td>
+        <td *ngIf="status==2">{{item.lengthOfTime}}</td>
+        <td [ngSwitch]="item.sstatus">
+          <span *ngSwitchCase="0">未开播</span>
+          <span *ngSwitchCase="1">直播中</span>
+          <span *ngSwitchCase="2">已结束</span>
+        </td>
+        <td [ngSwitch]="item.sstatus">
+          <ng-container *ngSwitchCase="0">
+            <a (click)="modalShow=true;selected=item;">编辑</a>
+          </ng-container>
+          <ng-container *ngSwitchCase="1">
+            <a>下播</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>弹幕填充</a>
+          </ng-container>
+          <ng-container *ngSwitchCase="2">
+            <a (click)="selected=item;modalData=true">直播数据</a>
+          </ng-container>
         </td>
       </tr>
       </tbody>
     </nz-table>
   </nz-tab>
   <nz-tab
-    [nzTitle]="'-观看人数'"
+    [nzTitle]="selected.liveTitle+'-观看人数'"
     *ngIf="tabIndex==1"
   >
     <app-audience-list
@@ -139,3 +153,11 @@
   [(visiable)]="modalSetUser"
   type="subscriber"
 ></app-set-user>
+<app-live-form
+  [(visiable)]="modalShow"
+  (submitSuccess)="onSubmitSuccess()"
+></app-live-form>
+<app-live-data
+  [(visiable)]="modalData"
+  [queryId]="selected?.id"
+></app-live-data>

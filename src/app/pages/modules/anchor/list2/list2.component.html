@@ -28,7 +28,13 @@
         <nz-option nzValue="2" nzLabel="禁播"></nz-option>
       </nz-select>
     </nz-input-group>
-    <div nz-col [nzSpan]="6" class="actions">
+    <div nz-col [nzSpan]="12" class="actions">
+      <button
+        type="button"
+        nz-button
+        (click)="selected=null;modalForm=true"
+      >新增主播
+      </button>
       <button
         nz-button
         [nzType]="'primary'"
@@ -89,10 +95,10 @@
       <span *ngSwitchCase="1">女</span>
       <span *ngSwitchCase="2">未知</span>
     </td>
-    <td>授权时间</td>
+    <td>{{item.createTime}}</td>
     <td>{{item.roomId}}</td>
     <td>{{item.fansCount}}</td>
-    <td>关注用户数</td>
+    <td>{{item.followUserCount}}</td>
     <td>{{item.lastStartTime}}</td>
     <td>{{item.hostLevel}}</td>
     <td>{{item.sstatus == 0 ? '正常' : '禁播'}}</td>
@@ -118,3 +124,6 @@
   [detail]="selected"
   (submitSuccess)="onSubmitSuccess()"
 ></app-anchor-action>
+<app-anchor-form
+  [(visiable)]="modalForm"
+></app-anchor-form>

@@ -13,6 +13,7 @@ export class ListComponent extends Table<Live2> implements OnInit {
   tabIndex = 0;
   status = 0;
   modalSetUser = false;
+  modalData = false;
 
   constructor(
     protected http: HttpClient,
@@ -27,9 +28,12 @@ export class ListComponent extends Table<Live2> implements OnInit {
   }
 
   beforeSearch() {
+    this.search.SStatus = this.status;
   }
 
   onSubmitSuccess() {
+    this.fetchList('all');
+    this.message.success('操作成功');
   }
 
   onDelete() {

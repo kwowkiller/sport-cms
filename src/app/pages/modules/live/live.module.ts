@@ -13,14 +13,16 @@ import {
   NzSelectModule, NzSpinModule,
   NzTableModule, NzTabsModule
 } from 'ng-zorro-antd';
-import {ModalFormComponent} from './tv/modal-form/modal-form.component';
+import {ModalFormComponent as TVForm} from './tv/modal-form/modal-form.component';
+import {ModalFormComponent as LiveForm} from './live/modal-form/modal-form.component';
 import {TagSelectComponent} from './tag-select/tag-select.component';
 import {ComponentsModule} from '../../../components/components.module';
 import {AudienceComponent} from './audience/audience.component';
 import {SetUserComponent} from './set-user/set-user.component';
+import { ModalDataComponent } from './live/modal-data/modal-data.component';
 
 @NgModule({
-  declarations: [TVList, LiveList, ModalFormComponent, TagSelectComponent, AudienceComponent, SetUserComponent],
+  declarations: [TVList, LiveList, TVForm, LiveForm, TagSelectComponent, AudienceComponent, SetUserComponent, ModalDataComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
