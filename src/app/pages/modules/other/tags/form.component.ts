@@ -22,6 +22,7 @@ export class FormComponent extends ModalForm<Tags> implements OnInit, OnChanges 
     this.form = this.fb.group({
       liveType: [0, [Validators.required]],
       tag: [null, [Validators.required]],
+      moduleType: [0, [Validators.required]]
     });
     this.submitUrl = 'live/sys/tag/add';
   }
@@ -36,6 +37,7 @@ export class FormComponent extends ModalForm<Tags> implements OnInit, OnChanges 
         id: this.detail.id,
         tag: this.detail.tag,
         liveType: this.detail.liveType,
+        moduleType: this.detail.moduleType,
       });
       this.method = 'POST';
       this.submitUrl = 'live/sys/tag/update';

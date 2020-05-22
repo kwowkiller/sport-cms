@@ -73,6 +73,7 @@ export interface Tags {
   id: number;
   liveType: number;
   orderNum: number;
+  moduleType: number;
   sstatus: number;
   tag: string;
   updateTime: string;

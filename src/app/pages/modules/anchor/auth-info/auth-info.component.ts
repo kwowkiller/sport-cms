@@ -33,7 +33,7 @@ export class AuthInfoComponent extends ModalForm<{
     const idChange = changes.queryId;
     if (idChange && !idChange.firstChange && this.visiable) {
       this.detailUrl = `live/sys/host/auth/${this.queryId}`;
-      this.fetchDetailOnly();
+      this.fetchDetail();
     }
   }
 

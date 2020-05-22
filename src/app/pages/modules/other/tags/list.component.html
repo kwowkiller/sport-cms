@@ -14,9 +14,16 @@
         <nz-option nzLabel="足球" [nzValue]="0"></nz-option>
         <nz-option nzLabel="篮球" [nzValue]="1"></nz-option>
         <nz-option nzLabel="电竞" [nzValue]="2"></nz-option>
-        <nz-option nzLabel="全部" [nzValue]="3"></nz-option>
       </nz-select>
     </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="所属模块">
+      <nz-select [(ngModel)]="search.moduleType">
+        <nz-option nzLabel="TV" [nzValue]="0"></nz-option>
+        <nz-option nzLabel="主播" [nzValue]="1"></nz-option>
+      </nz-select>
+    </nz-input-group>
+  </div>
+  <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="12" class="actions">
       <button
         type="button"
@@ -69,6 +76,7 @@
     ></th>
     <th>标签名</th>
     <th>所属分类</th>
+    <th>所属模块</th>
     <th nzWidth="200px">操作</th>
   </tr>
   </thead>
@@ -84,6 +92,10 @@
       <span *ngSwitchCase="1">篮球</span>
       <span *ngSwitchCase="2">电竞</span>
       <span *ngSwitchCase="3">全部</span>
+    </td>
+    <td [ngSwitch]="item.moduleType">
+      <span *ngSwitchCase="0">TV</span>
+      <span *ngSwitchCase="1">主播</span>
     </td>
     <td>
       <a (click)="modalShow=true;selected=item">编辑</a>

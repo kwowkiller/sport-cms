@@ -21,7 +21,7 @@ export class ModalUserComponent extends ModalForm<AuthInfo> implements OnInit, O
     const idChange = changes.queryId;
     if (idChange && !idChange.firstChange) {
       this.detailUrl = `bar/sys/bar/user/${this.queryId}`;
-      this.fetchDetailOnly();
+      this.fetchDetail();
     }
   }
 

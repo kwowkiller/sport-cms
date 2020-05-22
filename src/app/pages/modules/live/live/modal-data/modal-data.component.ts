@@ -22,7 +22,7 @@ export class ModalDataComponent extends ModalForm<any> implements OnInit, OnChan
     const idChange = changes.queryId;
     if (idChange && !idChange.firstChange && this.visiable) {
       this.detailUrl = `/${this.queryId}`;
-      this.fetchDetailOnly();
+      this.fetchDetail();
     }
   }
 

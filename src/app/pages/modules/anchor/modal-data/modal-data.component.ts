@@ -40,7 +40,7 @@ export class ModalDataComponent extends ModalForm<{
     const idChange = changes.queryId;
     if (idChange && !idChange.firstChange && this.visiable) {
       this.detailUrl = `live/sys/host/host/${this.queryId}`;
-      this.fetchDetailOnly();
+      this.fetchDetail();
     }
   }
 }

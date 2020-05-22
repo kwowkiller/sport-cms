@@ -35,8 +35,8 @@ export abstract class ModalForm<T> {
   protected constructor(protected http: HttpClient) {
   }
 
-  // 仅查询详情  不填充表单
-  fetchDetailOnly() {
+  // 查询详情
+  fetchDetail() {
     if (!this.visiable) {
       return;
     }

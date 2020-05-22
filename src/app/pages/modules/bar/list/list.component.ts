@@ -73,7 +73,7 @@ export class ListComponent extends Table<Bar> implements OnInit {
 
   // 关闭/开启 球吧
   updateItemStatus(item: Bar) {
-    this.http.put<Result>('bar/sys/bar/update', {
+    this.http.put<Result>('bar/sys/bar/open', {
       id: item.id,
       barStatus: item.barStatus === 0 ? 1 : 0,
     }).pipe().subscribe(event => {

@@ -20,7 +20,7 @@ export class AuthInfoComponent extends ModalForm<AuthInfo> implements OnInit, On
     const idChange = changes.queryId;
     if (idChange && !idChange.firstChange && this.visiable) {
       this.detailUrl = `app/sys/app/user/auth/${this.queryId}`;
-      this.fetchDetailOnly();
+      this.fetchDetail();
     }
   }
 

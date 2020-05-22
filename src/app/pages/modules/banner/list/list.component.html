@@ -91,7 +91,13 @@
     <td>
       <img [src]="item.url" alt="" style="height: 40px">
     </td>
-    <td><a [href]="item.linkUrl" target="_blank">{{item.linkUrl}}</a></td>
+    <td
+      style="max-width: 300px;
+      word-break: keep-all;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;"
+    ><a [href]="item.linkUrl" target="_blank">{{item.linkUrl}}</a></td>
     <td [ngSwitch]="item.moduleType">
       <span *ngSwitchCase="0">首页</span>
       <span *ngSwitchCase="1">资讯</span>

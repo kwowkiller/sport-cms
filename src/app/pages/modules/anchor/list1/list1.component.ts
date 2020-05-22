@@ -45,7 +45,10 @@ export class List1Component extends Table<AnchorAudit> implements OnInit {
   }
 
   updateItem() {
-    this.http.put<Result>(`live/sys/host/apply/approve/${this.selected.id}/${this.form.value.status}`, {}).pipe(
+    this.http.put<Result>(`live/sys/host/apply/approve`, {
+      id: this.selected.id,
+      sStatus: this.form.value.status,
+    }).pipe(
     ).subscribe(event => {
       if (event.code === 200) {
         this.message.success('审核成功');

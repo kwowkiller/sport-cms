@@ -22,7 +22,16 @@
           <nz-option nzLabel="足球" [nzValue]="0"></nz-option>
           <nz-option nzLabel="篮球" [nzValue]="1"></nz-option>
           <nz-option nzLabel="电竞" [nzValue]="2"></nz-option>
-          <nz-option nzLabel="全部" [nzValue]="3"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>应用模块</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-select formControlName="moduleType">
+          <!--0:TV 1:主播-->
+          <nz-option nzLabel="TV" [nzValue]="0"></nz-option>
+          <nz-option nzLabel="主播" [nzValue]="1"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>

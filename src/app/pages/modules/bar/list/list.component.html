@@ -4,9 +4,9 @@
   nzButtonStyle="solid"
   style="margin-bottom: 12px"
 >
-  <label nz-radio-button [nzValue]="0">未开播</label>
-  <label nz-radio-button [nzValue]="1">直播中</label>
-  <label nz-radio-button [nzValue]="2">直播结束</label>
+  <label nz-radio-button [nzValue]="0">待审核</label>
+  <label nz-radio-button [nzValue]="1">审核通过</label>
+  <label nz-radio-button [nzValue]="2">审核不通过</label>
 </nz-radio-group>
 <form
   ngNoForm
@@ -24,7 +24,6 @@
         <nz-option nzLabel="足球" [nzValue]="0"></nz-option>
         <nz-option nzLabel="篮球" [nzValue]="1"></nz-option>
         <nz-option nzLabel="电竞" [nzValue]="2"></nz-option>
-        <nz-option nzLabel="全部" [nzValue]="3"></nz-option>
       </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="吧主昵称">
