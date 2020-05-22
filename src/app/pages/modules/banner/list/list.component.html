@@ -10,8 +10,9 @@
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="应用模块">
       <nz-select [(ngModel)]="search.moduleType">
-        <nz-option nzLabel="首页" [nzValue]="0"></nz-option>
+        <nz-option nzLabel="TV" [nzValue]="0"></nz-option>
         <nz-option nzLabel="资讯" [nzValue]="1"></nz-option>
+        <nz-option nzLabel="主播" [nzValue]="2"></nz-option>
       </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="状态">
@@ -99,8 +100,9 @@
       white-space: nowrap;"
     ><a [href]="item.linkUrl" target="_blank">{{item.linkUrl}}</a></td>
     <td [ngSwitch]="item.moduleType">
-      <span *ngSwitchCase="0">首页</span>
+      <span *ngSwitchCase="0">TV</span>
       <span *ngSwitchCase="1">资讯</span>
+      <span *ngSwitchCase="2">主播</span>
     </td>
     <td>{{item.orderNum}}</td>
     <td>{{item.createTime}}</td>

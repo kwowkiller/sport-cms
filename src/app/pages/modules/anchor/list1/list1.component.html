@@ -82,7 +82,11 @@
     </td>
     <td>{{item.username}}</td>
     <td>{{item.phone}}</td>
-    <td>{{item.sex == '1' ? '男' : '女'}}</td>
+    <td [ngSwitch]="item.sex">
+      <span *ngSwitchCase="0">男</span>
+      <span *ngSwitchCase="1">女</span>
+      <span *ngSwitchCase="2">未知</span>
+    </td>
     <td>{{item.createTime}}</td>
     <td>{{item.fansCount}}</td>
     <td>{{item.userFollowCount}}</td>

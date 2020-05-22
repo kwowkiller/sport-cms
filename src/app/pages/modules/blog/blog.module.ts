@@ -8,7 +8,7 @@ import {
   NzDividerModule,
   NzFormModule,
   NzGridModule,
-  NzInputModule, NzPopconfirmModule,
+  NzInputModule, NzPaginationModule, NzPopconfirmModule, NzSpinModule,
   NzTableModule,
   NzTabsModule
 } from 'ng-zorro-antd';
@@ -36,6 +36,8 @@ import {BlogDetailComponent} from './blog-detail/blog-detail.component';
     ComponentsModule,
     NzTabsModule,
     NzPopconfirmModule,
+    NzPaginationModule,
+    NzSpinModule,
   ]
 })
 export class BlogModule {

@@ -103,6 +103,7 @@
     </nz-table>
   </nz-tab>
   <nz-tab
+    *ngIf="!!selected"
     [nzTitle]="'贴子详情'"
   >
     <app-blog-detail

@@ -13,7 +13,7 @@ import {Result} from '../../../../common/common.model';
 })
 export class ListComponent extends Table<Blog> implements OnInit {
   dateRange: Date[] = [];
-  tabIndex = 1;
+  tabIndex = 0;
 
   constructor(
     protected http: HttpClient,

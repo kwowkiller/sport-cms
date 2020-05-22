@@ -22,6 +22,7 @@ ul {
 }
 
 .top > li > .user {
+  width: 130px;
 }
 
 .top > li > .user > img {
@@ -87,6 +88,15 @@ ul {
   background-color: #cccccc;
   display: block;
   margin-right: 5px;
+  flex-shrink: 0;
+}
+
+.sub > li > .user >span{
+  width: 70px;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .sub > li > .content {
