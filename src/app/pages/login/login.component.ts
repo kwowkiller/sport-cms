@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {finalize} from 'rxjs/operators';
 import {Session} from '../../common/session';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient,
+    private message: NzMessageService,
   ) {
     this.form = this.fb.group({
       username: ['ssl', [Validators.required]],
@@ -61,5 +63,10 @@ export class LoginComponent implements OnInit {
       Session.token = `${event.token_type} ${event.access_token}`;
       this.router.navigateByUrl('/').then();
     });
+  }
+
+  // 加载验证码失败
+  onCodeImageError() {
+    this.message.warning('验证码加载失败，可能服务器已关闭或错误');
   }
 }

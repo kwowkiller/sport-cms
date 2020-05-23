@@ -1,12 +1,8 @@
 <nz-spin [nzSpinning]="loading">
   <ul class="top">
-    <li *ngFor="let item of list">
-      <div class="user">
-        <img [src]="item.headerImg" alt="">
-        <span>{{item.username}}</span>
-      </div>
+    <li class="first">
       <div class="content">
-        {{item.context}}
+        {{detail?.context}}
         <!--<div class="img-box">
           <img src="" alt="">
           <img src="" alt="">
@@ -14,26 +10,46 @@
           <img src="" alt="">
         </div>-->
         <div class="action">
+          <span>{{detail?.username}}</span>
+          <span>{{detail?.barName}}</span>
+          <span>{{detail?.createTime}}</span>
+          <a
+            nz-popconfirm
+            nzPopconfirmTitle="确认删除该贴?"
+            (nzOnConfirm)="onDelete(detail?.id)"
+            style="color: red;margin-right: 0"
+          >删除</a>
+        </div>
+      </div>
+    </li>
+    <li *ngFor="let item of topList">
+      <div class="user">
+        <img [src]="item.headerImg" alt="">
+        <span>{{item.username}}</span>
+      </div>
+      <div class="content">
+        {{item.context}}
+        <div class="action">
           <span>{{item.floorNum}}楼</span>
           <span>{{item.createTime}}</span>
           <a
             nz-popconfirm
-            nzPopconfirmTitle="确认删除该回复？"
-            (nzOnConfirm)="onDelete(item.id)"
+            nzPopconfirmTitle="确认删除该层回复?"
+            (nzOnConfirm)="onDeleteComment(item.id)"
           >删除</a>
         </div>
-        <ul class="sub">
-          <li>
-            <div class="user"><img src="" alt=""><span>username</span></div>
+        <ul class="sub" *ngIf="item.subCount>0">
+          <li *ngFor="let sub of getSubList(item.id)">
+            <div class="user"><img [src]="sub.headerImg" alt="">{{sub.username}}</div>
             <div class="content">
-              这是前端添加的的测试帖子，账号id是29，看看能不能关注自己，图片上传前端穿添加了限制，最多上传9张图片，所有图片都懒加载,只能上传3M以内的图片，添加了上传的进度
+              {{sub.context}}
             </div>
             <div class="action">
-              <span>2012-12-21 12:21:12</span>
+              <span>{{sub.createTime}}</span>
               <a
                 nz-popconfirm
-                nzPopconfirmTitle="确认删除该评论？"
-                (nzOnConfirm)="onDelete(item.id)"
+                nzPopconfirmTitle="确认删除该层回复?"
+                (nzOnConfirm)="onDeleteComment(sub.id)"
               >删除</a>
             </div>
           </li>
@@ -42,10 +58,3 @@
     </li>
   </ul>
 </nz-spin>
-<nz-pagination
-  [nzTotal]="total"
-  [nzPageSize]="10"
-  [(nzPageIndex)]="search.pageNum"
-  [(nzPageSize)]="search.pageSize"
-  (nzPageIndexChange)="fetchList()"
-></nz-pagination>

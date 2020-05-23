@@ -35,6 +35,8 @@ export class ListComponent extends Table<Blog> implements OnInit {
   }
 
   onSubmitSuccess() {
+    this.tabIndex = 0;
+    this.fetchList();
   }
 
   onDelete() {

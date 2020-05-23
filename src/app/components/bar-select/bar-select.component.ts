@@ -14,7 +14,7 @@ import {finalize} from 'rxjs/operators';
       nzPlaceHolder="输入球吧名搜索"
       (nzOnSearch)="onSearch($event)"
       [nzLoading]="loading"
-      nzNotFoundContent="没有相关球吧"
+      [nzNotFoundContent]="notFoundContent"
       [(ngModel)]="model"
       (ngModelChange)="onModelChange($event)"
     >
@@ -30,6 +30,11 @@ import {finalize} from 'rxjs/operators';
 export class BarSelectComponent extends CustomInput implements OnInit {
   selectData: Bar[] = [];
   loading = false;
+  private barName = '';
+
+  get notFoundContent() {
+    return this.barName.length === 0 ? '请输入球吧名来查找' : '没有找到相关球吧';
+  }
 
   constructor(private http: HttpClient) {
     super();
@@ -39,6 +44,11 @@ export class BarSelectComponent extends CustomInput implements OnInit {
   }
 
   onSearch(barName: string) {
+    this.barName = barName;
+    if (barName.length === 0) {
+      this.selectData = [];
+      return;
+    }
     this.loading = true;
     this.http.get<Pageable<Bar>>('bar/sys/bar/list', {
       params: {

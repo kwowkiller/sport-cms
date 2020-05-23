@@ -22,7 +22,7 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
       [nzPlaceHolder]="placeholder"
       (nzOnSearch)="onSearch($event)"
       [nzLoading]="loading"
-      nzNotFoundContent="没有相关用户"
+      [nzNotFoundContent]="notFoundContent"
       [(ngModel)]="model"
       (ngModelChange)="onModelChange($event)"
       nzAllowClear
@@ -42,7 +42,12 @@ export class UserSelectComponent extends CustomInput implements OnInit {
   @Input()
   queryParams: { [key: string]: string } = {};
   @Input()
-  placeholder = '输入用户名搜索';
+  placeholder = '输入用户名搜索匹配的用户';
+  username = '';
+
+  get notFoundContent() {
+    return this.username.length === 0 ? '请输入用户名来查找' : '没有找到相关用户';
+  }
 
   constructor(private http: HttpClient) {
     super();
@@ -52,6 +57,11 @@ export class UserSelectComponent extends CustomInput implements OnInit {
   }
 
   onSearch(username: string) {
+    this.username = username;
+    if (username.length === 0) {
+      this.selectData = [];
+      return;
+    }
     this.loading = true;
     this.http.get<Pageable<User>>('app/sys/app/user/page', {
       params: {

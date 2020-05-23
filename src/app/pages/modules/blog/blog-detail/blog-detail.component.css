@@ -6,13 +6,18 @@ ul {
   max-width: 1200px;
 }
 
+.top .first {
+  background-color: #1890ff;
+  color: #ffffff;
+}
+
 .top > li {
   display: flex;
 }
 
 .top > li {
   margin-bottom: 12px;
-  padding-bottom: 12px;
+  padding: 12px;
   border-bottom: 1px solid #eeeeee;
 }
 
@@ -22,7 +27,8 @@ ul {
 }
 
 .top > li > .user {
-  width: 130px;
+  width: 100px;
+  flex-shrink: 0;
 }
 
 .top > li > .user > img {
@@ -38,6 +44,7 @@ ul {
   margin-left: 24px;
   font-size: 15px;
   letter-spacing: 1px;
+  flex: 1;
 }
 
 .top > li > .content > .img-box {
@@ -91,7 +98,7 @@ ul {
   flex-shrink: 0;
 }
 
-.sub > li > .user >span{
+.sub > li > .user > span {
   width: 70px;
   word-break: keep-all;
   text-overflow: ellipsis;

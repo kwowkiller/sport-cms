@@ -32,7 +32,7 @@ export class ListComponent extends Table<Bar> implements OnInit {
     super(http, message);
     this.listUrl = 'bar/sys/bar/list';
     this.form = this.fb.group({
-      remark: [null],
+      approveRemark: [null],
       approveStatus: [1]
     });
   }

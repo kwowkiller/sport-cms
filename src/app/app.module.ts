@@ -62,6 +62,7 @@ registerLocaleData(zh);
       },
       {path: 'login', component: LoginComponent},
       {path: 'video', component: VideoComponent},
+      {path: 'test', loadChildren: () => import('./pages/test/test.module').then(m => m.TestModule)},
     ]),
   ],
   providers: [

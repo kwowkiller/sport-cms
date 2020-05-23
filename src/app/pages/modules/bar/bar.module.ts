@@ -50,6 +50,8 @@ export class BarModule {
 export interface Bar {
   // 审核状态(0:待审核1:审核通过2:拒绝)
   approveStatus: number;
+  // 不通过原因
+  approveRemark?: string;
   // 球吧名称
   barName: string;
   // 球吧状态(0:开启1:关闭)

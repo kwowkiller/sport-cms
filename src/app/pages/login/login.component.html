@@ -43,6 +43,7 @@
               [src]="codeUrl"
               style="height: 35px"
               (click)="refreshCode()"
+              (error)="onCodeImageError()"
             />
           </ng-template>
         </nz-input-group>

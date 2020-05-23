@@ -16,7 +16,9 @@
           <app-bar-select [(model)]="search.barId"></app-bar-select>
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="吧主昵称">
-          <input nz-input>
+          <app-user-select
+            [(model)]="search.userId"
+          ></app-user-select>
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="创建时间">
           <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
@@ -103,11 +105,12 @@
     </nz-table>
   </nz-tab>
   <nz-tab
-    *ngIf="!!selected"
+    *ngIf="tabIndex==1"
     [nzTitle]="'贴子详情'"
   >
     <app-blog-detail
       [queryId]="selected?.id"
+      (deleteSuccess)="onSubmitSuccess()"
     ></app-blog-detail>
   </nz-tab>
 </nz-tabset>

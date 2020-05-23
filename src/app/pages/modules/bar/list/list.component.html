@@ -177,7 +177,7 @@
     </nz-radio-group>
     <label style="display: flex;margin-top: 12px">
       <span>备注：</span>
-      <textarea style="flex: 1;height: 100px" nz-input formControlName="remark"></textarea>
+      <textarea style="flex: 1;height: 100px" nz-input formControlName="approveRemark"></textarea>
     </label>
   </form>
 </nz-modal>
@@ -187,5 +187,5 @@
   (nzOnCancel)="modalRemark=false"
   [nzFooter]="null"
 >
-  <div>不通过原因：</div>
+  <div>不通过原因：{{selected?.approveRemark}}</div>
 </nz-modal>
