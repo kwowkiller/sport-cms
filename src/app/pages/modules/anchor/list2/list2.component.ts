@@ -4,6 +4,7 @@ import {Anchor} from '../anchor.module';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
 import * as moment from 'moment';
+import {Result} from '../../../../common/common.model';
 
 @Component({
   selector: 'app-anchor-list2',
@@ -40,9 +41,15 @@ export class List2Component extends Table<Anchor> implements OnInit {
   }
 
   updateItem(id: number) {
-    this.http.post(`live/sys/host/change`, {
-      id, sStatus: 1
+    this.http.post<Result>(`live/sys/host/change`, {
+      id, sStatus: 0
     }).subscribe(event => {
+      if (event.code === 200) {
+        this.message.success('解禁成功');
+        this.fetchList();
+      } else {
+        this.message.success('解禁失败：' + event.message);
+      }
     });
   }
 }

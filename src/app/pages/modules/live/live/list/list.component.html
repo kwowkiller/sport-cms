@@ -18,13 +18,13 @@
     >
       <div nz-row [nzGutter]="24">
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播标题">
-          <input nz-input>
+          <input nz-input [(ngModel)]="search.liveTitle">
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="主播昵称">
-          <input nz-input>
+          <input nz-input [(ngModel)]="search.username">
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播分类">
-          <nz-select nzPlaceHolder="请选择">
+          <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.hostType">
             <nz-option [nzValue]="0" nzLabel="足球"></nz-option>
             <nz-option [nzValue]="1" nzLabel="篮球"></nz-option>
             <nz-option [nzValue]="2" nzLabel="电竞"></nz-option>
@@ -156,6 +156,7 @@
 <app-live-form
   [(visiable)]="modalShow"
   (submitSuccess)="onSubmitSuccess()"
+  [queryId]="selected?.id"
 ></app-live-form>
 <app-live-data
   [(visiable)]="modalData"

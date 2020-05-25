@@ -45,7 +45,7 @@ export class List1Component extends Table<AnchorAudit> implements OnInit {
   }
 
   updateItem() {
-    this.http.put<Result>(`live/sys/host/apply/approve`, {
+    this.http.put<Result>(`live/sys/host/apply/approve/${this.selected.id}/${this.form.value.status}`, {
       id: this.selected.id,
       sStatus: this.form.value.status,
     }).pipe(
@@ -54,8 +54,9 @@ export class List1Component extends Table<AnchorAudit> implements OnInit {
         this.message.success('审核成功');
         this.selected = null;
         this.modalShow = false;
+        this.fetchList();
       } else {
-        this.message.error('审核失败');
+        this.message.error('审核失败:' + event.message);
       }
     });
   }

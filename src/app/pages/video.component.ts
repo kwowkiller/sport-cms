@@ -21,32 +21,31 @@ import {Component, OnInit} from '@angular/core';
     </div>
     <div>
       <h1>debug</h1>
-      {{info|json}}
     </div>
   `,
   styles: []
 })
 export class VideoComponent implements OnInit {
-  // src = 'http://zhibo2.hst778.com/anhui/anhui.m3u8';
-  // src = 'http://zhibo.qex713.com/fightsport/fightsport.m3u8';
-  src = 'https://vue5.oss-cn-beijing.aliyuncs.com/assets/videos/0.mp4';
+  src = 'http://zhibo2.hst778.com/anhui/anhui.m3u8';
+  // src = 'http://zhibo2.hst778.com/anhui1/anhui1.m3u8';
   info: any = {};
   states = [];
+  video: HTMLVideoElement;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    const video = document.getElementById('video') as HTMLVideoElement;
-    video.onplaying = () => {
+    this.video = document.getElementById('video') as HTMLVideoElement;
+    this.video.defaultMuted = true;
+    this.video.onplaying = () => {
       this.states.push('onplaying');
       // this.info = video.audioTracks;
     };
-    video.onerror = (event: Event | string, source?: string, lineno?: number, colno?: number, error?: Error) => {
+    this.video.onerror = (event: Event | string, source?: string, lineno?: number, colno?: number, error?: Error) => {
       this.states.push('onerror');
-      this.info = error;
     };
-    video.onabort = () => {
+    this.video.onabort = () => {
       this.states.push('onabort');
       // this.info = arguments;
     };

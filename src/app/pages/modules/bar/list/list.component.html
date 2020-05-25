@@ -33,7 +33,7 @@
       ></app-user-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="创建时间">
-      <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
+      <nz-range-picker [(ngModel)]="dateRange" style="width: 100%"></nz-range-picker>
     </nz-input-group>
   </div>
   <div nz-row [nzGutter]="24">
@@ -116,7 +116,7 @@
     <td *ngIf="status==2">
       <a (click)="modalUserShow=true;selected=item">吧主信息</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a (click)="modalRemark=true">审核信息</a>
+      <a (click)="modalRemark=true;selected=item">审核信息</a>
     </td>
   </tr>
   </tbody>
