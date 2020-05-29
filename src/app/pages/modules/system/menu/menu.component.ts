@@ -27,6 +27,8 @@ export class MenuComponent extends Table<Menu> implements OnInit {
   }
 
   onSubmitSuccess() {
+    this.message.success('保存成功');
+    this.fetchList();
   }
 
   onDeleteSingle(menuId: number) {

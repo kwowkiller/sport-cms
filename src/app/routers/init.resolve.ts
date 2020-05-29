@@ -47,7 +47,7 @@ export class InitResolve implements Resolve<any> {
       // 测试数据
       const temp: Menu[] = [
         {
-          id: 1,
+          id: 101,
           alwaysShow: true,
           children: [
             {
@@ -377,7 +377,7 @@ export class InitResolve implements Resolve<any> {
           path: 'information',
         },
         {
-          id: 16,
+          id: 1,
           alwaysShow: true,
           children: [
             {

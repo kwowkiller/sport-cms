@@ -51,6 +51,10 @@ export abstract class ModalForm<T> {
   // 提交前的额外处理
   abstract beforeSubmit();
 
+  // 保存失败
+  onFail(error: string) {
+  }
+
   // 提交表单
   submit() {
     this.beforeSubmit();
@@ -73,6 +77,7 @@ export abstract class ModalForm<T> {
         this.submitSuccess.emit();
       } else {
         // 失败
+        this.onFail(event.message);
       }
     });
   }

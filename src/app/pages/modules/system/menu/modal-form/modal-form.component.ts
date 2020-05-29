@@ -3,7 +3,7 @@ import {ModalForm} from '../../../../../frame/modal-form';
 import {Menu} from '../../system.module';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
-import {NzTreeNodeOptions} from 'ng-zorro-antd';
+import {NzMessageService, NzTreeNodeOptions} from 'ng-zorro-antd';
 import {Session} from '../../../../../common/session';
 import {Menu as UIMenu} from '../../../../../common/common.model';
 
@@ -15,7 +15,7 @@ import {Menu as UIMenu} from '../../../../../common/common.model';
 export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnChanges {
 
   get title() {
-    return '新增菜单';
+    return this.detail ? '编辑菜单' : '新增菜单';
   }
 
   treeData: NzTreeNodeOptions[] = [];
@@ -23,6 +23,7 @@ export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnCha
   constructor(
     protected http: HttpClient,
     private fb: FormBuilder,
+    private message: NzMessageService,
   ) {
     super(http);
     this.form = this.fb.group({
@@ -51,8 +52,31 @@ export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnCha
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (this.detail) {
+      this.submitUrl = 'admin/system/menu/update';
+      this.method = 'PUT';
+      this.form.addControl('menuId', this.fb.control(null));
+      this.form.setValue({
+        menuId: this.detail.menuId,
+        menuName: this.detail.menuName,
+        icon: this.detail.icon,
+        orderNum: this.detail.orderNum,
+        path: this.detail.path,
+        parentId: String(this.detail.parentId),
+      });
+    } else {
+      this.submitUrl = 'admin/system/menu/add';
+      this.method = 'POST';
+      this.form.removeControl('menuId');
+      this.form.reset();
+    }
   }
 
+
   beforeSubmit() {
+  }
+
+  onFail(error) {
+    this.message.error(error);
   }
 }

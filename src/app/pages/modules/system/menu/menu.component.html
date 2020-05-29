@@ -69,12 +69,17 @@
       [nzChecked]="setOfCheckedId.has(item.menuId)"
       (nzCheckedChange)="onItemChecked(item.menuId, $event)"
     ></td>
-    <td><i nz-icon [nzType]="item.icon" style="margin-right: 5px"></i>{{item.menuName}}</td>
+    <td><i
+      *ngIf="item.icon&&item.icon.length>0"
+      nz-icon
+      [nzType]="item.icon"
+      style="margin-right: 5px"
+    ></i>{{item.menuName}}</td>
     <td><a [routerLink]="'/main'+item.path">{{item.path}}</a></td>
     <td>parent</td>
     <td>{{item.orderNum}}</td>
     <td>
-      <a>编辑</a>
+      <a (click)="selected=item;modalShow=true;">编辑</a>
       <nz-divider nzType="vertical"></nz-divider>
       <a
         nz-popconfirm
@@ -87,5 +92,6 @@
 </nz-table>
 <app-menu-form
   [(visiable)]="modalShow"
+  [detail]="selected"
   (submitSuccess)="onSubmitSuccess()"
 ></app-menu-form>

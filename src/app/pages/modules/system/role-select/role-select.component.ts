@@ -4,6 +4,7 @@ import {Pageable} from '../../../../common/common.model';
 import {HttpClient} from '@angular/common/http';
 import {CustomInput} from '../../../../frame/custom-input';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-role-select',
@@ -21,6 +22,7 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
       (nzOnSearch)="onRoleSearch($event)"
       [(ngModel)]="model"
       (ngModelChange)="onModelChange($event)"
+      [nzLoading]="loading"
     >
       <nz-option
         *ngFor="let item of selectData"
@@ -33,6 +35,7 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 })
 export class RoleSelectComponent extends CustomInput implements OnInit {
   selectData: Role[] = [];
+  loading = false;
 
   constructor(private http: HttpClient) {
     super();
@@ -42,9 +45,12 @@ export class RoleSelectComponent extends CustomInput implements OnInit {
   }
 
   onRoleSearch(roleName: string) {
+    this.loading = true;
     this.http.get<Pageable<Role>>('admin/system/role/page', {
       params: {roleName}
-    }).subscribe(event => {
+    }).pipe(
+      finalize(() => this.loading = false)
+    ).subscribe(event => {
       this.selectData = event.data.records;
     });
   }

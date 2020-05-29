@@ -19,7 +19,7 @@ import {TagSelectComponent} from './tag-select/tag-select.component';
 import {ComponentsModule} from '../../../components/components.module';
 import {AudienceComponent} from './audience/audience.component';
 import {SetUserComponent} from './set-user/set-user.component';
-import { ModalDataComponent } from './live/modal-data/modal-data.component';
+import {ModalDataComponent} from './live/modal-data/modal-data.component';
 
 @NgModule({
   declarations: [TVList, LiveList, TVForm, LiveForm, TagSelectComponent, AudienceComponent, SetUserComponent, ModalDataComponent],
@@ -103,4 +103,5 @@ export interface Live2 {
   sex: number;
   sstatus: number;
   username: string;
+  toTime: string;
 }

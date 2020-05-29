@@ -115,7 +115,7 @@
         </td>
         <td>{{item.fromTime}}</td>
         <td *ngIf="status==1"><a (click)="selected=item;tabIndex=1">观看人数</a></td>
-        <td *ngIf="status==2">结束时间</td>
+        <td *ngIf="status==2">{{item.toTime}}</td>
         <td *ngIf="status==2">{{item.lengthOfTime}}</td>
         <td [ngSwitch]="item.sstatus">
           <span *ngSwitchCase="0">未开播</span>
