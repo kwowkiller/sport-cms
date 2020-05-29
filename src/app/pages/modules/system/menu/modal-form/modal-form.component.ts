@@ -72,7 +72,6 @@ export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnCha
     }
   }
 
-
   beforeSubmit() {
   }
 

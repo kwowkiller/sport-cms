@@ -3,18 +3,21 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Menu, User} from '../common/common.model';
 import {Session} from '../common/session';
+import {NzMessageService} from 'ng-zorro-antd';
 
 /**
  * 获取用户信息 权限 菜单等
  */
 @Injectable()
 export class InitResolve implements Resolve<any> {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private message: NzMessageService) {
   }
 
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    let messageId: string = null;
     // 登录信息
     if (!Session.user) {
+      messageId = this.message.loading('加载用户信息').messageId;
       const loginInfo = await this.http.get<{
         principal: User,
       }>('auth/user').toPromise();
@@ -44,6 +47,9 @@ export class InitResolve implements Resolve<any> {
           };
         });
       };
+      if (messageId != null) {
+        this.message.remove(messageId);
+      }
       // 测试数据
       const temp: Menu[] = [
         {
