@@ -1,0 +1,64 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="12" class="actions">
+      <button
+        type="button"
+        nz-button
+        (click)="selected=null;modalShow=true"
+      >新增分类
+      </button>
+      <button
+        type="button"
+        nz-button
+        nzType="danger"
+        [disabled]="setOfCheckedId.size==0"
+        (click)="onDelete()"
+      >删除
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  #localTable
+  [nzData]="list"
+  [nzFrontPagination]="true"
+  [nzLoading]="loading"
+  [nzTotal]="list.length"
+  [nzShowTotal]="totalTemplate"
+>
+  <thead>
+  <tr>
+    <th
+      [nzChecked]="allChecked"
+      [nzIndeterminate]="false"
+      (nzCheckedChange)="onAllChecked($event)"
+      nzWidth="100px"
+    ></th>
+    <th>资讯分类</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of localTable.data">
+    <td
+      [nzChecked]="setOfCheckedId.has(item.id)"
+      (nzCheckedChange)="onItemChecked(item.id, $event)"
+    ></td>
+    <td>{{format(item).newsTypeName}}</td>
+    <td>
+      <a (click)="modalShow=true;selected=item">编辑</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<app-news-category-form
+  [(visiable)]="modalShow"
+  [detail]="selected"
+  (submitSuccess)="onSubmitSuccess()"
+></app-news-category-form>

@@ -16,17 +16,20 @@ import {RouterModule} from '@angular/router';
 import {ModalFormComponent} from './modal-form/modal-form.component';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {ComponentsModule} from '../../../components/components.module';
+import { CategoryComponent } from './category/category.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 
 @NgModule({
-  declarations: [ListComponent, ModalFormComponent],
+  declarations: [ListComponent, ModalFormComponent, CategoryComponent, CategoryFormComponent],
   imports: [
     CommonModule,
     FormsModule,
     NzDividerModule,
     NzTableModule,
     RouterModule.forChild([
-      {path: '', component: ListComponent}
+      {path: '', component: ListComponent},
+      {path: 'category', component: CategoryComponent},
     ]),
     NzGridModule,
     NzInputModule,
