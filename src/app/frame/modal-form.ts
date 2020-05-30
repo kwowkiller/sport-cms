@@ -63,6 +63,11 @@ export abstract class ModalForm<T> {
       ...this.form.value
     };
     for (const key in body) {
+      if (body.hasOwnProperty(key) && body[key] === null) {
+        delete body[key];
+      }
+    }
+    for (const key in body) {
       if (body.hasOwnProperty(key) && body[key] instanceof Date) {
         body[key] = moment(body[key]).format(this.dateFormat);
       }

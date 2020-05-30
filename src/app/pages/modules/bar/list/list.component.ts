@@ -85,4 +85,20 @@ export class ListComponent extends Table<Bar> implements OnInit {
       }
     });
   }
+
+  // 设置推荐
+  updateItemRecommend(item: Bar) {
+    this.updating = true;
+    this.http.get<Result>(`bar/sys/bar/recommend/${item.id}/${item.isRecommend === 0 ? 1 : 0}`, {
+    }).pipe(
+      finalize(() => this.updating = false)
+    ).subscribe(event => {
+      if (event.code === 200) {
+        this.message.success('设置成功');
+        this.fetchList();
+      } else {
+        this.message.error('设置失败');
+      }
+    });
+  }
 }

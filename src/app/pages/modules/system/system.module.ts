@@ -12,13 +12,14 @@ import {
   NzInputModule,
   NzModalModule, NzPopconfirmModule,
   NzSelectModule,
-  NzTableModule, NzTreeSelectModule
+  NzTableModule, NzTreeModule, NzTreeSelectModule
 } from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ModalFormComponent as RoleForm} from './role/modal-form/modal-form.component';
 import {ModalFormComponent as AdminForm} from './admin/modal-form/modal-form.component';
 import {ModalFormComponent as MenuForm} from './menu/modal-form/modal-form.component';
 import {RoleSelectComponent} from './role-select/role-select.component';
+import { PermissionComponent } from './role/permission/permission.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {RoleSelectComponent} from './role-select/role-select.component';
     AdminForm,
     MenuForm,
     RoleSelectComponent,
+    PermissionComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +52,7 @@ import {RoleSelectComponent} from './role-select/role-select.component';
     NzPopconfirmModule,
     NzIconModule,
     NzTreeSelectModule,
+    NzTreeModule,
   ]
 })
 export class SystemModule {

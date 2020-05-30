@@ -1,0 +1,16 @@
+<nz-modal
+  nzTitle="设置权限"
+  [nzVisible]="visiable"
+  (nzOnCancel)="visiableChange.emit(false)"
+  (nzOnOk)="submit()"
+  [nzOkLoading]="submiting"
+>
+  <nz-tree
+    #nzTreeComponent
+    [nzData]="treeData"
+    nzCheckable
+    nzMultiple
+  >
+  </nz-tree>
+</nz-modal>
+

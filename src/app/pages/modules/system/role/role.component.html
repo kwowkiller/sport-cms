@@ -8,7 +8,7 @@
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="角色名">
       <input nz-input [(ngModel)]="search.roleName">
     </nz-input-group>
-    <div class="actions" nz-col [nzSpan]="6">
+    <div class="actions" nz-col [nzSpan]="12">
       <button
         nz-button
         type="button"
@@ -63,7 +63,7 @@
         nzPopconfirmPlacement="top"
       >删除</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>配置权限</a>
+      <a (click)="selected=item;modalTreeShow=true;">配置权限</a>
     </td>
   </tr>
   </tbody>
@@ -72,3 +72,7 @@
   [(visiable)]="modalShow"
   (submitSuccess)="onSubmitSuccess()"
 ></app-role-form>
+<app-permission
+  [(visiable)]="modalTreeShow"
+  [queryId]="selected?.roleId"
+></app-permission>

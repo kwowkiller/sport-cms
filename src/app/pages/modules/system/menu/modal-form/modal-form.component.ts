@@ -62,7 +62,7 @@ export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnCha
         icon: this.detail.icon,
         orderNum: this.detail.orderNum,
         path: this.detail.path,
-        parentId: String(this.detail.parentId),
+        parentId: this.detail.parentId == null ? null : String(this.detail.parentId),
       });
     } else {
       this.submitUrl = 'admin/system/menu/add';

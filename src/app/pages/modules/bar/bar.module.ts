@@ -56,6 +56,8 @@ export interface Bar {
   barName: string;
   // 球吧状态(0:开启1:关闭)
   barStatus: number;
+  // 帖子是否推荐(0:否1:是)
+  isRecommend: number;
   // 球吧分类(0:足球1:篮球2:电竞3:全部)
   barType: number;
   createTime: string;

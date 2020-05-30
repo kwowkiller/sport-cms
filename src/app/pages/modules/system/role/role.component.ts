@@ -10,6 +10,7 @@ import {NzMessageService} from 'ng-zorro-antd';
   styles: []
 })
 export class RoleComponent extends Table<Role> implements OnInit {
+  modalTreeShow = true;
 
   constructor(
     protected http: HttpClient,
