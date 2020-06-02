@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Menu} from '../../../common/common.model';
+import {UIMenu} from '../../../common/common.model';
 
 @Component({
   selector: 'app-side-menus',
@@ -9,10 +9,10 @@ export class SideMenusComponent implements OnInit {
   @Input()
   isCollapsed: boolean;
   @Input()
-  menus: Menu[];
+  menus: UIMenu[];
 
   format(arr: any) {
-    return arr as Menu[];
+    return arr as UIMenu[];
   }
 
   constructor() {
@@ -20,9 +20,9 @@ export class SideMenusComponent implements OnInit {
 
   ngOnInit(): void {
     if (location.pathname !== '/main') {
-      const flatArr: Menu[] = [];
+      const flatArr: UIMenu[] = [];
       // 展开菜单
-      const foo = (arr: Menu[]): void => {
+      const foo = (arr: UIMenu[]): void => {
         arr.forEach(item => {
           flatArr.push(item);
           if (item.children) {

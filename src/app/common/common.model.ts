@@ -39,10 +39,10 @@ export interface User {
 }
 
 // 菜单项
-export interface Menu {
+export interface UIMenu {
   id: number;
   alwaysShow: boolean;
-  children?: Menu[];
+  children?: UIMenu[];
   component: string;
   hidden: boolean;
   meta: {

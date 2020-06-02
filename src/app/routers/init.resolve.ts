@@ -1,7 +1,7 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Menu, User} from '../common/common.model';
+import {UIMenu, User} from '../common/common.model';
 import {Session} from '../common/session';
 import {NzMessageService} from 'ng-zorro-antd';
 
@@ -29,10 +29,10 @@ export class InitResolve implements Resolve<any> {
         code: number,
         data: {
           permissions: string[],
-          routes: Menu[]
+          routes: UIMenu[]
         },
       }>(`admin/system/menu/${Session.user.username}`).toPromise();
-      const foo = (arr: Menu[], level: number): Menu[] => {
+      const foo = (arr: UIMenu[], level: number): UIMenu[] => {
         return arr.map(item => {
           if (item.children) {
             return {
@@ -51,7 +51,7 @@ export class InitResolve implements Resolve<any> {
         this.message.remove(messageId);
       }
       // 测试数据
-      const temp: Menu[] = [
+      const temp: UIMenu[] = [
         {
           id: 101,
           alwaysShow: true,

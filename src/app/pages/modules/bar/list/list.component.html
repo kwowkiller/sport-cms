@@ -108,15 +108,25 @@
     </td>
     <td>{{item.createTime}}</td>
     <td>{{item.username}}</td>
-    <td *ngIf="status==0">
-      <a (click)="modalUserShow=true;selected=item">吧主信息</a>
+    <td>
+      <ng-container *ngIf="status==0">
+        <a (click)="modalUserShow=true;selected=item">吧主信息</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="modalApproveShow=true;selected=item">审核</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="selected=item;modalShow=true;">编辑</a>
+      </ng-container>
+      <ng-container *ngIf="status==2">
+        <a (click)="modalUserShow=true;selected=item">吧主信息</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="modalRemark=true;selected=item">审核信息</a>
+      </ng-container>
       <nz-divider nzType="vertical"></nz-divider>
-      <a (click)="modalApproveShow=true;selected=item">审核</a>
-    </td>
-    <td *ngIf="status==2">
-      <a (click)="modalUserShow=true;selected=item">吧主信息</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a (click)="modalRemark=true;selected=item">审核信息</a>
+      <a
+        nz-popconfirm
+        nzPopconfirmTitle="确认删除？"
+        (nzOnConfirm)="onDeleteSingle(item.id)"
+      >删除</a>
     </td>
   </tr>
   </tbody>
@@ -156,6 +166,16 @@
         [nzPopconfirmTitle]="item.barStatus == 0 ? '关闭球吧' : '开启球吧'"
         (nzOnConfirm)="updateItemStatus(item)"
       >{{item.barStatus == 0 ? '关闭球吧' : '开启球吧'}}</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a (click)="selected=item;modalShow=true;">编辑</a>
+      <ng-container *ngIf="item.barStatus==1">
+        <nz-divider nzType="vertical"></nz-divider>
+        <a
+          nz-popconfirm
+          nzPopconfirmTitle="确认删除？"
+          (nzOnConfirm)="onDeleteSingle(item.id)"
+        >删除</a>
+      </ng-container>
     </td>
   </tr>
   </tbody>
@@ -163,6 +183,7 @@
 <app-bar-form
   [(visiable)]="modalShow"
   (submitSuccess)="onSubmitSuccess()"
+  [detail]="selected"
 ></app-bar-form>
 <app-bar-user
   [queryId]="selected?.id"

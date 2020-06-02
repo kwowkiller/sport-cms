@@ -1,4 +1,4 @@
-import {Menu, User} from './common.model';
+import {UIMenu, User} from './common.model';
 import {environment} from '../../environments/environment';
 
 export class Session {
@@ -32,7 +32,7 @@ export class Session {
     sessionStorage.setItem('menus', JSON.stringify(menus));
   }
 
-  static get menus(): Menu[] {
+  static get menus(): UIMenu[] {
     return JSON.parse(sessionStorage.getItem('menus'));
   }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NzContextMenuService, NzDropdownMenuComponent} from 'ng-zorro-antd';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {Menu} from '../../common/common.model';
+import {UIMenu} from '../../common/common.model';
 import {Session} from '../../common/session';
 import {filter, map} from 'rxjs/operators';
 import {IndexComponent} from '../index/index.component';
@@ -17,7 +17,7 @@ export class LayoutComponent implements OnInit {
   isCollapsed = false;
   menus = Session.menus;
   // 打开的菜单列表
-  openedMenus: Menu[] = [];
+  openedMenus: UIMenu[] = [];
 
   constructor(
     private router: Router,
@@ -26,9 +26,9 @@ export class LayoutComponent implements OnInit {
   ) {
   }
 
-  private findMenuByPath(): Menu {
-    let find: Menu = null;
-    const foo = (arr: Menu[]) => {
+  private findMenuByPath(): UIMenu {
+    let find: UIMenu = null;
+    const foo = (arr: UIMenu[]) => {
       arr.forEach(item => {
         if (item.children) {
           foo(item.children);
@@ -84,7 +84,7 @@ export class LayoutComponent implements OnInit {
   }
 
   // 关闭页面
-  closePage(menu: Menu) {
+  closePage(menu: UIMenu) {
     // 如果清空 回到首页
     if (this.openedMenus.length === 1) {
       this.openedMenus = [];
@@ -111,7 +111,7 @@ export class LayoutComponent implements OnInit {
   }
 
   // 关闭其他页面
-  closeOtherPage(menu: Menu) {
+  closeOtherPage(menu: UIMenu) {
     this.router.navigateByUrl('/main/' + menu.path).then(() => {
       this.openedMenus = [menu];
     });

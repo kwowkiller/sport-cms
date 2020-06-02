@@ -7,9 +7,11 @@
 >
   <nz-tree
     #nzTreeComponent
-    [nzData]="treeData"
+    [nzData]="permissionService.menus"
     nzCheckable
-    nzMultiple
+    nzExpandAll
+    [nzCheckedKeys]="checkedKeys"
+    nzCheckStrictly
   >
   </nz-tree>
 </nz-modal>

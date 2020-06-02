@@ -3,9 +3,8 @@ import {ModalForm} from '../../../../../frame/modal-form';
 import {Menu} from '../../system.module';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
-import {NzMessageService, NzTreeNodeOptions} from 'ng-zorro-antd';
-import {Session} from '../../../../../common/session';
-import {Menu as UIMenu} from '../../../../../common/common.model';
+import {NzMessageService} from 'ng-zorro-antd';
+import {PermissionService} from '../../../../../services/permission.service';
 
 @Component({
   selector: 'app-menu-form',
@@ -18,14 +17,14 @@ export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnCha
     return this.detail ? '编辑菜单' : '新增菜单';
   }
 
-  treeData: NzTreeNodeOptions[] = [];
-
   constructor(
     protected http: HttpClient,
     private fb: FormBuilder,
     private message: NzMessageService,
+    public permissionService: PermissionService,
   ) {
     super(http);
+    this.permissionService.fetchMenus();
     this.form = this.fb.group({
       menuName: [null, [Validators.required]],
       icon: [null],
@@ -38,18 +37,6 @@ export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnCha
   }
 
   ngOnInit(): void {
-    const foo = (menus: UIMenu[]): NzTreeNodeOptions[] => {
-      if (!menus || menus.length === 0) {
-        return;
-      }
-      return menus.map(m => ({
-        title: m.name,
-        key: String(m.id),
-        isLeaf: !m.children || m.children.length === 0,
-        children: foo(m.children),
-      }));
-    };
-    this.treeData = foo(Session.menus);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -64,7 +51,7 @@ export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnCha
         orderNum: this.detail.orderNum,
         path: this.detail.path,
         parentId: this.detail.parentId == null ? null : String(this.detail.parentId),
-        type: this.detail.type,
+        type: Number(this.detail.type),
       });
     } else {
       this.submitUrl = 'admin/system/menu/add';

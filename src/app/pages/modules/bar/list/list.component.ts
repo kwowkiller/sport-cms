@@ -89,8 +89,7 @@ export class ListComponent extends Table<Bar> implements OnInit {
   // 设置推荐
   updateItemRecommend(item: Bar) {
     this.updating = true;
-    this.http.get<Result>(`bar/sys/bar/recommend/${item.id}/${item.isRecommend === 0 ? 1 : 0}`, {
-    }).pipe(
+    this.http.get<Result>(`bar/sys/bar/recommend/${item.id}/${item.isRecommend === 0 ? 1 : 0}`, {}).pipe(
       finalize(() => this.updating = false)
     ).subscribe(event => {
       if (event.code === 200) {
@@ -100,5 +99,10 @@ export class ListComponent extends Table<Bar> implements OnInit {
         this.message.error('设置失败');
       }
     });
+  }
+
+  onDeleteSingle(id: number) {
+    this.deleteUrl = `bar/sys/bar/delete/${id}`;
+    this.deleteItem();
   }
 }
