@@ -4,6 +4,7 @@ import {Menu, Role} from '../../system.module';
 import {HttpClient} from '@angular/common/http';
 import {NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions} from 'ng-zorro-antd';
 import {Pageable} from '../../../../../common/common.model';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-permission',
@@ -15,12 +16,13 @@ export class PermissionComponent extends ModalForm<Role> implements OnInit {
   @ViewChild('nzTreeComponent', {static: false})
   nzTreeComponent: NzTreeComponent;
 
-  constructor(protected http: HttpClient) {
+  constructor(protected http: HttpClient, private fb: FormBuilder) {
     super(http);
+    this.submitUrl = 'admin/system/role/menu';
   }
 
   ngOnInit(): void {
-    this.queryId = 5;
+    this.queryId = 11;
     this.http.get(`admin/system/role/role/menu/${this.queryId}`).subscribe(event => {
     });
     // 获取角色权限
@@ -56,5 +58,9 @@ export class PermissionComponent extends ModalForm<Role> implements OnInit {
   }
 
   beforeSubmit() {
+    this.form = this.fb.group({
+      roleId: this.queryId,
+      menuIds: this.getSelectMenusId().join(','),
+    });
   }
 }

@@ -10,7 +10,7 @@ import {
   NzFormModule,
   NzGridModule, NzIconModule,
   NzInputModule,
-  NzModalModule, NzPopconfirmModule,
+  NzModalModule, NzPopconfirmModule, NzRadioModule,
   NzSelectModule,
   NzTableModule, NzTreeModule, NzTreeSelectModule
 } from 'ng-zorro-antd';
@@ -19,7 +19,7 @@ import {ModalFormComponent as RoleForm} from './role/modal-form/modal-form.compo
 import {ModalFormComponent as AdminForm} from './admin/modal-form/modal-form.component';
 import {ModalFormComponent as MenuForm} from './menu/modal-form/modal-form.component';
 import {RoleSelectComponent} from './role-select/role-select.component';
-import { PermissionComponent } from './role/permission/permission.component';
+import {PermissionComponent} from './role/permission/permission.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,10 @@ import { PermissionComponent } from './role/permission/permission.component';
     CommonModule,
     RouterModule.forChild([
       {path: 'menu', component: MenuComponent},
-      {path: 'admin', component: AdminComponent},
+      {
+        path: 'admin',
+        component: AdminComponent,
+      },
       {path: 'role', component: RoleComponent},
     ]),
     NzTableModule,
@@ -53,6 +56,9 @@ import { PermissionComponent } from './role/permission/permission.component';
     NzIconModule,
     NzTreeSelectModule,
     NzTreeModule,
+    NzRadioModule,
+  ],
+  providers: [
   ]
 })
 export class SystemModule {

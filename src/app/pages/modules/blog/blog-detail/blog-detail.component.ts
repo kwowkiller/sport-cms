@@ -97,6 +97,7 @@ interface Posting {
   recommendTime: string;
   userId: number;
   username: string;
+  isDel: number;
 }
 
 interface Comment {

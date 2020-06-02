@@ -32,6 +32,7 @@ export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnCha
       orderNum: [0, [Validators.required]],
       path: [null],
       parentId: [null],
+      type: [0],
     });
     this.submitUrl = 'admin/system/menu/add';
   }
@@ -63,12 +64,15 @@ export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnCha
         orderNum: this.detail.orderNum,
         path: this.detail.path,
         parentId: this.detail.parentId == null ? null : String(this.detail.parentId),
+        type: this.detail.type,
       });
     } else {
       this.submitUrl = 'admin/system/menu/add';
       this.method = 'POST';
       this.form.removeControl('menuId');
-      this.form.reset();
+      this.form.reset({
+        type: 0,
+      }, {onlySelf: true});
     }
   }
 

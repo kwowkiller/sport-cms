@@ -108,7 +108,7 @@ ul {
 
 .sub > li > .content {
   flex: 1;
-  padding: 0 24px 0 12px;
+  padding: 0.5em 24px 0 12px;
 }
 
 .sub > li > .action span {

@@ -10,7 +10,7 @@ import {NzMessageService} from 'ng-zorro-antd';
   styles: []
 })
 export class RoleComponent extends Table<Role> implements OnInit {
-  modalTreeShow = true;
+  modalTreeShow = false;
 
   constructor(
     protected http: HttpClient,
@@ -29,6 +29,7 @@ export class RoleComponent extends Table<Role> implements OnInit {
   }
 
   onSubmitSuccess() {
+    this.message.success('操作成功');
     this.fetchList('none');
   }
 

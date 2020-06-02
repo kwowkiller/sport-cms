@@ -14,11 +14,13 @@
           <span>{{detail?.barName}}</span>
           <span>{{detail?.createTime}}</span>
           <a
+            *ngIf="detail?.isDel==0"
             nz-popconfirm
             nzPopconfirmTitle="确认删除该贴?"
             (nzOnConfirm)="onDelete(detail?.id)"
-            style="color: red;margin-right: 0"
+            style="color: #ffffff;margin-right: 0"
           >删除</a>
+          <a *ngIf="detail?.isDel==1" style="color:red;">已删除</a>
         </div>
       </div>
     </li>
@@ -33,24 +35,28 @@
           <span>{{item.floorNum}}楼</span>
           <span>{{item.createTime}}</span>
           <a
+            *ngIf="item.isDel==0"
             nz-popconfirm
             nzPopconfirmTitle="确认删除该层回复?"
             (nzOnConfirm)="onDeleteComment(item.id)"
           >删除</a>
+          <a *ngIf="item.isDel==1" style="color:red;">已删除</a>
         </div>
         <ul class="sub" *ngIf="item.subCount>0">
           <li *ngFor="let sub of getSubList(item.id)">
-            <div class="user"><img [src]="sub.headerImg" alt="">{{sub.username}}</div>
+            <div class="user"><img [src]="sub.headerImg" alt="">{{sub.username}}:</div>
             <div class="content">
               {{sub.context}}
             </div>
             <div class="action">
               <span>{{sub.createTime}}</span>
               <a
+                *ngIf="sub.isDel==0"
                 nz-popconfirm
                 nzPopconfirmTitle="确认删除该层回复?"
                 (nzOnConfirm)="onDeleteComment(sub.id)"
               >删除</a>
+              <a *ngIf="sub.isDel==1" style="color:red;">已删除</a>
             </div>
           </li>
         </ul>

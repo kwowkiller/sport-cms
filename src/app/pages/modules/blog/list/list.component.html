@@ -75,6 +75,7 @@
         <th>分享数</th>
         <th>评论数</th>
         <th>点赞数</th>
+        <th>删除状态</th>
         <th>操作</th>
       </tr>
       </thead>
@@ -91,6 +92,7 @@
         <td>{{item.shareCount}}</td>
         <td>{{item.commentCount}}</td>
         <td>{{item.likeCount}}</td>
+        <td>{{item.isDel == 0 ? '正常' : '已删除'}}</td>
         <td>
           <a (click)="selected=item;tabIndex=1">贴子详情</a>
           <nz-divider nzType="vertical"></nz-divider>

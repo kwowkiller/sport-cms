@@ -25,7 +25,7 @@
         <app-role-select formControlName="roleId"></app-role-select>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
+    <nz-form-item *ngIf="detail==null">
       <nz-form-label [nzSm]="4" nzRequired>账号密码</nz-form-label>
       <nz-form-control [nzSm]="17">
         <input nz-input type="password" formControlName="password"/>

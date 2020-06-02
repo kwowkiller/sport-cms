@@ -28,6 +28,8 @@ export class AdminComponent extends Table<Admin> implements OnInit {
   }
 
   onSubmitSuccess() {
+    this.message.success('操作成功');
+    this.fetchList();
   }
 
   onDeleteSingle(userId: number) {

@@ -17,9 +17,6 @@ import {finalize} from 'rxjs/operators';
   ],
   template: `
     <nz-select
-      nzShowSearch
-      nzServerSearch
-      (nzOnSearch)="onRoleSearch($event)"
       [(ngModel)]="model"
       (ngModelChange)="onModelChange($event)"
       [nzLoading]="loading"
@@ -42,12 +39,9 @@ export class RoleSelectComponent extends CustomInput implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  onRoleSearch(roleName: string) {
     this.loading = true;
     this.http.get<Pageable<Role>>('admin/system/role/page', {
-      params: {roleName}
+      params: {pageNumber: '1000'}
     }).pipe(
       finalize(() => this.loading = false)
     ).subscribe(event => {
