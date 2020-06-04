@@ -123,18 +123,23 @@
         <td>
           <ng-container *ngIf="item.authenStatus!=0">
             <a (click)="selected=item;modalShow=true">认证信息</a>
-            <nz-divider nzType="vertical"></nz-divider>
           </ng-container>
-          <a
-            *ngIf="item.userStatus!=1"
-            (click)="modalStatusShow=true;selected=item"
-          >禁言</a>
-          <a
-            *ngIf="item.userStatus==1"
-            nz-popconfirm
-            nzPopconfirmTitle="确认解除禁言该用户吗？"
-            (nzOnConfirm)="unbannedUser(item.id)"
-          >解除禁言</a>
+          <ng-container *appAuthority="'banned'">
+            <nz-divider nzType="vertical"></nz-divider>
+            <a
+              *ngIf="item.userStatus!=1"
+              (click)="modalStatusShow=true;selected=item"
+            >禁言</a>
+          </ng-container>
+          <ng-container *appAuthority="'no-banned'">
+            <nz-divider nzType="vertical"></nz-divider>
+            <a
+              *ngIf="item.userStatus==1"
+              nz-popconfirm
+              nzPopconfirmTitle="确认解除禁言该用户吗？"
+              (nzOnConfirm)="unbannedUser(item.id)"
+            >解除禁言</a>
+          </ng-container>
         </td>
       </tr>
       </tbody>

@@ -15,6 +15,7 @@ import {
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FormComponent} from './form/form.component';
 import {ComponentsModule} from '../../../components/components.module';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {ComponentsModule} from '../../../components/components.module';
     ComponentsModule,
     NzPopconfirmModule,
     NzDividerModule,
+    DirectiveModule,
   ]
 })
 export class BannerModule {

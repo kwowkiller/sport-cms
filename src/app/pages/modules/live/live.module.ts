@@ -20,6 +20,7 @@ import {ComponentsModule} from '../../../components/components.module';
 import {AudienceComponent} from './audience/audience.component';
 import {SetUserComponent} from './set-user/set-user.component';
 import {ModalDataComponent} from './live/modal-data/modal-data.component';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 @NgModule({
   declarations: [TVList, LiveList, TVForm, LiveForm, TagSelectComponent, AudienceComponent, SetUserComponent, ModalDataComponent],
@@ -45,6 +46,7 @@ import {ModalDataComponent} from './live/modal-data/modal-data.component';
     NzPopconfirmModule,
     NzTabsModule,
     NzRadioModule,
+    DirectiveModule,
   ]
 })
 export class LiveModule {

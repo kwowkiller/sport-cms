@@ -15,6 +15,7 @@ import {
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComponentsModule} from '../../../components/components.module';
 import {BlogDetailComponent} from './blog-detail/blog-detail.component';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {BlogDetailComponent} from './blog-detail/blog-detail.component';
     NzPopconfirmModule,
     NzPaginationModule,
     NzSpinModule,
+    DirectiveModule,
   ]
 })
 export class BlogModule {

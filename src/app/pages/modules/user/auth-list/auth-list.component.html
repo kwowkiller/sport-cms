@@ -90,7 +90,10 @@
       <ng-container *ngSwitchCase="0">
         <a (click)="selected=item;modalDetailShow=true">认证信息</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="selected=item;modalActionShow=true">审核</a>
+        <a
+          *appAuthority="'examine'"
+          (click)="selected=item;modalActionShow=true"
+        >审核</a>
       </ng-container>
       <ng-container *ngSwitchCase="1">
         <a (click)="selected=item;modalDetailShow=true">认证信息</a>

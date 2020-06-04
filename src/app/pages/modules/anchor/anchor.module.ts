@@ -18,6 +18,7 @@ import {AuthInfoComponent} from './auth-info/auth-info.component';
 import {ModalActionComponent} from './modal-action/modal-action.component';
 import { ModalFormComponent } from './modal-form/modal-form.component';
 import {ComponentsModule} from '../../../components/components.module';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 @NgModule({
   declarations: [List1Component, List2Component, ModalDataComponent, AuthInfoComponent, ModalActionComponent, ModalFormComponent],
@@ -43,6 +44,7 @@ import {ComponentsModule} from '../../../components/components.module';
     NzSpinModule,
     ComponentsModule,
     NzPopconfirmModule,
+    DirectiveModule,
   ]
 })
 export class AnchorModule {

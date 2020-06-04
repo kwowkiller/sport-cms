@@ -19,6 +19,7 @@ import {FormComponent as WordForm} from './word/form.component';
 import {ListComponent as TagsList} from './tags/list.component';
 import {ComponentsModule} from '../../../components/components.module';
 import {FormComponent as TagForm} from './tags/form.component';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 @NgModule({
   declarations: [WordList, HelpList, HelpForm, WordForm, TagsList, TagForm],
@@ -43,6 +44,7 @@ import {FormComponent as TagForm} from './tags/form.component';
     ComponentsModule,
     NzToolTipModule,
     NzUploadModule,
+    DirectiveModule,
   ]
 })
 export class OtherModule {

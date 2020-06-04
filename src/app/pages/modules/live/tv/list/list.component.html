@@ -37,12 +37,14 @@
         </nz-input-group>
         <div nz-col [nzSpan]="6" class="actions">
           <button
+            *appAuthority="'insert'"
             type="button"
             nz-button
             (click)="selected=null;modalShow=true"
-          >新增直播
+          >新增TV
           </button>
           <button
+            *appAuthority="'delete'"
             type="button"
             nz-button
             nzType="danger"
@@ -141,10 +143,14 @@
           <span *ngSwitchCase="2">已结束</span>
         </td>
         <td [ngSwitch]="item.liveStatus">
-          <a (click)="modalShow=true;selected=item;">编辑</a>
+          <a
+            *appAuthority="'edit'"
+            (click)="modalShow=true;selected=item;"
+          >编辑</a>
           <nz-divider nzType="vertical"></nz-divider>
           <ng-container *ngSwitchCase="0">
             <a
+              *appAuthority="'start'"
               nz-popconfirm
               nzPopconfirmTitle="确认开播?"
               (nzOnConfirm)="updateStatus(item.id,1)"
@@ -152,6 +158,7 @@
           </ng-container>
           <ng-container *ngSwitchCase="1">
             <a
+              *appAuthority="'end'"
               nz-popconfirm
               nzPopconfirmTitle="确认下播?"
               (nzOnConfirm)="updateStatus(item.id,2)"
@@ -159,6 +166,7 @@
           </ng-container>
           <ng-container *ngSwitchCase="2">
             <a
+              *appAuthority="'restart'"
               nz-popconfirm
               nzPopconfirmTitle="重新开播?"
               (nzOnConfirm)="updateStatus(item.id,1)"

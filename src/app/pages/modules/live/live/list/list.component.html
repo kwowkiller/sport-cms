@@ -37,12 +37,14 @@
       <div nz-row [nzGutter]="24">
         <div nz-col [nzSpan]="6" class="actions">
           <button
+            *appAuthority="'insert'"
             type="button"
             nz-button
             (click)="selected=null;modalShow=true"
           >新增直播
           </button>
           <button
+            *appAuthority="'delete'"
             type="button"
             nz-button
             nzType="danger"
@@ -124,10 +126,15 @@
         </td>
         <td [ngSwitch]="item.sstatus">
           <ng-container *ngSwitchCase="0">
-            <a (click)="modalShow=true;selected=item;">编辑</a>
+            <a
+              *appAuthority="'edit'"
+              (click)="modalShow=true;selected=item;"
+            >编辑</a>
           </ng-container>
           <ng-container *ngSwitchCase="1">
-            <a>下播</a>
+            <a
+              *appAuthority="'end'"
+            >下播</a>
             <!--<nz-divider nzType="vertical"></nz-divider>
             <a>弹幕填充</a>-->
           </ng-container>

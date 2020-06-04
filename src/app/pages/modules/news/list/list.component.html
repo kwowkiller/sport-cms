@@ -16,12 +16,14 @@
     </nz-input-group>
     <div nz-col [nzSpan]="6" class="actions">
       <button
+        *appAuthority="'insert'"
         type="button"
         nz-button
         (click)="modalShow=true;selected=null"
       >创建资讯
       </button>
       <button
+        *appAuthority="'delete'"
         type="button"
         nz-button
         nzType="danger"
@@ -92,21 +94,28 @@
       <span *ngSwitchCase="0">已下架</span>
     </td>
     <td>
-      <a (click)="selected=item;modalShow=true">编辑</a>
-      <nz-divider nzType="vertical"></nz-divider>
       <a
-        nz-popconfirm
-        [nzPopconfirmTitle]="item.publishStatus!=1?'确认上架？':'确认下架？'"
-        (nzOnConfirm)="updateItem(item.id)"
-        nzPopconfirmPlacement="top"
-      >{{item.publishStatus != 1 ? '上架' : '下架'}}</a>
-      <ng-container *ngIf="item.publishStatus==1">
+        *appAuthority="'edit'"
+        (click)="selected=item;modalShow=true"
+      >编辑</a>
+      <ng-container *appAuthority="'open'">
         <nz-divider nzType="vertical"></nz-divider>
         <a
           nz-popconfirm
-          [nzPopconfirmTitle]="item.isRecommend === 0 ? '设为推荐？' : '取消推荐？'"
-          (nzOnConfirm)="updateItemRecommend(item)"
-        >{{item.isRecommend === 0 ? '设为推荐' : '取消推荐'}}</a>
+          [nzPopconfirmTitle]="item.publishStatus!=1?'确认上架？':'确认下架？'"
+          (nzOnConfirm)="updateItem(item.id)"
+          nzPopconfirmPlacement="top"
+        >{{item.publishStatus != 1 ? '上架' : '下架'}}</a>
+      </ng-container>
+      <ng-container *appAuthority="'recommend'">
+        <ng-container *ngIf="item.publishStatus==1">
+          <nz-divider nzType="vertical"></nz-divider>
+          <a
+            nz-popconfirm
+            [nzPopconfirmTitle]="item.isRecommend === 0 ? '设为推荐？' : '取消推荐？'"
+            (nzOnConfirm)="updateItemRecommend(item)"
+          >{{item.isRecommend === 0 ? '设为推荐' : '取消推荐'}}</a>
+        </ng-container>
       </ng-container>
     </td>
   </tr>

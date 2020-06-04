@@ -7,12 +7,14 @@
   <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="12" class="actions">
       <button
+        *appAuthority="'insert'"
         type="button"
         nz-button
         (click)="selected=null;modalShow=true"
       >新增分类
       </button>
       <button
+        *appAuthority="'delete'"
         type="button"
         nz-button
         nzType="danger"
@@ -52,7 +54,10 @@
     ></td>
     <td>{{format(item).newsTypeName}}</td>
     <td>
-      <a (click)="modalShow=true;selected=item">编辑</a>
+      <a
+        *appAuthority="'edit'"
+        (click)="modalShow=true;selected=item"
+      >编辑</a>
     </td>
   </tr>
   </tbody>

@@ -18,6 +18,7 @@ import {SubListComponent} from './sub-list/sub-list.component';
 import {BarListComponent} from './bar-list/bar-list.component';
 import {AuthInfoComponent} from './auth-info/auth-info.component';
 import {BannedComponent} from './banned/banned.component';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 @NgModule({
   declarations: [ListComponent, AuthListComponent, SubListComponent, BarListComponent, AuthInfoComponent, BannedComponent],
@@ -42,6 +43,7 @@ import {BannedComponent} from './banned/banned.component';
     NzSpinModule,
     ReactiveFormsModule,
     NzFormModule,
+    DirectiveModule,
   ]
 })
 export class UserModule {

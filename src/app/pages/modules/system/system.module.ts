@@ -20,6 +20,7 @@ import {ModalFormComponent as AdminForm} from './admin/modal-form/modal-form.com
 import {ModalFormComponent as MenuForm} from './menu/modal-form/modal-form.component';
 import {RoleSelectComponent} from './role-select/role-select.component';
 import {PermissionComponent} from './role/permission/permission.component';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {PermissionComponent} from './role/permission/permission.component';
     NzTreeSelectModule,
     NzTreeModule,
     NzRadioModule,
+    DirectiveModule,
   ],
   providers: [
   ]

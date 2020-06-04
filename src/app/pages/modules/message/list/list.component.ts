@@ -37,6 +37,11 @@ export class ListComponent extends Table<Message> implements OnInit {
     this.deleteItem();
   }
 
+  onDeleteSingle(id: number) {
+    this.deleteUrl = `app/sys/message/${id}`;
+    this.deleteItem();
+  }
+
   updateItem(id: number) {
     this.http.put<Result>(`app/sys/message/send/${id}`, {}).subscribe(event => {
       if (event.code === 200) {

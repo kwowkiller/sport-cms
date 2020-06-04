@@ -15,6 +15,7 @@ import {RouterModule} from '@angular/router';
 import {ModalFormComponent} from './modal-form/modal-form.component';
 import {ComponentsModule} from '../../../components/components.module';
 import {ModalUserComponent} from './modal-user/modal-user.component';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {ModalUserComponent} from './modal-user/modal-user.component';
     NzSelectModule,
     NzSpinModule,
     NzPopconfirmModule,
+    DirectiveModule,
   ]
 })
 export class BarModule {

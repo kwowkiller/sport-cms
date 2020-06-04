@@ -18,6 +18,7 @@ import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {ComponentsModule} from '../../../components/components.module';
 import { CategoryComponent } from './category/category.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { CategoryFormComponent } from './category-form/category-form.component';
     ComponentsModule,
     NzSpinModule,
     NzPopconfirmModule,
+    DirectiveModule,
   ]
 })
 export class NewsModule {

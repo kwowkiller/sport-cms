@@ -98,8 +98,10 @@
     <td>
       <a (click)="modalInfoShow=true;selected=item;">认证信息</a>
       <ng-container *ngIf="item.sstatus==0">
-        <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="modalShow=true;selected=item;">审核</a>
+        <ng-container *appAuthority="'examine'">
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="modalShow=true;selected=item;">审核</a>
+        </ng-container>
       </ng-container>
     </td>
   </tr>

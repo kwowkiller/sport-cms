@@ -39,6 +39,7 @@
   <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="6" class="actions">
       <button
+        *appAuthority="'create'"
         type="button"
         nz-button
         (click)="modalShow=true"
@@ -112,21 +113,28 @@
       <ng-container *ngIf="status==0">
         <a (click)="modalUserShow=true;selected=item">吧主信息</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="modalApproveShow=true;selected=item">审核</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="selected=item;modalShow=true;">编辑</a>
+        <ng-container *appAuthority="'examine'">
+          <a (click)="modalApproveShow=true;selected=item">审核</a>
+          <nz-divider nzType="vertical"></nz-divider>
+        </ng-container>
+        <a
+          *appAuthority="'edit'"
+          (click)="selected=item;modalShow=true;"
+        >编辑</a>
       </ng-container>
       <ng-container *ngIf="status==2">
         <a (click)="modalUserShow=true;selected=item">吧主信息</a>
         <nz-divider nzType="vertical"></nz-divider>
         <a (click)="modalRemark=true;selected=item">审核信息</a>
       </ng-container>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a
-        nz-popconfirm
-        nzPopconfirmTitle="确认删除？"
-        (nzOnConfirm)="onDeleteSingle(item.id)"
-      >删除</a>
+      <ng-container *appAuthority="'delete'">
+        <nz-divider nzType="vertical"></nz-divider>
+        <a
+          nz-popconfirm
+          nzPopconfirmTitle="确认删除？"
+          (nzOnConfirm)="onDeleteSingle(item.id)"
+        >删除</a>
+      </ng-container>
     </td>
   </tr>
   </tbody>
@@ -155,26 +163,35 @@
     <td>
       <a (click)="modalUserShow=true;selected=item">吧主信息</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a
-        nz-popconfirm
-        [nzPopconfirmTitle]="item.isRecommend == 0 ? '设为推荐？' : '取消推荐？'"
-        (nzOnConfirm)="updateItemRecommend(item)"
-      >{{item.isRecommend == 0 ? '设为推荐' : '取消推荐'}}</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a
-        nz-popconfirm
-        [nzPopconfirmTitle]="item.barStatus == 0 ? '关闭球吧' : '开启球吧'"
-        (nzOnConfirm)="updateItemStatus(item)"
-      >{{item.barStatus == 0 ? '关闭球吧' : '开启球吧'}}</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a (click)="selected=item;modalShow=true;">编辑</a>
-      <ng-container *ngIf="item.barStatus==1">
-        <nz-divider nzType="vertical"></nz-divider>
+      <ng-container *appAuthority="'recommend'">
         <a
           nz-popconfirm
-          nzPopconfirmTitle="确认删除？"
-          (nzOnConfirm)="onDeleteSingle(item.id)"
-        >删除</a>
+          [nzPopconfirmTitle]="item.isRecommend == 0 ? '设为推荐？' : '取消推荐？'"
+          (nzOnConfirm)="updateItemRecommend(item)"
+        >{{item.isRecommend == 0 ? '设为推荐' : '取消推荐'}}</a>
+        <nz-divider nzType="vertical"></nz-divider>
+      </ng-container>
+      <ng-container *appAuthority="'open'">
+        <a
+          nz-popconfirm
+          [nzPopconfirmTitle]="item.barStatus == 0 ? '关闭球吧' : '开启球吧'"
+          (nzOnConfirm)="updateItemStatus(item)"
+        >{{item.barStatus == 0 ? '关闭球吧' : '开启球吧'}}</a>
+        <nz-divider nzType="vertical"></nz-divider>
+      </ng-container>
+      <a
+        *appAuthority="'edit'"
+        (click)="selected=item;modalShow=true;"
+      >编辑</a>
+      <ng-container *ngIf="item.barStatus==1">
+        <ng-container *appAuthority="'delete'">
+          <nz-divider nzType="vertical"></nz-divider>
+          <a
+            nz-popconfirm
+            nzPopconfirmTitle="确认删除？"
+            (nzOnConfirm)="onDeleteSingle(item.id)"
+          >删除</a>
+        </ng-container>
       </ng-container>
     </td>
   </tr>

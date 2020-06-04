@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ListComponent} from './list/list.component';
 import {FormComponent} from './form/form.component';
 import {ComponentsModule} from '../../../components/components.module';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {ComponentsModule} from '../../../components/components.module';
     ComponentsModule,
     NzDividerModule,
     NzPopconfirmModule,
+    DirectiveModule,
   ]
 })
 export class MessageModule {

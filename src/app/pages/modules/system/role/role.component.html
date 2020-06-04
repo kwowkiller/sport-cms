@@ -10,6 +10,7 @@
     </nz-input-group>
     <div class="actions" nz-col [nzSpan]="12">
       <button
+        *appAuthority="'create'"
         nz-button
         type="button"
         (click)="modalShow=true"
@@ -56,14 +57,19 @@
     <td>{{item.remark}}</td>
     <td>角色权限</td>
     <td>
+      <ng-container *appAuthority="'delete'">
+        <a
+          nz-popconfirm
+          nzPopconfirmTitle="确认删除?"
+          (nzOnConfirm)="remove(item.roleId)"
+          nzPopconfirmPlacement="top"
+        >删除</a>
+        <nz-divider nzType="vertical"></nz-divider>
+      </ng-container>
       <a
-        nz-popconfirm
-        nzPopconfirmTitle="确认删除?"
-        (nzOnConfirm)="remove(item.roleId)"
-        nzPopconfirmPlacement="top"
-      >删除</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a (click)="selected=item;modalTreeShow=true;">配置权限</a>
+        *appAuthority="'edit'"
+        (click)="selected=item;modalTreeShow=true;"
+      >配置权限</a>
     </td>
   </tr>
   </tbody>

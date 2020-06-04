@@ -23,6 +23,7 @@ export class MenuComponent extends Table<Menu> implements OnInit {
 
   ngOnInit(): void {
     this.fetchList('all');
+    // this.test();
   }
 
   beforeSearch() {
@@ -44,4 +45,28 @@ export class MenuComponent extends Table<Menu> implements OnInit {
     this.deleteUrl = `admin/system/menu/delete/${Array.from(this.setOfCheckedId.values()).join(',')}`;
     this.deleteItem();
   }
+
+  // test() {
+  //   this.http.get<Pageable<Menu>>('admin/system/menu/page', {
+  //     params: {
+  //       pageNum: '1',
+  //       pageSize: '10000',
+  //     },
+  //   }).subscribe(event => {
+  //     const menus = event.data.records.filter(i => i.type === '1' && i.path === 'create');
+  //     menus.forEach(item => {
+  //       setTimeout(() => {
+  //         this.http.put('admin/system/menu/update', {
+  //           menuId: item.menuId,
+  //           menuName: '创建',
+  //           icon: '',
+  //           orderNum: item.orderNum,
+  //           path: item.path,
+  //           parentId: String(item.parentId),
+  //           type: '1',
+  //         }).subscribe();
+  //       }, 400);
+  //     });
+  //   });
+  // }
 }
