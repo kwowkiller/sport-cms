@@ -13,6 +13,7 @@
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播分类">
           <app-category-select
             [(ngModel)]="search.liveType"
+            [queryParams]="{moduleType:'0'}"
           ></app-category-select>
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播标签">

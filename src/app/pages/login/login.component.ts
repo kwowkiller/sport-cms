@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       username: ['ssl', [Validators.required]],
-      password: ['1234qwer', [Validators.required]],
+      password: ['123456', [Validators.required]],
       code: ['', [Validators.required]],
       key: [new Date().getTime()],
       grant_type: ['password'],

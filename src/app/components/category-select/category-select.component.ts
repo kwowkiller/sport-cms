@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {CustomInput} from '../../frame/custom-input';
 import {Category} from '../../pages/modules/other/other.module';
@@ -35,6 +35,8 @@ import {HttpClient} from '@angular/common/http';
 export class CategorySelectComponent extends CustomInput implements OnInit {
   selectData: Category[] = [];
   loading = false;
+  @Input()
+  queryParams: { [key: string]: string } = {};
 
   constructor(private http: HttpClient) {
     super();
@@ -44,7 +46,8 @@ export class CategorySelectComponent extends CustomInput implements OnInit {
     this.loading = true;
     this.http.get<Pageable<Category>>('live/sys/liveType/page', {
       params: {
-        pageSize: '10000'
+        pageSize: '10000',
+        ...this.queryParams
       }
     }).pipe(
       finalize(() => this.loading = false)

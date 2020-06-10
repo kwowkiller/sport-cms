@@ -26,6 +26,7 @@
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播分类">
           <app-category-select
             [(ngModel)]="search.hostType"
+            [queryParams]="{moduleType:'1'}"
           ></app-category-select>
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播时间">

@@ -19,15 +19,12 @@
       <input nz-input [(ngModel)]="search.barName">
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="球吧分类">
-     <!-- <nz-select [(ngModel)]="search.barType">
-        &lt;!&ndash;0:足球1:篮球2:电竞3:全部&ndash;&gt;
+      <nz-select [(ngModel)]="search.barType">
+        <!--0:足球1:篮球2:电竞3:全部-->
         <nz-option nzLabel="足球" [nzValue]="0"></nz-option>
         <nz-option nzLabel="篮球" [nzValue]="1"></nz-option>
         <nz-option nzLabel="电竞" [nzValue]="2"></nz-option>
-      </nz-select>-->
-      <app-category-select
-        [(ngModel)]="search.barType"
-      ></app-category-select>
+      </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="吧主昵称">
       <app-user-select
@@ -104,7 +101,12 @@
       <img [src]="item.barLogo" alt="" height="35">
     </td>
     <td>{{item.barName}}</td>
-    <td>{{item.barType}}</td>
+    <td [ngSwitch]="item.barType">
+      <span *ngSwitchCase="0">足球</span>
+      <span *ngSwitchCase="1">篮球</span>
+      <span *ngSwitchCase="2">电竞</span>
+      <span *ngSwitchCase="3">全部</span>
+    </td>
     <td>{{item.createTime}}</td>
     <td>{{item.username}}</td>
     <td>
@@ -142,7 +144,12 @@
       <img [src]="item.barLogo" alt="" height="35">
     </td>
     <td>{{item.barName}}</td>
-    <td>{{item.barType}}</td>
+    <td [ngSwitch]="item.barType">
+      <span *ngSwitchCase="0">足球</span>
+      <span *ngSwitchCase="1">篮球</span>
+      <span *ngSwitchCase="2">电竞</span>
+      <span *ngSwitchCase="3">全部</span>
+    </td>
     <td>{{item.createTime}}</td>
     <td>{{item.username}}</td>
     <td>{{item.postCount}}</td>
