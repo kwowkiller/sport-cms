@@ -3,6 +3,7 @@ import {Table} from '../../../../frame/table';
 import {Role} from '../system.module';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
+import {PermissionService} from '../../../../services/permission.service';
 
 @Component({
   selector: 'app-system-role',
@@ -15,6 +16,7 @@ export class RoleComponent extends Table<Role> implements OnInit {
   constructor(
     protected http: HttpClient,
     protected message: NzMessageService,
+    private permissionService: PermissionService,
   ) {
     super(http, message);
     this.idKey = 'roleId';
@@ -31,6 +33,8 @@ export class RoleComponent extends Table<Role> implements OnInit {
   onSubmitSuccess() {
     this.message.success('操作成功');
     this.fetchList('none');
+    // 刷新角色
+    this.permissionService.fetchRoles().then();
   }
 
   remove(id: number) {

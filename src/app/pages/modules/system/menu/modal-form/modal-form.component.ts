@@ -24,7 +24,7 @@ export class ModalFormComponent extends ModalForm<Menu> implements OnInit, OnCha
     public permissionService: PermissionService,
   ) {
     super(http);
-    this.permissionService.fetchMenus();
+    this.permissionService.fetchMenus(false).then();
     this.form = this.fb.group({
       menuName: [null, [Validators.required]],
       icon: [null],

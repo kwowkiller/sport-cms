@@ -11,11 +11,9 @@
           <input nz-input [(ngModel)]="search.liveTitle">
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播分类">
-          <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.liveType">
-            <nz-option [nzValue]="0" nzLabel="足球"></nz-option>
-            <nz-option [nzValue]="1" nzLabel="篮球"></nz-option>
-            <nz-option [nzValue]="2" nzLabel="电竞"></nz-option>
-          </nz-select>
+          <app-category-select
+            [(ngModel)]="search.liveType"
+          ></app-category-select>
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播标签">
           <app-live-tag-select
@@ -123,12 +121,7 @@
         <td>
           <img [src]="item.liveFaceImage" alt="" style="height: 35px">
         </td>
-        <td [ngSwitch]="item.liveType">
-          <span *ngSwitchCase="0">足球</span>
-          <span *ngSwitchCase="1">篮球</span>
-          <span *ngSwitchCase="2">电竞</span>
-          <span *ngSwitchCase="3">全部</span>
-        </td>
+        <td>{{item.liveType}}</td>
         <td>{{item.tag}}</td>
         <td>{{item.startTime}}</td>
         <td>{{item.lastStartTime}}</td>

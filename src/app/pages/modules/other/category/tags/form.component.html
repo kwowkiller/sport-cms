@@ -1,0 +1,37 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+  [nzOkLoading]="submiting"
+  [nzOkDisabled]="!form.valid"
+  (nzOnOk)="submit()"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>标签名称</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input formControlName="tag"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>所属分类</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <app-category-select
+          formControlName="liveType"
+        ></app-category-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>应用模块</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-select formControlName="moduleType">
+          <!--0:TV 1:主播-->
+          <nz-option nzLabel="TV" [nzValue]="0"></nz-option>
+          <nz-option nzLabel="主播" [nzValue]="1"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+

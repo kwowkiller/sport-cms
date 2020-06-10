@@ -4,13 +4,19 @@ import {HttpClient} from '@angular/common/http';
 import {UIMenu, User} from '../common/common.model';
 import {Session} from '../common/session';
 import {NzMessageService} from 'ng-zorro-antd';
+import {Menu} from '../pages/modules/system/system.module';
+import {PermissionService} from '../services/permission.service';
 
 /**
  * 获取用户信息 权限 菜单等
  */
 @Injectable()
 export class InitResolve implements Resolve<any> {
-  constructor(private http: HttpClient, private message: NzMessageService) {
+  constructor(
+    private http: HttpClient,
+    private message: NzMessageService,
+    private permissionService: PermissionService,
+  ) {
   }
 
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -23,6 +29,9 @@ export class InitResolve implements Resolve<any> {
       }>('auth/user').toPromise();
       Session.user = loginInfo.principal;
     }
+    // 获取按钮权限
+    await this.permissionService.fetchMenus();
+    await this.permissionService.fetchButtons();
     // 菜单信息
     if (!Session.menus) {
       const menuData = await this.http.get<{
@@ -450,7 +459,8 @@ export class InitResolve implements Resolve<any> {
           path: 'system',
         },
       ];
-      Session.menus = foo(temp, 0);
+      // Session.menus = foo(temp, 0);
+      Session.menus = foo(menuData.data.routes.filter(i => i.path !== '*'), 0);
     }
   }
 }

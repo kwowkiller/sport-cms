@@ -33,7 +33,7 @@ export class MenuComponent extends Table<Menu> implements OnInit {
     this.message.success('保存成功');
     this.fetchList();
     // 重新加载菜单
-    this.permissionService.fetchMenus();
+    this.permissionService.fetchMenus().then();
   }
 
   onDeleteSingle(menuId: number) {

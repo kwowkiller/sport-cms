@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {CustomInput} from '../../../../frame/custom-input';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
+import {PermissionService} from '../../../../services/permission.service';
 
 @Component({
   selector: 'app-role-select',
@@ -22,7 +23,7 @@ import {finalize} from 'rxjs/operators';
       [nzLoading]="loading"
     >
       <nz-option
-        *ngFor="let item of selectData"
+        *ngFor="let item of permissionService.roles"
         [nzLabel]="item.roleName"
         [nzValue]="item.roleId"
       ></nz-option>
@@ -31,21 +32,15 @@ import {finalize} from 'rxjs/operators';
   styles: []
 })
 export class RoleSelectComponent extends CustomInput implements OnInit {
-  selectData: Role[] = [];
   loading = false;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    public permissionService: PermissionService,
+  ) {
     super();
   }
 
   ngOnInit(): void {
-    this.loading = true;
-    this.http.get<Pageable<Role>>('admin/system/role/page', {
-      params: {pageNumber: '1000'}
-    }).pipe(
-      finalize(() => this.loading = false)
-    ).subscribe(event => {
-      this.selectData = event.data.records;
-    });
+    this.permissionService.fetchRoles().then();
   }
 }

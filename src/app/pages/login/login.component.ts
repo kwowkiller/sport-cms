@@ -61,6 +61,8 @@ export class LoginComponent implements OnInit {
       finalize(() => this.submitting = false)
     ).subscribe(event => {
       Session.token = `${event.token_type} ${event.access_token}`;
+      // 添加登录日志
+      this.http.get(`admin/system/user/success/${this.form.value.username}`).subscribe();
       this.router.navigateByUrl('/').then();
     });
   }

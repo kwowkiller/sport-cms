@@ -24,11 +24,9 @@
           <input nz-input [(ngModel)]="search.username">
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播分类">
-          <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.hostType">
-            <nz-option [nzValue]="0" nzLabel="足球"></nz-option>
-            <nz-option [nzValue]="1" nzLabel="篮球"></nz-option>
-            <nz-option [nzValue]="2" nzLabel="电竞"></nz-option>
-          </nz-select>
+          <app-category-select
+            [(ngModel)]="search.hostType"
+          ></app-category-select>
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="直播时间">
           <nz-date-picker style="width: 100%"></nz-date-picker>
@@ -109,12 +107,7 @@
           <img [src]="item.liveImg" alt="" style="height: 35px">
         </td>
         <td>{{item.username}}</td>
-        <td [ngSwitch]="item.hostType">
-          <span *ngSwitchCase="0">足球</span>
-          <span *ngSwitchCase="1">篮球</span>
-          <span *ngSwitchCase="2">电竞</span>
-          <span *ngSwitchCase="3">全部</span>
-        </td>
+        <td>{{item.hostType}}</td>
         <td>{{item.fromTime}}</td>
         <td *ngIf="status==1"><a (click)="selected=item;tabIndex=1">观看人数</a></td>
         <td *ngIf="status==2">{{item.toTime}}</td>

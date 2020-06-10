@@ -23,7 +23,7 @@ export class PermissionComponent extends ModalForm<Role> implements OnInit, OnCh
   ) {
     super(http);
     this.submitUrl = 'admin/system/role/menu';
-    this.permissionService.fetchMenus();
+    this.permissionService.fetchMenus().then();
   }
 
   ngOnInit(): void {

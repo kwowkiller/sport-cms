@@ -32,11 +32,9 @@
       <nz-form-item>
         <nz-form-label [nzSm]="4" nzRequired>直播分类</nz-form-label>
         <nz-form-control [nzSm]="17">
-          <nz-select nzPlaceHolder="请选择" formControlName="hostType">
-            <nz-option [nzValue]="0" nzLabel="足球"></nz-option>
-            <nz-option [nzValue]="1" nzLabel="篮球"></nz-option>
-            <nz-option [nzValue]="2" nzLabel="电竞"></nz-option>
-          </nz-select>
+          <app-category-select
+            formControlName="hostType"
+          ></app-category-select>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>

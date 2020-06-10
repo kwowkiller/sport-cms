@@ -9,20 +9,9 @@
 >
   <form nz-form [formGroup]="form">
     <nz-form-item>
-      <nz-form-label [nzSm]="4" nzRequired>标签名称</nz-form-label>
+      <nz-form-label [nzSm]="4" nzRequired>分类名称</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input formControlName="tag"/>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="4" nzRequired>所属分类</nz-form-label>
-      <nz-form-control [nzSm]="17">
-        <nz-select formControlName="liveType">
-          <!--0:足球1:篮球2:电竞3:全部-->
-          <nz-option nzLabel="足球" [nzValue]="0"></nz-option>
-          <nz-option nzLabel="篮球" [nzValue]="1"></nz-option>
-          <nz-option nzLabel="电竞" [nzValue]="2"></nz-option>
-        </nz-select>
+        <input nz-input formControlName="typeName"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -33,6 +22,21 @@
           <nz-option nzLabel="TV" [nzValue]="0"></nz-option>
           <nz-option nzLabel="主播" [nzValue]="1"></nz-option>
         </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>前端排序</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input type="number" formControlName="orderNum"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>状态</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-radio-group formControlName="SStatus">
+          <label nz-radio [nzValue]="0">启用</label>
+          <label nz-radio [nzValue]="1">禁用</label>
+        </nz-radio-group>
       </nz-form-control>
     </nz-form-item>
   </form>

@@ -6,9 +6,9 @@ import {
   NzFormModule,
   NzGridModule,
   NzInputModule,
-  NzModalModule, NzPopconfirmModule,
+  NzModalModule, NzPopconfirmModule, NzRadioModule,
   NzSelectModule,
-  NzTableModule, NzToolTipModule, NzUploadModule
+  NzTableModule, NzTabsModule, NzToolTipModule, NzUploadModule
 } from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
@@ -16,13 +16,24 @@ import {ListComponent as WordList} from './word/list.component';
 import {ListComponent as HelpList} from './help/list.component';
 import {FormComponent as HelpForm} from './help/form.component';
 import {FormComponent as WordForm} from './word/form.component';
-import {ListComponent as TagsList} from './tags/list.component';
+import {ListComponent as TagsList} from './category/tags/list.component';
 import {ComponentsModule} from '../../../components/components.module';
-import {FormComponent as TagForm} from './tags/form.component';
+import {FormComponent as TagForm} from './category/tags/form.component';
 import {DirectiveModule} from '../../../directives/directive.module';
+import {ListComponent as CategoryList} from './category/list/list.component';
+import {FormComponent as CategoryForm} from './category/form/form.component';
 
 @NgModule({
-  declarations: [WordList, HelpList, HelpForm, WordForm, TagsList, TagForm],
+  declarations: [
+    WordList,
+    HelpList,
+    HelpForm,
+    WordForm,
+    TagsList,
+    TagForm,
+    CategoryList,
+    CategoryForm,
+  ],
   imports: [
     CommonModule,
     NzTableModule,
@@ -37,7 +48,7 @@ import {DirectiveModule} from '../../../directives/directive.module';
     RouterModule.forChild([
       {path: 'word', component: WordList},
       {path: 'help', component: HelpList},
-      {path: 'tags', component: TagsList},
+      {path: 'category', component: CategoryList},
     ]),
     NzDividerModule,
     NzPopconfirmModule,
@@ -45,6 +56,8 @@ import {DirectiveModule} from '../../../directives/directive.module';
     NzToolTipModule,
     NzUploadModule,
     DirectiveModule,
+    NzTabsModule,
+    NzRadioModule,
   ]
 })
 export class OtherModule {
@@ -68,6 +81,19 @@ export interface Help {
   imageUrl: string;
   orderNum: number;
   title: string;
+}
+
+// 导航分类
+export interface Category {
+  createTime: string;
+  id: number;
+  moduleType: number;
+  orderNum: number;
+  sstatus: number;
+  tagId: string;
+  tagName: string;
+  typeName: string;
+  updateTime: string;
 }
 
 export interface Tags {

@@ -20,22 +20,19 @@ export class SideMenusComponent implements OnInit {
 
   ngOnInit(): void {
     if (location.pathname !== '/main') {
-      const flatArr: UIMenu[] = [];
       // 展开菜单
-      const foo = (arr: UIMenu[]): void => {
+      const foo = (arr: UIMenu[], parent: UIMenu = null): void => {
         arr.forEach(item => {
-          flatArr.push(item);
+          if (item.path && item.path.startsWith(location.pathname.split('/')[2])) {
+            parent.open = true;
+            item.open = true;
+          }
           if (item.children) {
-            foo(item.children);
+            foo(item.children, item);
           }
         });
       };
       foo(this.menus);
-      flatArr.forEach(item => {
-        if (item.path.startsWith(location.pathname.split('/')[2])) {
-          item.open = true;
-        }
-      });
     }
   }
 }

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Table} from '../../../../frame/table';
+import {Table} from '../../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
-import {Tags} from '../other.module';
+import {Tags} from '../../other.module';
 
 @Component({
   selector: 'app-tags-list',

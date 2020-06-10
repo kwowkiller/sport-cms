@@ -1,8 +1,8 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ModalForm} from '../../../../frame/modal-form';
+import {ModalForm} from '../../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
-import {Tags} from '../other.module';
+import {Tags} from '../../other.module';
 
 @Component({
   selector: 'app-tags-form',

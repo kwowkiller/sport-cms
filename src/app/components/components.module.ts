@@ -5,6 +5,7 @@ import {NzIconModule, NzSelectModule, NzSpinModule, NzUploadModule} from 'ng-zor
 import {UserSelectComponent} from './user-select/user-select.component';
 import {FormsModule} from '@angular/forms';
 import { BarSelectComponent } from './bar-select/bar-select.component';
+import { CategorySelectComponent } from './category-select/category-select.component';
 
 
 @NgModule({
@@ -12,11 +13,13 @@ import { BarSelectComponent } from './bar-select/bar-select.component';
     UploadComponent,
     UserSelectComponent,
     BarSelectComponent,
+    CategorySelectComponent,
   ],
   exports: [
     UploadComponent,
     UserSelectComponent,
-    BarSelectComponent
+    BarSelectComponent,
+    CategorySelectComponent
   ],
   imports: [
     CommonModule,
