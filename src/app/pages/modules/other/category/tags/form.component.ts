@@ -1,8 +1,8 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
-import {Tags} from '../../other.module';
+import {Category, Tags} from '../../other.module';
 
 @Component({
   selector: 'app-tags-form',
@@ -10,6 +10,9 @@ import {Tags} from '../../other.module';
   styles: []
 })
 export class FormComponent extends ModalForm<Tags> implements OnInit, OnChanges {
+  @Input()
+  category: Category;
+
   get title() {
     return this.detail ? '编辑标签' : '创建标签';
   }
@@ -20,9 +23,11 @@ export class FormComponent extends ModalForm<Tags> implements OnInit, OnChanges 
   ) {
     super(http);
     this.form = this.fb.group({
-      liveType: [0, [Validators.required]],
+      liveType: [null, [Validators.required]],
       tag: [null, [Validators.required]],
-      moduleType: [0, [Validators.required]]
+      sstatus: [0, [Validators.required]],
+      orderNum: [null, [Validators.required]],
+      // moduleType: [0, [Validators.required]],
     });
     this.submitUrl = 'live/sys/tag/add';
   }
@@ -36,14 +41,18 @@ export class FormComponent extends ModalForm<Tags> implements OnInit, OnChanges 
       this.form.setValue({
         id: this.detail.id,
         tag: this.detail.tag,
+        sstatus: this.detail.sstatus,
+        orderNum: this.detail.orderNum,
         liveType: this.detail.liveType,
-        moduleType: this.detail.moduleType,
+        // moduleType: this.detail.moduleType,
       });
       this.method = 'POST';
       this.submitUrl = 'live/sys/tag/update';
     } else {
       this.form.removeControl('id');
-      this.form.reset();
+      this.form.reset({
+        liveType: this.category.id,
+      }, {onlySelf: true});
       this.method = 'POST';
       this.submitUrl = 'live/sys/tag/add';
     }

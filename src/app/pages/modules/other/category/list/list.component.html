@@ -86,7 +86,7 @@
         <td>{{item.tagName}}</td>
         <td>{{item.sstatus == 0 ? '启用' : '禁用'}}</td>
         <td>
-          <a>设置标签</a>
+          <a (click)="selected=item;tabIndex=1">设置标签</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a (click)="selected=item;modalShow=true;">编辑</a>
           <nz-divider nzType="vertical"></nz-divider>
@@ -100,8 +100,11 @@
       </tbody>
     </nz-table>
   </nz-tab>
-  <nz-tab nzTitle="标签列表">
-    <app-tags-list></app-tags-list>
+  <nz-tab *ngIf="tabIndex==1" nzTitle="{{selected?.typeName}}-标签列表">
+    <app-tags-list
+      type="modal"
+      [detail]="selected"
+    ></app-tags-list>
   </nz-tab>
 </nz-tabset>
 <app-category-form
@@ -109,3 +112,18 @@
   [(visiable)]="modalShow"
   (submitSuccess)="onSubmitSuccess()"
 ></app-category-form>
+<!--<nz-modal
+  nzTitle="设置标签"
+  [(nzVisible)]="modalTagsShow"
+  (nzOnCancel)="modalTagsShow=false;"
+  [nzWidth]="700"
+  [nzOkLoading]="updating"
+  (nzOnOk)="onSetTags()"
+>
+  <app-tags-list
+    *ngIf="modalTagsShow"
+    type="modal"
+    [liveType]="selected.id"
+    [(tags)]="checkedTags"
+  ></app-tags-list>
+</nz-modal>-->

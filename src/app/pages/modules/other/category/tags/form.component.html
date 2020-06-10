@@ -17,19 +17,25 @@
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>所属分类</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <app-category-select
+        <!--<app-category-select
           formControlName="liveType"
-        ></app-category-select>
+        ></app-category-select>-->
+        {{category?.typeName}}
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSm]="4" nzRequired>应用模块</nz-form-label>
+      <nz-form-label [nzSm]="4" nzRequired>前端排序</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <nz-select formControlName="moduleType">
-          <!--0:TV 1:主播-->
-          <nz-option nzLabel="TV" [nzValue]="0"></nz-option>
-          <nz-option nzLabel="主播" [nzValue]="1"></nz-option>
-        </nz-select>
+        <input nz-input type="number" formControlName="orderNum"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>状态</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-radio-group formControlName="sstatus">
+          <label nz-radio [nzValue]="0">启用</label>
+          <label nz-radio [nzValue]="1">禁用</label>
+        </nz-radio-group>
       </nz-form-control>
     </nz-form-item>
   </form>

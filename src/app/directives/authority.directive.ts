@@ -20,10 +20,10 @@ export class AuthorityDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!environment.production) {
-      this.container.createEmbeddedView(this.template);
-      return;
-    }
+    // if (!environment.production) {
+    //   this.container.createEmbeddedView(this.template);
+    //   return;
+    // }
     if (this.permissionService.getCurrentMenuButtons().some(i => i.path === this.authority)) {
       this.container.createEmbeddedView(this.template);
     }
