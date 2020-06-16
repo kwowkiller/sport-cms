@@ -24,7 +24,9 @@ export class ModalFormComponent extends ModalForm<Live> implements OnInit, OnCha
     this.form = this.fb.group({
       startTime: [null, [Validators.required]],
       liveTitle: [null, [Validators.required]],
-      liveType: [null, [Validators.required]],
+      liveType: [null, [
+        // Validators.required
+      ]],
       liveUrl: [null, [Validators.required]],
       liveTag: [null, [Validators.required]],
       liveFaceImage: [null, [Validators.required]],
@@ -60,7 +62,7 @@ export class ModalFormComponent extends ModalForm<Live> implements OnInit, OnCha
           id: event.data.id,
           startTime: new Date(event.data.startTime),
           liveTitle: event.data.liveTitle,
-          liveType: event.data.liveType,
+          liveType: event.data.liveType || null,
           liveUrl: event.data.liveUrl,
           liveTag: event.data.liveTag,
           liveFaceImage: event.data.liveFaceImage,

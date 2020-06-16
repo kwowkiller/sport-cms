@@ -30,6 +30,10 @@
         <nz-option nzValue="2" nzLabel="审核不通过"></nz-option>
       </nz-select>
     </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户等级">
+      <nz-select>
+      </nz-select>
+    </nz-input-group>
     <div nz-col [nzSpan]="6" class="actions">
       <button
         nz-button
@@ -65,6 +69,7 @@
     <th>手机号码</th>
     <th>性别</th>
     <th>提交审核时间</th>
+    <th>用户等级</th>
     <th>粉丝数</th>
     <th>关注用户数</th>
     <th>审核状态</th>
@@ -88,6 +93,7 @@
       <span *ngSwitchCase="2">未知</span>
     </td>
     <td>{{item.createTime}}</td>
+    <td>用户等级</td>
     <td>{{item.fansCount}}</td>
     <td>{{item.userFollowCount}}</td>
     <td [ngSwitch]="item.sstatus">

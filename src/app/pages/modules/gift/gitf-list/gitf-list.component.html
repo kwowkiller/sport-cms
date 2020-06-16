@@ -1,0 +1,47 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        type="button"
+        nz-button
+      >发送礼物
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [nzShowPagination]="false"
+>
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>礼物名称</th>
+    <th>礼物图像</th>
+    <th>礼物价值</th>
+    <th>礼物标签</th>
+    <th>单次赠送上限</th>
+    <th>前端排序</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>序号</td>
+    <td>礼物名称</td>
+    <td>礼物图像</td>
+    <td>礼物价值</td>
+    <td>礼物标签</td>
+    <td>单次赠送上限</td>
+    <td>前端排序</td>
+  </tr>
+  </tbody>
+</nz-table>

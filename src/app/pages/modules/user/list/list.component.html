@@ -22,7 +22,7 @@
           </nz-select>
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="注册时间">
-          <nz-range-picker [(ngModel)]="dateRange"></nz-range-picker>
+          <nz-range-picker [(ngModel)]="dateRange" style="width: 100%"></nz-range-picker>
         </nz-input-group>
       </div>
       <div nz-row [nzGutter]="24">
@@ -38,6 +38,10 @@
             <nz-option nzValue="0" nzLabel="正常"></nz-option>
             <nz-option nzValue="1" nzLabel="禁言"></nz-option>
             <nz-option nzValue="2" nzLabel="禁用"></nz-option>
+          </nz-select>
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户等级">
+          <nz-select nzPlaceHolder="请选择">
           </nz-select>
         </nz-input-group>
         <div nz-col [nzSpan]="6" class="actions">
@@ -83,7 +87,8 @@
         <th>关注用户数</th>
         <th>关注贴吧数</th>
         <th>上次登录时间</th>
-        <!--<th>用户等级</th>-->
+        <th>用户等级</th>
+        <th>积分余额</th>
         <th>账号状态</th>
         <th>认证状态</th>
         <th>操作</th>
@@ -109,7 +114,12 @@
           <a (click)="selected=item;tabIndex=1;subTableType='bar'">{{item.followBarCount}}</a>
         </td>
         <td>{{item.lastLoginTime}}</td>
-        <!--<td>用户等级</td>-->
+        <td>
+          <a (click)="selected=item;tabIndex=1;subTableType='level'">用户等级</a>
+        </td>
+        <td>
+          <a (click)="selected=item;tabIndex=1;subTableType='point'">积分余额</a>
+        </td>
         <td [ngSwitch]="item.userStatus">
           <span *ngSwitchCase="0">正常</span>
           <span *ngSwitchCase="1">禁言</span>
@@ -140,6 +150,10 @@
               (nzOnConfirm)="unbannedUser(item.id)"
             >解除禁言</a>
           </ng-container>
+          <br/>
+          <a (click)="selected=item;modalPointShow=true;">积分设置</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="selected=item;modalExpShow=true;">经验设置</a>
         </td>
       </tr>
       </tbody>
@@ -158,6 +172,12 @@
       *ngIf="subTableType=='bar'"
       [userId]="selected?.id"
     ></app-user-bar-list>
+    <app-point-log
+      *ngIf="subTableType=='point'"
+    ></app-point-log>
+    <app-level-log
+      *ngIf="subTableType=='level'"
+    ></app-level-log>
   </nz-tab>
 </nz-tabset>
 <app-auth-info
@@ -169,3 +189,11 @@
   [(visiable)]="modalStatusShow"
   (submitSuccess)="onSubmitSuccess()"
 ></app-banned>
+<app-point-setting
+  [(visiable)]="modalPointShow"
+  [detail]="selected"
+></app-point-setting>
+<app-exp-setting
+  [(visiable)]="modalExpShow"
+  [detail]="selected"
+></app-exp-setting>

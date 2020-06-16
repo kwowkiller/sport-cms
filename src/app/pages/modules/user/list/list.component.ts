@@ -13,10 +13,14 @@ import {Result} from '../../../../common/common.model';
 })
 export class ListComponent extends Table<User> implements OnInit {
   tabIndex = 0;
-  subTableType: 'fans' | 'bar' | 'follow';
+  subTableType: 'fans' | 'bar' | 'follow' | 'point' | 'level';
   dateRange: Date[] = [];
   // 设置禁言
   modalStatusShow = false;
+  // 积分设置
+  modalPointShow = false;
+  // 经验设置
+  modalExpShow = false;
 
   get subTableTitle() {
     let str = '';
@@ -30,8 +34,14 @@ export class ListComponent extends Table<User> implements OnInit {
       case 'follow':
         str = '关注的人';
         break;
+      case 'point':
+        str = '积分记录';
+        break;
+      case 'level':
+        str = '经验记录';
+        break;
     }
-    return `${this.selected.username}的${str}`;
+    return `${this.selected.username} - ${str}`;
   }
 
   constructor(

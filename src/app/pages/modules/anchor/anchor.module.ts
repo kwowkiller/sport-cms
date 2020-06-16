@@ -19,9 +19,11 @@ import {ModalActionComponent} from './modal-action/modal-action.component';
 import { ModalFormComponent } from './modal-form/modal-form.component';
 import {ComponentsModule} from '../../../components/components.module';
 import {DirectiveModule} from '../../../directives/directive.module';
+import { ModalSetting1Component } from './modal-setting1/modal-setting1.component';
+import { ModalSetting2Component } from './modal-setting2/modal-setting2.component';
 
 @NgModule({
-  declarations: [List1Component, List2Component, ModalDataComponent, AuthInfoComponent, ModalActionComponent, ModalFormComponent],
+  declarations: [List1Component, List2Component, ModalDataComponent, AuthInfoComponent, ModalActionComponent, ModalFormComponent, ModalSetting1Component, ModalSetting2Component],
   imports: [
     CommonModule,
     RouterModule.forChild([

@@ -1,0 +1,62 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="dateRange=[];fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="变动类型">
+      <nz-select></nz-select>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="变动时间">
+      <nz-range-picker [(ngModel)]="dateRange" style="width: 100%"></nz-range-picker>
+    </nz-input-group>
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>经验获取时间</th>
+    <th>获得经验类型</th>
+    <th>获得经验值</th>
+    <th>获得前经验值</th>
+    <th>获得后经验值</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>序号</td>
+    <td>经验获取时间</td>
+    <td>获得经验类型</td>
+    <td>获得经验值</td>
+    <td>获得前经验值</td>
+    <td>获得后经验值</td>
+  </tr>
+  </tbody>
+</nz-table>

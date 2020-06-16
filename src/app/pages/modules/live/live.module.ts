@@ -21,14 +21,29 @@ import {AudienceComponent} from './audience/audience.component';
 import {SetUserComponent} from './set-user/set-user.component';
 import {ModalDataComponent} from './live/modal-data/modal-data.component';
 import {DirectiveModule} from '../../../directives/directive.module';
+import {GiftLogComponent} from './live/gift-log/gift-log.component';
+import {BulletComponent} from './bullet/bullet.component';
 
 @NgModule({
-  declarations: [TVList, LiveList, TVForm, LiveForm, TagSelectComponent, AudienceComponent, SetUserComponent, ModalDataComponent],
+  declarations: [
+    TVList,
+    LiveList,
+    TVForm,
+    LiveForm,
+    TagSelectComponent,
+    AudienceComponent,
+    SetUserComponent,
+    ModalDataComponent,
+    GiftLogComponent,
+    BulletComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {path: 'tv', component: TVList},
       {path: 'live', component: LiveList},
+      // 弹幕管理
+      {path: 'bullet', component: BulletComponent},
     ]),
     FormsModule,
     NzGridModule,

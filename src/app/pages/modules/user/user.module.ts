@@ -19,14 +19,32 @@ import {BarListComponent} from './bar-list/bar-list.component';
 import {AuthInfoComponent} from './auth-info/auth-info.component';
 import {BannedComponent} from './banned/banned.component';
 import {DirectiveModule} from '../../../directives/directive.module';
+import {PointSettingComponent} from './point-setting/point-setting.component';
+import {ExpSettingComponent} from './exp-setting/exp-setting.component';
+import {LevelConfigComponent} from './level-config/level-config.component';
+import { PointLogComponent } from './point-log/point-log.component';
+import { LevelLogComponent } from './level-log/level-log.component';
 
 @NgModule({
-  declarations: [ListComponent, AuthListComponent, SubListComponent, BarListComponent, AuthInfoComponent, BannedComponent],
+  declarations: [
+    ListComponent,
+    AuthListComponent,
+    SubListComponent,
+    BarListComponent,
+    AuthInfoComponent,
+    BannedComponent,
+    PointSettingComponent,
+    ExpSettingComponent,
+    LevelConfigComponent,
+    PointLogComponent,
+    LevelLogComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {path: '', component: ListComponent},
       {path: 'auth', component: AuthListComponent},
+      {path: 'level', component: LevelConfigComponent},
     ]),
     NzTableModule,
     NzDividerModule,

@@ -71,6 +71,11 @@ import {NotFoundComponent} from '../errors/not-found.component';
         path: 'other',
         loadChildren: () => import('./other/other.module').then(m => m.OtherModule),
       },
+      {
+        // 礼物管理模块
+        path: 'gift',
+        loadChildren: () => import('./gift/gift.module').then(m => m.GiftModule),
+      },
       // 404
       {path: '**', component: NotFoundComponent},
     ]),

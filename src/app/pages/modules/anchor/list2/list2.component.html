@@ -29,6 +29,10 @@
         <nz-option nzValue="1" nzLabel="禁播"></nz-option>
       </nz-select>
     </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户等级">
+      <nz-select>
+      </nz-select>
+    </nz-input-group>
     <div nz-col [nzSpan]="12" class="actions">
       <button
         *appAuthority="'insert'"
@@ -75,7 +79,7 @@
     <th>粉丝数</th>
     <th>关注用户数</th>
     <th>上次直播时间</th>
-    <th>主播等级</th>
+    <th>用户等级</th>
     <th>主播状态</th>
     <th>直播状态</th>
     <th>操作</th>
@@ -125,6 +129,10 @@
       </ng-container>
       <nz-divider nzType="vertical"></nz-divider>
       <a (click)="modalShow=true;selected=item;">主播数据</a>
+      <br>
+      <a (click)="selected=item;modalSetting1=true">设置认证主播</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a (click)="selected=item;modalSetting2=true">设置直播分成</a>
     </td>
   </tr>
   </tbody>
@@ -141,3 +149,11 @@
 <app-anchor-form
   [(visiable)]="modalForm"
 ></app-anchor-form>
+<app-modal-setting1
+  [detail]="selected"
+  [(visiable)]="modalSetting1"
+></app-modal-setting1>
+<app-modal-setting2
+  [detail]="selected"
+  [(visiable)]="modalSetting2"
+></app-modal-setting2>

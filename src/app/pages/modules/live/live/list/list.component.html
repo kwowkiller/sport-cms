@@ -93,7 +93,8 @@
         <th *ngIf="status==1">观看人数</th>
         <th *ngIf="status==2">结束时间</th>
         <th *ngIf="status==2">直播时长</th>
-        <th>直播状态</th>
+        <th *ngIf="status==2">获得礼物数</th>
+        <!--<th>直播状态</th>-->
         <th>操作</th>
       </tr>
       </thead>
@@ -110,14 +111,15 @@
         <td>{{item.username}}</td>
         <td>{{item.hostType}}</td>
         <td>{{item.fromTime}}</td>
-        <td *ngIf="status==1"><a (click)="selected=item;tabIndex=1">观看人数</a></td>
+        <td *ngIf="status==1"><a (click)="selected=item;subTableType='audience';tabIndex=1">观看人数</a></td>
         <td *ngIf="status==2">{{item.toTime}}</td>
         <td *ngIf="status==2">{{item.lengthOfTime}}</td>
-        <td [ngSwitch]="item.sstatus">
+        <td *ngIf="status==2"><a (click)="selected=item;subTableType='gift';tabIndex=1">获得礼物数</a></td>
+        <!--<td [ngSwitch]="item.sstatus">
           <span *ngSwitchCase="0">未开播</span>
           <span *ngSwitchCase="1">直播中</span>
           <span *ngSwitchCase="2">已结束</span>
-        </td>
+        </td>-->
         <td [ngSwitch]="item.sstatus">
           <ng-container *ngSwitchCase="0">
             <a
@@ -141,13 +143,17 @@
     </nz-table>
   </nz-tab>
   <nz-tab
-    [nzTitle]="selected.liveTitle+'-观看人数'"
+    [nzTitle]="subTableTitle"
     *ngIf="tabIndex==1"
   >
     <app-audience-list
+      *ngIf="subTableType=='audience'"
       queryType="live"
       [queryId]="selected?.id"
     ></app-audience-list>
+    <app-gift-log
+      *ngIf="subTableType=='gift'"
+    ></app-gift-log>
   </nz-tab>
 </nz-tabset>
 <app-set-user

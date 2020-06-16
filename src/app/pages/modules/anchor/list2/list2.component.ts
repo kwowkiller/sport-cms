@@ -15,6 +15,10 @@ export class List2Component extends Table<Anchor> implements OnInit {
   modalAction = false;
   dateRange: Date[] = [];
   modalForm = false;
+  // 设置认证主播
+  modalSetting1 = false;
+  // 设置直播分成
+  modalSetting2 = false;
 
   constructor(
     protected http: HttpClient,

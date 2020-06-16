@@ -7,8 +7,8 @@ export abstract class CustomInput implements ControlValueAccessor {
   @Output()
   modelChange = new EventEmitter();
 
-  onChangeListener: (value: any) => {};
-  onTouchedListener: () => {};
+  onChangeListener: (value: any) => void;
+  onTouchedListener: () => void;
 
   registerOnChange(fn: any) {
     this.onChangeListener = fn;

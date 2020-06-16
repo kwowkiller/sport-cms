@@ -14,6 +14,20 @@ export class ListComponent extends Table<Live2> implements OnInit {
   status = 0;
   modalSetUser = false;
   modalData = false;
+  subTableType: 'audience' | 'gift';
+
+  get subTableTitle() {
+    let str = '';
+    switch (this.subTableType) {
+      case 'audience':
+        str = '观看人数';
+        break;
+      case 'gift':
+        str = '礼物';
+        break;
+    }
+    return `${this.selected.username} - ${str}`;
+  }
 
   constructor(
     protected http: HttpClient,

@@ -1,0 +1,57 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户名">
+      <nz-select></nz-select>
+    </nz-input-group>
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>用户头像</th>
+    <th>用户昵称</th>
+    <th>手机号码</th>
+    <th>性别</th>
+    <th>用户等级</th>
+    <th>进入直播间时间</th>
+    <th>赠送礼物</th>
+    <th>赠送数量</th>
+    <th>礼物价值</th>
+    <th>赠送时间</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+  </tr>
+  </tbody>
+</nz-table>
