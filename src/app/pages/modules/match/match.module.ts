@@ -13,20 +13,26 @@ import {
 } from 'ng-zorro-antd';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {SubListComponent} from './sub-list/sub-list.component';
 import {ModalData1Component} from './modal-data1/modal-data1.component';
 import {ModalData2Component} from './modal-data2/modal-data2.component';
 import {ModalData3Component} from './modal-data3/modal-data3.component';
 
 @NgModule({
-  declarations: [ListComponent, SubListComponent, ModalData1Component, ModalData2Component, ModalData3Component],
+  declarations: [
+    ListComponent,
+    ModalData1Component,
+    ModalData2Component,
+    ModalData3Component,
+  ],
   imports: [
     CommonModule,
     NzTableModule,
     NzDividerModule,
     FormsModule,
     RouterModule.forChild([
-      {path: '', component: ListComponent}
+      {path: '', redirectTo: 'football'},
+      {path: 'football', component: ListComponent, data: {type: 'football'}},
+      {path: 'basketball', component: ListComponent, data: {type: 'basketball'}},
     ]),
     NzGridModule,
     NzInputModule,
@@ -41,6 +47,8 @@ import {ModalData3Component} from './modal-data3/modal-data3.component';
 })
 export class MatchModule {
 }
+
+export type MatchType = 'football' | 'basketball';
 
 export interface Match {
   areaName: string;
@@ -110,4 +118,10 @@ export interface MatchItem {
   awayTeamYellow: number;
   homeTeamRank: string;
   awayTeamRank: string;
+
+  followCount: number;
+  isCartoon: number;
+  isCast: number;
+  isGuess: number;
+  isLive: number;
 }

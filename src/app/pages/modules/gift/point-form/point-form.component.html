@@ -1,0 +1,30 @@
+<nz-modal
+  [nzTitle]="'编辑'"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+  (nzOnOk)="submit()"
+  [nzOkLoading]="submiting"
+  [nzOkDisabled]="!form.valid"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>充值积分数</nz-form-label>
+      <nz-form-control [nzSm]="15">
+        <input nz-input>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>价格</nz-form-label>
+      <nz-form-control [nzSm]="15">
+        <input nz-input>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>首冲赠送</nz-form-label>
+      <nz-form-control [nzSm]="15">
+        <input nz-input placeholder="为0不赠送">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

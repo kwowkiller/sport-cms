@@ -1,8 +1,8 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
-import {MatchItem} from '../match.module';
+import {MatchItem, MatchType} from '../match.module';
 
 @Component({
   selector: 'app-match-modal-data1',
@@ -10,13 +10,20 @@ import {MatchItem} from '../match.module';
   styles: []
 })
 export class ModalData1Component extends ModalForm<MatchItem> implements OnInit, OnChanges {
+  @Input()
+  type: MatchType;
   // 历史交锋
   history: Item1[] = [];
   // 进球分布
   distribution: Item3[] = [];
+  model: Model;
 
   constructor(protected http: HttpClient) {
     super(http);
+  }
+
+  toArray(item: any) {
+    return item as any[];
   }
 
   ngOnInit(): void {
@@ -28,9 +35,10 @@ export class ModalData1Component extends ModalForm<MatchItem> implements OnInit,
       this.loading = true;
       this.http.get<{
         code, data: Model,
-      }>(`match/sys/football/match/data/${this.queryId}`).pipe(
+      }>(`match/sys/${this.type}/match/data/${this.queryId}`).pipe(
         finalize(() => this.loading = false)
       ).subscribe(event => {
+        this.model = event.data;
         this.history = event.data.historyMatch;
         this.distribution = event.data.goalDistribution;
       });

@@ -9,6 +9,8 @@
       <button
         type="button"
         nz-button
+        nzType="primary"
+        (click)="modalSendShow=true"
       >发送礼物
       </button>
     </div>
@@ -31,6 +33,7 @@
     <th>礼物标签</th>
     <th>单次赠送上限</th>
     <th>前端排序</th>
+    <th>操作</th>
   </tr>
   </thead>
   <tbody>
@@ -42,6 +45,21 @@
     <td>礼物标签</td>
     <td>单次赠送上限</td>
     <td>前端排序</td>
+    <td>
+      <a (click)="selected=item;modalShow=true">编辑</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a (click)="selected=item;modalQuantityShow=true">赠送数量设置</a>
+    </td>
   </tr>
   </tbody>
 </nz-table>
+<app-gift-form
+  [detail]="selected"
+  [(visiable)]="modalShow"
+></app-gift-form>
+<app-send-gift
+  [(visiable)]="modalSendShow"
+></app-send-gift>
+<app-quantity-setting
+  [(visiable)]="modalQuantityShow"
+></app-quantity-setting>

@@ -1,0 +1,22 @@
+<nz-modal
+  nzTitle="配置赠送礼物数量"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+  (nzOnOk)="submit()"
+  [nzOkLoading]="submiting"
+  [nzOkDisabled]="!form.valid"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="3" nzRequired>数量</nz-form-label>
+      <nz-form-control [nzSm]="5">
+        <input nz-input/>
+      </nz-form-control>
+      <nz-form-label [nzSm]="3" nzRequired>描述</nz-form-label>
+      <nz-form-control [nzSm]="12">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

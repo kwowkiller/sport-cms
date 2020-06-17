@@ -1,0 +1,95 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户昵称">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事名称">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事状态">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="审核状态">
+      <input nz-input>
+    </nz-input-group>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th
+      [nzChecked]="allChecked"
+      [nzIndeterminate]="false"
+      (nzCheckedChange)="onAllChecked($event)"
+    ></th>
+    <!--头像+昵称-->
+    <th>用户</th>
+    <th>方案标题</th>
+    <th>方案玩法</th>
+    <th>命中率</th>
+    <th>连胜</th>
+    <th>返还率</th>
+    <th>胜率</th>
+    <th>方案价格</th>
+    <th>创建时间</th>
+    <th>赛事状态</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td
+      [nzChecked]="setOfCheckedId.has(item.id)"
+      (nzCheckedChange)="onItemChecked(item.id, $event)"
+    ></td>
+    <td>用户</td>
+    <td>方案标题</td>
+    <td>方案玩法</td>
+    <td>命中率</td>
+    <td>连胜</td>
+    <td>返还率</td>
+    <td>胜率</td>
+    <td>方案价格</td>
+    <td>创建时间</td>
+    <td>赛事状态</td>
+    <td>状态</td>
+    <td><a (click)="selected=item;modalShow=true;">方案审核</a></td>
+  </tr>
+  </tbody>
+</nz-table>
+<app-scheme-detail
+  [(visiable)]="modalShow"
+></app-scheme-detail>

@@ -6,7 +6,7 @@
   [nzFooter]="null"
 >
   <nz-spin [nzSpinning]="loading">
-    <div class="container">
+    <div class="container" *ngIf="type=='football'">
       <div>
         <h2>主队：{{home?.name_zh}}<i>比分：{{home?.score}}</i></h2>
         <div class="box">
@@ -82,6 +82,79 @@
             <div>
               <p>联赛排名</p>
               <p>{{detail?.awayTeamRank}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" *ngIf="type=='basketball'">
+      <div>
+        <h2>主队：{{home?.name_zh}}<i>比分：{{detail?.homeTeamScore}}</i></h2>
+        <div class="box">
+          <div>
+            <div>
+              <p>3分球得分</p>
+              <p>{{getStat('home', 1)}}</p>
+            </div>
+            <div>
+              <p>2分球得分</p>
+              <p>{{getStat('home', 2)}}</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>罚球得分</p>
+              <p>{{getStat('home', 3)}}</p>
+            </div>
+            <div>
+              <p>罚球命中率</p>
+              <p>{{getStat('home', 6)}}</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>犯规数</p>
+              <p>{{getStat('home', 5)}}</p>
+            </div>
+            <div>
+              <p>总暂停数</p>
+              <p>{{getStat('home', 7)}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span>VS</span>
+      <div>
+        <h2>客队：{{away?.name_zh}}<i>比分：{{detail?.awayTeamScore}}</i></h2>
+        <div class="box">
+          <div>
+            <div>
+              <p>3分球得分</p>
+              <p>{{getStat('away', 1)}}</p>
+            </div>
+            <div>
+              <p>2分球得分</p>
+              <p>{{getStat('away', 2)}}</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>罚球得分</p>
+              <p>{{getStat('away', 3)}}</p>
+            </div>
+            <div>
+              <p>罚球命中率</p>
+              <p>{{getStat('away', 6)}}</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>犯规数</p>
+              <p>{{getStat('away', 5)}}</p>
+            </div>
+            <div>
+              <p>总暂停数</p>
+              <p>{{getStat('away', 7)}}</p>
             </div>
           </div>
         </div>

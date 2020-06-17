@@ -1,8 +1,8 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
-import {MatchItem} from '../match.module';
+import {MatchItem, MatchType} from '../match.module';
 
 @Component({
   selector: 'app-match-modal-data3',
@@ -10,6 +10,8 @@ import {MatchItem} from '../match.module';
   styles: []
 })
 export class ModalData3Component extends ModalForm<MatchItem> implements OnInit, OnChanges {
+  @Input()
+  type: MatchType;
   tabIndex = 0;
   data: Model;
 
@@ -42,7 +44,7 @@ export class ModalData3Component extends ModalForm<MatchItem> implements OnInit,
   ngOnChanges(changes: SimpleChanges): void {
     if (this.visiable && this.queryId) {
       this.loading = true;
-      this.http.get<{ code, data: Model }>(`match/sys/football/match/odds/${this.queryId}`).pipe(
+      this.http.get<{ code, data: Model }>(`match/sys/${this.type}/match/odds/${this.queryId}`).pipe(
         finalize(() => this.loading = false)
       ).subscribe(event => {
         this.data = event.data;

@@ -16,10 +16,11 @@ import {ModalFormComponent} from './modal-form/modal-form.component';
 import {ComponentsModule} from '../../../components/components.module';
 import {ModalUserComponent} from './modal-user/modal-user.component';
 import {DirectiveModule} from '../../../directives/directive.module';
+import { AuditListComponent } from './audit-list/audit-list.component';
 
 
 @NgModule({
-  declarations: [ListComponent, ModalFormComponent, ModalUserComponent],
+  declarations: [ListComponent, ModalFormComponent, ModalUserComponent, AuditListComponent],
   imports: [
     CommonModule,
     NzDividerModule,

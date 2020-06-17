@@ -76,6 +76,11 @@ import {NotFoundComponent} from '../errors/not-found.component';
         path: 'gift',
         loadChildren: () => import('./gift/gift.module').then(m => m.GiftModule),
       },
+      {
+        // 方案管理模块
+        path: 'scheme',
+        loadChildren: () => import('./scheme/scheme.module').then(m => m.SchemeModule),
+      },
       // 404
       {path: '**', component: NotFoundComponent},
     ]),

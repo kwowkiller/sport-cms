@@ -1,0 +1,37 @@
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>充值积分数</th>
+    <th>价格</th>
+    <th>首冲赠送</th>
+    <th>创建时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>序号</td>
+    <td>充值积分数</td>
+    <td>价格</td>
+    <td>首冲赠送</td>
+    <td>创建时间</td>
+    <td><a (click)="selected=item;modalShow=true">编辑</a></td>
+  </tr>
+  </tbody>
+</nz-table>
+<app-point-form
+  [(visiable)]="modalShow"
+  [detail]="selected"
+></app-point-form>

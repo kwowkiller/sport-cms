@@ -1,0 +1,48 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+  (nzOnOk)="submit()"
+  [nzOkLoading]="submiting"
+  [nzOkDisabled]="!form.valid"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>礼物名称</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>礼物价值</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-input-group nzAddOnAfter="积分">
+          <input nz-input/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>礼物价值</nz-form-label>
+      <app-upload></app-upload>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>礼物标签</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-select></nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>赠送上限</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>前端排序</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

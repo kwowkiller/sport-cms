@@ -265,23 +265,90 @@ export class InitResolve implements Resolve<any> {
                 component: '',
                 hidden: false,
                 meta: {
-                  title: '赛事管理',
+                  title: '足球赛事',
                   icon: '',
                   breadcrumb: false,
                 },
-                name: '赛事管理',
-                path: 'match',
+                name: '足球赛事',
+                path: 'match/football',
+              },
+              {
+                id: 310,
+                alwaysShow: true,
+                component: '',
+                hidden: false,
+                meta: {
+                  title: '篮球赛事',
+                  icon: '',
+                  breadcrumb: false,
+                },
+                name: '篮球赛事',
+                path: 'match/basketball',
               },
             ],
             component: '',
             hidden: false,
             meta: {
               title: '赛事管理',
-              icon: 'unordered-list',
+              icon: 'trophy',
               breadcrumb: false,
             },
             name: '赛事管理',
             path: 'match',
+          },
+          {
+            id: 330,
+            alwaysShow: true,
+            children: [
+              {
+                id: 331,
+                alwaysShow: true,
+                component: '',
+                hidden: false,
+                meta: {
+                  title: '方案审核',
+                  icon: '',
+                  breadcrumb: false,
+                },
+                name: '方案审核',
+                path: 'scheme/audit',
+              },
+              {
+                id: 332,
+                alwaysShow: true,
+                component: '',
+                hidden: false,
+                meta: {
+                  title: '方案列表',
+                  icon: '',
+                  breadcrumb: false,
+                },
+                name: '方案列表',
+                path: 'scheme/list',
+              },
+              {
+                id: 333,
+                alwaysShow: true,
+                component: '',
+                hidden: false,
+                meta: {
+                  title: '方案用户管理',
+                  icon: '',
+                  breadcrumb: false,
+                },
+                name: '方案用户管理',
+                path: 'scheme/user',
+              },
+            ],
+            component: '',
+            hidden: false,
+            meta: {
+              title: '方案管理',
+              icon: 'unordered-list',
+              breadcrumb: false,
+            },
+            name: '方案管理',
+            path: 'scheme',
           },
           {
             id: 22,
@@ -531,6 +598,7 @@ export class InitResolve implements Resolve<any> {
           },
         ];
         Session.menus = foo(temp, 0);
+        // Session.menus = foo(menuData.data.routes.filter(i => i.path !== '*'), 0);
       }
     }
   }

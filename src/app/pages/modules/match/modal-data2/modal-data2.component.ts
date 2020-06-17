@@ -1,8 +1,8 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
-import {MatchItem} from '../match.module';
+import {MatchItem, MatchType} from '../match.module';
 
 @Component({
   selector: 'app-match-modal-data2',
@@ -10,7 +10,10 @@ import {MatchItem} from '../match.module';
   styleUrls: ['./modal-data2.component.css']
 })
 export class ModalData2Component extends ModalForm<MatchItem> implements OnInit, OnChanges {
-  stats: Item3[] = [];
+  @Input()
+  type: MatchType;
+  footballStats: Item3[] = [];
+  basketballStats: number[][] = [];
   home: Item1;
   away: Item1;
 
@@ -25,13 +28,20 @@ export class ModalData2Component extends ModalForm<MatchItem> implements OnInit,
     if (this.visiable && this.queryId) {
       this.loading = true;
       this.http.get<{
-        code, data: Model,
-      }>(`match/sys/football/match/detail/${this.queryId}`).pipe(
+        code, data: FootballModel | BasketballModel,
+      }>(`match/sys/${this.type}/match/detail/${this.queryId}`).pipe(
         finalize(() => this.loading = false)
       ).subscribe(event => {
-        this.stats = event.data.stats;
-        this.home = event.data.home_team;
-        this.away = event.data.away_team;
+        if (this.type === 'football') {
+          this.footballStats = (event.data as FootballModel).stats;
+          this.home = (event.data as FootballModel).home_team;
+          this.away = (event.data as FootballModel).away_team;
+        }
+        if (this.type === 'basketball') {
+          this.home = (event.data as BasketballModel).hometeam;
+          this.away = (event.data as BasketballModel).awayteam;
+          this.basketballStats = (event.data as BasketballModel).stats;
+        }
       });
     }
   }
@@ -40,6 +50,7 @@ export class ModalData2Component extends ModalForm<MatchItem> implements OnInit,
   }
 
   /*
+      足球
    1  进球
    2  角球
    3  黄牌
@@ -64,17 +75,33 @@ export class ModalData2Component extends ModalForm<MatchItem> implements OnInit,
    25  控球率
    26  加时赛结束
    27  点球大战结束
+   篮球
+   1	3分球进球数	篮球技术统计
+   2	2分球进球数	篮球技术统计
+   3	罚球进球数	篮球技术统计
+   4	剩余暂停数	篮球技术统计
+   5	犯规数	篮球技术统计
+   6	罚球命中率	篮球技术统计
+   7	总暂停数	篮球技术统计
    */
   getStat(team: 'home' | 'away', type: number): number {
-    const find = this.stats.find(item => item.type === type);
-    if (find) {
-      return team === 'home' ? find.home : find.away;
+    if (this.type === 'football') {
+      const find = this.footballStats.find(item => item.type === type);
+      if (find) {
+        return team === 'home' ? find.home : find.away;
+      }
+    }
+    if (this.type === 'basketball') {
+      const find = this.basketballStats.find(item => item[0] === type);
+      if (find) {
+        return team === 'home' ? find[1] : find[2];
+      }
     }
     return 0;
   }
 }
 
-interface Model {
+interface FootballModel {
   away_team: Item1;
   home_team: Item1;
   info: {
@@ -91,6 +118,17 @@ interface Model {
   // 技术统计
   stats: Item3[];
   tlive: Item2[];
+}
+
+interface BasketballModel {
+  awayteam: Item1;
+  hometeam: Item1;
+  // [
+  //     1,//统计类型，请参考 状态码->篮球技术统计
+  //     8,//主队数值
+  //     10//客队数值
+  //   ],
+  stats: number[][];
 }
 
 interface Item1 {
