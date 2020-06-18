@@ -22,6 +22,8 @@ import {FormComponent as TagForm} from './category/tags/form.component';
 import {DirectiveModule} from '../../../directives/directive.module';
 import {ListComponent as CategoryList} from './category/list/list.component';
 import {FormComponent as CategoryForm} from './category/form/form.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { FeedbackDetailComponent } from './feedback/feedback-detail/feedback-detail.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import {FormComponent as CategoryForm} from './category/form/form.component';
     TagForm,
     CategoryList,
     CategoryForm,
+    FeedbackComponent,
+    FeedbackDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +53,7 @@ import {FormComponent as CategoryForm} from './category/form/form.component';
       {path: 'word', component: WordList},
       {path: 'help', component: HelpList},
       {path: 'category', component: CategoryList},
+      {path: 'feedback', component: FeedbackComponent},
     ]),
     NzDividerModule,
     NzPopconfirmModule,

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Result} from '../../../../common/common.model';
+import {Result} from '../../../../../common/common.model';
 import {NzMessageService} from 'ng-zorro-antd';
 import {finalize} from 'rxjs/operators';
 

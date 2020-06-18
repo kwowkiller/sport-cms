@@ -70,7 +70,8 @@
       nzWidth="100px"
     ></th>
     <th>消息内容</th>
-    <!--<th>消息范围</th>-->
+    <th>发送用户类型</th>
+    <th>发送范围</th>
     <th>发送时间</th>
     <th>状态</th>
     <th>操作
@@ -84,7 +85,8 @@
       (nzCheckedChange)="onItemChecked(item.id, $event)"
     ></td>
     <td>{{item.content}}</td>
-    <!--<td>消息范围</td>-->
+    <td>发送用户类型</td>
+    <td>发送范围</td>
     <td>{{item.sendTime}}</td>
     <td [ngSwitch]="item.status">
       <span *ngSwitchCase="0">待发送</span>

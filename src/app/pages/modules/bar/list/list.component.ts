@@ -14,7 +14,6 @@ import {finalize} from 'rxjs/operators';
   styles: []
 })
 export class ListComponent extends Table<Bar> implements OnInit {
-  status = 0;
   dateRange: Date[] = [];
   // 吧主信息
   modalUserShow = false;
@@ -23,6 +22,21 @@ export class ListComponent extends Table<Bar> implements OnInit {
   // 审核备注
   modalRemark = false;
   form: FormGroup;
+  tabIndex = 0;
+  subTableType: 'user' | 'blog';
+
+  get subTableTitle() {
+    let str = '';
+    switch (this.subTableType) {
+      case 'user':
+        str = '关注用户';
+        break;
+      case 'blog':
+        str = '贴子';
+        break;
+    }
+    return `${this.selected.barName} - ${str}`;
+  }
 
   constructor(
     protected http: HttpClient,
@@ -43,7 +57,7 @@ export class ListComponent extends Table<Bar> implements OnInit {
 
   beforeSearch() {
     // 审核状态
-    this.search.approveStatus = this.status;
+    this.search.approveStatus = 1;
     if (this.dateRange.length !== 0) {
       this.search.createTimeFrom = moment(this.dateRange[0]).format('YYYY-MM-DD');
       this.search.createTimeTo = moment(this.dateRange[1]).format('YYYY-MM-DD');

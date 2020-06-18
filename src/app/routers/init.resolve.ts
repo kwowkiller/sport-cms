@@ -543,6 +543,34 @@ export class InitResolve implements Resolve<any> {
             path: 'information',
           },
           {
+            id: 400,
+            alwaysShow: true,
+            children: [
+              {
+                id: 401,
+                alwaysShow: true,
+                component: '',
+                hidden: false,
+                meta: {
+                  title: '任务管理',
+                  icon: '',
+                  breadcrumb: false,
+                },
+                name: '任务管理',
+                path: 'task',
+              },
+            ],
+            component: '',
+            hidden: false,
+            meta: {
+              title: '任务管理',
+              icon: 'database',
+              breadcrumb: false,
+            },
+            name: '任务管理',
+            path: 'task',
+          },
+          {
             id: 1,
             alwaysShow: true,
             children: [

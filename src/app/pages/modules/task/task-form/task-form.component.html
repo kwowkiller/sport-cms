@@ -1,0 +1,83 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="form.reset();visiableChange.emit(false)"
+  (nzOnOk)="submit()"
+  [nzOkDisabled]="!form.valid"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>任务名称</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>任务类型</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <nz-select></nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>任务图标</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <app-upload
+        ></app-upload>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>可完成次数</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>获得经验值</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>获得积分</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>获得礼物</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <nz-radio-group>
+          <label nz-radio nzValue="0">是</label>
+          <label nz-radio nzValue="1">否</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>选择礼物</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <nz-select></nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>获得数量</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <input nz-input>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>跳转链接</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <input nz-input>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>任务备注</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <input nz-input>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+
+

@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Table} from '../../../../frame/table';
+import {Component, Input, OnInit} from '@angular/core';
+import {Table} from '../../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
-import {Blog} from '../blog.module';
 import {NzMessageService} from 'ng-zorro-antd';
 import * as moment from 'moment';
-import {Result} from '../../../../common/common.model';
+import {Result} from '../../../../../common/common.model';
+import {Blog} from '../../bar.module';
 
 @Component({
   selector: 'app-blog-list',
@@ -12,6 +12,8 @@ import {Result} from '../../../../common/common.model';
   styles: []
 })
 export class ListComponent extends Table<Blog> implements OnInit {
+  @Input()
+  barId: number = null;
   dateRange: Date[] = [];
   tabIndex = 0;
 
@@ -28,6 +30,9 @@ export class ListComponent extends Table<Blog> implements OnInit {
   }
 
   beforeSearch() {
+    if (this.barId != null) {
+      this.search.barId = this.barId;
+    }
     if (this.dateRange.length !== 0) {
       this.search.createTimeFrom = moment(this.dateRange[0]).format('YYYY-MM-DD');
       this.search.createTimeTo = moment(this.dateRange[1]).format('YYYY-MM-DD');

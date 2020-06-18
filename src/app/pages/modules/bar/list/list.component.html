@@ -1,202 +1,154 @@
-<nz-radio-group
-  [(ngModel)]="status"
-  (ngModelChange)="fetchList('all')"
-  nzButtonStyle="solid"
-  style="margin-bottom: 12px"
->
-  <label nz-radio-button [nzValue]="0">待审核</label>
-  <label nz-radio-button [nzValue]="1">审核通过</label>
-  <label nz-radio-button [nzValue]="2">审核不通过</label>
-</nz-radio-group>
-<form
-  ngNoForm
-  class="search-area"
-  (submit)="$event.preventDefault();fetchList('page')"
-  (reset)="fetchList('all')"
->
-  <div nz-row [nzGutter]="24">
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="球吧名称">
-      <input nz-input [(ngModel)]="search.barName">
-    </nz-input-group>
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="球吧分类">
-      <nz-select [(ngModel)]="search.barType">
-        <!--0:足球1:篮球2:电竞3:全部-->
-        <nz-option nzLabel="足球" [nzValue]="0"></nz-option>
-        <nz-option nzLabel="篮球" [nzValue]="1"></nz-option>
-        <nz-option nzLabel="电竞" [nzValue]="2"></nz-option>
-      </nz-select>
-    </nz-input-group>
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="吧主昵称">
-      <app-user-select
-        [(model)]="search.userId"
-        [queryParams]="{authenStatus: '2'}"
-      ></app-user-select>
-    </nz-input-group>
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="创建时间">
-      <nz-range-picker [(ngModel)]="dateRange" style="width: 100%"></nz-range-picker>
-    </nz-input-group>
-  </div>
-  <div nz-row [nzGutter]="24">
-    <div nz-col [nzSpan]="6" class="actions">
-      <button
-        *appAuthority="'create'"
-        type="button"
-        nz-button
-        (click)="modalShow=true"
-      >创建球吧
-      </button>
-      <button
-        nz-button
-        [nzType]="'primary'"
-        [disabled]="loading"
-      >查询
-      </button>
-      <button
-        type="reset"
-        nz-button
-        [disabled]="loading"
-      >重置
-      </button>
-    </div>
-  </div>
-</form>
-<ng-template #totalTemplate>共 {{total}} 条</ng-template>
-<nz-table
-  [nzData]="list"
-  [nzFrontPagination]="false"
-  [nzLoading]="loading"
-  [nzTotal]="total"
-  [nzShowTotal]="totalTemplate"
-  [(nzPageIndex)]="search.pageNum"
-  [(nzPageSize)]="search.pageSize"
-  (nzPageIndexChange)="fetchList()"
-  (nzPageSizeChange)="fetchList('page')"
->
-  <thead>
-  <tr *ngIf="status!=1">
-    <th>球吧LOGO</th>
-    <th>球吧名称</th>
-    <th>球吧分类</th>
-    <th>创建时间</th>
-    <th>申请人</th>
-    <th>操作</th>
-  </tr>
-  <tr *ngIf="status==1">
-    <th>球吧LOGO</th>
-    <th>球吧名称</th>
-    <th>球吧分类</th>
-    <th>创建时间</th>
-    <th>吧主</th>
-    <th>发帖数</th>
-    <th>关注数</th>
-    <th>回复数</th>
-    <th>阅读量</th>
-    <th>球吧状态</th>
-    <th>操作</th>
-  </tr>
-  </thead>
-  <tbody *ngIf="status!=1">
-  <tr *ngFor="let item of list">
-    <td>
-      <img [src]="item.barLogo" alt="" height="35">
-    </td>
-    <td>{{item.barName}}</td>
-    <td [ngSwitch]="item.barType">
-      <span *ngSwitchCase="0">足球</span>
-      <span *ngSwitchCase="1">篮球</span>
-      <span *ngSwitchCase="2">电竞</span>
-      <span *ngSwitchCase="3">全部</span>
-    </td>
-    <td>{{item.createTime}}</td>
-    <td>{{item.username}}</td>
-    <td>
-      <ng-container *ngIf="status==0">
-        <a (click)="modalUserShow=true;selected=item">吧主信息</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <ng-container *appAuthority="'examine'">
-          <a (click)="modalApproveShow=true;selected=item">审核</a>
+<nz-tabset [(nzSelectedIndex)]="tabIndex">
+  <nz-tab nzTitle="球吧列表">
+    <form
+      ngNoForm
+      class="search-area"
+      (submit)="$event.preventDefault();fetchList('page')"
+      (reset)="fetchList('all')"
+    >
+      <div nz-row [nzGutter]="24">
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="球吧名称">
+          <input nz-input [(ngModel)]="search.barName">
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="球吧分类">
+          <nz-select [(ngModel)]="search.barType">
+            <!--0:足球1:篮球2:电竞3:全部-->
+            <nz-option nzLabel="足球" [nzValue]="0"></nz-option>
+            <nz-option nzLabel="篮球" [nzValue]="1"></nz-option>
+            <nz-option nzLabel="电竞" [nzValue]="2"></nz-option>
+          </nz-select>
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="吧主昵称">
+          <app-user-select
+            [(model)]="search.userId"
+            [queryParams]="{authenStatus: '2'}"
+          ></app-user-select>
+        </nz-input-group>
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="创建时间">
+          <nz-range-picker [(ngModel)]="dateRange" style="width: 100%"></nz-range-picker>
+        </nz-input-group>
+      </div>
+      <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="6" class="actions">
+          <button
+            *appAuthority="'create'"
+            type="button"
+            nz-button
+            (click)="modalShow=true"
+          >创建球吧
+          </button>
+          <button
+            nz-button
+            [nzType]="'primary'"
+            [disabled]="loading"
+          >查询
+          </button>
+          <button
+            type="reset"
+            nz-button
+            [disabled]="loading"
+          >重置
+          </button>
+        </div>
+      </div>
+    </form>
+    <ng-template #totalTemplate>共 {{total}} 条</ng-template>
+    <nz-table
+      [nzData]="list"
+      [nzFrontPagination]="false"
+      [nzLoading]="loading"
+      [nzTotal]="total"
+      [nzShowTotal]="totalTemplate"
+      [(nzPageIndex)]="search.pageNum"
+      [(nzPageSize)]="search.pageSize"
+      (nzPageIndexChange)="fetchList()"
+      (nzPageSizeChange)="fetchList('page')"
+    >
+      <thead>
+      <tr>
+        <th>球吧LOGO</th>
+        <th>球吧名称</th>
+        <th>球吧分类</th>
+        <th>创建时间</th>
+        <th>吧主</th>
+        <th>发帖数</th>
+        <th>关注数</th>
+        <th>回复数</th>
+        <th>阅读量</th>
+        <th>球吧状态</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of list">
+        <td>
+          <img [src]="item.barLogo" alt="" height="35">
+        </td>
+        <td>{{item.barName}}</td>
+        <td [ngSwitch]="item.barType">
+          <span *ngSwitchCase="0">足球</span>
+          <span *ngSwitchCase="1">篮球</span>
+          <span *ngSwitchCase="2">电竞</span>
+          <span *ngSwitchCase="3">全部</span>
+        </td>
+        <td>{{item.createTime}}</td>
+        <td>{{item.username}}</td>
+        <td><a (click)="selected=item;subTableType='blog';tabIndex=1">{{item.postCount}}</a></td>
+        <!--<td><a (click)="selected=item;subTableType='user';tabIndex=1">{{item.followCount}}</a></td>-->
+        <td>{{item.followCount}}</td>
+        <td>{{item.replayCount}}</td>
+        <td>{{item.viewCount}}</td>
+        <td [ngSwitch]="item.barStatus">
+          <span *ngSwitchCase="0">开启</span>
+          <span *ngSwitchCase="1">关闭</span>
+        </td>
+        <td>
+          <a (click)="modalUserShow=true;selected=item">吧主信息</a>
           <nz-divider nzType="vertical"></nz-divider>
-        </ng-container>
-        <a
-          *appAuthority="'edit'"
-          (click)="selected=item;modalShow=true;"
-        >编辑</a>
-      </ng-container>
-      <ng-container *ngIf="status==2">
-        <a (click)="modalUserShow=true;selected=item">吧主信息</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="modalRemark=true;selected=item">审核信息</a>
-      </ng-container>
-      <ng-container *appAuthority="'delete'">
-        <nz-divider nzType="vertical"></nz-divider>
-        <a
-          nz-popconfirm
-          nzPopconfirmTitle="确认删除？"
-          (nzOnConfirm)="onDeleteSingle(item.id)"
-        >删除</a>
-      </ng-container>
-    </td>
-  </tr>
-  </tbody>
-  <tbody *ngIf="status==1">
-  <tr *ngFor="let item of list">
-    <td>
-      <img [src]="item.barLogo" alt="" height="35">
-    </td>
-    <td>{{item.barName}}</td>
-    <td [ngSwitch]="item.barType">
-      <span *ngSwitchCase="0">足球</span>
-      <span *ngSwitchCase="1">篮球</span>
-      <span *ngSwitchCase="2">电竞</span>
-      <span *ngSwitchCase="3">全部</span>
-    </td>
-    <td>{{item.createTime}}</td>
-    <td>{{item.username}}</td>
-    <td>{{item.postCount}}</td>
-    <td>{{item.followCount}}</td>
-    <td>{{item.replayCount}}</td>
-    <td>{{item.viewCount}}</td>
-    <td [ngSwitch]="item.barStatus">
-      <span *ngSwitchCase="0">开启</span>
-      <span *ngSwitchCase="1">关闭</span>
-    </td>
-    <td>
-      <a (click)="modalUserShow=true;selected=item">吧主信息</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <ng-container *appAuthority="'recommend'">
-        <a
-          nz-popconfirm
-          [nzPopconfirmTitle]="item.isRecommend == 0 ? '设为推荐？' : '取消推荐？'"
-          (nzOnConfirm)="updateItemRecommend(item)"
-        >{{item.isRecommend == 0 ? '设为推荐' : '取消推荐'}}</a>
-        <nz-divider nzType="vertical"></nz-divider>
-      </ng-container>
-      <ng-container *appAuthority="'open'">
-        <a
-          nz-popconfirm
-          [nzPopconfirmTitle]="item.barStatus == 0 ? '关闭球吧' : '开启球吧'"
-          (nzOnConfirm)="updateItemStatus(item)"
-        >{{item.barStatus == 0 ? '关闭球吧' : '开启球吧'}}</a>
-        <nz-divider nzType="vertical"></nz-divider>
-      </ng-container>
-      <a
-        *appAuthority="'edit'"
-        (click)="selected=item;modalShow=true;"
-      >编辑</a>
-      <ng-container *ngIf="item.barStatus==1">
-        <ng-container *appAuthority="'delete'">
-          <nz-divider nzType="vertical"></nz-divider>
+          <ng-container *appAuthority="'recommend'">
+            <a
+              nz-popconfirm
+              [nzPopconfirmTitle]="item.isRecommend == 0 ? '设为推荐？' : '取消推荐？'"
+              (nzOnConfirm)="updateItemRecommend(item)"
+            >{{item.isRecommend == 0 ? '设为推荐' : '取消推荐'}}</a>
+            <nz-divider nzType="vertical"></nz-divider>
+          </ng-container>
+          <ng-container *appAuthority="'open'">
+            <a
+              nz-popconfirm
+              [nzPopconfirmTitle]="item.barStatus == 0 ? '关闭球吧' : '开启球吧'"
+              (nzOnConfirm)="updateItemStatus(item)"
+            >{{item.barStatus == 0 ? '关闭球吧' : '开启球吧'}}</a>
+            <nz-divider nzType="vertical"></nz-divider>
+          </ng-container>
           <a
-            nz-popconfirm
-            nzPopconfirmTitle="确认删除？"
-            (nzOnConfirm)="onDeleteSingle(item.id)"
-          >删除</a>
-        </ng-container>
-      </ng-container>
-    </td>
-  </tr>
-  </tbody>
-</nz-table>
+            *appAuthority="'edit'"
+            (click)="selected=item;modalShow=true;"
+          >编辑</a>
+          <ng-container *ngIf="item.barStatus==1">
+            <ng-container *appAuthority="'delete'">
+              <nz-divider nzType="vertical"></nz-divider>
+              <a
+                nz-popconfirm
+                nzPopconfirmTitle="确认删除？"
+                (nzOnConfirm)="onDeleteSingle(item.id)"
+              >删除</a>
+            </ng-container>
+          </ng-container>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+  <nz-tab
+    *ngIf="tabIndex==1"
+    [nzTitle]="subTableTitle"
+  >
+    <app-blog-list
+      [barId]="selected?.id"
+    ></app-blog-list>
+  </nz-tab>
+</nz-tabset>
 <app-bar-form
   [(visiable)]="modalShow"
   (submitSuccess)="onSubmitSuccess()"

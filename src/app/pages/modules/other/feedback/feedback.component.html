@@ -1,0 +1,80 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="问题类型">
+      <nz-select></nz-select>
+    </nz-input-group>
+    <div nz-col [nzSpan]="18" class="actions">
+      <button
+        type="button"
+        nz-button
+        nzType="danger"
+        [disabled]="setOfCheckedId.size==0"
+        (click)="onDelete()"
+      >删除
+      </button>
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th
+      [nzChecked]="allChecked"
+      [nzIndeterminate]="false"
+      (nzCheckedChange)="onAllChecked($event);"
+    ></th>
+    <th>问题类型</th>
+    <th>问题详情</th>
+    <th>提交人</th>
+    <th>提交时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td
+      [nzChecked]="setOfCheckedId.has(item.id)"
+      (nzCheckedChange)="onItemChecked(item.id, $event);"
+    ></td>
+    <td>问题类型</td>
+    <td>问题详情</td>
+    <td>提交人</td>
+    <td>提交时间</td>
+    <td>
+      <a (click)="selected=item;modalShow=true;">查看</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<app-feedback-detail
+  [(visiable)]="modalShow"
+  [detail]="selected"
+></app-feedback-detail>

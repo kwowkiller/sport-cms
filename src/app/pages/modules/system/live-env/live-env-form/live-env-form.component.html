@@ -1,0 +1,43 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+  [nzOkLoading]="submiting"
+  [nzOkDisabled]="!form.valid"
+  (nzOnOk)="submit()"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>环境名称</nz-form-label>
+      <nz-form-control [nzSm]="15">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>环境类型</nz-form-label>
+      <nz-form-control [nzSm]="15">
+        <nz-select></nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>生产key的地址</nz-form-label>
+      <nz-form-control [nzSm]="15">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>推流地址</nz-form-label>
+      <nz-form-control [nzSm]="15">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>播放地址</nz-form-label>
+      <nz-form-control [nzSm]="15">
+        <input nz-input/>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+

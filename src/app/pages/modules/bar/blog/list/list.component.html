@@ -12,7 +12,7 @@
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="贴子内容">
           <input nz-input [(ngModel)]="search.context">
         </nz-input-group>
-        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="所属球吧">
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="所属球吧" *ngIf="barId==null">
           <app-bar-select [(model)]="search.barId"></app-bar-select>
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="吧主昵称">

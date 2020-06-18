@@ -1,0 +1,24 @@
+<nz-modal
+  [nzTitle]="title"
+  [nzVisible]="visiable"
+  [nzWidth]="600"
+  (nzOnCancel)="visiableChange.emit(false)"
+  [nzOkLoading]="submiting"
+  [nzOkDisabled]="!form.valid"
+  (nzOnOk)="submit()"
+>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>分类名称</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired>前端排序</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <input nz-input>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

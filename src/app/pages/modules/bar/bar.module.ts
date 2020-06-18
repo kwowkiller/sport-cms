@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ListComponent} from './list/list.component';
+import {ListComponent as BarList} from './list/list.component';
 import {
   NzButtonModule,
   NzDatePickerModule,
@@ -16,11 +16,24 @@ import {ModalFormComponent} from './modal-form/modal-form.component';
 import {ComponentsModule} from '../../../components/components.module';
 import {ModalUserComponent} from './modal-user/modal-user.component';
 import {DirectiveModule} from '../../../directives/directive.module';
-import { AuditListComponent } from './audit-list/audit-list.component';
+import {AuditListComponent} from './audit-list/audit-list.component';
+import {BlogDetailComponent} from './blog/blog-detail/blog-detail.component';
+import {ListComponent as BlogList} from './blog/list/list.component';
+import {BarCategoryComponent} from './category/bar-category.component';
+import { BarCategoryFormComponent } from './category/bar-category-form.component';
 
 
 @NgModule({
-  declarations: [ListComponent, ModalFormComponent, ModalUserComponent, AuditListComponent],
+  declarations: [
+    BarList,
+    ModalFormComponent,
+    ModalUserComponent,
+    AuditListComponent,
+    BlogDetailComponent,
+    BlogList,
+    BarCategoryComponent,
+    BarCategoryFormComponent
+  ],
   imports: [
     CommonModule,
     NzDividerModule,
@@ -31,7 +44,10 @@ import { AuditListComponent } from './audit-list/audit-list.component';
     NzDatePickerModule,
     NzRadioModule,
     RouterModule.forChild([
-      {path: '', component: ListComponent}
+      {path: '', component: BarList},
+      {path: 'audit', component: AuditListComponent},
+      {path: 'blog', component: BlogList},
+      {path: 'category', component: BarCategoryComponent},
     ]),
     NzButtonModule,
     NzModalModule,
@@ -79,3 +95,23 @@ export interface Bar {
   followTime: string;
   viewCount: number;
 }
+
+export interface Blog {
+  barId: number;
+  barName: string;
+  context: string;
+  createTime: string;
+  id: number;
+  isDel: number;
+  phone: string;
+  postingTitle: string;
+  updateTime: string;
+  userId: number;
+  username: string;
+  commentCount: number;
+  likeCount: number;
+  shareCount: number;
+  //  帖子是否推荐(0:否1:是)
+  isRecommend: number;
+}
+

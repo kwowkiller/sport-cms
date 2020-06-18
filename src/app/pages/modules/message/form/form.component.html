@@ -14,15 +14,18 @@
         <textarea nz-input rows="5" formControlName="content"></textarea>
       </nz-form-control>
     </nz-form-item>
-    <!--<nz-form-item>
-      <nz-form-label [nzSm]="4">发送对象</nz-form-label>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4">发送用户类型</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <app-user-select
-          formControlName="userId"
-          placeholder="不选择则发送给所有用户"
-        ></app-user-select>
+        <nz-select></nz-select>
       </nz-form-control>
-    </nz-form-item>-->
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4">发送范围</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <nz-select></nz-select>
+      </nz-form-control>
+    </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>发送时间</nz-form-label>
       <nz-form-control [nzSm]="17">

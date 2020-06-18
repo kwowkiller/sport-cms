@@ -21,6 +21,8 @@ import {ModalFormComponent as MenuForm} from './menu/modal-form/modal-form.compo
 import {RoleSelectComponent} from './role-select/role-select.component';
 import {PermissionComponent} from './role/permission/permission.component';
 import {DirectiveModule} from '../../../directives/directive.module';
+import {LiveEnvComponent} from './live-env/live-env.component';
+import { LiveEnvFormComponent } from './live-env/live-env-form/live-env-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import {DirectiveModule} from '../../../directives/directive.module';
     MenuForm,
     RoleSelectComponent,
     PermissionComponent,
+    LiveEnvComponent,
+    LiveEnvFormComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +46,7 @@ import {DirectiveModule} from '../../../directives/directive.module';
         component: AdminComponent,
       },
       {path: 'role', component: RoleComponent},
+      {path: 'live-env', component: LiveEnvComponent},
     ]),
     NzTableModule,
     NzGridModule,
@@ -60,8 +65,7 @@ import {DirectiveModule} from '../../../directives/directive.module';
     NzRadioModule,
     DirectiveModule,
   ],
-  providers: [
-  ]
+  providers: []
 })
 export class SystemModule {
 }

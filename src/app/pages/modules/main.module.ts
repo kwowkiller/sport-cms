@@ -27,11 +27,6 @@ import {NotFoundComponent} from '../errors/not-found.component';
         loadChildren: () => import('./bar/bar.module').then(m => m.BarModule),
       },
       {
-        // 贴子管理
-        path: 'bar/blog',
-        loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule),
-      },
-      {
         // 直播管理
         path: 'live',
         loadChildren: () => import('./live/live.module').then(m => m.LiveModule),
@@ -80,6 +75,11 @@ import {NotFoundComponent} from '../errors/not-found.component';
         // 方案管理模块
         path: 'scheme',
         loadChildren: () => import('./scheme/scheme.module').then(m => m.SchemeModule),
+      },
+      {
+        // 任务管理
+        path: 'task',
+        loadChildren: () => import('./task/Task.module').then(m => m.TaskModule),
       },
       // 404
       {path: '**', component: NotFoundComponent},

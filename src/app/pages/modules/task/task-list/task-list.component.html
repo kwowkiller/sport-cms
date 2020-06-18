@@ -1,0 +1,88 @@
+<form
+  ngNoForm
+  class="search-area"
+  (submit)="$event.preventDefault();fetchList('page')"
+  (reset)="fetchList('all')"
+>
+  <div nz-row [nzGutter]="24">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="任务名称">
+      <input nz-input>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="任务类型">
+      <nz-select>
+      </nz-select>
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="状态">
+      <nz-select>
+      </nz-select>
+    </nz-input-group>
+    <div nz-col [nzSpan]="6" class="actions">
+      <button
+        nz-button
+        [nzType]="'primary'"
+        [disabled]="loading"
+      >查询
+      </button>
+      <button
+        type="reset"
+        nz-button
+        [disabled]="loading"
+      >重置
+      </button>
+    </div>
+  </div>
+</form>
+<ng-template #totalTemplate>共 {{total}} 条</ng-template>
+<nz-table
+  [nzData]="list"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzShowTotal]="totalTemplate"
+  [(nzPageIndex)]="search.pageNum"
+  [(nzPageSize)]="search.pageSize"
+  (nzPageIndexChange)="fetchList()"
+  (nzPageSizeChange)="fetchList('page')"
+>
+  <thead>
+  <tr>
+    <th>任务名称</th>
+    <th>任务图标</th>
+    <th>任务类型</th>
+    <th>可完成次数</th>
+    <th>获得经验值</th>
+    <th>获得积分</th>
+    <th>获得礼物</th>
+    <th>跳转链接</th>
+    <th>任务备注</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td>任务名称</td>
+    <td>任务图标</td>
+    <td>任务类型</td>
+    <td>可完成次数</td>
+    <td>获得经验值</td>
+    <td>获得积分</td>
+    <td>获得礼物</td>
+    <td>跳转链接</td>
+    <td>任务备注</td>
+    <td>状态</td>
+    <td>
+      <a (click)="selected=item;modalShow=true">编辑</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a
+        nz-popconfirm
+        [nzPopconfirmTitle]="'确认下架？'"
+      >下架</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<app-task-form
+  [(visiable)]="modalShow"
+  [detail]="selected"
+></app-task-form>
