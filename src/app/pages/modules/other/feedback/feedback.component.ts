@@ -2,19 +2,21 @@ import {Component, OnInit} from '@angular/core';
 import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
+import {Feedback} from '../other.module';
 
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.component.html',
   styles: []
 })
-export class FeedbackComponent extends Table<any> implements OnInit {
+export class FeedbackComponent extends Table<Feedback> implements OnInit {
 
   constructor(
     protected http: HttpClient,
     protected message: NzMessageService,
   ) {
     super(http, message);
+    this.listUrl = 'app/sys/feedback/user/list';
   }
 
   ngOnInit(): void {
@@ -28,5 +30,7 @@ export class FeedbackComponent extends Table<any> implements OnInit {
   }
 
   onDelete() {
+    this.deleteUrl = `app/sys/feedback/user/${Array.from(this.setOfCheckedId).join(',')}`;
+    this.deleteItem();
   }
 }

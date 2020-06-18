@@ -73,6 +73,13 @@ export class ListComponent extends Table<MatchItem> implements OnInit {
     return item as MatchItem[];
   }
 
+  getLiveUrls(item: MatchItem): string[] {
+    if (item.liveUrl && item.liveUrl.length > 0) {
+      return item.liveUrl.split(',').filter(url => url.length > 0);
+    }
+    return [];
+  }
+
   fetchList(reset: 'all' | 'page' | 'none' = 'none') {
     this.loading = true;
     this.http.get<{ code: number; data: MatchItem[] }>(this.listUrl, {

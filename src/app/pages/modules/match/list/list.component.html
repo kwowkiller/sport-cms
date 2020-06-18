@@ -77,7 +77,16 @@
     <td>{{item.awayTeamName}}</td>
     <td>{{item.homeTeamScore}} : {{item.awayTeamScore}}</td>
     <td>{{item.middlePosition == 1 ? '是' : '否'}}</td>
-    <td>视频地址</td>
+    <td>
+      <ng-container *ngFor="let url of getLiveUrls(item);let index=index">
+        <span [ngSwitch]="index">
+          <ng-container *ngSwitchCase="0">普清：</ng-container>
+          <ng-container *ngSwitchCase="1">高清英文：</ng-container>
+          <ng-container *ngSwitchCase="2">高清中文：</ng-container>
+        </span><a appCopy [text]="url">{{url}}</a><br>
+      </ng-container>
+      <ng-container *ngIf="getLiveUrls(item).length==0">暂无</ng-container>
+    </td>
     <td>{{item.isGuess ? '是' : '否'}}</td>
     <td>
       <a (click)="modal1Show=true;selected=item;">赛事数据</a>

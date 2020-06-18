@@ -1,16 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {AuthorityDirective} from "./authority.directive";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AuthorityDirective} from './authority.directive';
+import {CopyDirective} from './copy.directive';
 
 @NgModule({
   declarations: [
-    AuthorityDirective
+    AuthorityDirective,
+    CopyDirective,
   ],
   exports: [
-    AuthorityDirective
+    AuthorityDirective,
+    CopyDirective
   ],
   imports: [
     CommonModule
   ]
 })
-export class DirectiveModule { }
+export class DirectiveModule {
+}

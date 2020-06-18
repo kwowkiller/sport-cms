@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalForm} from '../../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
+import {Feedback} from '../../other.module';
 
 @Component({
   selector: 'app-feedback-detail',
@@ -11,7 +12,7 @@ import {HttpClient} from '@angular/common/http';
     '.item>label:after{content:"："}',
   ]
 })
-export class FeedbackDetailComponent extends ModalForm<any> implements OnInit {
+export class FeedbackDetailComponent extends ModalForm<Feedback> implements OnInit {
 
   constructor(http: HttpClient) {
     super(http);

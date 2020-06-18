@@ -16,6 +16,7 @@ import {RouterModule} from '@angular/router';
 import {ModalData1Component} from './modal-data1/modal-data1.component';
 import {ModalData2Component} from './modal-data2/modal-data2.component';
 import {ModalData3Component} from './modal-data3/modal-data3.component';
+import {DirectiveModule} from '../../../directives/directive.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {ModalData3Component} from './modal-data3/modal-data3.component';
     NzModalModule,
     NzRadioModule,
     NzSpinModule,
+    DirectiveModule,
   ]
 })
 export class MatchModule {
@@ -124,4 +126,6 @@ export interface MatchItem {
   isCast: number;
   isGuess: number;
   isLive: number;
+  // 普清，高清英文，高清中文 逗号隔开
+  liveUrl?: string;
 }

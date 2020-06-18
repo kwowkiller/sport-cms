@@ -22,8 +22,8 @@ import {FormComponent as TagForm} from './category/tags/form.component';
 import {DirectiveModule} from '../../../directives/directive.module';
 import {ListComponent as CategoryList} from './category/list/list.component';
 import {FormComponent as CategoryForm} from './category/form/form.component';
-import { FeedbackComponent } from './feedback/feedback.component';
-import { FeedbackDetailComponent } from './feedback/feedback-detail/feedback-detail.component';
+import {FeedbackComponent} from './feedback/feedback.component';
+import {FeedbackDetailComponent} from './feedback/feedback-detail/feedback-detail.component';
 
 @NgModule({
   declarations: [
@@ -111,3 +111,15 @@ export interface Tags {
   tag: string;
   updateTime: string;
 }
+
+export interface Feedback {
+  content: string;
+  createTime: string;
+  id: number;
+  // 图片
+  url: string;
+  userId: number;
+  // 问题类型(1账号信息,2充值问题,3实名认证,4直播问题,5球吧问题,6,比分问题,资讯问题)
+  type: number;
+}
+

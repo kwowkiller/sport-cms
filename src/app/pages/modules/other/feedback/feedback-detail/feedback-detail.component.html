@@ -6,18 +6,28 @@
 >
   <div class="item">
     <label>问题类型</label>
-    <div></div>
+    <div [ngSwitch]="detail?.type">
+      <span *ngSwitchCase="1">账号信息</span>
+      <span *ngSwitchCase="2">充值问题</span>
+      <span *ngSwitchCase="3">实名认证</span>
+      <span *ngSwitchCase="4">直播问题</span>
+      <span *ngSwitchCase="5">球吧问题</span>
+      <span *ngSwitchCase="6">比分问题</span>
+      <span *ngSwitchCase="7">资讯问题</span>
+    </div>
   </div>
   <div class="item">
     <label>问题详情</label>
-    <div></div>
+    <div>
+      {{detail?.content}}
+    </div>
   </div>
   <div class="item">
     <label>提交人</label>
-    <div></div>
+    <div>{{detail?.userId}}</div>
   </div>
   <div class="item">
     <label>提交时间</label>
-    <div></div>
+    <div>{{detail?.createTime}}</div>
   </div>
 </nz-modal>

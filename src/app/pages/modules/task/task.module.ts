@@ -12,11 +12,14 @@ import {
   NzTableModule
 } from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { TaskFormComponent } from './task-form/task-form.component';
+import {TaskFormComponent} from './task-form/task-form.component';
 import {ComponentsModule} from '../../../components/components.module';
 
 @NgModule({
-  declarations: [TaskListComponent, TaskFormComponent],
+  declarations: [
+    TaskListComponent,
+    TaskFormComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([

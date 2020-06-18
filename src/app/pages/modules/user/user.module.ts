@@ -24,6 +24,7 @@ import {ExpSettingComponent} from './exp-setting/exp-setting.component';
 import {LevelConfigComponent} from './level-config/level-config.component';
 import {PointLogComponent} from './point-log/point-log.component';
 import {LevelLogComponent} from './level-log/level-log.component';
+import {ComponentsModule} from '../../../components/components.module';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import {LevelLogComponent} from './level-log/level-log.component';
     ReactiveFormsModule,
     NzFormModule,
     DirectiveModule,
+    ComponentsModule,
   ]
 })
 export class UserModule {
