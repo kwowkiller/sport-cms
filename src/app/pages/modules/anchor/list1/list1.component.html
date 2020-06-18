@@ -31,8 +31,9 @@
       </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户等级">
-      <nz-select>
-      </nz-select>
+      <app-level-select
+        [(ngModel)]="search.levelId"
+      ></app-level-select>
     </nz-input-group>
     <div nz-col [nzSpan]="6" class="actions">
       <button
@@ -93,7 +94,7 @@
       <span *ngSwitchCase="2">未知</span>
     </td>
     <td>{{item.createTime}}</td>
-    <td>用户等级</td>
+    <td>{{item.levelName}}</td>
     <td>{{item.fansCount}}</td>
     <td>{{item.userFollowCount}}</td>
     <td [ngSwitch]="item.sstatus">

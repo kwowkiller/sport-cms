@@ -6,6 +6,7 @@ import {UserSelectComponent} from './user-select/user-select.component';
 import {FormsModule} from '@angular/forms';
 import { BarSelectComponent } from './bar-select/bar-select.component';
 import { CategorySelectComponent } from './category-select/category-select.component';
+import { LevelSelectComponent } from './level-select/level-select.component';
 
 
 @NgModule({
@@ -14,12 +15,14 @@ import { CategorySelectComponent } from './category-select/category-select.compo
     UserSelectComponent,
     BarSelectComponent,
     CategorySelectComponent,
+    LevelSelectComponent,
   ],
   exports: [
     UploadComponent,
     UserSelectComponent,
     BarSelectComponent,
-    CategorySelectComponent
+    CategorySelectComponent,
+    LevelSelectComponent
   ],
   imports: [
     CommonModule,

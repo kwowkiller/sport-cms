@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {ModalForm} from '../../../../frame/modal-form';
 import {Anchor} from '../anchor.module';
 
@@ -16,30 +16,44 @@ import {Anchor} from '../anchor.module';
       [nzOkDisabled]="!form.valid"
       [nzOkLoading]="submiting"
     >
-      <nz-form-item>
-        <nz-form-label [nzSm]="6" nzRequired>主播分成比例</nz-form-label>
-        <nz-form-control [nzSm]="15">
-          <input type="text" nz-input>
-        </nz-form-control>
-      </nz-form-item>
-      <div nz-col nzOffset="6" nzSpan="15">
-        直播所得积分由系统抽50%，用户得50%
-      </div>
+      <form nz-form [formGroup]="form">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" nzRequired>主播分成比例</nz-form-label>
+          <nz-form-control [nzSm]="15">
+            <input type="number" nz-input formControlName="rate">
+          </nz-form-control>
+        </nz-form-item>
+        <div nz-col nzOffset="6" nzSpan="15">
+          直播所得积分由系统抽50%，用户得50%
+        </div>
+      </form>
     </nz-modal>
   `,
   styles: []
 })
-export class ModalSetting2Component extends ModalForm<Anchor> implements OnInit {
+export class ModalSetting2Component extends ModalForm<Anchor> implements OnInit, OnChanges {
 
   constructor(http: HttpClient, private fb: FormBuilder) {
     super(http);
-    this.form = this.fb.group({});
+    this.submitUrl = 'live/sys/host/rate';
+    this.method = 'PUT';
+    this.form = this.fb.group({
+      rate: [null, [Validators.required]],
+    });
   }
 
   ngOnInit(): void {
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.detail) {
+      // this.http.get(`live/sys/host/host/${this.detail.id}`).subscribe(event => {
+      // });
+    }
+  }
+
   beforeSubmit() {
+    this.form.value.id = this.detail.id;
   }
 
 }

@@ -11,37 +11,43 @@
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>礼物名称</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <input nz-input formControlName="giftName"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>礼物价值</nz-form-label>
       <nz-form-control [nzSm]="17">
         <nz-input-group nzAddOnAfter="积分">
-          <input nz-input/>
+          <input nz-input formControlName="price"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSm]="4" nzRequired>礼物价值</nz-form-label>
-      <app-upload></app-upload>
+      <nz-form-label [nzSm]="4" nzRequired>礼物图片</nz-form-label>
+      <app-upload
+        formControlName="giftImage"
+      ></app-upload>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>礼物标签</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <nz-select></nz-select>
+        <nz-select formControlName="giftTag">
+          <nz-option nzLabel="热门" [nzValue]="0"></nz-option>
+          <nz-option nzLabel="无" [nzValue]="1"></nz-option>
+          <nz-option nzLabel="豪" [nzValue]="2"></nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>赠送上限</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <input nz-input formControlName="LLimit"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>前端排序</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <input nz-input formControlName="orderNum"/>
       </nz-form-control>
     </nz-form-item>
   </form>

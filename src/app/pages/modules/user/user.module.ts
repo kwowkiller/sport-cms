@@ -22,8 +22,8 @@ import {DirectiveModule} from '../../../directives/directive.module';
 import {PointSettingComponent} from './point-setting/point-setting.component';
 import {ExpSettingComponent} from './exp-setting/exp-setting.component';
 import {LevelConfigComponent} from './level-config/level-config.component';
-import { PointLogComponent } from './point-log/point-log.component';
-import { LevelLogComponent } from './level-log/level-log.component';
+import {PointLogComponent} from './point-log/point-log.component';
+import {LevelLogComponent} from './level-log/level-log.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +86,10 @@ export interface User {
   updateTime: string;
   userStatus: number;
   username: string;
+  // 积分
+  points: number;
+  // 等级
+  levelName: string;
 }
 
 export interface AuthInfo {
@@ -114,4 +118,13 @@ export interface AuthInfo {
   registerDays: number;
   signature: string;
   username: string;
+}
+
+export interface LevelConfig {
+  createTime: string;
+  fromExpireValue: number;
+  id: number;
+  levelImage: string;
+  levelName: string;
+  toExpireValue: number;
 }

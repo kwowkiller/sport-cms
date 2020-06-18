@@ -18,9 +18,9 @@
       </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="是否可发布方案">
-      <nz-select nzPlaceHolder="请选择">
+      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.isGuess">
         <nz-option nzLabel="是" [nzValue]="1"></nz-option>
-        <nz-option nzLabel="否" [nzValue]="2"></nz-option>
+        <nz-option nzLabel="否" [nzValue]="0"></nz-option>
       </nz-select>
     </nz-input-group>
   </div>
@@ -78,7 +78,7 @@
     <td>{{item.homeTeamScore}} : {{item.awayTeamScore}}</td>
     <td>{{item.middlePosition == 1 ? '是' : '否'}}</td>
     <td>视频地址</td>
-    <td>是否可发布方案</td>
+    <td>{{item.isGuess ? '是' : '否'}}</td>
     <td>
       <a (click)="modal1Show=true;selected=item;">赛事数据</a>
       <nz-divider nzType="vertical"></nz-divider>

@@ -15,6 +15,7 @@ export class PointListComponent extends Table<any> implements OnInit {
     protected message: NzMessageService,
   ) {
     super(http, message);
+    this.listUrl = 'app/sys/points/page';
   }
 
   ngOnInit(): void {

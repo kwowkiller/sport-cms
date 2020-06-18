@@ -557,14 +557,14 @@ export class InitResolve implements Resolve<any> {
                   breadcrumb: false,
                 },
                 name: '任务管理',
-                path: 'task',
+                  path: 'task',
               },
             ],
             component: '',
             hidden: false,
             meta: {
               title: '任务管理',
-              icon: 'database',
+                icon: 'database',
               breadcrumb: false,
             },
             name: '任务管理',
@@ -625,8 +625,8 @@ export class InitResolve implements Resolve<any> {
             path: 'system',
           },
         ];
-        Session.menus = foo(temp, 0);
-        // Session.menus = foo(menuData.data.routes.filter(i => i.path !== '*'), 0);
+        // Session.menus = foo(temp, 0);
+        Session.menus = foo(menuData.data.routes.filter(i => i.path !== '*'), 0);
       }
     }
   }

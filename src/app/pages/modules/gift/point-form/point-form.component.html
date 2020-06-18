@@ -11,19 +11,19 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>充值积分数</nz-form-label>
       <nz-form-control [nzSm]="15">
-        <input nz-input>
+        <input nz-input formControlName="points">
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>价格</nz-form-label>
       <nz-form-control [nzSm]="15">
-        <input nz-input>
+        <input nz-input formControlName="price">
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>首冲赠送</nz-form-label>
       <nz-form-control [nzSm]="15">
-        <input nz-input placeholder="为0不赠送">
+        <input nz-input placeholder="为0不赠送" formControlName="firstBuyGive">
       </nz-form-control>
     </nz-form-item>
   </form>

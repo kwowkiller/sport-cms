@@ -30,8 +30,9 @@
       </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户等级">
-      <nz-select>
-      </nz-select>
+      <app-level-select
+        [(ngModel)]="search.levelId"
+      ></app-level-select>
     </nz-input-group>
     <div nz-col [nzSpan]="12" class="actions">
       <button
@@ -106,7 +107,7 @@
     <td>{{item.fansCount}}</td>
     <td>{{item.followUserCount}}</td>
     <td>{{item.lastStartTime}}</td>
-    <td>{{item.hostLevel}}</td>
+    <td>{{item.levelName}}</td>
     <td>{{item.sstatus == 0 ? '正常' : '禁播'}}</td>
     <td [ngSwitch]="item.liveStatus">
       <span *ngSwitchCase="0">未播</span>
@@ -152,8 +153,10 @@
 <app-modal-setting1
   [detail]="selected"
   [(visiable)]="modalSetting1"
+  (submitSuccess)="onSubmitSuccess()"
 ></app-modal-setting1>
 <app-modal-setting2
   [detail]="selected"
   [(visiable)]="modalSetting2"
+  (submitSuccess)="onSubmitSuccess()"
 ></app-modal-setting2>

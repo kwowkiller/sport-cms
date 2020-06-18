@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
 import {Anchor} from '../anchor.module';
 import {HttpClient} from '@angular/common/http';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-modal-setting1',
@@ -16,26 +16,40 @@ import {FormBuilder} from '@angular/forms';
       [nzOkDisabled]="!form.valid"
       [nzOkLoading]="submiting"
     >
-      <nz-form-item>
-        <nz-form-label [nzSm]="4" nzRequired>主播标签</nz-form-label>
-        <nz-form-control [nzSm]="17">
-          <input type="text" nz-input>
-        </nz-form-control>
-      </nz-form-item>
+      <form nz-form [formGroup]="form">
+        <nz-form-item>
+          <nz-form-label [nzSm]="4" nzRequired>主播标签</nz-form-label>
+          <nz-form-control [nzSm]="17">
+            <input type="text" nz-input formControlName="officialIcon">
+          </nz-form-control>
+        </nz-form-item>
+      </form>
     </nz-modal>
   `,
   styles: []
 })
-export class ModalSetting1Component extends ModalForm<Anchor> implements OnInit {
+export class ModalSetting1Component extends ModalForm<Anchor> implements OnInit, OnChanges {
 
   constructor(http: HttpClient, private fb: FormBuilder) {
     super(http);
-    this.form = this.fb.group({});
+    this.method = 'PUT';
+    this.submitUrl = 'live/sys/host/officialicon';
+    this.form = this.fb.group({
+      officialIcon: [null, [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.detail) {
+      // this.http.get(`live/sys/host/host/${this.detail.id}`).subscribe(event => {
+      // });
+    }
+  }
+
   beforeSubmit() {
+    this.form.value.id = this.detail.id;
   }
 }

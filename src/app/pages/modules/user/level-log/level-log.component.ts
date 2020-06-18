@@ -8,7 +8,7 @@ import {Table} from '../../../../frame/table';
   templateUrl: './level-log.component.html',
   styles: []
 })
-export class LevelLogComponent extends Table<any> implements OnInit {
+export class LevelLogComponent extends Table<Item> implements OnInit {
   dateRange: Date[] = [];
 
   constructor(
@@ -27,4 +27,8 @@ export class LevelLogComponent extends Table<any> implements OnInit {
 
   onSubmitSuccess() {
   }
+}
+
+interface Item {
+
 }

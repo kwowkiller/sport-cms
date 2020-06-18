@@ -115,10 +115,10 @@
         </td>
         <td>{{item.lastLoginTime}}</td>
         <td>
-          <a (click)="selected=item;tabIndex=1;subTableType='level'">用户等级</a>
+          <a (click)="selected=item;tabIndex=1;subTableType='level'">{{item.levelName}}</a>
         </td>
         <td>
-          <a (click)="selected=item;tabIndex=1;subTableType='point'">积分余额</a>
+          <a (click)="selected=item;tabIndex=1;subTableType='point'">{{item.points}}</a>
         </td>
         <td [ngSwitch]="item.userStatus">
           <span *ngSwitchCase="0">正常</span>

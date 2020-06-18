@@ -17,6 +17,7 @@ export class GiftListComponent extends Table<any> implements OnInit {
     protected message: NzMessageService,
   ) {
     super(http, message);
+    this.listUrl = 'app/sys/gift/gift/page';
   }
 
   ngOnInit(): void {
