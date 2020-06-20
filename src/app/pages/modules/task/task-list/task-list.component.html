@@ -77,6 +77,7 @@
       <a
         nz-popconfirm
         [nzPopconfirmTitle]="'确认下架？'"
+        (nzOnConfirm)="updateItem(item)"
       >下架</a>
     </td>
   </tr>

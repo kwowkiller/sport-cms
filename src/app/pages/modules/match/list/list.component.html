@@ -6,8 +6,11 @@
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="比赛名称">
       <input type="text" nz-input [(ngModel)]="search.matchName">
     </nz-input-group>
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="球队名称">
-      <input type="text" nz-input [(ngModel)]="search.teamName">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="主队名称">
+      <input type="text" nz-input [(ngModel)]="search.homeTeamName">
+    </nz-input-group>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="客队名称">
+      <input type="text" nz-input [(ngModel)]="search.awayTeamName">
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事状态">
       <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.type">
@@ -17,14 +20,14 @@
         <nz-option nzLabel="延期" [nzValue]="4"></nz-option>
       </nz-select>
     </nz-input-group>
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="是否可发布方案">
-      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.isGuess">
+  </div>
+  <div nz-row [nzGutter]="24">
+      <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="是否可发布方案">
+      <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.programType">
         <nz-option nzLabel="是" [nzValue]="1"></nz-option>
         <nz-option nzLabel="否" [nzValue]="0"></nz-option>
       </nz-select>
     </nz-input-group>
-  </div>
-  <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="6" class="actions">
       <button
         type="button"
@@ -75,7 +78,9 @@
     <td *ngIf="type=='football'">{{item.teeTime * 1000|date:'yyyy-MM-dd HH:mm:ss'}}</td>
     <td>{{item.homeTeamName}}</td>
     <td>{{item.awayTeamName}}</td>
-    <td>{{item.homeTeamScore}} : {{item.awayTeamScore}}</td>
+    <td *ngIf="type=='football'">{{item.homeTeamScore}} : {{item.awayTeamScore}}</td>
+    <td *ngIf="type=='basketball'">{{getBasketballTotalScore(item.homeTeamScore)}}
+      : {{getBasketballTotalScore(item.awayTeamScore)}}</td>
     <td>{{item.middlePosition == 1 ? '是' : '否'}}</td>
     <td>
       <ng-container *ngFor="let url of getLiveUrls(item);let index=index">

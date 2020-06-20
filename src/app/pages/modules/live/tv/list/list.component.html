@@ -122,7 +122,7 @@
         <td>
           <img [src]="item.liveFaceImage" alt="" style="height: 35px">
         </td>
-        <td>{{item.liveType}}</td>
+        <td>{{item.typeName}}</td>
         <td>{{item.tag}}</td>
         <td>{{item.startTime}}</td>
         <td>{{item.lastStartTime}}</td>
@@ -183,6 +183,7 @@
 </nz-tabset>
 <app-tv-form
   [queryId]="selected?.id"
+  [detail]="selected"
   [(visiable)]="modalShow"
   (submitSuccess)="onSubmitSuccess()"
 ></app-tv-form>

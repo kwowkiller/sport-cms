@@ -71,6 +71,7 @@ export interface Match {
 }
 
 export interface MatchItem {
+  programType: boolean;
   awayTeamId: number;
   awayTeamRed: number;
   eventId: number;

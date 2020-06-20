@@ -41,3 +41,7 @@ import {ComponentsModule} from '../../../components/components.module';
 })
 export class TaskModule {
 }
+
+export interface Task {
+  id: number;
+}

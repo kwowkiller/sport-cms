@@ -92,12 +92,28 @@ export class ListComponent extends Table<MatchItem> implements OnInit {
         if (this.search.matchName) {
           this.list = this.list.filter(i => i.eventName.includes(this.search.matchName));
         }
-        if (this.search.teamName) {
-          this.list = this.list.filter(i => i.homeTeamName.includes(this.search.matchName)
-            || i.awayTeamName.includes(this.search.matchName));
+        if (this.search.homeTeamName) {
+          this.list = this.list.filter(i => i.homeTeamName.includes(this.search.homeTeamName));
+        }
+        if(this.search.awayTeamName){
+          this.list = this.list.filter(i => i.awayTeamName.includes(this.search.awayTeamName));
+        }
+        if (this.type === 'basketball') {
+          this.list.forEach(item => {
+            // @ts-ignore
+            const arr1 = item.homeTeamScore as number[];
+            arr1[arr1.length - 1] = arr1.reduce((p, c) => p + c);
+            // @ts-ignore
+            const arr2 = item.awayTeamScore as number[];
+            arr2[arr2.length - 1] = arr2.reduce((p, c) => p + c);
+          });
         }
       }
     });
+  }
+
+  getBasketballTotalScore(item: any) {
+    return item[item.length - 1];
   }
 
   ngOnInit(): void {

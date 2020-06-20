@@ -69,6 +69,8 @@ export class LiveModule {
 
 // TV
 export interface Live {
+  // 分类名
+  typeName: string;
   createTime: string;
   id: number;
   lastStartTime: string;

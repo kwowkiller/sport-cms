@@ -30,6 +30,7 @@ export class ListComponent extends Table<Live> implements OnInit {
 
   onSubmitSuccess() {
     this.message.success('操作成功');
+    this.fetchList('all');
   }
 
   onDelete() {

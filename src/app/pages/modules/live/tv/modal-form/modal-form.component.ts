@@ -27,7 +27,11 @@ export class ModalFormComponent extends ModalForm<Live> implements OnInit, OnCha
       liveType: [null, [
         // Validators.required
       ]],
-      liveUrl: [null, [Validators.required]],
+      // liveUrl: [null, [Validators.required]],
+      liveUrlOne: [null, [Validators.required]],
+      liveUrlTwo: [null],
+      liveUrlThree: [null],
+      liveUrlFour: [null],
       liveTag: [null, [Validators.required]],
       liveFaceImage: [null, [Validators.required]],
       // username: [null, [Validators.required]],
@@ -58,14 +62,18 @@ export class ModalFormComponent extends ModalForm<Live> implements OnInit, OnCha
         finalize(() => this.loading = false)
       ).subscribe(event => {
         this.form.addControl('id', this.fb.control(null));
+        const urls = event.data.liveUrl ? event.data.liveUrl.split(',') : [];
         this.form.setValue({
           id: event.data.id,
           startTime: new Date(event.data.startTime),
           liveTitle: event.data.liveTitle,
-          liveType: event.data.liveType || null,
-          liveUrl: event.data.liveUrl,
+          liveType: event.data.liveType || this.detail.liveType || null,
           liveTag: event.data.liveTag,
           liveFaceImage: event.data.liveFaceImage,
+          liveUrlOne: urls[0] || '',
+          liveUrlTwo: urls[1] || '',
+          liveUrlThree: urls[2] || '',
+          liveUrlFour: urls[3] || '',
           // username: '主播名',
         });
       });
@@ -73,5 +81,10 @@ export class ModalFormComponent extends ModalForm<Live> implements OnInit, OnCha
   }
 
   beforeSubmit() {
+    // const {liveUrl, liveUrl1, liveUrl2, liveUrl3} = this.form.value;
+    // this.form.value.liveUrl = [liveUrl, liveUrl1, liveUrl2, liveUrl3].join(',');
+    // delete this.form.value.liveUrl1;
+    // delete this.form.value.liveUrl2;
+    // delete this.form.value.liveUrl3;
   }
 }

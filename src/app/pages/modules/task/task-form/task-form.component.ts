@@ -22,6 +22,14 @@ export class TaskFormComponent extends ModalForm<any> implements OnInit, OnChang
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (this.detail) {
+      this.method = 'PUT';
+      this.submitUrl = 'app/sys/task/update';
+    } else {
+      this.method = 'POST';
+      this.submitUrl = 'app/sys/task/add';
+      this.form.reset();
+    }
   }
 
   beforeSubmit() {
