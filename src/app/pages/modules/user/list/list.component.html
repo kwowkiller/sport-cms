@@ -161,7 +161,7 @@
     </nz-table>
   </nz-tab>
   <nz-tab
-    *ngIf="selected"
+    *ngIf="selected&&tabIndex==1"
     [nzTitle]="subTableTitle"
   >
     <app-user-sub-list
@@ -193,8 +193,10 @@
 <app-point-setting
   [(visiable)]="modalPointShow"
   [detail]="selected"
+  (submitSuccess)="onSubmitSuccess()"
 ></app-point-setting>
 <app-exp-setting
   [(visiable)]="modalExpShow"
   [detail]="selected"
+  (submitSuccess)="onSubmitSuccess()"
 ></app-exp-setting>

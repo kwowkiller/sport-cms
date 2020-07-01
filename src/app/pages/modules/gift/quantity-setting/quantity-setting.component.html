@@ -5,18 +5,23 @@
   (nzOnCancel)="visiableChange.emit(false)"
   (nzOnOk)="submit()"
   [nzOkLoading]="submiting"
-  [nzOkDisabled]="!form.valid"
+  [nzOkDisabled]="disabled"
 >
-  <form nz-form [formGroup]="form">
+  <form
+    nz-form
+    *ngFor="let item of forms;let index=index"
+    [formGroup]="item"
+  >
     <nz-form-item>
       <nz-form-label [nzSm]="3" nzRequired>数量</nz-form-label>
       <nz-form-control [nzSm]="5">
-        <input nz-input/>
+        <input nz-input type="number" formControlName="giveQuantity"/>
       </nz-form-control>
       <nz-form-label [nzSm]="3" nzRequired>描述</nz-form-label>
       <nz-form-control [nzSm]="12">
-        <input nz-input/>
+        <input nz-input formControlName="description"/>
       </nz-form-control>
+      <a (click)="deleteItem(item.value.id,index)" style="margin-left: 10px;color: red;">删除</a>
     </nz-form-item>
   </form>
 </nz-modal>

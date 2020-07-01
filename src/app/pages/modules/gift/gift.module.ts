@@ -18,7 +18,7 @@ import {GiftListComponent} from './gift-list/gift-list.component';
 import {ComponentsModule} from '../../../components/components.module';
 import {QuantitySettingComponent} from './quantity-setting/quantity-setting.component';
 import {PointListComponent} from './point-list/point-list.component';
-import { PointFormComponent } from './point-form/point-form.component';
+import {PointFormComponent} from './point-form/point-form.component';
 
 @NgModule({
   declarations: [
@@ -49,4 +49,23 @@ import { PointFormComponent } from './point-form/point-form.component';
   ]
 })
 export class GiftModule {
+}
+
+export interface Gift {
+  createTime: string;
+  giftImage: string;
+  giftName: string;
+  giftTag: number;
+  id: number;
+  llimit: number;
+  orderNum: number;
+  price: number;
+}
+
+export interface Point {
+  createTime: string;
+  firstBuyGive: number;
+  id: number;
+  points: number;
+  price: number;
 }

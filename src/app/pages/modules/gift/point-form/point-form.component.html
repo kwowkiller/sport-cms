@@ -17,7 +17,9 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>价格</nz-form-label>
       <nz-form-control [nzSm]="15">
-        <input nz-input formControlName="price">
+        <nz-input-group nzAddOnAfter="元">
+          <input nz-input formControlName="price">
+        </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>

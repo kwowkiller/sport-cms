@@ -29,6 +29,12 @@ export class TaskListComponent extends Table<Task> implements OnInit {
 
   updateItem(item: Task) {
     this.http.put<Result>(`app/sys/task/status/${item.id}`, {}).subscribe(event => {
+      if (event.code === 200) {
+        this.fetchList('none');
+        this.message.success('操作成功');
+      } else {
+        this.message.error(event.message);
+      }
     });
   }
 }

@@ -38,13 +38,15 @@
   </thead>
   <tbody>
   <tr *ngFor="let item of list">
-    <td>序号</td>
-    <td>礼物名称</td>
-    <td>礼物图像</td>
-    <td>礼物价值</td>
-    <td>礼物标签</td>
-    <td>单次赠送上限</td>
-    <td>前端排序</td>
+    <td>{{item.id}}</td>
+    <td>{{item.giftName}}</td>
+    <td>
+      <img [src]="item.giftImage" alt="" style="height: 35px">
+    </td>
+    <td>{{item.price}}</td>
+    <td>{{item.giftTag}}</td>
+    <td>{{item.llimit}}</td>
+    <td>{{item.orderNum}}</td>
     <td>
       <a (click)="selected=item;modalShow=true">编辑</a>
       <nz-divider nzType="vertical"></nz-divider>
@@ -56,11 +58,14 @@
 <app-gift-form
   [detail]="selected"
   [(visiable)]="modalShow"
+  (submitSuccess)="onSubmitSuccess()"
 ></app-gift-form>
 <app-send-gift
   [(visiable)]="modalSendShow"
+  (submitSuccess)="onSubmitSuccess()"
 ></app-send-gift>
 <app-quantity-setting
   [(visiable)]="modalQuantityShow"
   [detail]="selected"
+  (submitSuccess)="onSubmitSuccess()"
 ></app-quantity-setting>

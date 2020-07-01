@@ -6,7 +6,13 @@
 >
   <div nz-row [nzGutter]="24">
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="变动类型">
-      <nz-select></nz-select>
+      <nz-select [(ngModel)]="search.type">
+        <nz-option
+          *ngFor="let item of pointType"
+          [nzLabel]="item.label"
+          [nzValue]="item.value"
+        ></nz-option>
+      </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="变动时间">
       <nz-range-picker [(ngModel)]="dateRange" style="width: 100%"></nz-range-picker>
@@ -42,21 +48,30 @@
   <thead>
   <tr>
     <th>序号</th>
-    <th>经验获取时间</th>
-    <th>获得经验类型</th>
-    <th>获得经验值</th>
-    <th>获得前经验值</th>
-    <th>获得后经验值</th>
+    <th>积分变动时间</th>
+    <th>变动类型</th>
+    <th>变动积分数</th>
+    <th>变动前积分余额</th>
+    <th>变动后积分余额</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let item of list">
-    <td>序号</td>
-    <td>经验获取时间</td>
-    <td>获得经验类型</td>
-    <td>获得经验值</td>
-    <td>获得前经验值</td>
-    <td>获得后经验值</td>
+    <td>{{item.id}}</td>
+    <td>{{item.createTime}}</td>
+    <td [ngSwitch]="item.type">
+      <span *ngSwitchCase="0">赠送礼物</span>
+      <span *ngSwitchCase="1">收到礼物</span>
+      <span *ngSwitchCase="2">购买方案</span>
+      <span *ngSwitchCase="3">出售方案</span>
+      <span *ngSwitchCase="4">积分充值</span>
+      <span *ngSwitchCase="5">任务赠送</span>
+      <span *ngSwitchCase="6">后台充值</span>
+      <span *ngSwitchCase="7">后台扣减</span>
+    </td>
+    <td>变动积分数</td>
+    <td>{{item.startPoints}}</td>
+    <td>{{item.endPoints}}</td>
   </tr>
   </tbody>
 </nz-table>

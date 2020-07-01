@@ -6,14 +6,18 @@
 >
   <div nz-row [nzGutter]="24">
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="任务名称">
-      <input nz-input>
+      <input nz-input [(ngModel)]="search.taskName">
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="任务类型">
-      <nz-select>
+      <nz-select [(ngModel)]="search.type">
+        <nz-option nzLabel="每日任务" [nzValue]="0"></nz-option>
+        <nz-option nzLabel="其他任务" [nzValue]="1"></nz-option>
       </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="状态">
-      <nz-select>
+      <nz-select [(ngModel)]="search.SStatus">
+        <nz-option nzLabel="已发布" [nzValue]="0"></nz-option>
+        <nz-option nzLabel="已下架" [nzValue]="1"></nz-option>
       </nz-select>
     </nz-input-group>
     <div nz-col [nzSpan]="6" class="actions">
@@ -61,24 +65,29 @@
   </thead>
   <tbody>
   <tr *ngFor="let item of list">
-    <td>任务名称</td>
-    <td>任务图标</td>
-    <td>任务类型</td>
-    <td>可完成次数</td>
-    <td>获得经验值</td>
-    <td>获得积分</td>
-    <td>获得礼物</td>
-    <td>跳转链接</td>
-    <td>任务备注</td>
-    <td>状态</td>
+    <td>{{item.taskName}}</td>
+    <td>
+      <img [src]="item.taskIcon" alt="" style="height: 35px">
+    </td>
+    <td [ngSwitch]="item.type">
+      <span *ngSwitchCase="0">每日任务</span>
+      <span *ngSwitchCase="1">其他任务</span>
+    </td>
+    <td>{{item.complateTimes}}</td>
+    <td>{{item.haveExpireValue}}</td>
+    <td>{{item.havePoints}}</td>
+    <td>{{item.giftName}}</td>
+    <td><a [href]="item.linkUrl" target="_blank">{{item.linkUrl}}</a></td>
+    <td>{{item.remark}}</td>
+    <td>{{item.sstatus == 0 ? '已发布' : '已下架'}}</td>
     <td>
       <a (click)="selected=item;modalShow=true">编辑</a>
       <nz-divider nzType="vertical"></nz-divider>
       <a
         nz-popconfirm
-        [nzPopconfirmTitle]="'确认下架？'"
+        [nzPopconfirmTitle]="item.sstatus==0?'确认下架？':'确认发布？'"
         (nzOnConfirm)="updateItem(item)"
-      >下架</a>
+      >{{item.sstatus == 0 ? '下架' : '发布'}}</a>
     </td>
   </tr>
   </tbody>
@@ -86,4 +95,5 @@
 <app-task-form
   [(visiable)]="modalShow"
   [detail]="selected"
+  (submitSuccess)="onSubmitSuccess()"
 ></app-task-form>

@@ -5,76 +5,83 @@
   (nzOnCancel)="form.reset();visiableChange.emit(false)"
   (nzOnOk)="submit()"
   [nzOkDisabled]="!form.valid"
+  [nzOkLoading]="submiting"
 >
   <form nz-form [formGroup]="form">
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>任务名称</nz-form-label>
       <nz-form-control [nzSm]="14">
-        <input nz-input/>
+        <input nz-input formControlName="taskName"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>任务类型</nz-form-label>
       <nz-form-control [nzSm]="14">
-        <nz-select></nz-select>
+        <nz-select formControlName="type">
+          <nz-option nzLabel="每日任务" [nzValue]="0"></nz-option>
+          <nz-option nzLabel="其他任务" [nzValue]="1"></nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>任务图标</nz-form-label>
       <nz-form-control [nzSm]="14">
         <app-upload
+          formControlName="taskIcon"
         ></app-upload>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>可完成次数</nz-form-label>
       <nz-form-control [nzSm]="14">
-        <input nz-input/>
+        <input nz-input formControlName="complateTimes" type="number"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>获得经验值</nz-form-label>
       <nz-form-control [nzSm]="14">
-        <input nz-input/>
+        <input nz-input formControlName="haveExpireValue" type="number"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>获得积分</nz-form-label>
       <nz-form-control [nzSm]="14">
-        <input nz-input/>
+        <input nz-input formControlName="havePoints" type="number"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>获得礼物</nz-form-label>
       <nz-form-control [nzSm]="14">
-        <nz-radio-group>
-          <label nz-radio nzValue="0">是</label>
-          <label nz-radio nzValue="1">否</label>
+        <nz-radio-group formControlName="hasGift">
+          <label nz-radio [nzValue]="0">是</label>
+          <label nz-radio [nzValue]="1">否</label>
         </nz-radio-group>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" nzRequired>选择礼物</nz-form-label>
-      <nz-form-control [nzSm]="14">
-        <nz-select></nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" nzRequired>获得数量</nz-form-label>
-      <nz-form-control [nzSm]="14">
-        <input nz-input>
-      </nz-form-control>
-    </nz-form-item>
+    <ng-container *ngIf="form.value['hasGift']==0">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" nzRequired>选择礼物</nz-form-label>
+        <nz-form-control [nzSm]="14">
+          <app-gift-select formControlName="giftId"></app-gift-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" nzRequired>获得数量</nz-form-label>
+        <nz-form-control [nzSm]="14">
+          <input nz-input type="number" formControlName="giftNum">
+        </nz-form-control>
+      </nz-form-item>
+    </ng-container>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>跳转链接</nz-form-label>
       <nz-form-control [nzSm]="14">
-        <input nz-input>
+        <input nz-input formControlName="linkUrl">
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>任务备注</nz-form-label>
       <nz-form-control [nzSm]="14">
-        <input nz-input>
+        <input nz-input formControlName="remark">
       </nz-form-control>
     </nz-form-item>
   </form>

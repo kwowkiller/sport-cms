@@ -43,5 +43,21 @@ export class TaskModule {
 }
 
 export interface Task {
+  complateTimes: number;
+  createTime: string;
+  giftId: number;
+  giftImage: string;
+  giftName: string;
+  giftNum: number;
+  haveExpireValue: number;
+  havePoints: number;
   id: number;
+  linkUrl: string;
+  remark: string;
+  sstatus: number;
+  taskIcon: string;
+  taskName: string;
+  taskType: number;
+  type: number;
+  updateTime: string;
 }

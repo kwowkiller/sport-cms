@@ -64,7 +64,7 @@ export class ListComponent extends Table<User> implements OnInit {
   }
 
   onSubmitSuccess() {
-    this.message.success('禁言成功');
+    this.message.success('操作成功');
     this.fetchList('none');
   }
 

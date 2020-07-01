@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import { BarSelectComponent } from './bar-select/bar-select.component';
 import { CategorySelectComponent } from './category-select/category-select.component';
 import { LevelSelectComponent } from './level-select/level-select.component';
+import { GiftSelectComponent } from './gitf-select/gift-select.component';
 
 
 @NgModule({
@@ -16,13 +17,15 @@ import { LevelSelectComponent } from './level-select/level-select.component';
     BarSelectComponent,
     CategorySelectComponent,
     LevelSelectComponent,
+    GiftSelectComponent,
   ],
   exports: [
     UploadComponent,
     UserSelectComponent,
     BarSelectComponent,
     CategorySelectComponent,
-    LevelSelectComponent
+    LevelSelectComponent,
+    GiftSelectComponent
   ],
   imports: [
     CommonModule,

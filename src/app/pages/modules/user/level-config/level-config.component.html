@@ -11,6 +11,7 @@
         nzType="primary"
         [disabled]="!editable"
         (click)="submit()"
+        [nzLoading]="submitting"
       >保存
       </button>
     </div>
@@ -39,16 +40,16 @@
       </td>
       <td>{{item.fromExpireValue}}</td>
       <td>{{item.toExpireValue}}</td>
-      <td>0</td>
+      <td>{{item.toExpireValue - item.fromExpireValue}}</td>
     </ng-container>
     <ng-template #editTemplate>
-      <td>LV1</td>
+      <td>{{item.levelName}}</td>
       <td>
         <img [src]="item.levelImage" alt="" style="height: 35px">
       </td>
-      <td><input type="text" nz-input [value]="item.fromExpireValue"></td>
-      <td><input type="text" nz-input [value]="item.toExpireValue"></td>
-      <td>0</td>
+      <td><input type="number" nz-input [(ngModel)]="item.fromExpireValue"></td>
+      <td><input type="number" nz-input [(ngModel)]="item.toExpireValue"></td>
+      <td>{{item.toExpireValue - item.fromExpireValue}}</td>
     </ng-template>
   </tr>
   </tbody>

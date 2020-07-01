@@ -22,11 +22,11 @@
   </thead>
   <tbody>
   <tr *ngFor="let item of list">
-    <td>序号</td>
-    <td>充值积分数</td>
-    <td>价格</td>
-    <td>首冲赠送</td>
-    <td>创建时间</td>
+    <td>{{item.id}}</td>
+    <td>{{item.points}}</td>
+    <td>{{item.price}}元</td>
+    <td>{{item.firstBuyGive}}</td>
+    <td>{{item.createTime}}</td>
     <td><a (click)="selected=item;modalShow=true">编辑</a></td>
   </tr>
   </tbody>
@@ -34,4 +34,5 @@
 <app-point-form
   [(visiable)]="modalShow"
   [detail]="selected"
+  (submitSuccess)="onSubmitSuccess()"
 ></app-point-form>
