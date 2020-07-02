@@ -22,7 +22,7 @@ import {RoleSelectComponent} from './role-select/role-select.component';
 import {PermissionComponent} from './role/permission/permission.component';
 import {DirectiveModule} from '../../../directives/directive.module';
 import {LiveEnvComponent} from './live-env/live-env.component';
-import { LiveEnvFormComponent } from './live-env/live-env-form/live-env-form.component';
+import {LiveEnvFormComponent} from './live-env/live-env-form/live-env-form.component';
 
 @NgModule({
   declarations: [
@@ -109,4 +109,20 @@ export interface Menu {
   type: string;
   updateTime: string;
   updateTimeTo: string;
+}
+
+export interface LiveEnv {
+  // 环境名称
+  envName: string;
+  // 生成key的地址
+  generateKeyUrl: string;
+  id: number;
+  // 是否启动(0:是1:否)
+  isEnable: number;
+  // 播放地址
+  livingUrl: string;
+  // 推流地址
+  streamUrl: string;
+  // 环境类型(0:开发环境1:生产环境)
+  type: number;
 }

@@ -8,13 +8,18 @@
     >
       <div nz-row [nzGutter]="24">
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户昵称">
-          <input nz-input>
+          <input nz-input [(ngModel)]="search.nickname">
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事名称">
-          <input nz-input>
+          <input nz-input [(ngModel)]="search.matchName">
         </nz-input-group>
         <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事状态">
-          <input nz-input>
+          <nz-select [(ngModel)]="search.matchStatus">
+            <nz-option nzLabel="未开赛" [nzValue]="1"></nz-option>
+            <nz-option nzLabel="进行中" [nzValue]="2"></nz-option>
+            <nz-option nzLabel="已结束" [nzValue]="3"></nz-option>
+            <nz-option nzLabel="其他" [nzValue]="4"></nz-option>
+          </nz-select>
         </nz-input-group>
       </div>
       <div nz-row [nzGutter]="24">
@@ -54,7 +59,7 @@
           (nzCheckedChange)="onAllChecked($event)"
         ></th>
         <!--头像+昵称-->
-        <th>用户</th>
+        <th style="text-align: center">用户</th>
         <th>方案标题</th>
         <th>方案玩法</th>
         <th>命中率</th>
@@ -74,23 +79,39 @@
           [nzChecked]="setOfCheckedId.has(item.id)"
           (nzCheckedChange)="onItemChecked(item.id, $event)"
         ></td>
-        <td>用户</td>
-        <td>方案标题</td>
-        <td>方案玩法</td>
-        <td>命中率</td>
+        <td style="text-align: center">
+          <img [src]="item.headerImg" alt="" style="height: 35px">
+          <br>
+          <span>{{item.username}}</span>
+        </td>
+        <td>{{item.title}}</td>
+        <td [ngSwitch]="item.gameType">
+          <span *ngSwitchCase="1">北单胜负过关</span>
+          <span *ngSwitchCase="2">北单胜平负</span>
+        </td>
+        <td>命中率 %</td>
         <td>连胜</td>
-        <td>返还率</td>
-        <td>胜率</td>
-        <td>创建时间</td>
+        <td>{{item.returnRate}}%</td>
+        <td>{{item.winRate}}%</td>
+        <td>{{item.createTime}}</td>
         <td>审核时间</td>
-        <td>比赛状态</td>
-        <td>是否命中</td>
+        <td [ngSwitch]="item.matchStatus">
+          <span *ngSwitchCase="1">未开赛</span>
+          <span *ngSwitchCase="2">进行中</span>
+          <span *ngSwitchCase="3">已结束</span>
+          <span *ngSwitchCase="4">其他</span>
+        </td>
+        <td [ngSwitch]="item.hit">
+          <span *ngSwitchCase="0">未核准</span>
+          <span *ngSwitchCase="1">命中</span>
+          <span *ngSwitchCase="2">未命中</span>
+        </td>
         <td>
-          <a>方案详情</a>
+          <a (click)="selected=item;modalShow=true">方案详情</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>设为精选</a>
+          <a (click)="updateItem(item)">{{item.isGood?'取消精选':'设为精选'}}</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>购买记录</a>
+          <a (click)="selected=item;tabIndex=1">购买记录</a>
         </td>
       </tr>
       </tbody>
@@ -101,6 +122,11 @@
     [nzTitle]="'购买记录'"
   >
     <app-purchase-record
+      [queryId]="selected?.id"
     ></app-purchase-record>
   </nz-tab>
 </nz-tabset>
+<app-scheme-detail
+  [(visiable)]="modalShow"
+  [detail]="selected"
+></app-scheme-detail>

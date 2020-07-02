@@ -11,8 +11,6 @@
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="手机号">
       <input nz-input>
     </nz-input-group>
-  </div>
-  <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="6" class="actions">
       <button
         nz-button
@@ -43,8 +41,8 @@
 >
   <thead>
   <tr>
-    <!--头像+昵称-->
-    <th>用户</th>
+    <th>用户头像</th>
+    <th>用户昵称</th>
     <th>手机号码</th>
     <th>用户等级</th>
     <th>胜率</th>
@@ -58,23 +56,31 @@
   </thead>
   <tbody>
   <tr *ngFor="let item of list">
-    <td>用户</td>
-    <td>手机号码</td>
-    <td>用户等级</td>
-    <td>胜率</td>
-    <td>返还率</td>
+    <td>
+      <img [src]="item.headerImg" alt="" style="height: 35px">
+    </td>
+    <td>{{item.nickname}}</td>
+    <td>{{item.phone}}</td>
+    <td>{{item.levelId}}</td>
+    <td>{{item.winRate}}%</td>
+    <td>{{item.returnRate}}%</td>
     <td>命中率</td>
     <td>连胜</td>
-    <td>上次发布方案时间</td>
-    <td>状态</td>
+    <td>{{item.pushTime}}</td>
+    <td>{{item.pushStatus == 0 ? '正常' : '禁止发布'}}</td>
     <td>
-      <a>禁止发布</a>
+      <a
+        nz-popconfirm
+        nzPopconfirmTitle="{{item.pushStatus == 0 ? '禁止该用户发布方案？' : '取消禁止该用户发布方案？'}}"
+        (nzOnConfirm)="updateItem(item)"
+      >{{item.pushStatus == 0 ? '禁止发布' : '取消禁止发布'}}</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>历史方案</a>
+      <a (click)="selected=item;modalShow=true;">历史方案</a>
     </td>
   </tr>
   </tbody>
 </nz-table>
 <app-scheme-history
+  [detail]="selected"
   [(visiable)]="modalShow"
 ></app-scheme-history>

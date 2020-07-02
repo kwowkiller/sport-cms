@@ -11,31 +11,34 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>环境名称</nz-form-label>
       <nz-form-control [nzSm]="15">
-        <input nz-input/>
+        <input nz-input formControlName="envName"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>环境类型</nz-form-label>
       <nz-form-control [nzSm]="15">
-        <nz-select></nz-select>
+        <nz-select formControlName="type">
+          <nz-option nzLabel="开发环境" [nzValue]="0"></nz-option>
+          <nz-option nzLabel="生产环境" [nzValue]="1"></nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>生产key的地址</nz-form-label>
       <nz-form-control [nzSm]="15">
-        <input nz-input/>
+        <input nz-input formControlName="generateKeyUrl"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>推流地址</nz-form-label>
       <nz-form-control [nzSm]="15">
-        <input nz-input/>
+        <input nz-input formControlName="streamUrl"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired>播放地址</nz-form-label>
       <nz-form-control [nzSm]="15">
-        <input nz-input/>
+        <input nz-input formControlName="livingUrl"/>
       </nz-form-control>
     </nz-form-item>
   </form>

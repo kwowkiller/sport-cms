@@ -6,13 +6,19 @@
 >
   <div nz-row [nzGutter]="24">
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="环境名称">
-      <input nz-input>
+      <input nz-input [(ngModel)]="search.envName">
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="环境类型">
-      <nz-select></nz-select>
+      <nz-select [(ngModel)]="search.type">
+        <nz-option nzLabel="开发环境" [nzValue]="0"></nz-option>
+        <nz-option nzLabel="生产环境" [nzValue]="1"></nz-option>
+      </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="状态">
-      <nz-select></nz-select>
+      <nz-select [(ngModel)]="search.isEnable">
+        <nz-option nzLabel="启用" [nzValue]="0"></nz-option>
+        <nz-option nzLabel="关闭" [nzValue]="1"></nz-option>
+      </nz-select>
     </nz-input-group>
     <div class="actions" nz-col [nzSpan]="6">
       <button
@@ -79,16 +85,20 @@
       [nzChecked]="setOfCheckedId.has(item.id)"
       (nzCheckedChange)="onItemChecked(item.id, $event)"
     ></td>
-    <td>环境名称</td>
-    <td>环境类型</td>
-    <td>生产的key地址</td>
-    <td>推流地址</td>
-    <td>播放地址</td>
-    <td>是否启动</td>
+    <td>{{item.envName}}</td>
+    <td>{{item.type == 1 ? '生产环境' : '开发环境'}}</td>
+    <td>{{item.generateKeyUrl}}</td>
+    <td>{{item.streamUrl}}</td>
+    <td>{{item.livingUrl}}</td>
+    <td>{{item.isEnable == 0 ? '是' : '否'}}</td>
     <td>
       <a (click)="selected=item;modalShow=true;">编辑</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>关闭</a>
+      <a
+        nz-popconfirm
+        [nzPopconfirmTitle]="'确认'+(item.isEnable==0?'关闭':'启动')+'?'"
+        (nzOnConfirm)="updateItem(item)"
+      >{{item.isEnable == 0 ? '关闭' : '启动'}}</a>
     </td>
   </tr>
   </tbody>
@@ -96,4 +106,5 @@
 <app-live-env-form
   [(visiable)]="modalShow"
   [detail]="selected"
+  (submitSuccess)="onSubmitSuccess()"
 ></app-live-env-form>

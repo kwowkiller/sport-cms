@@ -6,66 +6,70 @@
   (nzOnOk)="submit()"
   [nzOkLoading]="submiting"
   [nzOkDisabled]="!form.valid"
+  [nzFooter]="showAudit?'':null"
 >
   <div class="item">
     <label>用户昵称</label>
-    <div>Abel</div>
+    <div>{{detail?.username}}</div>
   </div>
   <div class="item">
     <label>赛事名称</label>
-    <div>澳大利亚足球超级联赛</div>
+    <div>{{detail?.matchName}}</div>
   </div>
   <div class="item">
     <label>比赛信息</label>
     <div class="match">
       <div class="team">
-        <img src="" alt>
-        <p>AUM荷兰U19</p>
+        <img [src]="detail?.homeLogo" alt>
+        <p>{{detail?.homeName}}</p>
       </div>
       <div class="vs">VS</div>
       <div class="team">
-        <img src="" alt>
-        <p>格勒诺布尔</p>
+        <img [src]="detail?.awayLogo" alt>
+        <p>{{detail?.awayName}}</p>
       </div>
     </div>
   </div>
   <div class="item">
     <label>猜球玩法</label>
-    <div>北单胜负过关</div>
+    <div [ngSwitch]="detail?.gameType">
+      <span *ngSwitchCase="1">北单胜负过关</span>
+      <span *ngSwitchCase="2">北单胜平负</span>
+    </div>
   </div>
   <div class="item">
     <label>竞猜信息</label>
     <div class="info">
       <div>
-        <p>AUM荷兰U19</p>
+        <p>{{detail?.homeName}}</p>
         <p>-0.5 2.33</p>
       </div>
       <div>
-        <p>格勒诺布尔</p>
+        <p>{{detail?.awayName}}</p>
         <p>0.5 1.74</p>
       </div>
     </div>
   </div>
   <div class="item">
     <label>分析</label>
-    <div>主队胜主队胜主队胜主队胜主队胜主队胜主队胜主队胜主队胜主队
-      胜主队胜主队胜主队胜主队胜主队胜主队胜主队胜主队胜主队胜主
-      队胜主队胜主队胜主队胜主队胜主队胜主队胜主队胜主队胜
-    </div>
+    <div>{{detail?.anAlyze}}</div>
   </div>
   <div class="item">
     <label>价格</label>
-    <div>300积分</div>
+    <div>{{detail?.money}}积分</div>
   </div>
-  <div class="item">
-    <label>方案审核</label>
-    <div>方案审核通过后用户在前端赛事列表处可以查看到该赛事并进行购买操作，请审核！</div>
-  </div>
-  <form nz-form [formGroup]="form" style="padding-left: 7em">
-    <nz-radio-group>
-      <label nz-radio nzValue="0">通过</label>
-      <label nz-radio nzValue="1">不通过</label>
-    </nz-radio-group>
-    <textarea nz-input rows="3" style="margin-top: 12px"></textarea>
-  </form>
+  <ng-container *ngIf="showAudit">
+    <hr>
+    <div class="item">
+      <label>方案审核</label>
+      <div>方案审核通过后用户在前端赛事列表处可以查看到该赛事并进行购买操作，请审核！</div>
+    </div>
+    <form nz-form [formGroup]="form" style="padding-left: 7em">
+      <nz-radio-group>
+        <label nz-radio [nzValue]="1">通过</label>
+        <label nz-radio [nzValue]="0">不通过</label>
+      </nz-radio-group>
+      <textarea nz-input rows="3" style="margin-top: 12px"></textarea>
+    </form>
+  </ng-container>
 </nz-modal>

@@ -7,7 +7,7 @@
 >
   <div style="display: flex">
     <div style="flex: 1">
-      <p><label>用户昵称：</label></p>
+      <p><label>用户昵称：</label>{{historyDetail?.nickname}}</p>
       <p><label>真实姓名：</label></p>
       <p><label>身份证号：</label></p>
       <p><label>注册时间：</label></p>
@@ -16,8 +16,8 @@
       <p><label>用户粉丝数：</label></p>
     </div>
     <div style="flex: 1">
-      <p><label>发布方案次数：</label></p>
-      <p><label>最近发布方案时间：</label></p>
+      <p><label>发布方案次数：</label>{{historyDetail?.pushCount}}</p>
+      <p><label>最近发布方案时间：</label>{{historyDetail?.pushTime}}</p>
       <p><label>方案总浏览人数：</label></p>
       <p><label>获得总积分数：</label></p>
     </div>

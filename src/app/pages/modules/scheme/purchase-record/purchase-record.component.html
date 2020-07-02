@@ -6,10 +6,10 @@
 >
   <div nz-row [nzGutter]="24">
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户昵称">
-      <input nz-input>
+      <input nz-input [(ngModel)]="search.nickname">
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="手机号码">
-      <input nz-input>
+      <input nz-input [(ngModel)]="search.phone">
     </nz-input-group>
     <div nz-col [nzSpan]="6" class="actions">
       <button
@@ -52,13 +52,17 @@
   </thead>
   <tbody>
   <tr *ngFor="let item of list">
-    <td>序号</td>
-    <td>用户头像</td>
-    <td>用户名称</td>
-    <td>手机号码</td>
-    <td>性别</td>
-    <td>用户等级</td>
-    <td>购买时间</td>
+    <td>{{item.id}}</td>
+    <td><img [src]="item.headerImg" alt="" style="height: 35px"></td>
+    <td>{{item.nickname}}</td>
+    <td>{{item.phone}}</td>
+    <td [ngSwitch]="item.sex">
+      <span *ngSwitchCase="0">男</span>
+      <span *ngSwitchCase="1">女</span>
+      <span *ngSwitchCase="2">未知</span>
+    </td>
+    <td>{{item.levelId}}</td>
+    <td>{{item.createTime}}</td>
   </tr>
   </tbody>
 </nz-table>
