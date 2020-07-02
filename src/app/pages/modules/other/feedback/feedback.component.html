@@ -6,7 +6,13 @@
 >
   <div nz-row [nzGutter]="24">
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="问题类型">
-      <nz-select></nz-select>
+      <nz-select [(ngModel)]="search.type">
+        <nz-option
+          *ngFor="let item of feedbackType"
+          [nzLabel]="item.label"
+          [nzValue]="item.value"
+        ></nz-option>
+      </nz-select>
     </nz-input-group>
     <div nz-col [nzSpan]="18" class="actions">
       <button
@@ -64,15 +70,7 @@
       [nzChecked]="setOfCheckedId.has(item.id)"
       (nzCheckedChange)="onItemChecked(item.id, $event);"
     ></td>
-    <td [ngSwitch]="item.type">
-      <span *ngSwitchCase="1">账号信息</span>
-      <span *ngSwitchCase="2">充值问题</span>
-      <span *ngSwitchCase="3">实名认证</span>
-      <span *ngSwitchCase="4">直播问题</span>
-      <span *ngSwitchCase="5">球吧问题</span>
-      <span *ngSwitchCase="6">比分问题</span>
-      <span *ngSwitchCase="7">资讯问题</span>
-    </td>
+    <td>{{feedbackType.getLabel(item.type)}}</td>
     <td>{{item.content}}</td>
     <td>{{item.userId}}</td>
     <td>{{item.createTime}}</td>

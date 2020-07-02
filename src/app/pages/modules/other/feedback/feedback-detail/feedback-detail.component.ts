@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ModalForm} from '../../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {Feedback} from '../../other.module';
+import {FeedbackType} from '../../../../../common/enum';
 
 @Component({
   selector: 'app-feedback-detail',
@@ -13,6 +14,7 @@ import {Feedback} from '../../other.module';
   ]
 })
 export class FeedbackDetailComponent extends ModalForm<Feedback> implements OnInit {
+  feedbackType = FeedbackType;
 
   constructor(http: HttpClient) {
     super(http);

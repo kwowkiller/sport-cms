@@ -3,6 +3,7 @@ import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../user.module';
 import {NzMessageService} from 'ng-zorro-antd';
+import {SexType} from '../../../../common/enum';
 
 @Component({
   selector: 'app-user-sub-list',
@@ -15,6 +16,7 @@ export class SubListComponent extends Table<User> implements OnInit, OnChanges {
   // 粉丝列表 关注用户列表
   @Input()
   type: 'fans' | 'follow';
+  sexType = SexType;
 
   constructor(
     protected http: HttpClient,

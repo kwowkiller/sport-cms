@@ -13,9 +13,11 @@
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="性别">
       <nz-select [(ngModel)]="search.sex">
-        <nz-option nzValue="0" nzLabel="男"></nz-option>
-        <nz-option nzValue="1" nzLabel="女"></nz-option>
-        <nz-option nzValue="2" nzLabel="未知"></nz-option>
+        <nz-option
+          *ngFor="let item of sexType"
+          [nzLabel]="item.label"
+          [nzValue]="item.value"
+        ></nz-option>
       </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="提交时间">
@@ -88,11 +90,7 @@
     </td>
     <td>{{item.username}}</td>
     <td>{{item.phone}}</td>
-    <td [ngSwitch]="item.sex">
-      <span *ngSwitchCase="0">男</span>
-      <span *ngSwitchCase="1">女</span>
-      <span *ngSwitchCase="2">未知</span>
-    </td>
+    <td>{{sexType.getLabel(item.sex)}}</td>
     <td>{{item.createTime}}</td>
     <td>{{item.levelName}}</td>
     <td>{{item.fansCount}}</td>

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
+import {SexType} from '../../../../common/enum';
 
 @Component({
   selector: 'app-purchase-record',
@@ -11,6 +12,7 @@ import {NzMessageService} from 'ng-zorro-antd';
 export class PurchaseRecordComponent extends Table<Item> implements OnInit {
   @Input()
   queryId: number;
+  sexType = SexType;
 
   constructor(
     protected http: HttpClient,
@@ -41,7 +43,6 @@ interface Item {
   nickname: string;
   phone: string;
   programId: number;
-  // 性别0:男1:女2:未知
   sex: number;
   userId: number;
 }

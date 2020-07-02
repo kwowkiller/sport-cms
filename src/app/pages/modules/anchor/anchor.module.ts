@@ -100,7 +100,6 @@ export interface Anchor {
   liveUrl: string;
   phone: string;
   securityKey: string;
-  // 性别0:男1:女2:未知
   sex: number;
   totalViews: number;
   //   主播昵称

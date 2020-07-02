@@ -56,11 +56,7 @@
     <td><img [src]="item.headerImg" alt="" style="height: 35px"></td>
     <td>{{item.nickname}}</td>
     <td>{{item.phone}}</td>
-    <td [ngSwitch]="item.sex">
-      <span *ngSwitchCase="0">男</span>
-      <span *ngSwitchCase="1">女</span>
-      <span *ngSwitchCase="2">未知</span>
-    </td>
+    <td>{{sexType.getLabel(item.sex)}}</td>
     <td>{{item.levelId}}</td>
     <td>{{item.createTime}}</td>
   </tr>

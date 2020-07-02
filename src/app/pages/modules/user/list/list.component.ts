@@ -5,6 +5,7 @@ import {User} from '../user.module';
 import * as moment from 'moment';
 import {NzMessageService} from 'ng-zorro-antd';
 import {Result} from '../../../../common/common.model';
+import {SexType} from '../../../../common/enum';
 
 @Component({
   selector: 'app-user-list',
@@ -21,6 +22,7 @@ export class ListComponent extends Table<User> implements OnInit {
   modalPointShow = false;
   // 经验设置
   modalExpShow = false;
+  sexType = SexType;
 
   get subTableTitle() {
     let str = '';

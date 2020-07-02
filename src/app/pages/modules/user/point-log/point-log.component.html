@@ -59,16 +59,7 @@
   <tr *ngFor="let item of list">
     <td>{{item.id}}</td>
     <td>{{item.createTime}}</td>
-    <td [ngSwitch]="item.type">
-      <span *ngSwitchCase="0">赠送礼物</span>
-      <span *ngSwitchCase="1">收到礼物</span>
-      <span *ngSwitchCase="2">购买方案</span>
-      <span *ngSwitchCase="3">出售方案</span>
-      <span *ngSwitchCase="4">积分充值</span>
-      <span *ngSwitchCase="5">任务赠送</span>
-      <span *ngSwitchCase="6">后台充值</span>
-      <span *ngSwitchCase="7">后台扣减</span>
-    </td>
+    <td>{{pointType.getLabel(item.type)}}</td>
     <td>变动积分数</td>
     <td>{{item.startPoints}}</td>
     <td>{{item.endPoints}}</td>

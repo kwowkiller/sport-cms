@@ -6,6 +6,7 @@ import {NzMessageService} from 'ng-zorro-antd';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Result} from '../../../../common/common.model';
 import * as moment from 'moment';
+import {SexType} from '../../../../common/enum';
 
 @Component({
   selector: 'app-anchor-list1',
@@ -16,6 +17,7 @@ export class List1Component extends Table<AnchorAudit> implements OnInit {
   form: FormGroup;
   modalInfoShow = false;
   dateRange: Date[] = [];
+  sexType = SexType;
 
   constructor(
     protected http: HttpClient,

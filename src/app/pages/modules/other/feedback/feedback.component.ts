@@ -3,6 +3,7 @@ import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
 import {Feedback} from '../other.module';
+import {FeedbackType} from '../../../../common/enum';
 
 @Component({
   selector: 'app-feedback',
@@ -10,6 +11,7 @@ import {Feedback} from '../other.module';
   styles: []
 })
 export class FeedbackComponent extends Table<Feedback> implements OnInit {
+  feedbackType = FeedbackType;
 
   constructor(
     protected http: HttpClient,

@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
 import * as moment from 'moment';
 import {Result} from '../../../../common/common.model';
+import {SexType} from '../../../../common/enum';
 
 @Component({
   selector: 'app-anchor-list2',
@@ -12,6 +13,7 @@ import {Result} from '../../../../common/common.model';
   styles: []
 })
 export class List2Component extends Table<Anchor> implements OnInit {
+  sexType = SexType;
   modalAction = false;
   dateRange: Date[] = [];
   modalForm = false;

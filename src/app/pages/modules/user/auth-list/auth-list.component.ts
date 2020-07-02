@@ -7,6 +7,7 @@ import {NzMessageService} from 'ng-zorro-antd';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
 import {Result} from '../../../../common/common.model';
+import {SexType} from '../../../../common/enum';
 
 @Component({
   selector: 'app-user-auth-list',
@@ -18,6 +19,7 @@ export class AuthListComponent extends Table<AuthInfo> implements OnInit {
   modalDetailShow = false;
   modalActionShow = false;
   form: FormGroup;
+  sexType = SexType;
 
   constructor(
     protected http: HttpClient,
