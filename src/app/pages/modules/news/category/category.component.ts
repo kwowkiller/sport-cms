@@ -39,7 +39,7 @@ export class CategoryComponent extends Table<NewsType> implements OnInit {
   }
 
   onDelete() {
-    this.deleteUrl = `news/sys/type/delete/${Array.from(this.setOfCheckedId.values()).join(',')}`;
+    this.deleteUrl = `news/sys/news/type/${Array.from(this.setOfCheckedId.values()).join(',')}`;
     this.deleteItem();
   }
 }

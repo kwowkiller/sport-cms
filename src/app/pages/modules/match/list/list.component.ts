@@ -95,7 +95,7 @@ export class ListComponent extends Table<MatchItem> implements OnInit {
         if (this.search.homeTeamName) {
           this.list = this.list.filter(i => i.homeTeamName.includes(this.search.homeTeamName));
         }
-        if(this.search.awayTeamName){
+        if (this.search.awayTeamName) {
           this.list = this.list.filter(i => i.awayTeamName.includes(this.search.awayTeamName));
         }
         if (this.type === 'basketball') {

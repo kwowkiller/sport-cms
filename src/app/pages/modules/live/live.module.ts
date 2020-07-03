@@ -123,4 +123,18 @@ export interface Live2 {
   sstatus: number;
   username: string;
   toTime: string;
+  // 当前观看人数
+  currentViews?: number;
+  // 礼物总值
+  giftAmount: number;
+  // 获取礼物数
+  giveQuantity?: number;
+  hostTag?: number;
+  nickname?: string;
+  tag?: string;
+  // 合计观看人数
+  totalAmountViews?: number;
+  // 总观看人数
+  totalViews?: number;
+  typeName?: string;
 }

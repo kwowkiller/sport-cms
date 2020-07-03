@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
-import {NzMessageService} from 'ng-zorro-antd';
+import {NzMessageService, NzTableData} from 'ng-zorro-antd';
 import * as moment from 'moment';
 import {PointType} from '../../../../common/enum';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-point-log',
@@ -11,6 +12,8 @@ import {PointType} from '../../../../common/enum';
   styles: []
 })
 export class PointLogComponent extends Table<PointLog> implements OnInit {
+  @Input()
+  userId: number;
   dateRange: Date[] = [];
   pointType = PointType;
 
@@ -22,6 +25,11 @@ export class PointLogComponent extends Table<PointLog> implements OnInit {
     this.listUrl = 'app/sys/app/user/point';
   }
 
+  formatList(data: any[]) {
+    return data as PointLog[];
+  }
+
+
   ngOnInit(): void {
     this.fetchList('all');
   }
@@ -31,9 +39,28 @@ export class PointLogComponent extends Table<PointLog> implements OnInit {
       this.search.createTimeFrom = moment(this.dateRange[0]).format('YYYY-MM-DD');
       this.search.createTimeTo = moment(this.dateRange[1]).format('YYYY-MM-DD');
     }
+    this.search.userId = this.userId;
   }
 
   onSubmitSuccess() {
+  }
+
+  fetchList(reset: 'all' | 'page' | 'none' = 'none') {
+    if (reset === 'all') {
+      this.search = {
+        pageNum: 1,
+        pageSize: 10,
+      };
+    }
+    this.loading = true;
+    this.beforeSearch();
+    this.http.get<PointLog[]>(this.listUrl, {
+      params: this.search,
+    }).pipe(
+      finalize(() => this.loading = false)
+    ).subscribe(event => {
+      this.list = event;
+    });
   }
 }
 

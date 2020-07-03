@@ -36,14 +36,10 @@
 <ng-template #totalTemplate>共 {{total}} 条</ng-template>
 <nz-table
   [nzData]="list"
-  [nzFrontPagination]="false"
+  [nzFrontPagination]="true"
   [nzLoading]="loading"
-  [nzTotal]="total"
   [nzShowTotal]="totalTemplate"
-  [(nzPageIndex)]="search.pageNum"
-  [(nzPageSize)]="search.pageSize"
-  (nzPageIndexChange)="fetchList()"
-  (nzPageSizeChange)="fetchList('page')"
+  #nzTableComponent
 >
   <thead>
   <tr>
@@ -56,7 +52,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of list">
+  <tr *ngFor="let item of formatList(nzTableComponent.data)">
     <td>{{item.id}}</td>
     <td>{{item.createTime}}</td>
     <td>{{pointType.getLabel(item.type)}}</td>

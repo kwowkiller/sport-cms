@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Table} from '../../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
@@ -8,12 +8,16 @@ import {NzMessageService} from 'ng-zorro-antd';
   templateUrl: './gift-log.component.html',
   styles: []
 })
-export class GiftLogComponent extends Table<any> implements OnInit {
+export class GiftLogComponent extends Table<GiftLog> implements OnInit {
+  @Input()
+  queryId: number;
+
   constructor(
     protected http: HttpClient,
     protected message: NzMessageService,
   ) {
     super(http, message);
+    this.listUrl = 'live/sys/host/log/transactionLog';
   }
 
   ngOnInit(): void {
@@ -25,4 +29,8 @@ export class GiftLogComponent extends Table<any> implements OnInit {
 
   onSubmitSuccess() {
   }
+}
+
+interface GiftLog {
+  id: number;
 }

@@ -3,7 +3,7 @@
     <div class="actions" nz-col [nzSpan]="12">
       <button
         nz-button
-        (click)="editable=!editable"
+        (click)="toggleEdit()"
       >{{editable ? '取消编辑' : '编辑'}}
       </button>
       <button

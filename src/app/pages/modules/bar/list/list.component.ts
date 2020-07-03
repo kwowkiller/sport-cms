@@ -4,7 +4,6 @@ import {Table} from '../../../../frame/table';
 import {Bar} from '../bar.module';
 import {NzMessageService} from 'ng-zorro-antd';
 import * as moment from 'moment';
-import {FormBuilder, FormGroup} from '@angular/forms';
 import {Result} from '../../../../common/common.model';
 import {finalize} from 'rxjs/operators';
 
@@ -21,7 +20,6 @@ export class ListComponent extends Table<Bar> implements OnInit {
   modalApproveShow = false;
   // 审核备注
   modalRemark = false;
-  form: FormGroup;
   tabIndex = 0;
   subTableType: 'user' | 'blog';
 
@@ -41,14 +39,9 @@ export class ListComponent extends Table<Bar> implements OnInit {
   constructor(
     protected http: HttpClient,
     protected message: NzMessageService,
-    private fb: FormBuilder,
   ) {
     super(http, message);
     this.listUrl = 'bar/sys/bar/list';
-    this.form = this.fb.group({
-      approveRemark: [null],
-      approveStatus: [1]
-    });
   }
 
   ngOnInit(): void {
@@ -65,24 +58,6 @@ export class ListComponent extends Table<Bar> implements OnInit {
   }
 
   onSubmitSuccess() {
-  }
-
-  updateItem() {
-    this.updating = true;
-    this.http.put<Result>('bar/sys/bar/approve', {
-      ...this.form.value,
-      id: this.selected.id,
-    }).pipe(
-      finalize(() => this.updating = false)
-    ).subscribe(event => {
-      if (event.code === 200) {
-        this.message.success('审核通过');
-        this.modalApproveShow = false;
-        this.fetchList();
-      } else {
-        this.message.error('审核失败');
-      }
-    });
   }
 
   // 关闭/开启 球吧

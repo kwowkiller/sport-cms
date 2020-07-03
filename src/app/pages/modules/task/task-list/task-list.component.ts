@@ -25,6 +25,8 @@ export class TaskListComponent extends Table<Task> implements OnInit {
   }
 
   onSubmitSuccess() {
+    this.message.success('操作成功');
+    this.fetchList('all');
   }
 
   updateItem(item: Task) {

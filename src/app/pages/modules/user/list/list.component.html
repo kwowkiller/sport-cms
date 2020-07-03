@@ -178,6 +178,7 @@
     ></app-user-bar-list>
     <app-point-log
       *ngIf="subTableType=='point'"
+      [userId]="selected?.id"
     ></app-point-log>
     <app-level-log
       *ngIf="subTableType=='level'"

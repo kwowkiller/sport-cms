@@ -20,6 +20,13 @@ export class LevelConfigComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 
+  toggleEdit() {
+    this.editable = !this.editable;
+    if (!this.editable) {
+      this.list = JSON.parse(JSON.stringify(this.compare));
+    }
+  }
+
   ngOnInit(): void {
     this.fetchList();
   }

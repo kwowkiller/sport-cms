@@ -114,12 +114,7 @@
         <td *ngIf="status==1"><a (click)="selected=item;subTableType='audience';tabIndex=1">观看人数</a></td>
         <td *ngIf="status==2">{{item.toTime}}</td>
         <td *ngIf="status==2">{{item.lengthOfTime}}</td>
-        <td *ngIf="status==2"><a (click)="selected=item;subTableType='gift';tabIndex=1">获得礼物数</a></td>
-        <!--<td [ngSwitch]="item.sstatus">
-          <span *ngSwitchCase="0">未开播</span>
-          <span *ngSwitchCase="1">直播中</span>
-          <span *ngSwitchCase="2">已结束</span>
-        </td>-->
+        <td *ngIf="status==2"><a (click)="selected=item;subTableType='gift';tabIndex=1">{{item.giveQuantity}}</a></td>
         <td [ngSwitch]="item.sstatus">
           <ng-container *ngSwitchCase="0">
             <a
@@ -152,6 +147,7 @@
       [queryId]="selected?.id"
     ></app-audience-list>
     <app-gift-log
+      [queryId]="selected?.id"
       *ngIf="subTableType=='gift'"
     ></app-gift-log>
   </nz-tab>

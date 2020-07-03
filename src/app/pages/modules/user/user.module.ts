@@ -120,6 +120,7 @@ export interface AuthInfo {
   registerDays: number;
   signature: string;
   username: string;
+  levelId: string;
 }
 
 export interface LevelConfig {
