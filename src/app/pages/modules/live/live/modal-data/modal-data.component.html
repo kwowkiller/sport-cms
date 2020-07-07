@@ -5,16 +5,14 @@
   (nzOnCancel)="visiableChange.emit(false)"
 >
   <nz-spin [nzSpinning]="loading">
-    <p>主播：</p>
-    <p>开播时间：</p>
+    <p>主播：{{detail?.nickname}}</p>
+    <p>开播时间：{{detail?.createTime}}</p>
     <p>结束时间：</p>
-    <p>直播时长：</p>
-    <p>最大同时观看人数：</p>
-    <p>直播间分享数：</p>
-    <p>粉丝增量：</p>
-    <p>订阅数量：</p>
-    <p>获得礼物数：</p>
-    <p>礼物总值：</p>
+    <p>直播时长：{{detail?.lengthOfTime}}</p>
+    <p>最大同时观看人数：{{detail?.totalViews}}</p>
+    <p>订阅数量：{{detail2?.subscribeCount}}</p>
+    <p>获得礼物数：{{detail?.giveQuantity}}</p>
+    <p>礼物总值：{{detail?.giftAmount}}</p>
   </nz-spin>
 </nz-modal>
 

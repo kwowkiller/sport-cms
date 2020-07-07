@@ -17,13 +17,29 @@
     <nz-form-item>
       <nz-form-label [nzSm]="4">发送用户类型</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <nz-select></nz-select>
+        <nz-select formControlName="type">
+          <nz-option nzLabel="全部" [nzValue]="0"></nz-option>
+          <nz-option nzLabel="主播用户" [nzValue]="1"></nz-option>
+          <nz-option nzLabel="方案用户" [nzValue]="2"></nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4">发送范围</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <nz-select></nz-select>
+        <nz-radio-group formControlName="rangeType">
+          <label nz-radio [nzValue]="0">全部</label>
+          <label nz-radio [nzValue]="1">指定等级</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item *ngIf="form.value['rangeType']===1">
+      <nz-form-label [nzSm]="4">等级范围</nz-form-label>
+      <nz-form-control [nzSm]="17">
+        <app-level-select
+          formControlName="levelId"
+          mode="multiple"
+        ></app-level-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>

@@ -2,7 +2,7 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
 import {User} from '../user.module';
 import {HttpClient} from '@angular/common/http';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-exp-setting',
@@ -16,21 +16,16 @@ import {FormBuilder} from '@angular/forms';
       [nzOkDisabled]="!form.valid"
       [nzOkLoading]="submiting"
     >
-      <nz-form-item>
-        <nz-form-label [nzSm]="4" nzRequired>增加经验</nz-form-label>
-        <nz-form-control [nzSm]="17">
-          <input type="text" nz-input>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzSm]="4" nzRequired>减少经验</nz-form-label>
-        <nz-form-control [nzSm]="17">
-          <input type="text" nz-input>
-        </nz-form-control>
-      </nz-form-item>
-      <div nz-col nzOffset="4" nzSpan="17">
-        操作后用户等级为：Lv4（1600）
-      </div>
+      <form nz-form [formGroup]="form">
+        <nz-form-item>
+          <nz-form-label [nzSm]="4" nzRequired>选择等级</nz-form-label>
+          <nz-form-control [nzSm]="17">
+            <app-level-select
+              formControlName="levelId"
+            ></app-level-select>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
     </nz-modal>
   `,
   styles: []
@@ -39,7 +34,11 @@ export class ExpSettingComponent extends ModalForm<User> implements OnInit, OnCh
 
   constructor(http: HttpClient, private fb: FormBuilder) {
     super(http);
-    this.form = this.fb.group({});
+    this.method = 'PUT';
+    this.submitUrl = 'app/sys/app/user/level';
+    this.form = this.fb.group({
+      levelId: [null, [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
@@ -49,5 +48,6 @@ export class ExpSettingComponent extends ModalForm<User> implements OnInit, OnCh
   }
 
   beforeSubmit() {
+    this.form.value.userId = this.detail.id;
   }
 }

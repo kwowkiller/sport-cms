@@ -62,4 +62,5 @@ interface Item {
   title: string;
   userId: number;
   userName: string;
+  headerImg: string;
 }

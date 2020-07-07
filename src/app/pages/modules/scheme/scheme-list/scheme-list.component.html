@@ -64,8 +64,16 @@
         <th>方案玩法</th>
         <th>命中率</th>
         <th>连胜</th>
-        <th>返还率</th>
-        <th>胜率</th>
+        <th
+          nzShowSort
+          (nzSortOrderChange)="onSortChange($event,'return_rate')"
+        >返还率
+        </th>
+        <th
+          nzShowSort
+          (nzSortOrderChange)="onSortChange($event,'win_rate')"
+        >胜率
+        </th>
         <th>创建时间</th>
         <th>审核时间</th>
         <th>比赛状态</th>
@@ -82,7 +90,7 @@
         <td style="text-align: center">
           <img [src]="item.headerImg" alt="" style="height: 35px">
           <br>
-          <span>{{item.username}}</span>
+          <span>{{item.nickname}}</span>
         </td>
         <td>{{item.title}}</td>
         <td [ngSwitch]="item.gameType">
@@ -90,7 +98,7 @@
           <span *ngSwitchCase="2">北单胜平负</span>
         </td>
         <td>命中率 %</td>
-        <td>连胜</td>
+        <td>{{item.winCount || 0}}</td>
         <td>{{item.returnRate}}%</td>
         <td>{{item.winRate}}%</td>
         <td>{{item.createTime}}</td>
@@ -109,7 +117,7 @@
         <td>
           <a (click)="selected=item;modalShow=true">方案详情</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="updateItem(item)">{{item.isGood?'取消精选':'设为精选'}}</a>
+          <a (click)="updateItem(item)">{{item.isGood ? '取消精选' : '设为精选'}}</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a (click)="selected=item;tabIndex=1">购买记录</a>
         </td>

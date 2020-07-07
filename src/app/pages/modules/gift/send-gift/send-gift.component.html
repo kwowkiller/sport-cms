@@ -11,34 +11,37 @@
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>选择礼物</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <nz-select></nz-select>
+        <app-gift-select
+          formControlName="giftId"
+          (selectItem)="selectedGift=$event"
+        ></app-gift-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>发送数量</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <input nz-input/>
+        <input nz-input type="number" formControlName="quantity"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>礼物价值</nz-form-label>
-      <nz-form-control [nzSm]="17">
-        100000积分
-      </nz-form-control>
+      <nz-form-control [nzSm]="17">{{total}}积分</nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>发送方式</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <nz-radio-group>
-          <label nz-radio nzValue="0">群发</label>
-          <label nz-radio nzValue="1">单发</label>
+        <nz-radio-group formControlName="sendType">
+          <label nz-radio [nzValue]="0">单发</label>
+          <label nz-radio [nzValue]="1">群发</label>
         </nz-radio-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>发送对象</nz-form-label>
       <nz-form-control [nzSm]="17">
-        <app-user-select></app-user-select>
+        <app-user-select
+          formGroupName="userId"
+        ></app-user-select>
       </nz-form-control>
     </nz-form-item>
   </form>

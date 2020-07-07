@@ -71,7 +71,10 @@
     <th>性别</th>
     <th>注册时间</th>
     <th>提交认证时间</th>
-    <th>用户等级</th>
+    <th
+      nzShowSort
+      (nzSortOrderChange)="onSortChange($event,'level_id')"
+    >用户等级</th>
     <th>审核状态</th>
     <th>操作</th>
   </tr>

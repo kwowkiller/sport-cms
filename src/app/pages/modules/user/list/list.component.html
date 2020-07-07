@@ -92,7 +92,10 @@
         <th>关注贴吧数</th>
         <th>上次登录时间</th>
         <th>用户等级</th>
-        <th>积分余额</th>
+        <th
+          nzShowSort
+          (nzSortOrderChange)="onSortChange($event,'points')"
+        >积分余额</th>
         <th>账号状态</th>
         <th>认证状态</th>
         <th>操作</th>
@@ -105,7 +108,7 @@
           [src]="item.headerImg"
           alt
         /></td>
-        <td>{{item.username}}</td>
+        <td>{{item.nickname}}</td>
         <td>{{item.phone}}</td>
         <td>{{sexType.getLabel(item.sex)}}</td>
         <td>{{item.createTime}}</td>

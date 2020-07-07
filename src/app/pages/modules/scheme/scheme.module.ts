@@ -103,6 +103,7 @@ export interface Scheme {
   title: string;
   userId: number;
   username: string;
+  // 连胜
   winCount: number;
   // 胜率
   winRate: number;

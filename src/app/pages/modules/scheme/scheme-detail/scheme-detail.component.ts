@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {Scheme} from '../scheme.module';
 
 @Component({
@@ -17,7 +17,7 @@ export class SchemeDetailComponent extends ModalForm<Scheme> implements OnInit {
     super(http);
     this.form = this.fb.group({
       remark: [null],
-      status: [0],
+      status: [0, [Validators.required]],
     });
     this.submitUrl = 'match/sys/match/programApply';
   }

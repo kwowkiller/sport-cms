@@ -29,7 +29,7 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
     >
       <nz-option
         *ngFor="let item of selectData"
-        [nzLabel]="item.username"
+        [nzLabel]="item.nickname"
         [nzValue]="item.id"
       ></nz-option>
     </nz-select>
@@ -43,10 +43,10 @@ export class UserSelectComponent extends CustomInput implements OnInit {
   queryParams: { [key: string]: string } = {};
   @Input()
   placeholder = '输入用户名搜索匹配的用户';
-  username = '';
+  nickname = '';
 
   get notFoundContent() {
-    return this.username.length === 0 ? '请输入用户名来查找' : '没有找到相关用户';
+    return this.nickname.length === 0 ? '请输入用户名来查找' : '没有找到相关用户';
   }
 
   constructor(private http: HttpClient) {
@@ -56,16 +56,16 @@ export class UserSelectComponent extends CustomInput implements OnInit {
   ngOnInit(): void {
   }
 
-  onSearch(username: string) {
-    this.username = username;
-    if (username.length === 0) {
+  onSearch(text: string) {
+    this.nickname = text;
+    if (text.length === 0) {
       this.selectData = [];
       return;
     }
     this.loading = true;
     this.http.get<Pageable<User>>('app/sys/app/user/page', {
       params: {
-        username,
+        nickname: this.nickname,
         ...this.queryParams,
       }
     }).pipe(

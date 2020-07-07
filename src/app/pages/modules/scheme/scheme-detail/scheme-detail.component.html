@@ -65,11 +65,11 @@
       <div>方案审核通过后用户在前端赛事列表处可以查看到该赛事并进行购买操作，请审核！</div>
     </div>
     <form nz-form [formGroup]="form" style="padding-left: 7em">
-      <nz-radio-group>
+      <nz-radio-group formControlName="status">
         <label nz-radio [nzValue]="1">通过</label>
         <label nz-radio [nzValue]="0">不通过</label>
       </nz-radio-group>
-      <textarea nz-input rows="3" style="margin-top: 12px"></textarea>
+      <textarea nz-input rows="3" style="margin-top: 12px" formControlName="remark"></textarea>
     </form>
   </ng-container>
 </nz-modal>

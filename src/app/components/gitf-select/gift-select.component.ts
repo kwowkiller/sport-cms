@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CustomInput} from '../../frame/custom-input';
 import {Gift} from '../../pages/modules/gift/gift.module';
 import {HttpClient} from '@angular/common/http';
@@ -35,6 +35,8 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 export class GiftSelectComponent extends CustomInput implements OnInit {
   selectData: Gift[] = [];
   loading = false;
+  @Output()
+  selectItem = new EventEmitter<Gift>();
 
   constructor(private http: HttpClient) {
     super();
@@ -53,4 +55,8 @@ export class GiftSelectComponent extends CustomInput implements OnInit {
     });
   }
 
+  onModelChange(value: any) {
+    this.selectItem.emit(this.selectData.find(i => i.id === value));
+    super.onModelChange(value);
+  }
 }

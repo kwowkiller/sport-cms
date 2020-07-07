@@ -34,10 +34,10 @@ export class ModalFormComponent extends ModalForm<any> implements OnInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.queryId) {
-      this.submitUrl = '';
-      this.http.get<{}>(`live/sys/host/log/detail?id=${this.queryId}`).subscribe(event => {
-      });
+    if (this.queryId && this.visiable) {
+      // this.submitUrl = '';
+      // this.http.get<{}>(`live/sys/host/log/detail?id=${this.queryId}`).subscribe(event => {
+      // });
     } else {
       this.submitUrl = 'live/sys/host/log/add';
       this.method = 'POST';

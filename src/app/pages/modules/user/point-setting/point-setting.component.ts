@@ -11,7 +11,7 @@ import {FormBuilder, Validators} from '@angular/forms';
       [nzVisible]="visiable"
       nzTitle="积分设置"
       [nzWidth]="600"
-      (nzOnCancel)="form.reset();visiableChange.emit(false)"
+      (nzOnCancel)="form.reset({type:6});visiableChange.emit(false)"
       (nzOnOk)="submit()"
       [nzOkDisabled]="!form.valid"
       [nzOkLoading]="submiting"

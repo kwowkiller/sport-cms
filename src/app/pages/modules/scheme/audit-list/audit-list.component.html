@@ -75,7 +75,9 @@
       [nzChecked]="setOfCheckedId.has(item.id)"
       (nzCheckedChange)="onItemChecked(item.id, $event)"
     ></td>
-    <td>用户头像</td>
+    <td>
+      <img [src]="item.headerImg" alt="" style="height: 35px">
+    </td>
     <td>{{item.nickname}}</td>
     <td>{{item.title}}</td>
     <td [ngSwitch]="item.gameType">

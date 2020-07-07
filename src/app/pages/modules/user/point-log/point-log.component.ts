@@ -91,7 +91,7 @@ interface PointLog {
   taskIcon: string;
   // 任务名称
   taskName: string;
-  //   类型(0:.赠送礼物1:收到礼物2:购买方案3:出售方案4:积分充值5:任务赠送6:后台充值7:后台扣减)
+  //   类型(0:赠送礼物1:收到礼物2:购买方案3:出售方案4:积分充值5:任务赠送6:后台充值7:后台扣减)
   type: number;
   userId: number;
   username: string;

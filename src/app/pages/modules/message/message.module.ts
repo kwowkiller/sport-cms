@@ -7,7 +7,7 @@ import {
   NzFormModule,
   NzGridModule,
   NzInputModule,
-  NzModalModule, NzPopconfirmModule,
+  NzModalModule, NzPopconfirmModule, NzRadioModule,
   NzSelectModule,
   NzTableModule
 } from 'ng-zorro-antd';
@@ -40,6 +40,7 @@ import {DirectiveModule} from '../../../directives/directive.module';
     NzDividerModule,
     NzPopconfirmModule,
     DirectiveModule,
+    NzRadioModule,
   ]
 })
 export class MessageModule {
@@ -56,6 +57,12 @@ export interface Message {
   // 消息状态(0，待发送，1未读取，2已读取)
   status: number;
   triggerUserId: number;
+  // 用户类型0:全部1:主播用户2:方案用户
   type: number;
   userId: number;
+  levelId: string;
+  nickname: string;
+  size: number;
+  // 触发类型(0帖子,1帖子评论)
+  triggerType: number;
 }

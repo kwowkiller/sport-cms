@@ -88,6 +88,7 @@ export interface User {
   updateTime: string;
   userStatus: number;
   username: string;
+  nickname: string;
   // 积分
   points: number;
   // 等级

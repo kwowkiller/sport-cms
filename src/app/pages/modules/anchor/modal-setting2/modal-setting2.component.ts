@@ -46,7 +46,7 @@ export class ModalSetting2Component extends ModalForm<Anchor> implements OnInit,
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.detail) {
+    if (this.detail && this.visiable) {
       // this.http.get(`live/sys/host/host/${this.detail.id}`).subscribe(event => {
       // });
     }

@@ -1,26 +1,15 @@
 <nz-modal
-  nzWidth="800px"
+  nzWidth="500px"
   nzTitle="方案总数据"
   [nzFooter]="null"
   [nzVisible]="visiable"
   (nzOnCancel)="visiableChange.emit(false)"
 >
-  <div style="display: flex">
-    <div style="flex: 1">
-      <p><label>用户昵称：</label>{{historyDetail?.nickname}}</p>
-      <p><label>真实姓名：</label></p>
-      <p><label>身份证号：</label></p>
-      <p><label>注册时间：</label></p>
-      <p><label>认证时间：</label></p>
-      <p><label>用户等级：</label></p>
-      <p><label>用户粉丝数：</label></p>
-    </div>
-    <div style="flex: 1">
-      <p><label>发布方案次数：</label>{{historyDetail?.pushCount}}</p>
-      <p><label>最近发布方案时间：</label>{{historyDetail?.pushTime}}</p>
-      <p><label>方案总浏览人数：</label></p>
-      <p><label>获得总积分数：</label></p>
-    </div>
-  </div>
+  <p><label>用户昵称：</label>{{historyDetail?.nickname}}</p>
+  <p><label>发布方案次数：</label>{{historyDetail?.pushCount}}</p>
+  <p><label>审核通过方案数：</label>{{historyDetail?.applyCount}}</p>
+  <p><label>最近发布方案时间：</label>{{historyDetail?.pushTime}}</p>
+  <p><label>方案购买人数：</label>{{historyDetail?.buyCount}}</p>
+  <p><label>获得总积分数：</label>{{historyDetail?.amountCount}}</p>
 </nz-modal>
 

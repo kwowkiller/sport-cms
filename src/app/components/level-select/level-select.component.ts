@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {LevelConfig} from '../../pages/modules/user/user.module';
@@ -21,6 +21,7 @@ import {finalize} from 'rxjs/operators';
       [(ngModel)]="model"
       (ngModelChange)="onModelChange($event)"
       nzAllowClear
+      [nzMode]="mode"
     >
       <nz-option
         *ngFor="let item of selectData"
@@ -32,6 +33,8 @@ import {finalize} from 'rxjs/operators';
   styles: []
 })
 export class LevelSelectComponent extends CustomInput implements OnInit {
+  @Input()
+  mode: 'multiple' | 'tags' | 'default' = 'default';
   selectData: LevelConfig[] = [];
   loading = false;
 
