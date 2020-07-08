@@ -3,6 +3,7 @@ import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
 import {Gift} from '../gift.module';
+import {GiftTagType} from '../../../../common/enum';
 
 @Component({
   selector: 'app-gift-list',
@@ -12,6 +13,7 @@ import {Gift} from '../gift.module';
 export class GiftListComponent extends Table<Gift> implements OnInit {
   modalSendShow = false;
   modalQuantityShow = false;
+  tagType = GiftTagType;
 
   constructor(
     protected http: HttpClient,

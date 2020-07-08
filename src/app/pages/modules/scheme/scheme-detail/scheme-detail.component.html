@@ -10,7 +10,7 @@
 >
   <div class="item">
     <label>用户昵称</label>
-    <div>{{detail?.username}}</div>
+    <div>{{detail?.nickname}}</div>
   </div>
   <div class="item">
     <label>赛事名称</label>
@@ -20,13 +20,13 @@
     <label>比赛信息</label>
     <div class="match">
       <div class="team">
-        <img [src]="detail?.homeLogo" alt>
-        <p>{{detail?.homeName}}</p>
+        <img [src]="detail2?.homeLogo" alt>
+        <p>{{detail2?.homeName}}</p>
       </div>
       <div class="vs">VS</div>
       <div class="team">
-        <img [src]="detail?.awayLogo" alt>
-        <p>{{detail?.awayName}}</p>
+        <img [src]="detail2?.awayLogo" alt>
+        <p>{{detail2?.awayName}}</p>
       </div>
     </div>
   </div>
@@ -40,13 +40,13 @@
   <div class="item">
     <label>竞猜信息</label>
     <div class="info">
-      <div>
-        <p>{{detail?.homeName}}</p>
-        <p>-0.5 2.33</p>
+      <div [class.active]="detail?.position==1">
+        <p>{{detail2?.homeName}}</p>
+        <p>{{detail2?.awayOdd}}</p>
       </div>
-      <div>
-        <p>{{detail?.awayName}}</p>
-        <p>0.5 1.74</p>
+      <div [class.active]="detail?.position==2">
+        <p>{{detail2?.awayName}}</p>
+        <p>{{detail2?.homeOdd}}</p>
       </div>
     </div>
   </div>

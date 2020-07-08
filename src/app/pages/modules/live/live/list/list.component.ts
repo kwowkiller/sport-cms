@@ -26,7 +26,7 @@ export class ListComponent extends Table<Live2> implements OnInit {
         str = '礼物';
         break;
     }
-    return `${this.selected.username} - ${str}`;
+    return `${this.selected.nickname} - ${str}`;
   }
 
   constructor(

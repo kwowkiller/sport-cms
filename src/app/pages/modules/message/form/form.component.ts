@@ -68,6 +68,7 @@ export class FormComponent extends ModalForm<Message> implements OnInit, OnChang
     // throw new Error('test');
     if (this.detail) {
       this.form.value.id = this.detail.id;
+      this.form.value.status = this.detail.status;
     }
   }
 }

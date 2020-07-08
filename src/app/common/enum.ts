@@ -62,3 +62,10 @@ export const FeedbackType = new Enumable([
   {label: '比分问题', value: 6},
   {label: '资讯问题', value: 7},
 ]);
+
+// 礼物标签
+export const GiftTagType = new Enumable([
+  {label: '热门', value: 0},
+  {label: '无', value: 1},
+  {label: '豪', value: 2},
+]);

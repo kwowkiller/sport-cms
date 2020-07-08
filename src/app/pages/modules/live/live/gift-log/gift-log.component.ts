@@ -25,6 +25,7 @@ export class GiftLogComponent extends Table<GiftLog> implements OnInit {
   }
 
   beforeSearch() {
+    this.search.type = 0;
   }
 
   onSubmitSuccess() {

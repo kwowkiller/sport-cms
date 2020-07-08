@@ -108,7 +108,7 @@ export interface AuthInfo {
   headerImg: string;
   id: number;
   idNo: string;
-  nikeName: string;
+  nikename: string;
   phone: string;
   realName: string;
   remark: string;

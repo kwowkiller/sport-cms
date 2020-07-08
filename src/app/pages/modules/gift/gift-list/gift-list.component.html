@@ -44,7 +44,7 @@
       <img [src]="item.giftImage" alt="" style="height: 35px">
     </td>
     <td>{{item.price}}</td>
-    <td>{{item.giftTag}}</td>
+    <td>{{tagType.getLabel(item.giftTag)}}</td>
     <td>{{item.llimit}}</td>
     <td>{{item.orderNum}}</td>
     <td>
