@@ -3,7 +3,7 @@ interface Enum {
   value: any;
 }
 
-class Enumable implements Iterable<Enum> {
+export class Enumable implements Iterable<Enum> {
   * [Symbol.iterator](): Iterator<Enum> {
     for (const item of this.enums) {
       yield item;

@@ -95,7 +95,8 @@
         <th
           nzShowSort
           (nzSortOrderChange)="onSortChange($event,'points')"
-        >积分余额</th>
+        >积分余额
+        </th>
         <th>账号状态</th>
         <th>认证状态</th>
         <th>操作</th>
@@ -113,17 +114,20 @@
         <td>{{sexType.getLabel(item.sex)}}</td>
         <td>{{item.createTime}}</td>
         <td>
-          <a (click)="selected=item;tabIndex=1;subTableType='fans'">{{item.fansCount}}</a></td>
-        <td>
-          <a (click)="selected=item;tabIndex=1;subTableType='follow'">{{item.followUserCount}}</a>
+          <a *ngIf="item.fansCount" (click)="selected=item;tabIndex=1;subTableType='fans'">{{item.fansCount}}</a>
+          <span *ngIf="item.fansCount==0">{{item.fansCount}}</span>
         </td>
         <td>
-          <a (click)="selected=item;tabIndex=1;subTableType='bar'">{{item.followBarCount}}</a>
+          <a *ngIf="item.fansCount"
+             (click)="selected=item;tabIndex=1;subTableType='follow'">{{item.followUserCount}}</a>
+          <span *ngIf="item.fansCount==0">{{item.followUserCount}}</span>
+        </td>
+        <td>
+          <a *ngIf="item.fansCount" (click)="selected=item;tabIndex=1;subTableType='bar'">{{item.followBarCount}}</a>
+          <span *ngIf="item.fansCount==0">{{item.followBarCount}}</span>
         </td>
         <td>{{item.lastLoginTime}}</td>
-        <td>
-          <a (click)="selected=item;tabIndex=1;subTableType='level'">{{item.levelName}}</a>
-        </td>
+        <td>Lv{{item.levelName}}</td>
         <td>
           <a (click)="selected=item;tabIndex=1;subTableType='point'">{{item.points}}</a>
         </td>

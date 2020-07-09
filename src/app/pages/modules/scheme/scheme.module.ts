@@ -103,13 +103,17 @@ export interface Scheme {
   title: string;
   userId: number;
   username: string;
-  // 连胜
   winCount: number;
-  // 胜率
   winRate: number;
+  // 连胜
+  winTag: string;
+  // 命中
+  hitTag: string;
 }
 
 export interface SchemeUser {
+  winTag: string;
+  hitTag: string;
   endTime: string;
   headerImg: string;
   history: string;

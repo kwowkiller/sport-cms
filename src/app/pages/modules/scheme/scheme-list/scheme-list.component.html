@@ -97,10 +97,10 @@
           <span *ngSwitchCase="1">北单胜负过关</span>
           <span *ngSwitchCase="2">北单胜平负</span>
         </td>
-        <td>命中率 %</td>
+        <td>{{item.hitTag}}</td>
         <td>{{item.winCount || 0}}</td>
         <td>{{item.returnRate}}%</td>
-        <td>{{item.winRate}}%</td>
+        <td>{{item.winTag}}</td>
         <td>{{item.createTime}}</td>
         <td>审核时间</td>
         <td [ngSwitch]="item.matchStatus">

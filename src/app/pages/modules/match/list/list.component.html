@@ -14,15 +14,15 @@
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事状态">
       <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.type">
-        <nz-option nzLabel="即时" [nzValue]="1"></nz-option>
-        <nz-option nzLabel="赛程" [nzValue]="2"></nz-option>
-        <nz-option nzLabel="赛果" [nzValue]="3"></nz-option>
-        <nz-option nzLabel="延期" [nzValue]="4"></nz-option>
+        <nz-option nzLabel="进行中" [nzValue]="1"></nz-option>
+        <nz-option nzLabel="未开赛" [nzValue]="2"></nz-option>
+        <nz-option nzLabel="已结束" [nzValue]="3"></nz-option>
+        <nz-option nzLabel="其他" [nzValue]="4"></nz-option>
       </nz-select>
     </nz-input-group>
   </div>
   <div nz-row [nzGutter]="24">
-      <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="是否可发布方案">
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="是否可发布方案">
       <nz-select nzPlaceHolder="请选择" [(ngModel)]="search.programType">
         <nz-option nzLabel="是" [nzValue]="1"></nz-option>
         <nz-option nzLabel="否" [nzValue]="0"></nz-option>

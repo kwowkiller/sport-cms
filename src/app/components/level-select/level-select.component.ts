@@ -22,6 +22,7 @@ import {finalize} from 'rxjs/operators';
       (ngModelChange)="onModelChange($event)"
       nzAllowClear
       [nzMode]="mode"
+      nzPlaceHolder="下拉选择等级"
     >
       <nz-option
         *ngFor="let item of selectData"

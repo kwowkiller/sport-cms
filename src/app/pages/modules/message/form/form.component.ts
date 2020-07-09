@@ -38,7 +38,10 @@ export class FormComponent extends ModalForm<Message> implements OnInit, OnChang
   ngOnChanges(changes: SimpleChanges) {
     if (this.detail) {
       this.method = 'PUT';
-      const arr = this.detail.levelId.split(',').filter(i => i.length > 0).map(i => Number(i));
+      const arr = this.detail.levelId.split(',')
+        .filter(i => i.length > 0)
+        .map(i => i.replace('Lv', ''))
+        .map(i => Number(i));
       this.form.setValue({
         content: this.detail.content,
         sendTime: new Date(this.detail.sendTime),

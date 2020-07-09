@@ -25,7 +25,7 @@ export class GiftLogComponent extends Table<GiftLog> implements OnInit {
   }
 
   beforeSearch() {
-    this.search.type = 0;
+    this.search.type = 1;
   }
 
   onSubmitSuccess() {
@@ -33,5 +33,12 @@ export class GiftLogComponent extends Table<GiftLog> implements OnInit {
 }
 
 interface GiftLog {
+  amount: number;
+  batchNo: number;
+  createTime: string;
   id: number;
+  itemId: number;
+  price: number;
+  quantity: number;
+  userId: number;
 }

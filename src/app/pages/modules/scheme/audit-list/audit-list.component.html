@@ -6,16 +6,24 @@
 >
   <div nz-row [nzGutter]="24">
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户昵称">
-      <input nz-input>
+      <input nz-input [(ngModel)]="search.nickname">
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事名称">
-      <input nz-input>
+      <input nz-input [(ngModel)]="search.matchName">
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事状态">
-      <input nz-input>
+      <nz-select [(ngModel)]="search.matchStatus">
+        <nz-option nzLabel="未开赛" [nzValue]="1"></nz-option>
+        <nz-option nzLabel="进行中" [nzValue]="2"></nz-option>
+        <nz-option nzLabel="已结束" [nzValue]="3"></nz-option>
+        <nz-option nzLabel="其他" [nzValue]="4"></nz-option>
+      </nz-select>
     </nz-input-group>
     <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="审核状态">
-      <input nz-input>
+      <nz-select [(ngModel)]="search.applyStart">
+        <nz-option nzLabel="待审核" [nzValue]="3"></nz-option>
+        <nz-option nzLabel="审核不通过" [nzValue]="4"></nz-option>
+      </nz-select>
     </nz-input-group>
   </div>
   <div nz-row [nzGutter]="24">
@@ -84,10 +92,10 @@
       <span *ngSwitchCase="1">北单胜负过关</span>
       <span *ngSwitchCase="2">北单胜平负</span>
     </td>
-    <td>命中率</td>
-    <td>连胜</td>
-    <td>返还率</td>
-    <td>胜率</td>
+    <td>{{item.hitTag}}</td>
+    <td>{{item.winTag}}</td>
+    <td>{{item.returnRate}}%</td>
+    <td>{{item.winRate}}%</td>
     <td>{{item.money}}积分</td>
     <td>{{item.createTime}}</td>
     <td [ngSwitch]="item.matchStatus">

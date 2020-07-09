@@ -40,8 +40,13 @@
       <nz-form-label [nzSm]="4" nzRequired>发送对象</nz-form-label>
       <nz-form-control [nzSm]="17">
         <app-user-select
-          formGroupName="userId"
+          *ngIf="form.value['sendType']==0"
+          formControlName="userId"
         ></app-user-select>
+        <app-level-select
+          *ngIf="form.value['sendType']==1"
+          formControlName="levelId"
+        ></app-level-select>
       </nz-form-control>
     </nz-form-item>
   </form>

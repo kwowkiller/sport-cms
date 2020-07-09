@@ -7,7 +7,7 @@
   [nzOkDisabled]="!form.valid"
   (nzOnOk)="submit()"
 >
-  <form nz-form [formGroup]="form">
+  <form nz-form [formGroup]="form" *ngIf="visiable">
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzRequired>消息内容</nz-form-label>
       <nz-form-control [nzSm]="17">

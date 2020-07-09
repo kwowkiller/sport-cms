@@ -63,4 +63,9 @@ interface Item {
   userId: number;
   userName: string;
   headerImg: string;
+  history: string;
+  hitTag: string;
+  returnRate: number;
+  winRate: number;
+  winTag: string;
 }

@@ -45,8 +45,16 @@
     <th>用户昵称</th>
     <th>手机号码</th>
     <th>用户等级</th>
-    <th>胜率</th>
-    <th>返还率</th>
+    <th
+      nzShowSort
+      (nzSortOrderChange)="onSortChange($event,'win_rate')"
+    >胜率
+    </th>
+    <th
+      nzShowSort
+      (nzSortOrderChange)="onSortChange($event,'return_rate')"
+    >返还率
+    </th>
     <th>命中率</th>
     <th>连胜</th>
     <th>上次发布方案时间</th>
@@ -64,8 +72,8 @@
     <td>{{item.levelId}}</td>
     <td>{{item.winRate}}%</td>
     <td>{{item.returnRate}}%</td>
-    <td>命中率</td>
-    <td>连胜</td>
+    <td>{{item.hitTag}}</td>
+    <td>{{item.winTag}}</td>
     <td>{{item.pushTime}}</td>
     <td>{{item.pushStatus == 0 ? '正常' : '禁止发布'}}</td>
     <td>
