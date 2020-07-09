@@ -72,8 +72,8 @@
     <td>{{item.levelId}}</td>
     <td>{{item.winRate}}%</td>
     <td>{{item.returnRate}}%</td>
-    <td>{{item.hitTag}}</td>
-    <td>{{item.winTag}}</td>
+    <td>{{item.hitTag || '-'}}</td>
+    <td>{{item.winTag || '-'}}</td>
     <td>{{item.pushTime}}</td>
     <td>{{item.pushStatus == 0 ? '正常' : '禁止发布'}}</td>
     <td>

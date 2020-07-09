@@ -47,22 +47,22 @@
     <th>性别</th>
     <th>观看直播时间</th>
     <th>观看时长</th>
-    <th>操作</th>
+    <!--<th>操作</th>-->
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let item of list">
-    <th>用户头像</th>
-    <th>用户昵称</th>
-    <th>手机号码</th>
-    <th>性别</th>
-    <th>观看直播时间</th>
-    <th>观看时长</th>
-    <th>
+    <td>用户头像</td>
+    <td>{{item.nickname}}</td>
+    <td>{{item.phone}}</td>
+    <td>性别</td>
+    <td>{{item.fromTime}}</td>
+    <td>观看时长</td>
+    <!--<td>
       <a>禁言</a>
       <nz-divider nzType="vertical"></nz-divider>
       <a>踢出</a>
-    </th>
+    </td>-->
   </tr>
   </tbody>
 </nz-table>

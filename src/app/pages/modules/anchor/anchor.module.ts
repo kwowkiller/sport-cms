@@ -66,6 +66,7 @@ export interface AnchorAudit {
   userFollowCount: number;
   userId: number;
   username: string;
+  nickname: string;
   levelId: number;
   levelName: string;
 }

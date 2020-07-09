@@ -90,7 +90,7 @@ export interface Live {
   // 总直播时长(分钟)
   totalLiveTime: number;
   // 总观看人数
-  totalLiveUsers: number;
+  totalViewUsers: number;
   userId: number;
   // 观看人数
   viewUsers: number;

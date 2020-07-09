@@ -111,7 +111,7 @@
         <td>{{item.nickname}}</td>
         <td>{{item.hostType}}</td>
         <td>{{item.fromTime}}</td>
-        <td *ngIf="status==1"><a (click)="selected=item;subTableType='audience';tabIndex=1">观看人数</a></td>
+        <td *ngIf="status==1"><a (click)="selected=item;subTableType='audience';tabIndex=1">{{item.currentViews}}</a></td>
         <td *ngIf="status==2">{{item.toTime}}</td>
         <td *ngIf="status==2">{{item.lengthOfTime}}</td>
         <td *ngIf="status==2"><a (click)="selected=item;subTableType='gift';tabIndex=1">{{item.giveQuantity}}</a></td>
@@ -147,7 +147,7 @@
       [queryId]="selected?.id"
     ></app-audience-list>
     <app-gift-log
-      [queryId]="selected?.id"
+      [query]="selected"
       *ngIf="subTableType=='gift'"
     ></app-gift-log>
   </nz-tab>

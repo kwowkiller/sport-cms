@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
+import {BasketballMatchStatus, FootballMatchStatus} from '../../../../common/enum';
 
 @Component({
   selector: 'app-audit-list',
@@ -9,6 +10,8 @@ import {NzMessageService, NzModalService} from 'ng-zorro-antd';
   styles: []
 })
 export class AuditListComponent extends Table<Item> implements OnInit {
+  footballMatchStatus = FootballMatchStatus;
+  basketballMatchStatus = BasketballMatchStatus;
 
   constructor(
     protected http: HttpClient,
@@ -17,6 +20,17 @@ export class AuditListComponent extends Table<Item> implements OnInit {
   ) {
     super(http, message);
     this.listUrl = 'match/sys/match/programApply/list';
+  }
+
+  statusStr(item: Item): string {
+    switch (item.matchType) {
+      case 1:
+        return this.footballMatchStatus.getLabel(item.matchStatus);
+      case 2:
+        return this.basketballMatchStatus.getLabel(item.matchStatus);
+      default:
+        return '未知';
+    }
   }
 
   ngOnInit(): void {

@@ -60,6 +60,7 @@ export class CoreHttp implements HttpInterceptor {
               this.message.warning(`请求失败`);
               break;
             case 401:
+              window.sessionStorage.clear();
               this.message.warning(`认证失败，请尝试重新登录`);
               break;
             case 404:

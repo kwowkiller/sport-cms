@@ -8,7 +8,7 @@ import {NzMessageService} from 'ng-zorro-antd';
   templateUrl: './audience.component.html',
   styles: []
 })
-export class AudienceComponent extends Table<any> implements OnInit, OnChanges {
+export class AudienceComponent extends Table<Item> implements OnInit, OnChanges {
   @Input()
   queryId = 0;
   @Input()
@@ -40,9 +40,21 @@ export class AudienceComponent extends Table<any> implements OnInit, OnChanges {
   }
 
   beforeSearch() {
-    this.search.id = this.queryId;
+    this.search.liveId = this.queryId;
   }
 
   onSubmitSuccess() {
   }
+}
+
+interface Item {
+  createTime: string;
+  fromTime: string;
+  id: number;
+  ip: string;
+  liveType: number;
+  nickname: string;
+  phone: string;
+  userId: number;
+  userType: number;
 }

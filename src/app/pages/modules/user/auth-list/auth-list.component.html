@@ -91,7 +91,7 @@
     <td>{{sexType.getLabel(item.sex)}}</td>
     <td>{{item.createTime}}</td>
     <td>{{item.creationTime}}</td>
-    <td>{{item.levelId}}</td>
+    <td>Lv{{item.levelId}}</td>
     <td [ngSwitch]="item.authStatus">
       <span *ngSwitchCase="1">未认证</span>
       <span *ngSwitchCase="2">认证成功</span>

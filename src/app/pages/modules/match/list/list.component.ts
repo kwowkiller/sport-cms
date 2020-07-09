@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import {Table} from '../../../../frame/table';
 import {NzMessageService} from 'ng-zorro-antd';
 import {ActivatedRoute} from '@angular/router';
+import {FootballMatchStatus, BasketballMatchStatus} from '../../../../common/enum';
 
 @Component({
   selector: 'app-match-list',
@@ -17,6 +18,8 @@ export class ListComponent extends Table<MatchItem> implements OnInit {
   modal2Show = false;
   modal3Show = false;
   type: MatchType;
+  footballMatchStatus = FootballMatchStatus;
+  basketballMatchStatus = BasketballMatchStatus;
 
   constructor(
     protected http: HttpClient,
@@ -36,36 +39,14 @@ export class ListComponent extends Table<MatchItem> implements OnInit {
     }
   }
 
-  statusStr(status: number) {
-    switch (status) {
-      case 0:
-        return '比赛异常';
-      case 1:
-        return '未开赛';
-      case 2:
-        return '上半场';
-      case 3:
-        return '中场';
-      case 4:
-        return '下半场';
-      case 5:
-        return '加时赛';
-      case 6:
-        return '加时赛(弃用)';
-      case 7:
-        return '点球决战';
-      case 8:
-        return '完场';
-      case 9:
-        return '推迟';
-      case 10:
-        return '中断';
-      case 11:
-        return '腰斩';
-      case 12:
-        return '取消';
-      case 13:
-        return '待定';
+  statusStr(status: number): string {
+    switch (this.type) {
+      case 'football':
+        return this.footballMatchStatus.getLabel(status);
+      case 'basketball':
+        return this.basketballMatchStatus.getLabel(status);
+      default:
+        return '未知';
     }
   }
 

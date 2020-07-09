@@ -97,18 +97,13 @@
           <span *ngSwitchCase="1">北单胜负过关</span>
           <span *ngSwitchCase="2">北单胜平负</span>
         </td>
-        <td>{{item.hitTag}}</td>
-        <td>{{item.winCount || 0}}</td>
+        <td>{{item.hitTag || '-'}}</td>
+        <td>{{item.winTag || '-'}}</td>
         <td>{{item.returnRate}}%</td>
-        <td>{{item.winTag}}</td>
+        <td>{{item.winRate || 0}}%</td>
         <td>{{item.createTime}}</td>
         <td>审核时间</td>
-        <td [ngSwitch]="item.matchStatus">
-          <span *ngSwitchCase="1">未开赛</span>
-          <span *ngSwitchCase="2">进行中</span>
-          <span *ngSwitchCase="3">已结束</span>
-          <span *ngSwitchCase="4">其他</span>
-        </td>
+        <td>{{statusStr(item)}}</td>
         <td [ngSwitch]="item.hit">
           <span *ngSwitchCase="0">未核准</span>
           <span *ngSwitchCase="1">命中</span>

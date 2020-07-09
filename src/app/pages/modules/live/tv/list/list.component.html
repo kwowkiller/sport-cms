@@ -128,8 +128,9 @@
         <td>{{item.lastStartTime}}</td>
         <td>{{item.liveTime}}</td>
         <td>{{item.totalLiveTime}}</td>
-        <td><a (click)="tabIndex=1;selected=item">{{item.viewUsers}}</a></td>
-        <td>{{item.totalLiveUsers}}</td>
+        <!--<td><a (click)="tabIndex=1;selected=item">{{item.viewUsers}}</a></td>-->
+        <td>{{item.viewUsers}}</td>
+        <td>{{item.totalViewUsers}}</td>
         <td><a (click)="selected=item;modalSetUser=true">{{item.reseveUsers}}</a></td>
         <td [ngSwitch]="item.liveStatus">
           <span *ngSwitchCase="0">未开播</span>

@@ -14,7 +14,7 @@ export class Enumable implements Iterable<Enum> {
   }
 
   getLabel(value: any) {
-    const find = this.enums.find(i => i.value === value);
+    const find = this.enums.find(i => i.value.toString() === value.toString());
     return find ? find.label : '';
   }
 }
@@ -68,4 +68,42 @@ export const GiftTagType = new Enumable([
   {label: '热门', value: 0},
   {label: '无', value: 1},
   {label: '豪', value: 2},
+]);
+
+// 足球比赛状态
+export const FootballMatchStatus = new Enumable([
+  {label: '比赛异常', value: 0},
+  {label: '未开赛', value: 1},
+  {label: '上半场', value: 2},
+  {label: '中场', value: 3},
+  {label: '下半场', value: 4},
+  {label: '加时赛', value: 5},
+  {label: '加时赛(弃用)', value: 6},
+  {label: '点球决战', value: 7},
+  {label: '完场', value: 8},
+  {label: '推迟', value: 9},
+  {label: '中断', value: 10},
+  {label: '腰斩', value: 11},
+  {label: '取消', value: 12},
+  {label: '待定', value: 13},
+]);
+
+// 篮球比赛状态
+export const BasketballMatchStatus = new Enumable([
+  {label: '比赛异常', value: 0},
+  {label: '未开赛', value: 1},
+  {label: '第一节', value: 2},
+  {label: '第一节完', value: 3},
+  {label: '第二节', value: 4},
+  {label: '第二节完', value: 5},
+  {label: '第三节', value: 6},
+  {label: '第三节完', value: 7},
+  {label: '第四节', value: 8},
+  {label: '加时', value: 9},
+  {label: '完场', value: 10},
+  {label: '中断', value: 11},
+  {label: '取消', value: 12},
+  {label: '延期', value: 13},
+  {label: '腰斩', value: 14},
+  {label: '待定', value: 15},
 ]);

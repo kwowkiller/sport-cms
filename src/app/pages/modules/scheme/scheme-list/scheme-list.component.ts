@@ -5,6 +5,7 @@ import {Table} from '../../../../frame/table';
 import {Scheme} from '../scheme.module';
 import {Result} from '../../../../common/common.model';
 import {finalize} from 'rxjs/operators';
+import {BasketballMatchStatus, FootballMatchStatus} from '../../../../common/enum';
 
 @Component({
   selector: 'app-scheme-list',
@@ -13,6 +14,8 @@ import {finalize} from 'rxjs/operators';
 })
 export class SchemeListComponent extends Table<Scheme> implements OnInit {
   tabIndex = 0;
+  footballMatchStatus = FootballMatchStatus;
+  basketballMatchStatus = BasketballMatchStatus;
 
   constructor(
     protected http: HttpClient,
@@ -21,6 +24,17 @@ export class SchemeListComponent extends Table<Scheme> implements OnInit {
   ) {
     super(http, message);
     this.listUrl = 'match/sys/match/program/list';
+  }
+
+  statusStr(item: Scheme): string {
+    switch (item.matchType) {
+      case 1:
+        return this.footballMatchStatus.getLabel(item.matchStatus);
+      case 2:
+        return this.basketballMatchStatus.getLabel(item.matchStatus);
+      default:
+        return '未知';
+    }
   }
 
   ngOnInit(): void {

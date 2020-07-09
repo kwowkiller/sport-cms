@@ -28,7 +28,6 @@ export class SchemeDetailComponent extends ModalForm<Scheme> implements OnInit, 
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.detail && this.visiable) {
-      console.log(this.detail);
       this.http.get<{ code, data: Detail2[] }>(`match/sys/match/program/playing/${this.detail.matchId}`).subscribe(event => {
         this.detail2 = event.data[0];
       });
