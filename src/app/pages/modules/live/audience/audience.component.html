@@ -46,18 +46,20 @@
     <th>手机号码</th>
     <th>性别</th>
     <th>观看直播时间</th>
-    <th>观看时长</th>
+    <th>退出直播间时间</th>
     <!--<th>操作</th>-->
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let item of list">
-    <td>用户头像</td>
+    <td>
+      <img [src]="item.headerImg" alt="" style="height: 35px">
+    </td>
     <td>{{item.nickname}}</td>
     <td>{{item.phone}}</td>
-    <td>性别</td>
+    <td>{{sexType.getLabel(item.sex)}}</td>
     <td>{{item.fromTime}}</td>
-    <td>观看时长</td>
+    <td>{{item.toTime}}</td>
     <!--<td>
       <a>禁言</a>
       <nz-divider nzType="vertical"></nz-divider>

@@ -40,6 +40,7 @@ interface Detail {
   createTime: string;
   currentViews: number;
   fromTime: string;
+  // 礼物总值
   giftAmount: number;
   giveQuantity: number;
   headerImg: string;
@@ -56,4 +57,6 @@ interface Detail {
   totalViews: number;
   userId: number;
   username: string;
+  // 结束时间
+  toTime: string;
 }

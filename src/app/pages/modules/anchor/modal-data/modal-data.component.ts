@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
   selector: 'app-anchor-modal-data',
   templateUrl: './modal-data.component.html',
   styles: [
-    'p{display: flex;justify-content: space-between}'
+    'p{display: flex;}'
   ]
 })
 export class ModalDataComponent extends ModalForm<{
@@ -22,6 +22,20 @@ export class ModalDataComponent extends ModalForm<{
   sstatus: number;
   userId: number;
   username: string;
+  authenTime: string;
+  expireValue: number;
+  forbiddenFrom: string;
+  forbiddenTo: string;
+  idNo: string;
+  levelId: number;
+  levelName: string;
+  livingTimes: number;
+  nickname: string;
+  subscribeCount: number;
+  totalAmountGift: number;
+  totalQuantityGift: number;
+  totalViews: number;
+  totalLengthOfTime: number;
 }> implements OnInit, OnChanges {
 
   constructor(

@@ -7,22 +7,19 @@
 >
   <div style="display: flex">
     <div style="flex: 1">
-      <p><label>主播：{{detail?.username}}</label></p>
-      <p><label>真实姓名：</label></p>
-      <p><label>身份证号：</label></p>
-      <p><label>注册时间：</label></p>
-      <p><label>认证时间：</label></p>
-      <p><label>主播等级：{{detail?.hostLevel}}</label></p>
-      <p><label>主播粉丝数：</label></p>
+      <p><label>主播：</label>{{detail?.nickname}}</p>
+      <p><label>注册时间：</label>{{detail?.createTime}}</p>
+      <p><label>认证时间：</label>{{detail?.authenTime}}</p>
+      <p><label>主播等级：</label>{{detail?.hostLevel}}</p>
+      <p><label>主播订阅数：</label>{{detail?.subscribeCount}}</p>
     </div>
     <div style="flex: 1">
-      <p><label>直播次数：</label></p>
-      <p><label>最近直播结束时间：{{detail?.lastStartTime}}</label></p>
-      <p><label>总直播时长：</label></p>
-      <p><label>累计最大观看人数：</label></p>
-      <p><label>直播间总分享数：</label></p>
-      <p><label>获得礼物数：</label></p>
-      <p><label>礼物总值：</label></p>
+      <p><label>直播次数：</label>{{detail?.livingTimes}}</p>
+      <p><label>最近直播结束时间：</label>{{detail?.lastStartTime}}</p>
+      <p><label>总直播时长：</label>{{detail?.totalLengthOfTime}}</p>
+      <p><label>累计最大观看人数：</label>{{detail?.totalViews}}</p>
+      <p><label>获得礼物数：</label>{{detail?.totalQuantityGift}}</p>
+      <p><label>礼物总值：</label>{{detail?.totalAmountGift}}</p>
     </div>
   </div>
 </nz-modal>

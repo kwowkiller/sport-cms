@@ -111,10 +111,16 @@
         <td>{{item.nickname}}</td>
         <td>{{item.hostType}}</td>
         <td>{{item.fromTime}}</td>
-        <td *ngIf="status==1"><a (click)="selected=item;subTableType='audience';tabIndex=1">{{item.currentViews}}</a></td>
+        <td *ngIf="status==1">
+          <a *ngIf="item.currentViews>0;else zero" (click)="selected=item;subTableType='audience';tabIndex=1">{{item.currentViews}}</a>
+          <ng-template #zero>0</ng-template>
+        </td>
         <td *ngIf="status==2">{{item.toTime}}</td>
         <td *ngIf="status==2">{{item.lengthOfTime}}</td>
-        <td *ngIf="status==2"><a (click)="selected=item;subTableType='gift';tabIndex=1">{{item.giveQuantity}}</a></td>
+        <td *ngIf="status==2">
+          <a *ngIf="item.giveQuantity>0;else zero" (click)="selected=item;subTableType='gift';tabIndex=1">{{item.giveQuantity}}</a>
+          <ng-template #zero>0</ng-template>
+        </td>
         <td [ngSwitch]="item.sstatus">
           <ng-container *ngSwitchCase="0">
             <a

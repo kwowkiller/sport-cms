@@ -14,6 +14,9 @@ export class Enumable implements Iterable<Enum> {
   }
 
   getLabel(value: any) {
+    if (value === null || typeof value === 'undefined') {
+      return '';
+    }
     const find = this.enums.find(i => i.value.toString() === value.toString());
     return find ? find.label : '';
   }

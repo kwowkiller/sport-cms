@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
+import {SexType} from '../../../../common/enum';
 
 @Component({
   selector: 'app-audience-list',
@@ -13,6 +14,7 @@ export class AudienceComponent extends Table<Item> implements OnInit, OnChanges 
   queryId = 0;
   @Input()
   queryType: 'tv' | 'live';
+  sexType = SexType;
 
   constructor(
     protected http: HttpClient,
@@ -57,4 +59,8 @@ interface Item {
   phone: string;
   userId: number;
   userType: number;
+  headerImg: string;
+  liveId: number;
+  sex: number;
+  toTime: string;
 }

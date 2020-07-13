@@ -30,7 +30,7 @@ export class AuthListComponent extends Table<AuthInfo> implements OnInit {
     this.listUrl = 'app/sys/app/user/auth/page';
     this.form = this.fb.group({
       remark: [null],
-      status: [1]
+      status: [2]
     });
   }
 

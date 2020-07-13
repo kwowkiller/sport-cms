@@ -86,14 +86,15 @@
       [src]="item.headerImg"
       alt
     /></td>
-    <td>{{item.nikename}}</td>
+    <td>{{item.nickname}}</td>
     <td>{{item.phone}}</td>
     <td>{{sexType.getLabel(item.sex)}}</td>
     <td>{{item.createTime}}</td>
     <td>{{item.creationTime}}</td>
     <td>Lv{{item.levelId}}</td>
     <td [ngSwitch]="item.authStatus">
-      <span *ngSwitchCase="1">未认证</span>
+      <span *ngSwitchCase="0">未认证</span>
+      <span *ngSwitchCase="1">待审核</span>
       <span *ngSwitchCase="2">认证成功</span>
       <span *ngSwitchCase="3">认证失败</span>
     </td>
@@ -130,8 +131,8 @@
   <form [formGroup]="form">
     <p>请审核用户认证信息，审核通过后用户可在前端进行开启直播操作！</p>
     <nz-radio-group style="display: block" formControlName="status">
-      <label nz-radio [nzValue]="1">通过</label>
-      <label nz-radio [nzValue]="2">不通过</label>
+      <label nz-radio [nzValue]="2">通过</label>
+      <label nz-radio [nzValue]="3">不通过</label>
     </nz-radio-group>
     <label style="display: flex;margin-top: 12px">
       <span>备注：</span>

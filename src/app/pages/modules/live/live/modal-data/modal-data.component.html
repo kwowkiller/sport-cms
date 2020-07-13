@@ -6,13 +6,13 @@
 >
   <nz-spin [nzSpinning]="loading">
     <p>主播：{{detail?.nickname}}</p>
-    <p>开播时间：{{detail?.createTime}}</p>
-    <p>结束时间：</p>
+    <p>开播时间：{{detail2?.fromTime}}</p>
+    <p>结束时间：{{detail2?.toTime}}</p>
     <p>直播时长：{{detail?.lengthOfTime}}</p>
-    <p>最大同时观看人数：{{detail?.totalViews}}</p>
+    <p>最大同时观看人数：{{detail2?.totalViews}}</p>
     <p>订阅数量：{{detail2?.subscribeCount}}</p>
-    <p>获得礼物数：{{detail?.giveQuantity}}</p>
-    <p>礼物总值：{{detail?.giftAmount}}</p>
+    <p>获得礼物数：{{detail2?.giveQuantity}}</p>
+    <p>礼物总值：{{detail2?.giftAmount}}</p>
   </nz-spin>
 </nz-modal>
 

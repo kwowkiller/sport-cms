@@ -2,14 +2,14 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
-import {Scheme} from '../scheme.module';
+import {AuditItem} from '../scheme.module';
 
 @Component({
   selector: 'app-scheme-detail',
   templateUrl: './scheme-detail.component.html',
   styleUrls: ['./scheme-detail.component.less']
 })
-export class SchemeDetailComponent extends ModalForm<Scheme> implements OnInit, OnChanges {
+export class SchemeDetailComponent extends ModalForm<AuditItem> implements OnInit, OnChanges {
   @Input()
   showAudit = false;
   detail2: Detail2;

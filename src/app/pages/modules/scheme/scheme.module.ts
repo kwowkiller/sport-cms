@@ -131,3 +131,34 @@ export interface SchemeUser {
   userId: number;
   winRate: number;
 }
+
+export interface AuditItem {
+  id: number;
+  anAlyze: string;
+  createTime: string;
+  dateTime: string;
+  endTime: string;
+  gameType: number;
+  isCharge: number;
+  matchId: number;
+  matchName: string;
+  matchStatus: number;
+  matchType: number;
+  money: number;
+  nickname: string;
+  // 选中胜负过关主1,客2胜平负位置6个
+  position: number;
+  remark: string;
+  startTime: string;
+  // 3待审核4审核不通过
+  status: number;
+  title: string;
+  userId: number;
+  userName: string;
+  headerImg: string;
+  history: string;
+  hitTag: string;
+  returnRate: number;
+  winRate: number;
+  winTag: string;
+}

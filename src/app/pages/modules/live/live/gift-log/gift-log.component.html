@@ -5,8 +5,8 @@
   (reset)="fetchList('all')"
 >
   <div nz-row [nzGutter]="24">
-    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户名">
-      <nz-select></nz-select>
+    <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="用户名称">
+      <input nz-input>
     </nz-input-group>
     <div nz-col [nzSpan]="6" class="actions">
       <button
@@ -38,12 +38,10 @@
 >
   <thead>
   <tr>
-    <th>用户头像</th>
     <th>用户昵称</th>
     <th>手机号码</th>
     <th>性别</th>
     <th>用户等级</th>
-    <th>进入直播间时间</th>
     <th>赠送礼物</th>
     <th>赠送数量</th>
     <th>礼物价值</th>
@@ -52,13 +50,11 @@
   </thead>
   <tbody>
   <tr *ngFor="let item of list">
-    <td>用户头像</td>
-    <td>用户昵称</td>
-    <td>手机号码</td>
-    <td>性别</td>
-    <td>用户等级</td>
-    <td>进入直播间时间</td>
-    <td>赠送礼物</td>
+    <td>{{item.nickname}}</td>
+    <td>{{item.phone}}</td>
+    <td>{{sexType.getLabel(item.sex)}}</td>
+    <td>{{item.levelName}}</td>
+    <td>{{item.giftName}}</td>
     <td>{{item.quantity}}</td>
     <td>{{item.price}}</td>
     <td>{{item.createTime}}</td>

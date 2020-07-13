@@ -121,13 +121,13 @@
 >
   <form [formGroup]="form">
     <p>请进行审核操作！审核通过后用户可以在前端 进行开启直播操作！</p>
-    <nz-radio-group style="display: block" formControlName="status">
+    <nz-radio-group style="display: block" formControlName="sStatus">
       <label nz-radio [nzValue]="1">通过</label>
       <label nz-radio [nzValue]="2">不通过</label>
     </nz-radio-group>
     <label style="display: flex;margin-top: 12px">
       <span>备注：</span>
-      <textarea style="flex: 1;height: 100px" nz-input formControlName="remark"></textarea>
+      <textarea style="flex: 1;height: 100px" nz-input formControlName="approveRemark"></textarea>
     </label>
   </form>
 </nz-modal>

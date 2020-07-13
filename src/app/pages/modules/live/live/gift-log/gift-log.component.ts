@@ -3,6 +3,7 @@ import {Table} from '../../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
 import {Live2} from '../../live.module';
+import {SexType} from '../../../../../common/enum';
 
 @Component({
   selector: 'app-gift-log',
@@ -12,6 +13,7 @@ import {Live2} from '../../live.module';
 export class GiftLogComponent extends Table<GiftLog> implements OnInit {
   @Input()
   query: Live2;
+  sexType = SexType;
 
   constructor(
     protected http: HttpClient,
@@ -45,4 +47,12 @@ interface GiftLog {
   price: number;
   quantity: number;
   userId: number;
+  giftName: string;
+  levelId: number;
+  levelName: string;
+  nickname: string;
+  phone: string;
+  sex: number;
+  type: number;
 }
+
