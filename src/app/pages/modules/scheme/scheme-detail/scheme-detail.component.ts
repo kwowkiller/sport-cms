@@ -36,7 +36,7 @@ export class SchemeDetailComponent extends ModalForm<AuditItem> implements OnIni
 
   beforeSubmit() {
     if (this.showAudit) {
-      this.form.value.programApplyId = this.queryId;
+      this.form.value.programApplyId = this.detail.id;
     }
   }
 }
