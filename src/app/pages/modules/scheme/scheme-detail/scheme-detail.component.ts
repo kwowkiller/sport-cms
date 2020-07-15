@@ -2,14 +2,15 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {ModalForm} from '../../../../frame/modal-form';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
-import {AuditItem} from '../scheme.module';
 
 @Component({
   selector: 'app-scheme-detail',
   templateUrl: './scheme-detail.component.html',
   styleUrls: ['./scheme-detail.component.less']
 })
-export class SchemeDetailComponent extends ModalForm<AuditItem> implements OnInit, OnChanges {
+export class SchemeDetailComponent extends ModalForm<{
+  id, matchId, position, anAlyze, money, gameType, nickname, matchName
+}> implements OnInit, OnChanges {
   @Input()
   showAudit = false;
   detail2: Detail2;
@@ -29,7 +30,11 @@ export class SchemeDetailComponent extends ModalForm<AuditItem> implements OnIni
   ngOnChanges(changes: SimpleChanges): void {
     if (this.detail && this.visiable) {
       this.http.get<{ code, data: Detail2[] }>(`match/sys/match/program/playing/${this.detail.matchId}`).subscribe(event => {
-        this.detail2 = event.data[0];
+        if (this.detail.gameType === 1) {
+          this.detail2 = event.data.find(i => i.gameType === 1);
+        } else {
+          this.detail2 = event.data.find(i => i.gameType === 2);
+        }
       });
     }
   }
@@ -49,6 +54,7 @@ interface Detail2 {
   count: any;
   dxf: any;
   gameType: number;
+  // 让球数 主队  客队取反
   goal: number;
   homeLogo: string;
   homeName: string;
@@ -61,8 +67,10 @@ interface Detail2 {
   matchTime: number;
   matchType: number;
   rf: any;
-  rq: any;
+  // 下面 逗号分隔  4个
+  rq: string;
   sellStatus: string;
   sfc: any;
-  spf: any;
+  // 上面  逗号分隔  3个  第一个写死0
+  spf: string;
 }

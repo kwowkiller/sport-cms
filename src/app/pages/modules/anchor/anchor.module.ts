@@ -104,7 +104,7 @@ export interface Anchor {
   sex: number;
   totalViews: number;
   //   主播昵称
-  username: string;
+  nickname: string;
   roomId: string;
   levelId: number;
   levelName: string;

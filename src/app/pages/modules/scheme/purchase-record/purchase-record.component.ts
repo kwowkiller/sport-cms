@@ -3,6 +3,7 @@ import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
 import {SexType} from '../../../../common/enum';
+import {Scheme} from '../scheme.module';
 
 @Component({
   selector: 'app-purchase-record',
@@ -11,7 +12,7 @@ import {SexType} from '../../../../common/enum';
 })
 export class PurchaseRecordComponent extends Table<Item> implements OnInit {
   @Input()
-  queryId: number;
+  detail: Scheme;
   sexType = SexType;
 
   constructor(
@@ -27,7 +28,7 @@ export class PurchaseRecordComponent extends Table<Item> implements OnInit {
   }
 
   beforeSearch() {
-    this.search.programId = this.queryId;
+    this.search.programId = this.detail.id;
   }
 
   onSubmitSuccess() {

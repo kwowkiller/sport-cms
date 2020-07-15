@@ -103,11 +103,11 @@
           (nzSortOrderChange)="onSortChange($event,'totalLiveUsers')"
         >累计观看人数
         </th>
-        <th
+        <!--<th
           nzShowSort
           (nzSortOrderChange)="onSortChange($event,'reseveUsers')"
         >订阅人数
-        </th>
+        </th>-->
         <th>直播状态</th>
         <th>操作</th>
       </tr>
@@ -131,7 +131,7 @@
         <!--<td><a (click)="tabIndex=1;selected=item">{{item.viewUsers}}</a></td>-->
         <td>{{item.viewUsers}}</td>
         <td>{{item.totalViewUsers}}</td>
-        <td><a (click)="selected=item;modalSetUser=true">{{item.reseveUsers}}</a></td>
+        <!--<td><a (click)="selected=item;modalSetUser=true">{{item.reseveUsers}}</a></td>-->
         <td [ngSwitch]="item.liveStatus">
           <span *ngSwitchCase="0">未开播</span>
           <span *ngSwitchCase="1">直播中</span>

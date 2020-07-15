@@ -56,6 +56,8 @@ export interface Scheme {
   id: number;
   // 分析内容
   anAlyze: string;
+  // 审核时间
+  applyTime: string;
   awayLogo: string;
   awayName: string;
   buyCount: string;
