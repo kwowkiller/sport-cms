@@ -79,7 +79,9 @@
     <td>{{item.haveExpireValue}}</td>
     <td>{{item.havePoints}}</td>
     <td>{{item.giftName}}</td>
-    <td><a [href]="item.linkUrl" target="_blank">{{item.linkUrl}}</a></td>
+    <td>
+      <a [href]="item.linkUrl" target="_blank" style="max-width: 350px;display: inline-block;">{{item.linkUrl}}</a>
+    </td>
     <td>{{item.remark}}</td>
     <td>{{item.sstatus == 0 ? '已发布' : '已下架'}}</td>
     <td>
