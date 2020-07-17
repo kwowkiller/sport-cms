@@ -52,8 +52,8 @@ export class ListComponent extends Table<Bar> implements OnInit {
     // 审核状态
     this.search.approveStatus = 1;
     if (this.dateRange.length !== 0) {
-      this.search.createTimeFrom = moment(this.dateRange[0]).format('YYYY-MM-DD');
-      this.search.createTimeTo = moment(this.dateRange[1]).format('YYYY-MM-DD');
+      this.search.createTimeFrom = moment(this.dateRange[0]).format('YYYY-MM-DD') + ' 00:00:00';
+      this.search.createTimeTo = moment(this.dateRange[1]).format('YYYY-MM-DD') + ' 00:00:00';
     }
   }
 

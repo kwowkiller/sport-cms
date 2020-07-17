@@ -88,12 +88,12 @@
       <span *ngSwitchCase="1">主播用户</span>
       <span *ngSwitchCase="2">方案用户</span>
     </td>
-    <td>{{item.levelId == 'Lv0' ? '全部' : item.levelId}}</td>
+    <td>{{item.levelId == '0' ? '全部' : item.levelId}}</td>
     <td>{{item.sendTime}}</td>
     <td [ngSwitch]="item.status">
       <span *ngSwitchCase="0">待发送</span>
-      <span *ngSwitchCase="1">未读取</span>
-      <span *ngSwitchCase="2">已读取</span>
+      <span *ngSwitchCase="1">已发送</span>
+      <span *ngSwitchCase="2">已发送</span>
     </td>
     <td [ngSwitch]="item.status">
       <ng-container *ngSwitchCase="0">

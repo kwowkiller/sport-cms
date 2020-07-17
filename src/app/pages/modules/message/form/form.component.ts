@@ -3,7 +3,7 @@ import {ModalForm} from '../../../../frame/modal-form';
 import {Message} from '../message.module';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
-import {NzMessageService} from 'ng-zorro-antd';
+import {DisabledTimeFn, NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-message-form',
@@ -15,6 +15,42 @@ export class FormComponent extends ModalForm<Message> implements OnInit, OnChang
   get title() {
     return this.detail ? '编辑消息' : '创建消息';
   }
+
+  disabledDate(): (date: Date) => boolean {
+    return (date) => {
+      if (new Date().getMonth() === date.getMonth()) {
+        return new Date().getDate() > date.getDate();
+      }
+      return false;
+    };
+  }
+
+  // disabledTime(): DisabledTimeFn {
+  //   return (current: Date) => {
+  //     const now = new Date();
+  //     return {
+  //       nzDisabledHours() {
+  //         if (current != null
+  //           && now.getMonth() === current.getMonth()
+  //           && now.getDate() === current.getDate()) {
+  //           return [...new Array(24).keys()].filter(h => h < now.getHours());
+  //         }
+  //         return [];
+  //       },
+  //       nzDisabledMinutes(hour: number) {
+  //         if (now.getHours() === hour) {
+  //           return [];
+  //         }
+  //         return [];
+  //       },
+  //       nzDisabledSeconds(hour: number, minute: number) {
+  //         if (now.getHours() === hour && now.getMinutes() === minute) {
+  //         }
+  //         return [];
+  //       },
+  //     };
+  //   };
+  // }
 
   constructor(
     protected http: HttpClient,
@@ -62,6 +98,10 @@ export class FormComponent extends ModalForm<Message> implements OnInit, OnChang
   }
 
   beforeSubmit() {
+    if ((this.form.value.sendTime as Date).getTime() > new Date().getDate()) {
+      this.message.info('发送时间必须大于当前时间');
+      throw new Error('发送时间错误');
+    }
     if (this.form.value.rangeType === 0) {
       this.form.value.levelId = 0;
     } else {

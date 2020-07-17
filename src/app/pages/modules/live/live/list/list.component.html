@@ -109,16 +109,18 @@
           <img [src]="item.liveImg" alt="" style="height: 35px">
         </td>
         <td>{{item.nickname}}</td>
-        <td>{{item.hostType}}</td>
+        <td>{{item.typeName}}</td>
         <td>{{item.fromTime}}</td>
         <td *ngIf="status==1">
-          <a *ngIf="item.currentViews>0;else zero" (click)="selected=item;subTableType='audience';tabIndex=1">{{item.currentViews}}</a>
+          <a *ngIf="item.currentViews>0;else zero"
+             (click)="selected=item;subTableType='audience';tabIndex=1">{{item.currentViews}}</a>
           <ng-template #zero>0</ng-template>
         </td>
         <td *ngIf="status==2">{{item.toTime}}</td>
         <td *ngIf="status==2">{{item.lengthOfTime}}</td>
         <td *ngIf="status==2">
-          <a *ngIf="item.giveQuantity>0;else zero" (click)="selected=item;subTableType='gift';tabIndex=1">{{item.giveQuantity}}</a>
+          <a *ngIf="item.giveQuantity>0;else zero"
+             (click)="selected=item;subTableType='gift';tabIndex=1">{{item.giveQuantity}}</a>
           <ng-template #zero>0</ng-template>
         </td>
         <td [ngSwitch]="item.sstatus">

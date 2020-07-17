@@ -121,5 +121,6 @@ export interface Feedback {
   userId: number;
   // 问题类型(1账号信息,2充值问题,3实名认证,4直播问题,5球吧问题,6,比分问题,资讯问题)
   type: number;
+  nickname: string;
 }
 

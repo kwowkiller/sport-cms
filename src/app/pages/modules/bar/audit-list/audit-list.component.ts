@@ -43,8 +43,8 @@ export class AuditListComponent extends Table<Bar> implements OnInit {
   beforeSearch() {
     // 审核状态
     if (this.dateRange.length !== 0) {
-      this.search.createTimeFrom = moment(this.dateRange[0]).format('YYYY-MM-DD');
-      this.search.createTimeTo = moment(this.dateRange[1]).format('YYYY-MM-DD');
+      this.search.createTimeFrom = moment(this.dateRange[0]).format('YYYY-MM-DD') + ' 00:00:00';
+      this.search.createTimeTo = moment(this.dateRange[1]).format('YYYY-MM-DD') + ' 00:00:00';
     }
   }
 
