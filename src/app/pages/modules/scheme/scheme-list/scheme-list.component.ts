@@ -5,7 +5,7 @@ import {Table} from '../../../../frame/table';
 import {Scheme} from '../scheme.module';
 import {Result} from '../../../../common/common.model';
 import {finalize} from 'rxjs/operators';
-import {BasketballMatchStatus, FootballMatchStatus} from '../../../../common/enum';
+import {BasketballMatchStatus, FootballMatchStatus, MatchTypes} from '../../../../common/enum';
 
 @Component({
   selector: 'app-scheme-list',
@@ -16,6 +16,7 @@ export class SchemeListComponent extends Table<Scheme> implements OnInit {
   tabIndex = 0;
   footballMatchStatus = FootballMatchStatus;
   basketballMatchStatus = BasketballMatchStatus;
+  matchTypes = MatchTypes;
 
   constructor(
     protected http: HttpClient,

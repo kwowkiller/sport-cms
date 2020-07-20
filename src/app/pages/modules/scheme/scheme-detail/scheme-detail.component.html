@@ -17,6 +17,10 @@
     <div>{{detail?.matchName}}</div>
   </div>
   <div class="item">
+    <label>开赛时间</label>
+    <div>{{detail2?.matchTime * 1000|date:'yyyy-MM-dd HH:mm'}}</div>
+  </div>
+  <div class="item">
     <label>比赛信息</label>
     <div class="match">
       <div class="team">
@@ -32,34 +36,68 @@
   </div>
   <div class="item">
     <label>猜球玩法</label>
-    <div [ngSwitch]="detail?.gameType">
-      <span *ngSwitchCase="1">北单胜负过关</span>
-      <span *ngSwitchCase="2">北单胜平负</span>
-    </div>
+    <ng-container [ngSwitch]="detail?.matchType">
+      <div *ngSwitchCase="1" [ngSwitch]="detail?.gameType">
+        <span *ngSwitchCase="1">北单胜负过关</span>
+        <span *ngSwitchCase="2">北单胜平负</span>
+      </div>
+      <div *ngSwitchCase="2" [ngSwitch]="detail?.gameType">
+        <span *ngSwitchCase="1">竞猜让分</span>
+        <span *ngSwitchCase="2">竞猜大小分</span>
+      </div>
+    </ng-container>
   </div>
-  <div class="item">
+  <div class="item" [ngSwitch]="detail?.matchType">
     <label>竞猜信息</label>
-    <div class="info" *ngIf="detail?.gameType==1">
-      <div [class.active]="detail?.position==1">
-        <p>{{detail2?.homeName}}</p>
-        <p>{{detail2?.goal}}&nbsp;&nbsp;{{detail2?.homeOdd}}</p>
+    <ng-container *ngSwitchCase="1">
+      <div class="info" *ngIf="detail?.gameType==1">
+        <div [class.active]="detail?.position==1">
+          <p>{{detail2?.homeName}}</p>
+          <p>{{detail2?.goal}}&nbsp;&nbsp;{{detail2?.homeOdd}}</p>
+        </div>
+        <div [class.active]="detail?.position==2">
+          <p>{{detail2?.awayName}}</p>
+          <p>{{-detail2?.goal}}&nbsp;&nbsp;{{detail2?.awayOdd}}</p>
+        </div>
       </div>
-      <div [class.active]="detail?.position==2">
-        <p>{{detail2?.awayName}}</p>
-        <p>{{-detail2?.goal}}&nbsp;&nbsp;{{detail2?.awayOdd}}</p>
+      <table *ngIf="detail?.gameType==2">
+        <tr>
+          <td>0</td>
+          <td *ngFor="let n of detail2?.spf.split(',');let index=index;"
+              [class.active]="index+1==detail?.position">{{n}}</td>
+        </tr>
+        <tr>
+          <td *ngFor="let n of detail2?.rq.split(',');let index=index;"
+              [class.active]="index+4==detail?.position">{{n}}</td>
+        </tr>
+      </table>
+    </ng-container>
+    <ng-container *ngSwitchCase="2">
+      <div class="info">
+        <div [class.active]="detail?.position==1">
+          <p>{{detail2?.homeName}}</p>
+          <p *ngIf="detail2?.gameType==1">
+            {{getBasketballArray(detail2?.rf)[0]}}&nbsp;&nbsp;
+            {{getBasketballArray(detail2?.rf)[1]}}
+          </p>
+          <p *ngIf="detail2?.gameType==2">
+            {{getBasketballArray(detail2?.dxf)[0]}}&nbsp;&nbsp;
+            {{getBasketballArray(detail2?.dxf)[1]}}
+          </p>
+        </div>
+        <div [class.active]="detail?.position==2">
+          <p>{{detail2?.awayName}}</p>
+          <p *ngIf="detail2?.gameType==1">
+            {{-getBasketballArray(detail2?.rf)[0]}}&nbsp;&nbsp;
+            {{getBasketballArray(detail2?.rf)[2]}}
+          </p>
+          <p *ngIf="detail2?.gameType==2">
+            {{getBasketballArray(detail2?.dxf)[0]}}&nbsp;&nbsp;
+            {{getBasketballArray(detail2?.dxf)[2]}}
+          </p>
+        </div>
       </div>
-    </div>
-    <table *ngIf="detail?.gameType==2">
-      <tr>
-        <td>0</td>
-        <td *ngFor="let n of detail2?.spf.split(',');let index=index;"
-            [class.active]="index+1==detail?.position">{{n}}</td>
-      </tr>
-      <tr>
-        <td *ngFor="let n of detail2?.rq.split(',');let index=index;"
-            [class.active]="index+4==detail?.position">{{n}}</td>
-      </tr>
-    </table>
+    </ng-container>
   </div>
   <div class="item">
     <label>分析</label>

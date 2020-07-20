@@ -21,10 +21,13 @@
             <nz-option nzLabel="其他" [nzValue]="4"></nz-option>
           </nz-select>
         </nz-input-group>
-        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="赛事状态">
+        <nz-input-group nz-col [nzSpan]="6" nzAddOnBefore="比赛类型">
           <nz-select [(ngModel)]="search.matchType">
-            <nz-option nzLabel="足球" [nzValue]="1"></nz-option>
-            <nz-option nzLabel="篮球" [nzValue]="2"></nz-option>
+            <nz-option
+              *ngFor="let item of matchTypes"
+              [nzLabel]="item.label"
+              [nzValue]="item.value"
+            ></nz-option>
           </nz-select>
         </nz-input-group>
       </div>
@@ -66,7 +69,8 @@
         ></th>
         <!--头像+昵称-->
         <th style="text-align: center">用户</th>
-        <th>方案标题</th>
+        <th nzWidth="200px">方案标题</th>
+        <th>比赛类型</th>
         <th>方案玩法</th>
         <th>命中率</th>
         <th>连胜</th>
@@ -99,9 +103,16 @@
           <span>{{item.nickname}}</span>
         </td>
         <td>{{item.title}}</td>
-        <td [ngSwitch]="item.gameType">
-          <span *ngSwitchCase="1">北单胜负过关</span>
-          <span *ngSwitchCase="2">北单胜平负</span>
+        <td>{{matchTypes.getLabel(item.matchType)}}</td>
+        <td [ngSwitch]="item.matchType">
+          <ng-container *ngSwitchCase="1" [ngSwitch]="item.gameType">
+            <span *ngSwitchCase="1">北单胜负过关</span>
+            <span *ngSwitchCase="2">北单胜平负</span>
+          </ng-container>
+          <ng-container *ngSwitchCase="2">
+            <span *ngSwitchCase="1">竞猜让分</span>
+            <span *ngSwitchCase="2">竞猜大小分</span>
+          </ng-container>
         </td>
         <td>{{item.hitTag || '-'}}</td>
         <td>{{item.winTag || '-'}}</td>

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Table} from '../../../../frame/table';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
-import {BasketballMatchStatus, FootballMatchStatus} from '../../../../common/enum';
+import {BasketballMatchStatus, FootballMatchStatus, MatchTypes} from '../../../../common/enum';
 import {AuditItem} from '../scheme.module';
 
 @Component({
@@ -13,6 +13,7 @@ import {AuditItem} from '../scheme.module';
 export class AuditListComponent extends Table<AuditItem> implements OnInit {
   footballMatchStatus = FootballMatchStatus;
   basketballMatchStatus = BasketballMatchStatus;
+  matchTypes = MatchTypes;
 
   constructor(
     protected http: HttpClient,

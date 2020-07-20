@@ -9,7 +9,7 @@ import {FormBuilder, Validators} from '@angular/forms';
   styleUrls: ['./scheme-detail.component.less']
 })
 export class SchemeDetailComponent extends ModalForm<{
-  id, matchId, position, anAlyze, money, gameType, nickname, matchName
+  id, matchId, position, anAlyze, money, gameType, nickname, matchName, matchType,
 }> implements OnInit, OnChanges {
   @Input()
   showAudit = false;
@@ -27,13 +27,22 @@ export class SchemeDetailComponent extends ModalForm<{
   ngOnInit(): void {
   }
 
+  getBasketballArray(str: string): number[] {
+    return str.split(',').map(n => Number(n));
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (this.detail && this.visiable) {
-      this.http.get<{ code, data: Detail2[] }>(`match/sys/match/program/playing/${this.detail.matchId}`).subscribe(event => {
-        if (this.detail.gameType === 1) {
-          this.detail2 = event.data.find(i => i.gameType === 1);
+      this.http.get<{
+        code,
+        data: Detail2[]
+      }>(`match/sys/match/program/playing/${this.detail.matchId}`).subscribe(event => {
+        // 足球1:北单胜负过关2:北单胜平负
+        if (this.detail.matchType === 1) {
+          this.detail2 = event.data.find(i => i.gameType === this.detail.gameType);
         } else {
-          this.detail2 = event.data.find(i => i.gameType === 2);
+          // 篮球1竞猜让分 2竞猜大小分
+          this.detail2 = event.data.find(i => i.gameType === this.detail.gameType);
         }
       });
     }

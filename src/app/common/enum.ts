@@ -110,3 +110,9 @@ export const BasketballMatchStatus = new Enumable([
   {label: '腰斩', value: 14},
   {label: '待定', value: 15},
 ]);
+
+// 比赛类型
+export const MatchTypes = new Enumable([
+  {label: '足球', value: 1},
+  {label: '篮球', value: 2},
+]);

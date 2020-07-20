@@ -67,7 +67,7 @@ export interface Scheme {
   createTime: string;
   endTime: string;
   fallCount: number;
-  // 游戏类型1:北单胜负过关2:北单胜平负
+  // 游戏类型 足球1:北单胜负过关2:北单胜平负  篮球1竞猜让分 2竞猜大小分
   gameType: number;
   headerImg: string;
   history: string;
@@ -145,6 +145,7 @@ export interface AuditItem {
   matchId: number;
   matchName: string;
   matchStatus: number;
+  // 1足球，2篮球
   matchType: number;
   money: number;
   nickname: string;
