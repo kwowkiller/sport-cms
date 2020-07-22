@@ -29,7 +29,7 @@ export class AuditListComponent extends Table<Bar> implements OnInit {
     private fb: FormBuilder,
   ) {
     super(http, message);
-    this.listUrl = 'bar/sys/bar/list';
+    this.listUrl = 'bar/sys/bar/apply/page';
     this.form = this.fb.group({
       approveRemark: [null],
       approveStatus: [1]

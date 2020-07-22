@@ -20,7 +20,7 @@ import {AuditListComponent} from './audit-list/audit-list.component';
 import {BlogDetailComponent} from './blog/blog-detail/blog-detail.component';
 import {ListComponent as BlogList} from './blog/list/list.component';
 import {BarCategoryComponent} from './category/bar-category.component';
-import { BarCategoryFormComponent } from './category/bar-category-form.component';
+import {BarCategoryFormComponent} from './category/bar-category-form.component';
 
 
 @NgModule({
@@ -67,6 +67,7 @@ export class BarModule {
 }
 
 export interface Bar {
+  nickname: string;
   // 审核状态(0:待审核1:审核通过2:拒绝)
   approveStatus: number;
   // 不通过原因
@@ -97,6 +98,7 @@ export interface Bar {
 }
 
 export interface Blog {
+  nickname: string;
   barId: number;
   barName: string;
   context: string;

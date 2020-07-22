@@ -44,8 +44,9 @@ export class ModalSetting1Component extends ModalForm<Anchor> implements OnInit,
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.detail && this.visiable) {
-      // this.http.get(`live/sys/host/host/${this.detail.id}`).subscribe(event => {
-      // });
+      this.form.setValue({
+        officialIcon: this.detail.officialIcon,
+      });
     }
   }
 

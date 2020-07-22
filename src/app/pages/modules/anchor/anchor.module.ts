@@ -108,4 +108,11 @@ export interface Anchor {
   roomId: string;
   levelId: number;
   levelName: string;
+  //
+  expireValue: number;
+  livingNotice: string;
+  officialIcon: string;
+  userId: number;
+  username: string;
+  rate: number;
 }
