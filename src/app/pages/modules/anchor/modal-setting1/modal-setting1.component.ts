@@ -43,7 +43,7 @@ export class ModalSetting1Component extends ModalForm<Anchor> implements OnInit,
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.detail && this.visiable) {
+    if (this.detail && this.visiable && typeof this.detail.officialIcon === 'string') {
       this.form.setValue({
         officialIcon: this.detail.officialIcon,
       });

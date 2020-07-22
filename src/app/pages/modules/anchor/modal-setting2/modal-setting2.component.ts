@@ -46,7 +46,7 @@ export class ModalSetting2Component extends ModalForm<Anchor> implements OnInit,
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.detail && this.visiable) {
+    if (this.detail && this.visiable && typeof this.detail.rate === 'number') {
       this.form.setValue({
         rate: this.detail.rate,
       });
