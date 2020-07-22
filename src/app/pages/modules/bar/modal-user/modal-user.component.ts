@@ -2,6 +2,7 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModalForm} from '../../../../frame/modal-form';
 import {AuthInfo} from '../../user/user.module';
 import {HttpClient} from '@angular/common/http';
+import {SexType} from '../../../../common/enum';
 
 @Component({
   selector: 'app-bar-user',
@@ -9,6 +10,7 @@ import {HttpClient} from '@angular/common/http';
   styles: []
 })
 export class ModalUserComponent extends ModalForm<AuthInfo> implements OnInit, OnChanges {
+  sexType = SexType;
 
   constructor(protected http: HttpClient) {
     super(http);

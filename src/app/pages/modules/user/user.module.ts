@@ -122,6 +122,7 @@ export interface AuthInfo {
   signature: string;
   username: string;
   levelId: string;
+  levelName: string;
 }
 
 export interface LevelConfig {
