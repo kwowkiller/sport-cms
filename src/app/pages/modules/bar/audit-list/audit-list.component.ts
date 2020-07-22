@@ -53,7 +53,7 @@ export class AuditListComponent extends Table<Bar> implements OnInit {
 
   updateItem() {
     this.updating = true;
-    this.http.put<Result>('bar/sys/bar/approve', {
+    this.http.put<Result>('bar/sys/bar/apply/approve', {
       ...this.form.value,
       id: this.selected.id,
     }).pipe(
